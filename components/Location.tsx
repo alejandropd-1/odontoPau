@@ -76,7 +76,7 @@ export default function Location() {
                   <span className="text-sm text-on-surface-variant font-medium">Ramón Falcón 2401</span>
                 </div>
               </div>
-              <a className="text-sm font-bold text-primary-container hover:underline decoration-2 underline-offset-4 pointer-events-auto" href="https://maps.app.goo.gl/uXv7XAnP5rW5oYQY9" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
+              <a className="text-sm font-bold text-primary-container hover:underline decoration-2 underline-offset-4 pointer-events-auto" href="https://www.google.com/maps/dir/?api=1&destination=Cnel.+Ramón+L.+Falcón+2401,+C1406+CABA" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
             </div>
           </div>
         </div>
