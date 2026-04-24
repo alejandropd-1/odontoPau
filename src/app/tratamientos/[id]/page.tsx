@@ -160,7 +160,7 @@ export default function TreatmentPage() {
                       <span className="text-sm font-bold text-on-surface">{caso.paciente}</span>
                       <span className="text-xs text-on-surface-variant">{caso.fecha}</span>
                     </div>
-                    <Link href="#" className="text-xs font-bold text-orange-600 hover:underline">Ver Caso Completo</Link>
+                    <Link href={`/tratamientos/${tratamiento.id}/casos/${caso.id}`} className="text-xs font-bold text-orange-600 hover:underline">Ver Caso Completo</Link>
                   </div>
                 </div>
               </motion.div>

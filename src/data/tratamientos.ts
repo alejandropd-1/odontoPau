@@ -23,7 +23,22 @@ export const tratamientos = [
         imagenAntes: '/images/casos/ana-antes.jpg',
         imagenDespues: '/images/casos/ana-despues.jpg',
         testimonio: 'No imaginé que el cambio sería tan radical. Ahora vivo sin la inseguridad de comer cualquier cosa.',
-        rating: 5
+        rating: 5,
+        desafio: 'Ana llegó con una pérdida significativa de piezas dentales superiores debido a años de desgaste y periodontitis. El mayor obstáculo no era solo rehabilitar su sonrisa, sino devolverle la confianza para comer y hablar sin dolor.',
+        diagnostico: 'Atrofia alveolar y colapso oclusal.',
+        duracion: '3 meses de tratamiento.',
+        solucion: 'Implementamos un protocolo de implantes de carga inmediata. Utilizamos escaneo intraoral 3D para diseñar una prótesis fija que respeta la biomecánica natural de la paciente.',
+        solucionFeatures: [
+          'Cirugía Guiada por Computadora',
+          'Prótesis Cerámica Pre-tallada',
+          'Ajuste Oclusal Dinámico'
+        ],
+        stats: [
+          { label: 'Recuperación Funcional', value: '100%' },
+          { label: 'Dolor Post-Op', value: '0' },
+          { label: 'Estética Natural', value: 'A++' },
+          { label: 'Años de Durabilidad', value: '10+' }
+        ]
       },
       {
         id: 2,
