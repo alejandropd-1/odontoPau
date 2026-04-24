@@ -39,12 +39,20 @@ export default function Location() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-[#25D366] text-white font-bold px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#1ebe57] transition-all shadow-lg shadow-[#25D366]/20 hover:scale-105 active:scale-95">
+              <a 
+                href="https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#25D366] text-white font-bold px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#1ebe57] transition-all shadow-lg shadow-[#25D366]/20 hover:scale-105 active:scale-95"
+              >
                 <MessageSquare className="w-5 h-5 fill-current" /> Contactar por WhatsApp
-              </button>
-              <button className="glass-panel border-primary-container text-primary-container font-bold px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-orange-50 transition-all hover:scale-105 active:scale-95">
+              </a>
+              <a 
+                href="tel:+5491137854198"
+                className="glass-panel border-primary-container text-primary-container font-bold px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-orange-50 transition-all hover:scale-105 active:scale-95"
+              >
                 <Phone className="w-5 h-5" /> Llamar ahora
-              </button>
+              </a>
             </div>
           </div>
 

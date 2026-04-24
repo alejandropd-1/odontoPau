@@ -38,12 +38,12 @@ export default function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               whileHover={{ y: -8 }}
               className={`glass-panel rounded-2xl p-8 transition-all duration-300 relative ${service.featured ? 'border-orange-500/30' : ''}`}
             >
-              {service.featured && (
+              {service && (
                 <div className="absolute inset-0 border-2 border-primary-container opacity-10 rounded-2xl pointer-events-none"></div>
               )}
               <div className="w-14 h-14 rounded-full bg-orange-100 flex items-center justify-center mb-6">

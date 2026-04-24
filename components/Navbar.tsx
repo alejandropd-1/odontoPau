@@ -18,9 +18,14 @@ export default function Navbar() {
           <a className="font-sans text-sm font-semibold tracking-tight text-slate-700 hover:text-orange-500 transition-colors" href="#testimonios">Testimonios</a>
           <a className="font-sans text-sm font-semibold tracking-tight text-slate-700 hover:text-orange-500 transition-colors" href="#ubicacion">Ubicación</a>
         </div>
-        <button className="bg-gradient-to-r from-primary-container to-brand-orange text-white font-sans text-sm font-semibold px-6 py-3 rounded-full hover:opacity-80 transition-opacity">
+        <a 
+          href="https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-gradient-to-r from-primary-container to-brand-orange text-white font-sans text-sm font-semibold px-6 py-3 rounded-full hover:opacity-80 transition-opacity"
+        >
           Agendar Turno
-        </button>
+        </a>
       </div>
     </nav>
   );
