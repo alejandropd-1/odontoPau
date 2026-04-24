@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { tratamientos } from '@/data/tratamientos';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function TreatmentPage() {
   const params = useParams();
@@ -37,8 +38,12 @@ export default function TreatmentPage() {
     <div className="min-h-screen bg-surface-background">
       <Navbar />
       
+      <div className="pt-24">
+        <Breadcrumb items={[{ label: tratamiento.tituloHero }]} />
+      </div>
+
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -85,7 +90,7 @@ export default function TreatmentPage() {
               </div>
             </div>
             {/* Dr. Badge Overlay */}
-            <div className="absolute -top-6 -right-6 md:right-10 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4">
+            <div className="absolute top-10 -right-6 md:right-10 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
                 <span className="text-orange-600 font-bold">PG</span>
               </div>

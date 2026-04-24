@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { tratamientos } from '@/data/tratamientos';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function CaseDetailPage() {
   const params = useParams();
@@ -30,8 +31,17 @@ export default function CaseDetailPage() {
     <div className="min-h-screen bg-surface-background">
       <Navbar />
       
+      <div className="pt-24">
+        <Breadcrumb 
+          items={[
+            { label: tratamiento.tituloHero, href: `/tratamientos/${id}` },
+            { label: `Caso: ${caso.paciente}` }
+          ]} 
+        />
+      </div>
+
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      <section className="relative pb-16 overflow-hidden">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.span 
             initial={{ opacity: 0, y: 10 }}
