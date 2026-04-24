@@ -14,6 +14,20 @@ export default function TreatmentPage() {
   const params = useParams();
   const id = params?.id as string;
   const tratamiento = tratamientos.find((t) => t.id === id);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const cardWidth = 400; // Approximate card width including gap
+      const scrollTo = direction === 'left' ? scrollLeft - cardWidth : scrollLeft + cardWidth;
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
+
+  const whatsappNumber = '5491137854198';
+  const getWhatsAppLink = (message: string) => 
+    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
   if (!tratamiento) {
     notFound();
@@ -43,9 +57,14 @@ export default function TreatmentPage() {
               {tratamiento.descripcionHero}
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="px-8 py-4 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all shadow-lg shadow-orange-600/20 flex items-center gap-2">
+              <a 
+                href={getWhatsAppLink(`Hola, quiero solicitar una valoración para ${tratamiento.tituloHero}`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all shadow-lg shadow-orange-600/20 flex items-center gap-2"
+              >
                 Solicitar Valoración <ArrowRight className="w-5 h-5" />
-              </button>
+              </a>
               <div className="flex items-center gap-3 px-6 py-4 bg-white rounded-full border border-surface-variant">
                 <CheckCircle2 className="text-orange-600 w-5 h-5" />
                 <span className="text-sm font-semibold text-on-surface">Garantía de por vida</span>
@@ -80,7 +99,7 @@ export default function TreatmentPage() {
       </section>
 
       {/* Casos Clínicos */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
@@ -90,16 +109,26 @@ export default function TreatmentPage() {
               </p>
             </div>
             <div className="flex gap-2">
-              <button className="w-10 h-10 rounded-full border border-surface-variant flex items-center justify-center hover:bg-surface-background transition-colors">
+              <button 
+                onClick={() => scroll('left')}
+                className="w-12 h-12 rounded-full border border-surface-variant flex items-center justify-center hover:bg-orange-50 hover:text-orange-600 hover:border-orange-200 transition-all active:scale-95"
+              >
                 <ArrowRight className="w-5 h-5 rotate-180" />
               </button>
-              <button className="w-10 h-10 rounded-full border border-surface-variant flex items-center justify-center hover:bg-surface-background transition-colors text-orange-600">
+              <button 
+                onClick={() => scroll('right')}
+                className="w-12 h-12 rounded-full border border-surface-variant flex items-center justify-center hover:bg-orange-50 hover:text-orange-600 hover:border-orange-200 transition-all active:scale-95"
+              >
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div 
+            ref={scrollRef}
+            className="flex gap-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory no-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             {tratamiento.casosClinicos.map((caso, idx) => (
               <motion.div 
                 key={caso.id}
@@ -107,7 +136,7 @@ export default function TreatmentPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                className="group bg-surface-background rounded-3xl overflow-hidden border border-surface-variant hover:shadow-xl transition-all duration-500"
+                className="max-w-[350px] w-full flex-shrink-0 bg-surface-background rounded-3xl overflow-hidden border border-surface-variant hover:shadow-xl transition-all duration-500 snap-start"
               >
                 <div className="aspect-[1.5/1] relative overflow-hidden">
                   <div className="absolute inset-0 bg-slate-200 flex items-center justify-center text-slate-400 font-bold">
@@ -123,7 +152,7 @@ export default function TreatmentPage() {
                       <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />
                     ))}
                   </div>
-                  <p className="text-on-surface mb-6 italic leading-relaxed">
+                  <p className="text-on-surface mb-6 italic leading-relaxed line-clamp-3">
                     "{caso.testimonio}"
                   </p>
                   <div className="flex items-center justify-between border-t border-surface-variant pt-6">
@@ -221,12 +250,20 @@ export default function TreatmentPage() {
               Reserve hoy su primera consulta de valoración gratuita y reciba un plan de tratamiento personalizado a su medida.
             </p>
             <div className="flex flex-wrap justify-center gap-4 relative z-10">
-              <button className="px-10 py-4 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all flex items-center gap-2">
+              <a 
+                href={getWhatsAppLink(`Hola, quiero agendar mi cita gratis para el tratamiento de ${tratamiento.tituloHero}`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-10 py-4 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all flex items-center gap-2"
+              >
                 Agendar Cita Gratis <CheckCircle2 className="w-5 h-5" />
-              </button>
-              <button className="px-10 py-4 bg-white/10 backdrop-blur text-white rounded-full font-bold hover:bg-white/20 transition-all flex items-center gap-2 border border-white/20">
+              </a>
+              <a 
+                href={`tel:+${whatsappNumber}`}
+                className="px-10 py-4 bg-white/10 backdrop-blur text-white rounded-full font-bold hover:bg-white/20 transition-all flex items-center gap-2 border border-white/20"
+              >
                 Hablar con un Especialista <Phone className="w-5 h-5" />
-              </button>
+              </a>
             </div>
           </div>
         </div>

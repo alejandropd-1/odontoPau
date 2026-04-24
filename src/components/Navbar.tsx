@@ -2,21 +2,22 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
+import Link from 'next/link';
 
 export default function Navbar() {
   return (
     <nav className="fixed top-0 w-full z-50 border-b border-white/20 bg-white/70 backdrop-blur-[15px] shadow-sm shadow-orange-500/5">
       <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
-        <div className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <span className="text-xl font-bold bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent font-sans">
             Paula Gualtieri
           </span>
-        </div>
+        </Link>
         <div className="hidden md:flex items-center gap-8">
-          <a className="font-sans text-sm font-semibold tracking-tight text-orange-600 border-b-2 border-orange-500 pb-1" href="#inicio">Inicio</a>
-          <a className="font-sans text-sm font-semibold tracking-tight text-slate-700 hover:text-orange-500 transition-colors" href="#servicios">Servicios</a>
-          <a className="font-sans text-sm font-semibold tracking-tight text-slate-700 hover:text-orange-500 transition-colors" href="#testimonios">Testimonios</a>
-          <a className="font-sans text-sm font-semibold tracking-tight text-slate-700 hover:text-orange-500 transition-colors" href="#ubicacion">Ubicación</a>
+          <Link className="font-sans text-sm font-semibold tracking-tight text-slate-700 hover:text-orange-500 transition-colors" href="/#inicio">Inicio</Link>
+          <Link className="font-sans text-sm font-semibold tracking-tight text-slate-700 hover:text-orange-500 transition-colors" href="/#servicios">Servicios</Link>
+          <Link className="font-sans text-sm font-semibold tracking-tight text-slate-700 hover:text-orange-500 transition-colors" href="/#testimonios">Testimonios</Link>
+          <Link className="font-sans text-sm font-semibold tracking-tight text-slate-700 hover:text-orange-500 transition-colors" href="/#ubicacion">Ubicación</Link>
         </div>
         <a 
           href="https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno"
