@@ -26,10 +26,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="glass-panel p-6 md:p-16 rounded-3xl max-w-3xl mx-auto"
+          className="glass-panel p-8 md:p-14 rounded-3xl max-w-3xl mx-auto"
         >
           <div className="flex flex-col items-center mb-6">
-            <div className="w-10 h-10 relative mb-3">
+            <div className="w-12 h-12 md:w-16 md:h-16 relative mb-4">
               <Image 
                 src="/images/p-solo.svg" 
                 alt="Isologo Paula Gualtieri"
@@ -37,15 +37,15 @@ export default function Hero() {
                 className="object-contain"
               />
             </div>
-            <span className="text-[10px] md:text-[11px] font-bold tracking-[0.4em] text-on-surface-variant/50 uppercase">
+            <span className="text-[11px] md:text-[13px] font-bold tracking-[0.5em] text-on-surface-variant/60 uppercase">
               Paula Gualtieri Odontología
             </span>
           </div>
-          <h1 className="text-2xl md:text-5xl font-extrabold text-on-surface mb-3 md:mb-5 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-on-surface mb-4 md:mb-6 leading-tight">
             Excelencia Clínica & <br className="hidden md:block" />
             <span className="bg-gradient-to-r from-primary-container to-brand-orange bg-clip-text text-transparent">Calidez Humana</span>
           </h1>
-          <p className="text-sm md:text-lg text-on-surface-variant mb-6 md:mb-8 max-w-xl mx-auto leading-relaxed">
+          <p className="text-[13px] md:text-base text-on-surface-variant mb-8 md:mb-10 max-w-xl mx-auto leading-relaxed opacity-90">
             Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

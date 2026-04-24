@@ -126,31 +126,5 @@ export const tratamientos = [
         rating: 5
       }
     ]
-  },
-  {
-    id: 'Pruebas',
-    tituloHero: 'Pruebas',
-    descripcionHero: 'Diseño de sonrisa personalizado mediante carillas de porcelana y blanqueamiento avanzado. Resultados armónicos que potencian tu belleza natural 2.',
-    icon: Sparkles,
-    heroImage: '/images/estetica-hero.jpg',
-    features: [
-      'Carillas Ultrafinas: Mínimo tallado dental para un resultado natural y duradero.',
-      'Blanqueamiento Láser: Aclara varios tonos en una sola sesión con mínima sensibilidad.',
-      'Diseño Digital DSD: Visualiza tu nueva sonrisa en el ordenador antes de iniciar.',
-      'Materiales Premium: Cerámicas de alta gama que imitan el esmalte natural.'
-    ],
-    casosClinicos: [
-      {
-        id: 1,
-        paciente: 'Julia V.',
-        fecha: 'Noviembre 2023',
-        titulo: 'Cambio de Look',
-        descripcion: 'Transformación total mediante 6 carillas de porcelana superiores.',
-        imagenAntes: '/images/casos/julia-antes.jpg',
-        imagenDespues: '/images/casos/julia-despues.jpg',
-        testimonio: 'Mi cara se ve mucho más joven. El cambio en las proporciones fue la clave.',
-        rating: 5
-      }
-    ]
   }
 ];
