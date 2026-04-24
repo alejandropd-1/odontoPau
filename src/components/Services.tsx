@@ -2,26 +2,9 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Drill, Sparkles, Smile } from 'lucide-react';
-
-const services = [
-  {
-    title: 'Implantología',
-    description: 'Recupera la funcionalidad y estética de tu sonrisa con implantes de titanio de máxima biocompatibilidad y precisión guiada por ordenador.',
-    icon: Drill,
-  },
-  {
-    title: 'Ortodoncia Invisible',
-    description: 'Alineación perfecta y discreta mediante alineadores transparentes hechos a medida. Comodidad y resultados predecibles sin brackets.',
-    icon: Smile,
-    featured: true,
-  },
-  {
-    title: 'Estética Dental',
-    description: 'Diseño de sonrisa digital, blanqueamientos de alta eficacia y carillas cerámicas ultradelgadas para lograr proporciones ideales y luminosidad.',
-    icon: Sparkles,
-  },
-];
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { tratamientos } from '@/data/tratamientos';
 
 export default function Services() {
   return (
@@ -37,23 +20,21 @@ export default function Services() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {tratamientos.map((service, index) => (
             <motion.div
-              key={index}
+              key={service.id}
               whileHover={{ y: -8 }}
-              className={`glass-panel rounded-2xl p-8 transition-all duration-300 relative ${service.featured ? 'border-orange-500/30' : ''}`}
+              className={`glass-panel rounded-2xl p-8 transition-all duration-300 relative ${service.id === 'ortodoncia-invisible' ? 'border-orange-500/30' : ''}`}
             >
-              {service && (
-                <div className="absolute inset-0 border-2 border-primary-container opacity-10 rounded-2xl pointer-events-none"></div>
-              )}
+              <div className="absolute inset-0 border-2 border-primary-container opacity-10 rounded-2xl pointer-events-none"></div>
               <div className="w-14 h-14 rounded-full bg-orange-100 flex items-center justify-center mb-6">
                 <service.icon className="text-primary-container w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold text-on-surface mb-3">{service.title}</h3>
-              <p className="text-on-surface-variant mb-6 leading-relaxed">{service.description}</p>
-              <a className="inline-flex items-center gap-2 text-sm font-bold text-primary-container hover:text-brand-orange transition-colors" href="#">
+              <h3 className="text-2xl font-bold text-on-surface mb-3">{service.tituloHero}</h3>
+              <p className="text-on-surface-variant mb-6 leading-relaxed line-clamp-3">{service.descripcionHero}</p>
+              <Link className="inline-flex items-center gap-2 text-sm font-bold text-primary-container hover:text-brand-orange transition-colors" href={`/tratamientos/${service.id}`}>
                 Saber más <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </motion.div>
           ))}
         </div>

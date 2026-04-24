@@ -14,11 +14,11 @@ export default function Hero() {
           src="/images/hero-bg.png"
           alt="Consultorio de Paula Gualtieri"
           fill
-          className="w-full h-full object-cover object-center opacity-30 grayscale-[10%] blur-[1px]"
+          className="w-full h-full object-cover object-center opacity-60 grayscale-[5%] blur-[0.5px]"
           referrerPolicy="no-referrer"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/40 to-white"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/20 via-white/40 to-white"></div>
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col items-center justify-center text-center pt-24 md:pt-0">
@@ -28,11 +28,24 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="glass-panel p-6 md:p-16 rounded-3xl max-w-3xl mx-auto"
         >
-          <h1 className="text-3xl md:text-6xl font-extrabold text-on-surface mb-4 md:mb-6 leading-tight">
+          <div className="flex flex-col items-center mb-6">
+            <div className="w-10 h-10 relative mb-3">
+              <Image 
+                src="/images/p-solo.svg" 
+                alt="Isologo Paula Gualtieri"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <span className="text-[10px] md:text-[11px] font-bold tracking-[0.4em] text-on-surface-variant/50 uppercase">
+              Paula Gualtieri Odontología
+            </span>
+          </div>
+          <h1 className="text-2xl md:text-5xl font-extrabold text-on-surface mb-3 md:mb-5 leading-tight">
             Excelencia Clínica & <br className="hidden md:block" />
             <span className="bg-gradient-to-r from-primary-container to-brand-orange bg-clip-text text-transparent">Calidez Humana</span>
           </h1>
-          <p className="text-base md:text-xl text-on-surface-variant mb-6 md:mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-lg text-on-surface-variant mb-6 md:mb-8 max-w-xl mx-auto leading-relaxed">
             Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
