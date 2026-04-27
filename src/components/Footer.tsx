@@ -13,7 +13,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-8">
-          {['Instagram', 'Facebook', 'LinkedIn', 'Aviso Legal'].map((link) => (
+          {['Instagram', 'Facebook', 'Aviso Legal'].map((link) => (
             <a
               key={link}
               className="text-xs font-bold text-slate-500 hover:text-orange-500 transition-colors uppercase tracking-widest"

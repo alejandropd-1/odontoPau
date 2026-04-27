@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import Testimonials from '@/components/Testimonials';
+import Team from '@/components/Team';
 import Location from '@/components/Location';
 import Footer from '@/components/Footer';
 import { Metadata } from 'next';
@@ -18,6 +19,7 @@ export default function Home() {
       <Hero />
       <Services />
       <Testimonials />
+      <Team />
       <Location />
       <Footer />
     </main>

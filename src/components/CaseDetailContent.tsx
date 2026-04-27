@@ -62,7 +62,7 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
             transition={{ delay: 0.2 }}
             className="text-lg text-on-surface-variant max-w-2xl mx-auto"
           >
-            Paciente: {caso.paciente} — Un viaje desde el malestar crónico hasta la sonrisa definitiva mediante tecnología de precisión.
+            Un viaje desde el malestar crónico hasta la sonrisa definitiva mediante tecnología de precisión.
           </motion.p>
         </div>
       </section>
@@ -70,39 +70,72 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
       {/* Comparison Section */}
       <section className="pb-24">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative group rounded-[2rem] overflow-hidden shadow-xl border-4 border-white"
-            >
-              <div className="aspect-[4/3] relative bg-slate-200">
-                <Image 
-                  src={caso.imagenAntes} 
-                  alt="Antes"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute top-6 left-6 px-4 py-2 bg-zinc-900/80 backdrop-blur text-white text-xs font-bold rounded-full">ANTES</div>
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative group rounded-[2rem] overflow-hidden shadow-xl border-4 border-white"
-            >
-              <div className="aspect-[4/3] relative bg-orange-100">
-                <Image 
-                  src={caso.imagenDespues} 
-                  alt="Después"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute top-6 left-6 px-4 py-2 bg-orange-600 text-white text-xs font-bold rounded-full">DESPUÉS</div>
-            </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-auto-fit min-[768px]:flex min-[768px]:flex-wrap justify-center gap-6">
+            {caso.imagenes ? (
+              caso.imagenes.map((img: string, idx: number) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="relative group rounded-[2rem] overflow-hidden shadow-xl border-4 border-white flex-1 min-w-[300px] max-w-[500px]"
+                >
+                  <div className="aspect-[4/3] relative bg-slate-200">
+                    <Image 
+                      src={img} 
+                      alt={`Imagen ${idx + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  {idx === 0 && (
+                    <div className="absolute top-6 left-6 px-4 py-2 bg-zinc-900/80 backdrop-blur text-white text-xs font-bold rounded-full">ANTES</div>
+                  )}
+                  {idx === (caso.imagenes?.length ?? 0) - 1 && idx > 0 && (
+                    <div className="absolute top-6 left-6 px-4 py-2 bg-orange-600 text-white text-xs font-bold rounded-full">DESPUÉS</div>
+                  )}
+                </motion.div>
+              ))
+            ) : (
+              <>
+                {caso.imagenAntes && (
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="relative group rounded-[2rem] overflow-hidden shadow-xl border-4 border-white flex-1 min-w-[300px] max-w-[500px]"
+                  >
+                    <div className="aspect-[4/3] relative bg-slate-200">
+                      <Image 
+                        src={caso.imagenAntes} 
+                        alt="Antes"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="absolute top-6 left-6 px-4 py-2 bg-zinc-900/80 backdrop-blur text-white text-xs font-bold rounded-full">ANTES</div>
+                  </motion.div>
+                )}
+                {caso.imagenDespues && (
+                  <motion.div 
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="relative group rounded-[2rem] overflow-hidden shadow-xl border-4 border-white flex-1 min-w-[300px] max-w-[500px]"
+                  >
+                    <div className="aspect-[4/3] relative bg-orange-100">
+                      <Image 
+                        src={caso.imagenDespues} 
+                        alt="Después"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="absolute top-6 left-6 px-4 py-2 bg-orange-600 text-white text-xs font-bold rounded-full">DESPUÉS</div>
+                  </motion.div>
+                )}
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -153,53 +186,6 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
         </div>
       </section>
 
-      {/* Stats Row */}
-      <section className="py-16 border-y border-surface-variant bg-surface-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-            {(caso.stats || [
-              { label: 'Recuperación', value: '100%' },
-              { label: 'Dolor', value: '0' },
-              { label: 'Estética', value: 'A++' },
-              { label: 'Garantía', value: '10+' }
-            ]).map((stat: any, i: number) => (
-              <div key={i} className="space-y-2">
-                <p className="text-4xl md:text-5xl font-bold text-on-surface">{stat.value}</p>
-                <p className="text-xs font-bold text-orange-600 uppercase tracking-widest">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonial Section */}
-      <section className="py-24 bg-white overflow-hidden relative">
-        <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <div className="bg-surface-background rounded-[3rem] p-12 md:p-16 border border-surface-variant relative">
-            <div className="absolute -top-10 left-12 md:left-16">
-              <div className="w-20 h-20 rounded-3xl bg-white border border-surface-variant p-2 shadow-lg">
-                <div className="w-full h-full rounded-2xl bg-orange-100 flex items-center justify-center">
-                   <span className="text-2xl font-bold text-orange-600">{caso.paciente.charAt(0)}</span>
-                </div>
-              </div>
-            </div>
-            <div className="mt-6">
-              <div className="flex gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-orange-500 text-orange-500" />
-                ))}
-              </div>
-              <blockquote className="text-2xl md:text-3xl font-medium text-on-surface mb-8 italic leading-snug">
-                "{caso.testimonio}"
-              </blockquote>
-              <div className="flex flex-col">
-                <span className="text-lg font-bold text-on-surface">{caso.paciente}</span>
-                <span className="text-sm font-bold text-orange-600 uppercase tracking-widest">{caso.titulo}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Footer */}
       <section className="py-24">
@@ -217,7 +203,7 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
             </p>
             <div className="flex flex-wrap justify-center gap-6 relative z-10">
               <a 
-                href={getWhatsAppLink(`Hola, vi el caso de ${caso.paciente} y me gustaría lograr un resultado similar`)}
+                href={getWhatsAppLink(`Vi el caso de ${tratamiento.tituloHero} y me gustaría lograr un resultado similar`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-12 py-5 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all shadow-xl shadow-orange-600/30 flex items-center gap-3 text-lg"

@@ -32,8 +32,13 @@ export default function Location() {
                   <Clock className="text-primary-container w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-on-surface mb-1">Horarios de Atención</h4>
-                  <p className="text-on-surface-variant">Lunes a Viernes: 09:00 - 19:00 hs<br/>Sábados: 09:00 - 13:00 hs</p>
+                  <h4 className="font-bold text-on-surface mb-1">Horarios para solicitar turnos o consultas</h4>
+                  <p className="text-on-surface-variant">
+                    Lunes de 9 a 15hs<br/>
+                    Martes de 9 a 18hs<br/>
+                    Miércoles y jueves de 13 a 18hs<br/>
+                    Viernes de 9 a 15hs
+                  </p>
                 </div>
               </div>
             </div>
@@ -46,12 +51,6 @@ export default function Location() {
                 className="bg-[#25D366] text-white font-bold px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#1ebe57] transition-all shadow-lg shadow-[#25D366]/20 hover:scale-105 active:scale-95"
               >
                 <MessageSquare className="w-5 h-5 fill-current" /> Contactar por WhatsApp
-              </a>
-              <a
-                href="tel:+5491137854198"
-                className="glass-panel border-primary-container text-primary-container font-bold px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-orange-50 transition-all hover:scale-105 active:scale-95"
-              >
-                <Phone className="w-5 h-5" /> Llamar ahora
               </a>
             </div>
           </div>

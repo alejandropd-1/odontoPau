@@ -61,20 +61,14 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
             <p className="text-lg text-on-surface-variant mb-10 max-w-xl leading-relaxed">
               {tratamiento.descripcionHero}
             </p>
-            <div className="flex flex-wrap gap-4">
               <a 
                 href={getWhatsAppLink(`Hola, quiero solicitar una valoración para ${tratamiento.tituloHero}`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all shadow-lg shadow-orange-600/20 flex items-center gap-2"
+                className="w-full md:w-fit justify-center px-8 py-4 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all shadow-lg shadow-orange-600/20 flex items-center gap-2"
               >
                 Solicitar Valoración <ArrowRight className="w-5 h-5" />
               </a>
-              <div className="flex items-center gap-3 px-6 py-4 bg-white rounded-full border border-surface-variant">
-                <CheckCircle2 className="text-orange-600 w-5 h-5" />
-                <span className="text-sm font-semibold text-on-surface">Garantía de por vida</span>
-              </div>
-            </div>
           </motion.div>
 
           <motion.div 
@@ -94,12 +88,34 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
             </div>
             {/* Dr. Badge Overlay */}
             <div className="absolute top-10 -right-6 md:right-10 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center shrink-0">
                 <span className="text-orange-600 font-bold">PG</span>
               </div>
               <div>
-                <p className="text-xs font-bold text-on-surface">Dra. Paula Gualtieri</p>
-                <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Especialista en {tratamiento.tituloHero}</p>
+                {tratamiento.id === 'pediatria' ? (
+                  <>
+                    <p className="text-xs font-bold text-on-surface">Dra. Paula Gualtieri</p>
+                    <p className="text-xs font-bold text-on-surface mt-1">Dra. Emilia Omastott</p>
+                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter mt-1">Especialistas en {tratamiento.tituloHero}</p>
+                  </>
+                ) : tratamiento.id === 'implantes' ? (
+                  <>
+                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Paula Gualtieri Odontología</p>
+                    <p className="text-xs font-bold text-on-surface mt-1">Dr. Roberto Dominguez</p>
+                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter mt-1">Especialista en Rehabilitación Oral</p>
+                  </>
+                ) : tratamiento.id === 'estetica-dental' ? (
+                  <>
+                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Paula Gualtieri Odontología</p>
+                    <p className="text-xs font-bold text-on-surface mt-1">Dr. Roberto Dominguez</p>
+                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter mt-1">Especialista en {tratamiento.tituloHero}</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-xs font-bold text-on-surface">Dra. Paula Gualtieri</p>
+                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Especialista en {tratamiento.tituloHero}</p>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
@@ -145,29 +161,19 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
               >
                 <div className="aspect-[1.5/1] relative overflow-hidden bg-slate-200">
                   <Image 
-                    src={caso.imagenDespues} 
+                    src={caso.imagenDespues || caso.imagenAntes} 
                     alt={caso.titulo}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-zinc-900/80 backdrop-blur text-white text-[10px] font-bold rounded-full">
-                    CARGA INMEDIATA
-                  </div>
+                  {caso.estado && (
+                    <div className="absolute top-4 left-4 px-3 py-1 bg-zinc-900/80 backdrop-blur text-white text-[10px] font-bold rounded-full">
+                      {caso.estado}
+                    </div>
+                  )}
                 </div>
                 <div className="p-8">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(caso.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-on-surface-variant italic mb-6 leading-relaxed">
-                    "{caso.testimonio}"
-                  </p>
                   <div className="flex items-center justify-between pt-6 border-t border-surface-variant">
-                    <div className="flex flex-col">
-                      <span className="text-sm font-bold text-on-surface">{caso.paciente}</span>
-                      <span className="text-xs text-on-surface-variant">{caso.fecha}</span>
-                    </div>
                     <Link href={`/tratamientos/${tratamiento.id}/casos/${caso.id}`} className="text-xs font-bold text-orange-600 hover:underline">Ver Caso Completo</Link>
                   </div>
                 </div>
@@ -206,8 +212,8 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
                   <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Tasa de Éxito</p>
                 </div>
                 <div className="bg-white p-8 rounded-[2rem] text-zinc-900 shadow-xl mt-8">
-                  <p className="text-4xl font-bold text-orange-600 mb-2">10+</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Años de Garantía</p>
+                  <p className="text-4xl font-bold text-orange-600 mb-2">15+</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Años de Experiencia</p>
                 </div>
              </div>
           </div>
@@ -223,21 +229,15 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
             
             <div className="relative z-10">
               <h2 className="text-3xl md:text-6xl font-bold text-white mb-8">¿Listo para transformar su sonrisa?</h2>
-              <p className="text-zinc-400 mb-12 max-w-2xl mx-auto text-lg leading-relaxed">Únase a los cientos de pacientes que han recuperado su confianza con nuestros tratamientos de vanguardia. Agende su valoración gratuita hoy mismo.</p>
+              <p className="text-zinc-400 mb-12 max-w-2xl mx-auto text-lg leading-relaxed">Unite a los pacientes que han recuperado su confianza con nuestro tratamientos de vanguardia.</p>
               <div className="flex flex-wrap justify-center gap-4 relative z-10">
                 <a 
-                  href={getWhatsAppLink(`Hola, quiero agendar mi cita gratis para el tratamiento de ${tratamiento.tituloHero}`)}
+                  href={getWhatsAppLink(`Hola, quiero agendar mi cita para el tratamiento de ${tratamiento.tituloHero}`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-10 py-4 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all flex items-center gap-2"
                 >
-                  Agendar Cita Gratis <CheckCircle2 className="w-5 h-5" />
-                </a>
-                <a 
-                  href={`tel:+${whatsappNumber}`}
-                  className="px-10 py-4 bg-white/10 backdrop-blur text-white rounded-full font-bold hover:bg-white/20 transition-all flex items-center gap-2 border border-white/20"
-                >
-                  Hablar con un Especialista <Phone className="w-5 h-5" />
+                  Agendar Cita <CheckCircle2 className="w-5 h-5" />
                 </a>
               </div>
             </div>

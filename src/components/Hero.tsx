@@ -50,7 +50,7 @@ export default function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
-              onClick={() => document.getElementById('ubicacion')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('equipo')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-gradient-to-r from-primary-container to-brand-orange text-white font-bold px-6 md:px-8 py-3 md:py-4 rounded-full shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all hover:scale-105 active:scale-95"
             >
               Conoce a la Dra. Gualtieri
