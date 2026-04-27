@@ -7,7 +7,7 @@ import { CheckCircle2 } from 'lucide-react';
 
 export default function Team() {
   return (
-    <section className="py-24 bg-white" id="equipo">
+    <section className="py-24 bg-orange-50/50" id="equipo">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-xs font-bold tracking-wider uppercase mb-4">
@@ -19,7 +19,7 @@ export default function Team() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Dra. Paula */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -75,7 +75,7 @@ export default function Team() {
                 role: 'Especialista en Endodoncia.'
               }
             ].map((member, idx) => (
-              <div key={idx} className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-surface-variant hover:shadow-lg transition-shadow">
+              <div key={idx} className="flex items-start gap-4 p-4 lg:p-5 rounded-2xl bg-white border border-surface-variant hover:shadow-lg transition-shadow">
                 <div className="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-6 h-6 text-orange-600" />
                 </div>
