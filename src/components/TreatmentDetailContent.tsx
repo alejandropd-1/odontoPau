@@ -50,7 +50,7 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-xs font-bold tracking-wider uppercase mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold tracking-wider uppercase mb-6">
               Excelencia Restaurativa
             </span>
             <h1 className="text-4xl md:text-6xl font-bold text-on-surface mb-6 leading-tight">

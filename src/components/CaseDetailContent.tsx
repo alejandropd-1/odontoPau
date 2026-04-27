@@ -44,7 +44,7 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
           <motion.span 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-xs font-bold tracking-wider uppercase mb-6"
+            className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold tracking-wider uppercase mb-6"
           >
             Caso de Éxito: {tratamiento.tituloHero}
           </motion.span>

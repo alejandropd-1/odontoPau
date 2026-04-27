@@ -10,7 +10,7 @@ export default function Team() {
     <section className="py-24 bg-orange-50/50" id="equipo">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-xs font-bold tracking-wider uppercase mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold tracking-wider uppercase mb-4">
             Conocé a los especialistas
           </span>
           <h2 className="text-3xl md:text-5xl font-bold text-on-surface mb-6">Equipo de trabajo</h2>
@@ -80,7 +80,7 @@ export default function Team() {
                   <CheckCircle2 className="w-6 h-6 text-orange-600" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-on-surface">{member.name}</h4>
+                  <h3 className="text-lg font-bold text-on-surface">{member.name}</h3>
                   <span className="text-sm text-orange-600 font-bold block mb-1">{member.mn}</span>
                   <p className="text-sm text-on-surface-variant">{member.role}</p>
                 </div>

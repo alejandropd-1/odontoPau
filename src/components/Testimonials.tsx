@@ -130,7 +130,7 @@ export default function Testimonials() {
                       <Image src={t.img} alt={t.name} fill className="object-cover" referrerPolicy="no-referrer" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-on-surface">{t.name}</h4>
+                      <h3 className="font-bold text-on-surface">{t.name}</h3>
                       <div className="flex text-orange-500">
                         {[...Array(t.rating)].map((_, idx) => (
                           <Star key={idx} className="w-3.5 h-3.5 fill-current" />
@@ -139,7 +139,7 @@ export default function Testimonials() {
                     </div>
                   </div>
                   <p className="text-on-surface-variant italic mb-6 leading-relaxed">{t.content}</p>
-                  <div className="flex items-center gap-2 text-slate-400 text-xs font-semibold uppercase tracking-wider">
+                  <div className="flex items-center gap-2 text-slate-500 text-xs font-semibold uppercase tracking-wider">
                     <t.icon className="w-4 h-4" /> Vía {t.source}
                   </div>
                 </div>
