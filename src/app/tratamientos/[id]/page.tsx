@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${tratamiento.tituloHero} | Dra. Paula Gualtieri`,
       description: tratamiento.descripcionHero,
       type: 'article',
-      url: `https://odontopau.com/tratamientos/${id}`,
+      url: `https://paulagualtieri.com/tratamientos/${id}`,
     }
   };
 }

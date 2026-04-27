@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `Caso de Éxito: ${caso.titulo} | Dra. Paula Gualtieri`,
       description: caso.descripcion,
       type: 'article',
-      url: `https://odontopau.com/tratamientos/${id}/casos/${casoId}`,
+      url: `https://paulagualtieri.com/tratamientos/${id}/casos/${casoId}`,
     }
   };
 }

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_AR',
-    url: 'https://odontopau.com',
+    url: 'https://paulagualtieri.com',
     siteName: 'Dra. Paula Gualtieri',
     title: 'Dra. Paula Gualtieri | Odontología de Vanguardia',
     description: 'Excelencia clínica y calidez humana. Especialistas en implantes, ortodoncia invisible y estética dental con tecnología de precisión.',

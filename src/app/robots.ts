@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    sitemap: 'https://odontopau.com/sitemap.xml',
+    sitemap: 'https://paulagualtieri.com/sitemap.xml',
   };
 }
