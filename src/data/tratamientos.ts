@@ -10,6 +10,7 @@ export interface CasoClinico {
   imagenAntes?: string;
   imagenDespues?: string;
   imagenes?: string[];
+  etiquetasImagenes?: string[];
   estado?: string;
   testimonio: string;
   desafio?: string;
@@ -175,6 +176,7 @@ export const tratamientos: Tratamiento[] = [
           '/images/ortopedia-hero.jpg',
           '/images/ortopedia-hero.jpg'
         ],
+        etiquetasImagenes: ['ANTES', 'EN PROGRESO', 'DESPUÉS'],
         estado: 'En proceso',
         testimonio: 'Notamos un gran cambio en la respiración y postura desde que iniciamos.',
         desafio: 'Falta de espacio para la erupción de los dientes permanentes y respiración bucal.',

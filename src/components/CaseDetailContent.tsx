@@ -33,7 +33,7 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
         <Breadcrumb 
           items={[
             { label: tratamiento.tituloHero, href: `/tratamientos/${id}` },
-            { label: `Caso: ${caso.paciente}` }
+            { label: `Caso: ${caso.titulo}` }
           ]} 
         />
       </div>
@@ -88,11 +88,10 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
                       className="object-cover"
                     />
                   </div>
-                  {idx === 0 && (
-                    <div className="absolute top-6 left-6 px-4 py-2 bg-zinc-900/80 backdrop-blur text-white text-xs font-bold rounded-full">ANTES</div>
-                  )}
-                  {idx === (caso.imagenes?.length ?? 0) - 1 && idx > 0 && (
-                    <div className="absolute top-6 left-6 px-4 py-2 bg-orange-600 text-white text-xs font-bold rounded-full">DESPUÉS</div>
+                  {caso.etiquetasImagenes && caso.etiquetasImagenes[idx] && (
+                    <div className={`absolute top-6 left-6 px-4 py-2 text-white text-xs font-bold rounded-full ${caso.etiquetasImagenes[idx].toUpperCase() === 'ANTES' ? 'bg-zinc-900/80 backdrop-blur' : 'bg-orange-600'}`}>
+                      {caso.etiquetasImagenes[idx]}
+                    </div>
                   )}
                 </motion.div>
               ))

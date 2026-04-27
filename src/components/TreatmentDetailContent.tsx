@@ -173,6 +173,7 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
                   )}
                 </div>
                 <div className="p-8">
+                  <h3 className="text-xl font-bold text-on-surface mb-6 leading-tight">{caso.titulo}</h3>
                   <div className="flex items-center justify-between pt-6 border-t border-surface-variant">
                     {caso.fecha && (
                       <span className="text-xs text-on-surface-variant font-medium">{caso.fecha}</span>
