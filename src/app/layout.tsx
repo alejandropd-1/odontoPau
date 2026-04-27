@@ -8,6 +8,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://paulagualtieri.com'),
   title: {
     default: 'Dra. Paula Gualtieri | Odontología de Vanguardia',
     template: '%s | Dra. Paula Gualtieri'
@@ -31,9 +32,9 @@ export const metadata: Metadata = {
     description: 'Excelencia clínica y calidez humana. Especialistas en implantes, ortodoncia invisible y estética dental con tecnología de precisión.',
     images: [
       {
-        url: '/images/og-image.jpg',
-        width: 1200,
-        height: 630,
+        url: '/images/isologo.png',
+        width: 1080,
+        height: 1080,
         alt: 'Dra. Paula Gualtieri - Clínica Odontológica',
       },
     ],
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Dra. Paula Gualtieri | Odontología de Vanguardia',
     description: 'Excelencia clínica y calidez humana en Buenos Aires.',
-    images: ['/images/og-image.jpg'],
+    images: ['/images/isologo.png'],
   },
   robots: {
     index: true,
@@ -56,8 +57,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: '/images/p-solo.svg',
+    apple: '/images/isologo.png',
   },
 };
 
