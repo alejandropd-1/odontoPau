@@ -161,7 +161,7 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
               >
                 <div className="aspect-[1.5/1] relative overflow-hidden bg-slate-200">
                   <Image 
-                    src={caso.imagenDespues || caso.imagenAntes} 
+                    src={caso.imagenDespues || caso.imagenAntes || (caso.imagenes && caso.imagenes.length > 0 ? caso.imagenes[caso.imagenes.length - 1] : '')} 
                     alt={caso.titulo}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -174,6 +174,9 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
                 </div>
                 <div className="p-8">
                   <div className="flex items-center justify-between pt-6 border-t border-surface-variant">
+                    {caso.fecha && (
+                      <span className="text-xs text-on-surface-variant font-medium">{caso.fecha}</span>
+                    )}
                     <Link href={`/tratamientos/${tratamiento.id}/casos/${caso.id}`} className="text-xs font-bold text-orange-600 hover:underline">Ver Caso Completo</Link>
                   </div>
                 </div>
