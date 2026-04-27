@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="flex flex-col md:flex-row justify-between items-center px-8 gap-8 max-w-7xl mx-auto">
         <div className="font-extrabold bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent font-sans text-2xl tracking-tight">Paula Gualtieri</div>
 
-        <div className="text-sm font-medium text-slate-400">
+        <div className="text-sm font-medium text-slate-500">
           © {new Date().getFullYear()} Paula Gualtieri Odontología. Todos los derechos reservados.
         </div>
 

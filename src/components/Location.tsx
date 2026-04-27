@@ -48,7 +48,7 @@ export default function Location() {
                 href="https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#25D366] text-white font-bold px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#1ebe57] transition-all shadow-lg shadow-[#25D366]/20 hover:scale-105 active:scale-95"
+                className="bg-[#128C7E] text-white font-bold px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#075E54] transition-all shadow-lg shadow-[#128C7E]/20 hover:scale-105 active:scale-95"
               >
                 <MessageSquare className="w-5 h-5 fill-current" /> Contactar por WhatsApp
               </a>
@@ -63,6 +63,7 @@ export default function Location() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+              title="Mapa de ubicación del consultorio de la Dra. Paula Gualtieri"
             ></iframe>
             {/* Floating Location Card */}
             <div className="absolute bottom-6 left-6 right-6 glass-panel p-5 rounded-2xl flex items-center justify-between transform translate-y-2 group-hover:translate-y-0 transition-transform pointer-events-none">
