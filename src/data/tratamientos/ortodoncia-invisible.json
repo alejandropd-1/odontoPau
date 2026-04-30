@@ -1,0 +1,25 @@
+{
+  "id": "ortodoncia-invisible",
+  "tituloHero": "Ortodoncia Invisible",
+  "descripcionHero": "Alinea tus dientes de forma discreta y cómoda con alineadores transparentes de última generación. La solución perfecta para adultos que buscan estética y resultados rápidos.",
+  "icon": "Smile",
+  "heroImage": "/images/ortodoncia-hero.jpg",
+  "features": [
+    "Removibles y Cómodos: Puedes quitártelos para comer y cepillarte, manteniendo una higiene perfecta.",
+    "Prácticamente Invisibles: Nadie notará que estás bajo tratamiento de ortodoncia.",
+    "Experiencia: Màs de de 15 años avala nuestro trabajo.",
+    "Menos Visitas: Sistema eficiente que requiere menos ajustes manuales en clínica."
+  ],
+  "casosClinicos": [
+    {
+      "id": 1,
+      "paciente": "Paciente",
+      "fecha": "Febrero 2024",
+      "titulo": "Alineación de Arcada",
+      "descripcion": "Elena logró la sonrisa que siempre quiso en solo 12 meses sin usar brackets.",
+      "imagenAntes": "/images/casos/elena-antes.jpg",
+      "imagenDespues": "/images/casos/elena-despues.jpg",
+      "testimonio": "Lo mejor fue que nadie se dio cuenta. Muy cómodo para mi trabajo cara al público."
+    }
+  ]
+}

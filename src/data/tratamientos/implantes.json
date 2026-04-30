@@ -1,0 +1,50 @@
+{
+  "id": "implantes",
+  "tituloHero": "Implantes Dentales",
+  "descripcionHero": "Recupera la funcionalidad total y la estética natural de su sonrisa con nuestra tecnología de implantes. Un procedimiento seguro, indoloro y con resultados predecibles.",
+  "icon": "Drill",
+  "heroImage": "/images/implantes-hero.jpg",
+  "features": [
+    "Materiales Bio-compatibles: Utilizamos titanio de grado médico de primer nivel, garantizando una osteointegración perfecta con el hueso.",
+    "98% Tasa de éxito: Nuestra metodología y tecnología de vanguardia aseguran resultados óptimos en casi la totalidad de los casos.",
+    "15 años de experiencia: Más de 15 años de experiencia avala nuestro trabajo.",
+    "Tecnología 3D: Utilizamos escaneos digitales para nuestras cirugìas y pròtesis"
+  ],
+  "casosClinicos": [
+    {
+      "id": 1,
+      "paciente": "Paciente",
+      "fecha": "Marzo 2024",
+      "titulo": "Rehabilitación Superior",
+      "descripcion": "Ana recuperó su seguridad al hablar y sonreír tras un tratamiento de implantes de carga inmediata.",
+      "imagenAntes": "/images/casos/ana-antes.jpg",
+      "imagenDespues": "/images/casos/ana-despues.jpg",
+      "testimonio": "No imaginé que el cambio sería tan radical. Ahora vivo sin la inseguridad de comer cualquier cosa.",
+      "desafio": "Ana llegó con una pérdida significativa de piezas dentales superiores debido a años de desgaste y periodontitis. El mayor obstáculo no era solo rehabilitar su sonrisa, sino devolverle la confianza para comer y hablar sin dolor.",
+      "diagnostico": "Atrofia alveolar y colapso oclusal.",
+      "duracion": "3 meses de tratamiento.",
+      "solucion": "Implementamos un protocolo de implantes de carga inmediata. Utilizamos escaneo intraoral 3D para diseñar una prótesis fija que respeta la biomecánica natural de la paciente.",
+      "solucionFeatures": [
+        "Cirugía Guiada por Computadora",
+        "Prótesis Cerámica Pre-tallada",
+        "Ajuste Oclusal Dinámico"
+      ],
+      "stats": [
+        { "label": "Recuperación Funcional", "value": "100%" },
+        { "label": "Dolor Post-Op", "value": "0" },
+        { "label": "Estética Natural", "value": "A++" },
+        { "label": "Años de Durabilidad", "value": "10+" }
+      ]
+    },
+    {
+      "id": 2,
+      "paciente": "Paciente",
+      "fecha": "Enero 2024",
+      "titulo": "Implante Unitario",
+      "descripcion": "Restauración de pieza frontal con acabado imperceptible.",
+      "imagenAntes": "/images/casos/carlos-antes.jpg",
+      "imagenDespues": "/images/casos/carlos-despues.jpg",
+      "testimonio": "La naturalidad es impresionante. Nadie nota que es un diente artificial."
+    }
+  ]
+}

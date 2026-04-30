@@ -31,7 +31,21 @@ export interface Tratamiento {
   casosClinicos: CasoClinico[];
 }
 
-import tratamientosData from './tratamientos.json';
+import implantes from './tratamientos/implantes.json';
+import ortodoncia from './tratamientos/ortodoncia-invisible.json';
+import estetica from './tratamientos/estetica-dental.json';
+import ortopedia from './tratamientos/ortopedia.json';
+import pediatria from './tratamientos/pediatria.json';
+import endodoncia from './tratamientos/endodoncia.json';
+
+const tratamientosData = [
+  implantes,
+  ortodoncia,
+  estetica,
+  ortopedia,
+  pediatria,
+  endodoncia
+];
 
 const iconMap: Record<string, LucideIcon> = {
   Drill,

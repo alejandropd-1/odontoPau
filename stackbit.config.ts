@@ -8,6 +8,10 @@ export default defineStackbitConfig({
   devCommand: 'npm run dev',
   installCommand: 'npm install',
   
+  modelExtensions: [
+    { name: 'Tratamiento', type: 'page' }
+  ],
+
   assets: {
     referenceType: 'static',
     staticDir: 'public',
@@ -29,13 +33,14 @@ export default defineStackbitConfig({
   contentSources: [
     new GitContentSource({
       rootPath: __dirname,
-      contentDirs: ['src/data'],
+      contentDirs: ['src/data/tratamientos'], // Ahora apunta a la carpeta de archivos individuales
       models: [
         {
           name: 'Tratamiento',
-          type: 'data',
+          type: 'page',
           label: 'Tratamiento',
           labelField: 'tituloHero',
+          urlPath: '/tratamientos/{id}',
           fields: [
             { name: 'id', type: 'string', required: true },
             { name: 'tituloHero', type: 'string', required: true, label: 'Título Hero' },
@@ -52,32 +57,12 @@ export default defineStackbitConfig({
           label: 'Caso Clínico',
           labelField: 'titulo',
           fields: [
-            { name: 'id', type: 'number', required: true },
             { name: 'paciente', type: 'string', required: true },
-            { name: 'fecha', type: 'string' },
             { name: 'titulo', type: 'string', required: true },
             { name: 'descripcion', type: 'text', required: true },
             { name: 'imagenAntes', type: 'image', label: 'Imagen Antes' },
             { name: 'imagenDespues', type: 'image', label: 'Imagen Después' },
-            { name: 'imagenes', type: 'list', items: { type: 'image' }, label: 'Galería' },
-            { name: 'etiquetasImagenes', type: 'list', items: { type: 'string' }, label: 'Etiquetas Imágenes' },
-            { name: 'estado', type: 'string' },
-            { name: 'testimonio', type: 'text', label: 'Testimonio' },
-            { name: 'desafio', type: 'text', label: 'Desafío' },
-            { name: 'diagnostico', type: 'text', label: 'Diagnóstico' },
-            { name: 'duracion', type: 'string', label: 'Duración' },
-            { name: 'solucion', type: 'text', label: 'Solución' },
-            { name: 'solucionFeatures', type: 'list', items: { type: 'string' }, label: 'Solución Features' },
-            { name: 'stats', type: 'list', items: { type: 'model', models: ['Stat'] } }
-          ]
-        },
-        {
-          name: 'Stat',
-          type: 'object',
-          labelField: 'label',
-          fields: [
-            { name: 'label', type: 'string', required: true },
-            { name: 'value', type: 'string', required: true }
+            { name: 'testimonio', type: 'text', label: 'Testimonio' }
           ]
         }
       ]

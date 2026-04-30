@@ -1,0 +1,27 @@
+{
+  "id": "ortopedia",
+  "tituloHero": "Ortopedia",
+  "descripcionHero": "Guía del crecimiento óseo y correción funcional temprana para lograr una armonìa facial integral.",
+  "icon": "Sparkles",
+  "heroImage": "/images/ortopedia-hero.jpg",
+  "features": [
+    "Desarrollo maxilar: Estimulaciòn y guìa del crecimiento del hueso de la cara.",
+    "Correcciòn funcional: reeducación de la respiración, masticaciòn y degluciòn.",
+    "Equilibrio facial: Mejora del perfil y la simetría mandibular.",
+    "Prevenciòn: evita extracciones y cirugìas complejas en la adultez."
+  ],
+  "casosClinicos": [
+    {
+      "id": 1,
+      "paciente": "Paciente",
+      "fecha": "Octubre 2024",
+      "titulo": "Ortopedia Maxilar",
+      "descripcion": "Expansión maxilar y guía de crecimiento.",
+      "testimonio": "Notamos un gran cambio en la respiración y postura desde que iniciamos.",
+      "desafio": "Falta de espacio para la erupción de los dientes permanentes y respiración bucal.",
+      "diagnostico": "Maxilar estrecho y mordida cruzada posterior.",
+      "duracion": "18 meses",
+      "solucion": "Uso de aparatología ortopédica funcional para expandir el maxilar y reeducar la postura lingual."
+    }
+  ]
+}
