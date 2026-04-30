@@ -1,4 +1,4 @@
-import { defineStackbitConfig } from '@stackbit/types';
+import { defineStackbitConfig, SiteMapEntry } from '@stackbit/types';
 import { GitContentSource } from '@stackbit/cms-git';
 
 export default defineStackbitConfig({
@@ -14,28 +14,46 @@ export default defineStackbitConfig({
     uploadDir: 'images',
     publicPath: '/'
   },
-  
-  siteMap: ({ documents }) => {
+
+  // 1. Implementamos el siteMap tal cual la Imagen 3 de la documentación
+  siteMap: ({ documents, models }) => {
+    const pageModels = models.filter((m) => m.type === 'page');
+
     return documents
-      .filter((doc) => doc.modelName === 'Tratamiento')
-      .map((doc) => ({
-        stableId: doc.id,
-        urlPath: `/tratamientos/${doc.id}`,
-        document: doc,
-        isHomePage: false,
-      }));
+      .filter((d) => pageModels.some(m => m.name === d.modelName))
+      .map((document) => {
+        let urlModel = '';
+        switch (document.modelName) {
+          case 'Tratamiento':
+            urlModel = 'tratamientos';
+            break;
+          default:
+            return null;
+        }
+
+        return {
+          stableId: document.id,
+          // document.id en GitContentSource suele ser el nombre del archivo sin extensión
+          urlPath: `/${urlModel}/${document.id}`,
+          document,
+          isHomePage: false,
+        };
+      })
+      .filter(Boolean) as SiteMapEntry[];
   },
 
   contentSources: [
     new GitContentSource({
       rootPath: __dirname,
-      contentDirs: ['src/data'],
+      contentDirs: ['src/data/tratamientos'],
       models: [
         {
           name: 'Tratamiento',
-          type: 'data',
+          type: 'page', // Definido como página según Imagen 1 y 2
           label: 'Tratamiento',
           labelField: 'tituloHero',
+          // Mapeo de URL estático según documentación
+          urlPath: '/tratamientos/{id}', 
           fields: [
             { name: 'id', type: 'string', required: true },
             { name: 'tituloHero', type: 'string', required: true, label: 'Título Hero' },
@@ -52,32 +70,12 @@ export default defineStackbitConfig({
           label: 'Caso Clínico',
           labelField: 'titulo',
           fields: [
-            { name: 'id', type: 'number', required: true },
             { name: 'paciente', type: 'string', required: true },
-            { name: 'fecha', type: 'string' },
             { name: 'titulo', type: 'string', required: true },
             { name: 'descripcion', type: 'text', required: true },
             { name: 'imagenAntes', type: 'image', label: 'Imagen Antes' },
             { name: 'imagenDespues', type: 'image', label: 'Imagen Después' },
-            { name: 'imagenes', type: 'list', items: { type: 'image' }, label: 'Galería' },
-            { name: 'etiquetasImagenes', type: 'list', items: { type: 'string' }, label: 'Etiquetas Imágenes' },
-            { name: 'estado', type: 'string' },
-            { name: 'testimonio', type: 'text', label: 'Testimonio' },
-            { name: 'desafio', type: 'text', label: 'Desafío' },
-            { name: 'diagnostico', type: 'text', label: 'Diagnóstico' },
-            { name: 'duracion', type: 'string', label: 'Duración' },
-            { name: 'solucion', type: 'text', label: 'Solución' },
-            { name: 'solucionFeatures', type: 'list', items: { type: 'string' }, label: 'Solución Features' },
-            { name: 'stats', type: 'list', items: { type: 'model', models: ['Stat'] } }
-          ]
-        },
-        {
-          name: 'Stat',
-          type: 'object',
-          labelField: 'label',
-          fields: [
-            { name: 'label', type: 'string', required: true },
-            { name: 'value', type: 'string', required: true }
+            { name: 'testimonio', type: 'text', label: 'Testimonio' }
           ]
         }
       ]

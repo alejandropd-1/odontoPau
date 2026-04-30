@@ -1,0 +1,26 @@
+{
+  "id": "endodoncia",
+  "tituloHero": "Endodoncia",
+  "descripcionHero": "Tecnología avanzada para preservar tus piezas dentales naturales, eliminando el dolor y las infecciones de forma precisa, cómoda y segura",
+  "icon": "Drill",
+  "heroImage": "/images/endodoncia-hero.jpg",
+  "features": [
+    "Prevención dental: salvamos el dientes y evitamos la extracción.",
+    "Tecnología rotatoria: uso de sistema mecanizado que garantizan rapidez y eficacia.",
+    "Biocompatibilidad: sellado hermético con materiales de última generación."
+  ],
+  "casosClinicos": [
+    {
+      "id": 1,
+      "paciente": "Paciente",
+      "fecha": "Julio 2024",
+      "titulo": "Tratamiento de Conducto Molar",
+      "descripcion": "Salvamos una pieza clave que presentaba infección profunda.",
+      "testimonio": "No sentí nada de dolor durante ni después del tratamiento. Pude conservar mi diente natural.",
+      "desafio": "Infección profunda en un molar inferior con conductos curvos y calcificados.",
+      "diagnostico": "Pulpitis irreversible sintomática con periodontitis apical.",
+      "duracion": "1 sesión de 90 minutos",
+      "solucion": "Tratamiento de conducto mecanizado con magnificación y sellado tridimensional."
+    }
+  ]
+}

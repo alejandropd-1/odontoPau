@@ -1,0 +1,27 @@
+{
+  "id": "pediatria",
+  "tituloHero": "Odontología Pediátrica",
+  "descripcionHero": "Cuidado especializado y cercano para proteger la salud dental infantil, fomentando hábitos positivos para los más pequeños",
+  "icon": "Smile",
+  "heroImage": "/images/pediatria-hero.jpg",
+  "features": [
+    "Prevención temprana: control del desarrollo dental e intervención a tiempo.",
+    "Enfoque adaptativo: manejo de ansiedad para experiencias sin miedo.",
+    "Educación en salud: guía en higiene y nutrición para niños y padres.",
+    "Crecimiento sano: monitoreo del recambio dentario y mantenimiento de espacios."
+  ],
+  "casosClinicos": [
+    {
+      "id": 1,
+      "paciente": "Paciente",
+      "fecha": "Septiembre 2024",
+      "titulo": "Rehabilitación Infantil",
+      "descripcion": "Tratamiento amigable y sin dolor para múltiples caries.",
+      "testimonio": "Mi hijo entró con miedo y salió sonriendo. La paciencia de las doctoras es increíble.",
+      "desafio": "Paciente de 5 años con múltiples caries de primera infancia y mucho temor al dentista.",
+      "diagnostico": "Caries de la primera infancia severa.",
+      "duracion": "4 sesiones cortas",
+      "solucion": "Adaptación al entorno dental mediante juegos, y posterior restauración con resinas estéticas."
+    }
+  ]
+}
