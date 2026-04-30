@@ -1,4 +1,4 @@
-import { defineStackbitConfig } from '@stackbit/types';
+import { defineStackbitConfig, SiteMapEntry } from '@stackbit/types';
 import { GitContentSource } from '@stackbit/cms-git';
 
 export default defineStackbitConfig({
@@ -8,39 +8,52 @@ export default defineStackbitConfig({
   devCommand: 'npm run dev',
   installCommand: 'npm install',
   
-  modelExtensions: [
-    { name: 'Tratamiento', type: 'page' }
-  ],
-
   assets: {
     referenceType: 'static',
     staticDir: 'public',
     uploadDir: 'images',
     publicPath: '/'
   },
-  
-  siteMap: ({ documents }) => {
+
+  // 1. Implementamos el siteMap tal cual la Imagen 3 de la documentación
+  siteMap: ({ documents, models }) => {
+    const pageModels = models.filter((m) => m.type === 'page');
+
     return documents
-      .filter((doc) => doc.modelName === 'Tratamiento')
-      .map((doc) => ({
-        stableId: doc.id,
-        urlPath: `/tratamientos/${doc.id}`,
-        document: doc,
-        isHomePage: false,
-      }));
+      .filter((d) => pageModels.some(m => m.name === d.modelName))
+      .map((document) => {
+        let urlModel = '';
+        switch (document.modelName) {
+          case 'Tratamiento':
+            urlModel = 'tratamientos';
+            break;
+          default:
+            return null;
+        }
+
+        return {
+          stableId: document.id,
+          // document.id en GitContentSource suele ser el nombre del archivo sin extensión
+          urlPath: `/${urlModel}/${document.id}`,
+          document,
+          isHomePage: false,
+        };
+      })
+      .filter(Boolean) as SiteMapEntry[];
   },
 
   contentSources: [
     new GitContentSource({
       rootPath: __dirname,
-      contentDirs: ['src/data/tratamientos'], // Ahora apunta a la carpeta de archivos individuales
+      contentDirs: ['src/data/tratamientos'],
       models: [
         {
           name: 'Tratamiento',
-          type: 'page',
+          type: 'page', // Definido como página según Imagen 1 y 2
           label: 'Tratamiento',
           labelField: 'tituloHero',
-          urlPath: '/tratamientos/{id}',
+          // Mapeo de URL estático según documentación
+          urlPath: '/tratamientos/{id}', 
           fields: [
             { name: 'id', type: 'string', required: true },
             { name: 'tituloHero', type: 'string', required: true, label: 'Título Hero' },
