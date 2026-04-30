@@ -78,7 +78,7 @@ export const tratamientos: Tratamiento[] = [
         descripcion: 'Restauración de pieza frontal con acabado imperceptible.',
         imagenAntes: '/images/casos/carlos-antes.jpg',
         imagenDespues: '/images/casos/carlos-despues.jpg',
-        testimonio: 'La naturalidad es impresionante. Nadie nota que es un diente artificial.'
+        testimonio: 'La naturalidad es impresionante. Nadie nota que es un diente artificial.',
       },
       {
         id: 3,
