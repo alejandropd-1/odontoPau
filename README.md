@@ -80,12 +80,7 @@ If you are an AI assistant working on this project:
    ```bash
    npm install
    ```
-3. **Environment Setup**:
-   Create a `.env.local` file and add:
-   ```env
-   GEMINI_API_KEY=your_key_here
-   ```
-4. **Run Development Server**:
+3. **Run Development Server**:
    ```bash
    npm run dev
    ```
