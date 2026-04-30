@@ -6,6 +6,7 @@ import Team from '@/components/Team';
 import Location from '@/components/Location';
 import Footer from '@/components/Footer';
 import { Metadata } from 'next';
+import homeData from '@/data/home.json';
 
 export const metadata: Metadata = {
   title: 'Inicio | Dra. Paula Gualtieri - Odontología de Vanguardia',
@@ -14,9 +15,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen" data-sb-object-id="src/data/home.json">
       <Navbar />
-      <Hero />
+      <Hero data={homeData.hero} />
       <Services />
       <Testimonials />
       <Team />

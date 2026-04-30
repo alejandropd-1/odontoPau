@@ -5,7 +5,24 @@ import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 
-export default function Hero() {
+interface HeroProps {
+  data?: {
+    title: string;
+    description: string;
+    buttonPrimary: string;
+    buttonSecondary: string;
+  };
+}
+
+export default function Hero({ data }: HeroProps) {
+  // Valores por defecto por si falla la carga
+  const content = data || {
+    title: "Excelencia Clínica & Calidez Humana",
+    description: "Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.",
+    buttonPrimary: "Conoce a la Dra. Gualtieri",
+    buttonSecondary: "Ver Especialidades"
+  };
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-white" id="inicio">
       {/* Background Image fading to white */}
@@ -41,25 +58,36 @@ export default function Hero() {
               Paula Gualtieri Odontología
             </span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-on-surface mb-4 md:mb-6 leading-tight">
-            Excelencia Clínica & <br className="hidden md:block" />
-            <span className="bg-gradient-to-r from-primary-container to-brand-orange bg-clip-text text-transparent">Calidez Humana</span>
+          
+          {/* Etiquetas data-sb-field-path para habilitar el lápiz visual */}
+          <h1 
+            className="text-3xl md:text-5xl font-extrabold text-on-surface mb-4 md:mb-6 leading-tight"
+            data-sb-field-path="hero.title"
+          >
+            {content.title}
           </h1>
-          <p className="text-[13px] md:text-base text-on-surface-variant mb-8 md:mb-10 max-w-xl mx-auto leading-relaxed opacity-90">
-            Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.
+          
+          <p 
+            className="text-[13px] md:text-base text-on-surface-variant mb-8 md:mb-10 max-w-xl mx-auto leading-relaxed opacity-90"
+            data-sb-field-path="hero.description"
+          >
+            {content.description}
           </p>
+          
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => document.getElementById('equipo')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-gradient-to-r from-primary-container to-brand-orange text-white font-bold px-6 md:px-8 py-3 md:py-4 rounded-full shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all hover:scale-105 active:scale-95"
+              data-sb-field-path="hero.buttonPrimary"
             >
-              Conoce a la Dra. Gualtieri
+              {content.buttonPrimary}
             </button>
             <button 
               onClick={() => document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })}
               className="glass-panel border-primary-container text-primary-container font-bold px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-orange-50 transition-all hover:scale-105 active:scale-95"
+              data-sb-field-path="hero.buttonSecondary"
             >
-              Ver Especialidades
+              {content.buttonSecondary}
             </button>
           </div>
         </motion.div>
