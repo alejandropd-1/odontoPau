@@ -15,13 +15,17 @@ interface HeroProps {
 }
 
 export default function Hero({ data }: HeroProps) {
-  // Valores por defecto por si falla la carga
   const content = data || {
     title: "Excelencia Clínica & Calidez Humana",
     description: "Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.",
     buttonPrimary: "Conoce a la Dra. Gualtieri",
     buttonSecondary: "Ver Especialidades"
   };
+
+  // Lógica para recuperar el degradado naranja automáticamente
+  const titleParts = content.title.split('&');
+  const firstPart = titleParts[0];
+  const secondPart = titleParts.length > 1 ? `& ${titleParts[1]}` : '';
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-white" id="inicio">
@@ -59,12 +63,19 @@ export default function Hero({ data }: HeroProps) {
             </span>
           </div>
           
-          {/* Etiquetas data-sb-field-path para habilitar el lápiz visual */}
           <h1 
             className="text-3xl md:text-5xl font-extrabold text-on-surface mb-4 md:mb-6 leading-tight"
             data-sb-field-path="hero.title"
           >
-            {content.title}
+            {firstPart}
+            {secondPart && (
+              <>
+                <br className="hidden md:block" />
+                <span className="bg-gradient-to-r from-primary-container to-brand-orange bg-clip-text text-transparent">
+                  {secondPart}
+                </span>
+              </>
+            )}
           </h1>
           
           <p 

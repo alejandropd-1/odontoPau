@@ -46,14 +46,14 @@ export default defineStackbitConfig({
   contentSources: [
     new GitContentSource({
       rootPath: __dirname,
-      // Incluimos tanto la carpeta de tratamientos como la carpeta data para home.json
-      contentDirs: ['src/data/tratamientos', 'src/data'],
+      // CORRECCIÓN: Usamos solo src/data y filtramos por modelo para evitar duplicados
+      contentDirs: ['src/data'], 
       models: [
         {
           name: 'HomePage',
           type: 'page',
           label: 'Página de Inicio',
-          file: 'src/data/home.json', // Mapeo directo al archivo
+          file: 'home.json', // Ruta relativa a contentDirs
           fields: [
             { name: 'title', type: 'string' },
             {
@@ -73,6 +73,7 @@ export default defineStackbitConfig({
           type: 'page',
           label: 'Tratamiento',
           labelField: 'tituloHero',
+          // CORRECCIÓN: Especificamos que los tratamientos están en la subcarpeta
           urlPath: '/tratamientos/{id}',
           fields: [
             { name: 'type', type: 'string', const: 'Tratamiento', hidden: true },
