@@ -5,60 +5,17 @@ import { motion } from 'framer-motion';
 import { Star, Quote, ArrowLeft, ArrowRight, Instagram, Facebook, Phone } from 'lucide-react';
 import Image from 'next/image';
 
-const testimonials = [
-  {
-    name: 'Martina R.',
-    content: '"El tratamiento de ortodoncia invisible fue tal como la Dra. Paula me lo explicó. Sin dolor, rápido y los resultados son increíbles. La clínica transmite mucha paz."',
-    source: 'Instagram',
-    icon: Instagram,
-    rating: 5,
-    img: 'https://picsum.photos/seed/patient1/100/100'
-  },
-  {
-    name: 'Diego F.',
-    content: '"Le tenía terror al dentista hasta que vine aquí por un implante. El equipo es súper profesional y humano. Me explicaron cada paso y no sentí nada. Totalmente recomendados."',
-    source: 'Facebook',
-    icon: Facebook,
-    rating: 5,
-    img: 'https://picsum.photos/seed/patient2/100/100'
-  },
-  {
-    name: 'Lucía G.',
-    content: '"Me hice diseño de sonrisa y carillas. El cambio fue espectacular pero súper natural. La calidez de la doctora Paula hace la diferencia. Gracias por devolverme las ganas de sonreír."',
-    source: 'WhatsApp',
-    icon: Phone,
-    rating: 5,
-    img: 'https://picsum.photos/seed/patient3/100/100'
-  },
-  {
-    name: 'Carlos M.',
-    content: '"Excelente atención. Me realicé un blanqueamiento y los resultados superaron mis expectativas. El ambiente es muy relajante y moderno."',
-    source: 'Google',
-    icon: Star,
-    rating: 5,
-    img: 'https://picsum.photos/seed/patient4/100/100'
-  },
-  {
-    name: 'Sofía L.',
-    content: '"La Dra. Paula es súper paciente y detallista. Me explicó todo el proceso de mi tratamiento de encías con mucha claridad. Me sentí en muy buenas manos."',
-    source: 'Instagram',
-    icon: Instagram,
-    rating: 5,
-    img: 'https://picsum.photos/seed/patient5/100/100'
-  },
-  {
-    name: 'Roberto P.',
-    content: '"Buscaba un lugar con tecnología de punta y lo encontré. El scanner intraoral es una maravilla, nada de moldes molestos. Muy recomendable."',
-    source: 'WhatsApp',
-    icon: Phone,
-    rating: 5,
-    img: 'https://picsum.photos/seed/patient6/100/100'
-  }
-];
+const IconsMap: Record<string, any> = {
+  Instagram: Instagram,
+  Facebook: Facebook,
+  WhatsApp: Phone,
+  Google: Star,
+};
 
-export default function Testimonials() {
+export default function Testimonials({ data }: { data: any }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(3);
+  const testimonialsList = data?.testimonials || [];
 
   useEffect(() => {
     const handleResize = () => {
@@ -77,20 +34,30 @@ export default function Testimonials() {
   }, []);
 
   const next = () => {
-    setCurrentIndex((prev) => (prev + 1) % (testimonials.length - itemsToShow + 1));
+    if (testimonialsList.length <= itemsToShow) return;
+    setCurrentIndex((prev) => (prev + 1) % (testimonialsList.length - itemsToShow + 1));
   };
 
   const prev = () => {
-    setCurrentIndex((prev) => (prev - 1 + (testimonials.length - itemsToShow + 1)) % (testimonials.length - itemsToShow + 1));
+    if (testimonialsList.length <= itemsToShow) return;
+    setCurrentIndex((prev) => (prev - 1 + (testimonialsList.length - itemsToShow + 1)) % (testimonialsList.length - itemsToShow + 1));
   };
 
   return (
-    <section className="py-24 bg-white" id="testimonios">
+    <section 
+      className="py-24 bg-white" 
+      id="testimonios"
+      data-sb-field-path="testimonialsSection"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-4">Experiencias de nuestros pacientes</h2>
-            <p className="text-lg text-on-surface-variant">Historias reales de personas que transformaron su salud bucal y su confianza con nosotros.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-4" data-sb-field-path=".title">
+              {data?.title || 'Experiencias de nuestros pacientes'}
+            </h2>
+            <p className="text-lg text-on-surface-variant" data-sb-field-path=".description">
+              {data?.description || 'Historias reales de personas que transformaron su salud bucal y su confianza con nosotros.'}
+            </p>
           </div>
           <div className="flex gap-4">
             <button
@@ -115,35 +82,50 @@ export default function Testimonials() {
             <motion.div
               className="flex gap-8"
               animate={{
-                x: `calc(-${currentIndex * (100 / itemsToShow)}% - ${currentIndex * (32 / itemsToShow)}px)`
+                x: testimonialsList.length > itemsToShow 
+                  ? `calc(-${currentIndex * (100 / itemsToShow)}% - ${currentIndex * (32 / itemsToShow)}px)`
+                  : '0'
               }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
-              {testimonials.map((t, i) => (
-                <div
-                  key={i}
-                  className="w-full md:w-[calc(50%-16px)] lg:w-[calc(33.333%-21.33px)] flex-shrink-0 bg-white border border-slate-100 rounded-2xl p-8 relative shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <Quote className="absolute top-6 right-6 text-orange-200 w-12 h-12" />
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-slate-100 overflow-hidden relative">
-                      <Image src={t.img} alt={t.name} fill className="object-cover" referrerPolicy="no-referrer" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-on-surface">{t.name}</h3>
-                      <div className="flex text-orange-500">
-                        {[...Array(t.rating)].map((_, idx) => (
-                          <Star key={idx} className="w-3.5 h-3.5 fill-current" />
-                        ))}
+              {testimonialsList.map((t: any, i: number) => {
+                const Icon = IconsMap[t.source] || Star;
+                return (
+                  <div
+                    key={i}
+                    className="w-full md:w-[calc(50%-16px)] lg:w-[calc(33.333%-21.33px)] flex-shrink-0 bg-white border border-slate-100 rounded-2xl p-8 relative shadow-sm hover:shadow-md transition-shadow"
+                    data-sb-field-path={`.testimonials.${i}`}
+                  >
+                    <Quote className="absolute top-6 right-6 text-orange-200 w-12 h-12" />
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-12 h-12 rounded-full bg-slate-100 overflow-hidden relative shadow-inner">
+                        <Image 
+                          src={t.img || 'https://picsum.photos/seed/patient/100/100'} 
+                          alt={t.name} 
+                          fill 
+                          className="object-cover" 
+                          referrerPolicy="no-referrer"
+                          data-sb-field-path=".img"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-on-surface" data-sb-field-path=".name">{t.name}</h3>
+                        <div className="flex text-orange-500" data-sb-field-path=".rating">
+                          {[...Array(t.rating || 5)].map((_, idx) => (
+                            <Star key={idx} className="w-3.5 h-3.5 fill-current" />
+                          ))}
+                        </div>
                       </div>
                     </div>
+                    <p className="text-on-surface-variant italic mb-6 leading-relaxed" data-sb-field-path=".content">
+                      {t.content}
+                    </p>
+                    <div className="flex items-center gap-2 text-slate-500 text-xs font-semibold uppercase tracking-wider" data-sb-field-path=".source">
+                      <Icon className="w-4 h-4" /> Vía {t.source}
+                    </div>
                   </div>
-                  <p className="text-on-surface-variant italic mb-6 leading-relaxed">{t.content}</p>
-                  <div className="flex items-center gap-2 text-slate-500 text-xs font-semibold uppercase tracking-wider">
-                    <t.icon className="w-4 h-4" /> Vía {t.source}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </motion.div>
           </div>
         </div>

@@ -5,6 +5,20 @@
   "descripcionHero": "Diseño de sonrisa personalizado mediante carillas de diferentes materiales y blanqueamiento avanzado. Resultados armónicos que potencian tu belleza natural.",
   "icon": "Sparkles",
   "heroImage": "/images/estetica-hero.jpg",
+  "badge": "Diseño de Sonrisa",
+  "specialists": [
+    { "name": "Paula Gualtieri Odontología", "role": "" },
+    { "name": "Dr. Roberto Dominguez", "role": "Especialista en Estética Dental" }
+  ],
+  "stats": [
+    { "label": "Diseños Realizados", "value": "200+" },
+    { "label": "Armonía Facial", "value": "A++" }
+  ],
+  "cta": {
+    "title": "La sonrisa que siempre soñaste",
+    "description": "Agenda tu consulta de diseño de sonrisa y proyecta tu mejor versión.",
+    "buttonText": "Agendar Cita"
+  },
   "features": [
     "Carillas Ultrafinas: Mínimo tallado dental para un resultado natural y duradero.",
     "Blanqueamiento ambulatorio: aclara varios tonos con mínima sensibilidad.",

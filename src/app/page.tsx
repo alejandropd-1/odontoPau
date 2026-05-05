@@ -18,10 +18,10 @@ export default function Home() {
     <main className="min-h-screen" data-sb-object-id="src/data/home.json">
       <Navbar />
       <Hero data={homeData.hero} />
-      <Services />
-      <Testimonials />
-      <Team />
-      <Location />
+      <Services data={homeData.servicesSection} />
+      <Testimonials data={homeData.testimonialsSection} />
+      <Team data={homeData.teamSection} />
+      <Location data={homeData.locationSection} />
       <Footer />
     </main>
   );

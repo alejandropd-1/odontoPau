@@ -1,0 +1,16 @@
+{
+  "type": "GlobalSettings",
+  "contact": {
+    "whatsapp": "5491137854198",
+    "whatsappMessage": "Hola,%20quiero%20sacar%20un%20turno",
+    "email": "contacto@odontopau.com",
+    "address": "Ramón Falcón 2401, Piso 1 Dpto. B\nCiudad Autónoma de Buenos Aires - Flores"
+  },
+  "social": {
+    "instagram": "https://instagram.com/",
+    "facebook": "https://facebook.com/"
+  },
+  "footer": {
+    "text": "Transformando sonrisas con tecnología de precisión y calidez humana."
+  }
+}

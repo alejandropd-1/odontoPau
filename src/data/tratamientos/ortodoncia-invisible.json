@@ -5,6 +5,19 @@
   "descripcionHero": "Alinea tus dientes de forma discreta y cómoda con alineadores transparentes de última generación. La solución perfecta para adultos que buscan estética y resultados rápidos.",
   "icon": "Smile",
   "heroImage": "/images/ortodoncia-hero.jpg",
+  "badge": "Tecnología en Alineación",
+  "specialists": [
+    { "name": "Dra. Paula Gualtieri", "role": "Especialista en Ortodoncia y Ortopedia" }
+  ],
+  "stats": [
+    { "label": "Casos Exitosos", "value": "1000+" },
+    { "label": "Satisfacción", "value": "100%" }
+  ],
+  "cta": {
+    "title": "Tu sonrisa, más alineada que nunca",
+    "description": "Descubre la comodidad de los alineadores invisibles. Agenda tu escaneo 3D hoy mismo.",
+    "buttonText": "Agendar Cita"
+  },
   "features": [
     "Removibles y Cómodos: Puedes quitártelos para comer y cepillarte, manteniendo una higiene perfecta.",
     "Prácticamente Invisibles: Nadie notará que estás bajo tratamiento de ortodoncia.",

@@ -1,4 +1,4 @@
-import { Drill, Smile, Sparkles } from 'lucide-react';
+import { Drill, Smile, Sparkles, Stethoscope, Baby, ShieldCheck } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
 export interface CasoClinico {
@@ -29,6 +29,15 @@ export interface Tratamiento {
   heroImage: string;
   features: string[];
   casosClinicos: CasoClinico[];
+  filePath: string;
+  badge?: string;
+  specialists?: { name: string; role: string; }[];
+  stats?: { label: string; value: string; }[];
+  cta?: {
+    title: string;
+    description: string;
+    buttonText?: string;
+  };
 }
 
 import implantes from './tratamientos/implantes.json';
@@ -39,18 +48,21 @@ import pediatria from './tratamientos/pediatria.json';
 import endodoncia from './tratamientos/endodoncia.json';
 
 const tratamientosData = [
-  implantes,
-  ortodoncia,
-  estetica,
-  ortopedia,
-  pediatria,
-  endodoncia
+  { ...implantes, filePath: 'src/data/tratamientos/implantes.json' },
+  { ...ortodoncia, filePath: 'src/data/tratamientos/ortodoncia-invisible.json' },
+  { ...estetica, filePath: 'src/data/tratamientos/estetica-dental.json' },
+  { ...ortopedia, filePath: 'src/data/tratamientos/ortopedia.json' },
+  { ...pediatria, filePath: 'src/data/tratamientos/pediatria.json' },
+  { ...endodoncia, filePath: 'src/data/tratamientos/endodoncia.json' }
 ];
 
 const iconMap: Record<string, LucideIcon> = {
   Drill,
   Smile,
-  Sparkles
+  Sparkles,
+  Stethoscope,
+  Baby,
+  ShieldCheck
 };
 
 export const tratamientos: Tratamiento[] = tratamientosData.map((t: any) => ({

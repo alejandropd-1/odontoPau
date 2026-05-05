@@ -52,11 +52,13 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold tracking-wider uppercase mb-6">
-              Excelencia Restaurativa
+            <span 
+              className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold tracking-wider uppercase mb-6"
+              data-sb-field-path="badge"
+            >
+              {tratamiento.badge || 'Excelencia Restaurativa'}
             </span>
             
-            {/* Etiqueta de título para el lápiz */}
             <h1 
               className="text-4xl md:text-6xl font-bold text-on-surface mb-6 leading-tight"
               data-sb-field-path="tituloHero"
@@ -64,7 +66,6 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
               {tratamiento.tituloHero}
             </h1>
             
-            {/* Etiqueta de descripción para el lápiz */}
             <p 
               className="text-lg text-on-surface-variant mb-10 max-w-xl leading-relaxed"
               data-sb-field-path="descripcionHero"
@@ -103,30 +104,19 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
               <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center shrink-0">
                 <span className="text-orange-600 font-bold">PG</span>
               </div>
-              <div>
-                {id === 'pediatria' ? (
-                  <>
-                    <p className="text-xs font-bold text-on-surface">Dra. Paula Gualtieri</p>
-                    <p className="text-xs font-bold text-on-surface mt-1">Dra. Emilia Omastott</p>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter mt-1">Especialistas en {tratamiento.tituloHero}</p>
-                  </>
-                ) : id === 'implantes' ? (
-                  <>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Paula Gualtieri Odontología</p>
-                    <p className="text-xs font-bold text-on-surface mt-1">Dr. Roberto Dominguez</p>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter mt-1">Especialista en Rehabilitación Oral</p>
-                  </>
-                ) : id === 'estetica-dental' ? (
-                  <>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Paula Gualtieri Odontología</p>
-                    <p className="text-xs font-bold text-on-surface mt-1">Dr. Roberto Dominguez</p>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter mt-1">Especialista en {tratamiento.tituloHero}</p>
-                  </>
+              <div data-sb-field-path="specialists">
+                {tratamiento.specialists && tratamiento.specialists.length > 0 ? (
+                  tratamiento.specialists.map((spec, i) => (
+                    <div key={i} className={i > 0 ? 'mt-2' : ''} data-sb-field-path={`.${i}`}>
+                      <p className="text-xs font-bold text-on-surface" data-sb-field-path=".name">{spec.name}</p>
+                      <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter" data-sb-field-path=".role">{spec.role}</p>
+                    </div>
+                  ))
                 ) : (
-                  <>
+                  <div>
                     <p className="text-xs font-bold text-on-surface">Dra. Paula Gualtieri</p>
                     <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Especialista en {tratamiento.tituloHero}</p>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
@@ -158,15 +148,26 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
                </div>
              </div>
 
-             <div className="grid grid-cols-2 gap-6 relative z-10">
-                <div className="bg-white p-8 rounded-[2rem] text-zinc-900 shadow-xl">
-                  <p className="text-4xl font-bold text-orange-600 mb-2">98%</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Tasa de Éxito</p>
-                </div>
-                <div className="bg-white p-8 rounded-[2rem] text-zinc-900 shadow-xl mt-8">
-                  <p className="text-4xl font-bold text-orange-600 mb-2">15+</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Años de Experiencia</p>
-                </div>
+             <div className="grid grid-cols-2 gap-6 relative z-10" data-sb-field-path="stats">
+                {tratamiento.stats && tratamiento.stats.length > 0 ? (
+                  tratamiento.stats.map((stat, i) => (
+                    <div key={i} className={`bg-white p-8 rounded-[2rem] text-zinc-900 shadow-xl ${i % 2 !== 0 ? 'mt-8' : ''}`} data-sb-field-path={`.${i}`}>
+                      <p className="text-4xl font-bold text-orange-600 mb-2" data-sb-field-path=".value">{stat.value}</p>
+                      <p className="text-xs font-bold uppercase tracking-widest text-zinc-400" data-sb-field-path=".label">{stat.label}</p>
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <div className="bg-white p-8 rounded-[2rem] text-zinc-900 shadow-xl">
+                      <p className="text-4xl font-bold text-orange-600 mb-2">98%</p>
+                      <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Tasa de Éxito</p>
+                    </div>
+                    <div className="bg-white p-8 rounded-[2rem] text-zinc-900 shadow-xl mt-8">
+                      <p className="text-4xl font-bold text-orange-600 mb-2">15+</p>
+                      <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Años de Experiencia</p>
+                    </div>
+                  </>
+                )}
              </div>
           </div>
         </div>
@@ -178,9 +179,13 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
           <div className="bg-zinc-900 rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/10 via-transparent to-transparent opacity-50"></div>
             
-            <div className="relative z-10">
-              <h2 className="text-3xl md:text-6xl font-bold text-white mb-8">¿Listo para transformar su sonrisa?</h2>
-              <p className="text-zinc-400 mb-12 max-w-2xl mx-auto text-lg leading-relaxed">Unite a los pacientes que han recuperado su confianza con nuestro tratamientos de vanguardia.</p>
+            <div className="relative z-10" data-sb-field-path="cta">
+              <h2 className="text-3xl md:text-6xl font-bold text-white mb-8" data-sb-field-path=".title">
+                {tratamiento.cta?.title || '¿Listo para transformar su sonrisa?'}
+              </h2>
+              <p className="text-zinc-400 mb-12 max-w-2xl mx-auto text-lg leading-relaxed" data-sb-field-path=".description">
+                {tratamiento.cta?.description || 'Unite a los pacientes que han recuperado su confianza con nuestro tratamientos de vanguardia.'}
+              </p>
               <div className="flex flex-wrap justify-center gap-4 relative z-10">
                 <a 
                   href={getWhatsAppLink(`Hola, quiero agendar mi cita para el tratamiento de ${tratamiento.tituloHero}`)}
@@ -188,7 +193,7 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
                   rel="noopener noreferrer"
                   className="px-10 py-4 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all flex items-center gap-2"
                 >
-                  Agendar Cita <CheckCircle2 className="w-5 h-5" />
+                  <span data-sb-field-path=".buttonText">{tratamiento.cta?.buttonText || 'Agendar Cita'}</span> <CheckCircle2 className="w-5 h-5" />
                 </a>
               </div>
             </div>

@@ -18,12 +18,18 @@ interface CaseDetailContentProps {
 
 export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps) {
   const tratamiento = tratamientos.find((t) => t.id === id);
-  const caso = tratamiento?.casosClinicos.find((c) => c.id.toString() === casoId);
+  const casoIndex = tratamiento?.casosClinicos.findIndex((c) => c.id.toString() === casoId);
+  const caso = casoIndex !== undefined && casoIndex !== -1 ? tratamiento?.casosClinicos[casoIndex] : null;
 
   if (!tratamiento || !caso) return null;
   const whatsappNumber = '5491137854198';
   const getWhatsAppLink = (message: string) => 
     `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+  // Stackbit path for the current treatment JSON
+  const objectId = `src/data/tratamientos/${id}.json`;
+  // Prefix for clinical case fields
+  const fieldPathPrefix = `casosClinicos.${casoIndex}`;
 
   return (
     <div className="min-h-screen bg-surface-background">
@@ -39,7 +45,10 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
       </div>
 
       {/* Hero Section */}
-      <section className="relative pb-16 overflow-hidden">
+      <section 
+        className="relative pb-16 overflow-hidden"
+        data-sb-object-id={objectId}
+      >
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.span 
             initial={{ opacity: 0, y: 10 }}
@@ -54,7 +63,7 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold text-on-surface mb-6 leading-tight"
           >
-            Caso Clínico: <span className="text-orange-600">{caso.titulo}</span>
+            Caso Clínico: <span className="text-orange-600" data-sb-field-path={`${fieldPathPrefix}.titulo`}>{caso.titulo}</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}
@@ -68,7 +77,10 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
       </section>
 
       {/* Comparison Section */}
-      <section className="pb-24">
+      <section 
+        className="pb-24"
+        data-sb-object-id={objectId}
+      >
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-auto-fit min-[768px]:flex min-[768px]:flex-wrap justify-center gap-6">
             {caso.imagenes ? (
@@ -86,10 +98,14 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
                       alt={`Imagen ${idx + 1}`}
                       fill
                       className="object-cover"
+                      data-sb-field-path={`${fieldPathPrefix}.imagenes.${idx}`}
                     />
                   </div>
                   {caso.etiquetasImagenes && caso.etiquetasImagenes[idx] && (
-                    <div className={`absolute top-6 left-6 px-4 py-2 text-white text-xs font-bold rounded-full ${caso.etiquetasImagenes[idx].toUpperCase() === 'ANTES' ? 'bg-zinc-900/80 backdrop-blur' : 'bg-orange-600'}`}>
+                    <div 
+                      className={`absolute top-6 left-6 px-4 py-2 text-white text-xs font-bold rounded-full ${caso.etiquetasImagenes[idx].toUpperCase() === 'ANTES' ? 'bg-zinc-900/80 backdrop-blur' : 'bg-orange-600'}`}
+                      data-sb-field-path={`${fieldPathPrefix}.etiquetasImagenes.${idx}`}
+                    >
                       {caso.etiquetasImagenes[idx]}
                     </div>
                   )}
@@ -110,6 +126,7 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
                         alt="Antes"
                         fill
                         className="object-cover"
+                        data-sb-field-path={`${fieldPathPrefix}.imagenAntes`}
                       />
                     </div>
                     <div className="absolute top-6 left-6 px-4 py-2 bg-zinc-900/80 backdrop-blur text-white text-xs font-bold rounded-full">ANTES</div>
@@ -128,6 +145,7 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
                         alt="Después"
                         fill
                         className="object-cover"
+                        data-sb-field-path={`${fieldPathPrefix}.imagenDespues`}
                       />
                     </div>
                     <div className="absolute top-6 left-6 px-4 py-2 bg-orange-600 text-white text-xs font-bold rounded-full">DESPUÉS</div>
@@ -140,7 +158,10 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
       </section>
 
       {/* Details Section */}
-      <section className="py-24 bg-white">
+      <section 
+        className="py-24 bg-white"
+        data-sb-object-id={objectId}
+      >
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Challenge */}
           <div className="space-y-12">
@@ -149,17 +170,21 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
                 <AlertCircle className="w-8 h-8" />
                 <h2 className="text-3xl font-bold text-on-surface">El Desafío</h2>
               </div>
-              <p className="text-lg text-on-surface-variant leading-relaxed mb-8">
+              <p className="text-lg text-on-surface-variant leading-relaxed mb-8" data-sb-field-path={`${fieldPathPrefix}.desafio`}>
                 {caso.desafio || 'El paciente presentaba una situación clínica compleja que afectaba tanto su salud bucodental como su bienestar emocional.'}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="p-6 rounded-2xl bg-surface-background border border-surface-variant">
                   <h4 className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-3">Diagnóstico</h4>
-                  <p className="text-sm font-semibold text-on-surface">{caso.diagnostico || 'Evaluación pendiente de detalle.'}</p>
+                  <p className="text-sm font-semibold text-on-surface" data-sb-field-path={`${fieldPathPrefix}.diagnostico`}>
+                    {caso.diagnostico || 'Evaluación pendiente de detalle.'}
+                  </p>
                 </div>
                 <div className="p-6 rounded-2xl bg-surface-background border border-surface-variant">
                   <h4 className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-3">Duración</h4>
-                  <p className="text-sm font-semibold text-on-surface">{caso.duracion || 'Variable según evolución.'}</p>
+                  <p className="text-sm font-semibold text-on-surface" data-sb-field-path={`${fieldPathPrefix}.duracion`}>
+                    {caso.duracion || 'Variable según evolución.'}
+                  </p>
                 </div>
               </div>
             </div>
@@ -168,12 +193,12 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
           {/* Solution */}
           <div className="bg-orange-600 rounded-[3rem] p-12 text-white shadow-2xl shadow-orange-600/20">
             <h2 className="text-3xl font-bold mb-8">Nuestra Solución</h2>
-            <p className="text-orange-50 leading-relaxed mb-10 text-lg">
+            <p className="text-orange-50 leading-relaxed mb-10 text-lg" data-sb-field-path={`${fieldPathPrefix}.solucion`}>
               {caso.solucion || 'Implementamos un abordaje integral basado en tecnología digital para garantizar resultados óptimos y duraderos.'}
             </p>
-            <ul className="space-y-6">
+            <ul className="space-y-6" data-sb-field-path={`${fieldPathPrefix}.solucionFeatures`}>
               {(caso.solucionFeatures || ['Planificación 3D', 'Materiales Premium', 'Seguimiento Personalizado']).map((f: string, i: number) => (
-                <li key={i} className="flex items-center gap-4">
+                <li key={i} className="flex items-center gap-4" data-sb-field-path={`.${i}`}>
                   <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
                     <CheckCircle2 className="w-5 h-5 text-white" />
                   </div>
