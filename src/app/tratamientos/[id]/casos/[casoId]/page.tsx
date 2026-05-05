@@ -8,10 +8,15 @@ type Props = {
   params: Promise<{ id: string, casoId: string }>
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id, casoId } = await params;
+function getTratamientoYCaso(id: string, casoId: string) {
   const tratamiento = tratamientos.find((t) => t.id === id);
   const caso = tratamiento?.casosClinicos.find((c) => c.id.toString() === casoId);
+  return { tratamiento, caso };
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id, casoId } = await params;
+  const { tratamiento, caso } = getTratamientoYCaso(id, casoId);
 
   if (!tratamiento || !caso) return { title: 'Caso no encontrado' };
 
@@ -29,8 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CaseDetailPage({ params }: Props) {
   const { id, casoId } = await params;
-  const tratamiento = tratamientos.find((t) => t.id === id);
-  const caso = tratamiento?.casosClinicos.find((c) => c.id.toString() === casoId);
+  const { tratamiento, caso } = getTratamientoYCaso(id, casoId);
 
   if (!tratamiento || !caso) {
     notFound();

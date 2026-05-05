@@ -1,3 +1,4 @@
+// fallow-ignore-file unused-file
 import { defineStackbitConfig, SiteMapEntry } from '@stackbit/types';
 import { GitContentSource } from '@stackbit/cms-git';
 
