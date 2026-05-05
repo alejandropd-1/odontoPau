@@ -1,3 +1,4 @@
+// fallow-ignore-file unused-file
 import { defineStackbitConfig, SiteMapEntry } from '@stackbit/types';
 import { GitContentSource } from '@stackbit/cms-git';
 
@@ -15,17 +16,19 @@ export default defineStackbitConfig({
     publicPath: '/'
   },
 
-  // 1. Implementamos el siteMap tal cual la Imagen 3 de la documentación
   siteMap: ({ documents, models }) => {
     const pageModels = models.filter((m) => m.type === 'page');
 
     return documents
       .filter((d) => pageModels.some(m => m.name === d.modelName))
       .map((document) => {
-        let urlModel = '';
+        let urlPath = '';
         switch (document.modelName) {
           case 'Tratamiento':
-            urlModel = 'tratamientos';
+            urlPath = `/tratamientos/${document.id}`;
+            break;
+          case 'HomePage':
+            urlPath = '/';
             break;
           default:
             return null;
@@ -33,10 +36,9 @@ export default defineStackbitConfig({
 
         return {
           stableId: document.id,
-          // document.id en GitContentSource suele ser el nombre del archivo sin extensión
-          urlPath: `/${urlModel}/${document.id}`,
+          urlPath: urlPath,
           document,
-          isHomePage: false,
+          isHomePage: document.modelName === 'HomePage',
         };
       })
       .filter(Boolean) as SiteMapEntry[];
@@ -45,16 +47,37 @@ export default defineStackbitConfig({
   contentSources: [
     new GitContentSource({
       rootPath: __dirname,
-      contentDirs: ['src/data/tratamientos'],
+      // CORRECCIÓN: Usamos solo src/data y filtramos por modelo para evitar duplicados
+      contentDirs: ['src/data'], 
       models: [
         {
+          name: 'HomePage',
+          type: 'page',
+          label: 'Página de Inicio',
+          file: 'home.json', // Ruta relativa a contentDirs
+          fields: [
+            { name: 'title', type: 'string' },
+            {
+              name: 'hero',
+              type: 'object',
+              fields: [
+                { name: 'title', type: 'string', label: 'Título Hero' },
+                { name: 'description', type: 'text', label: 'Descripción Hero' },
+                { name: 'buttonPrimary', type: 'string', label: 'Botón Principal' },
+                { name: 'buttonSecondary', type: 'string', label: 'Botón Secundario' }
+              ]
+            }
+          ]
+        },
+        {
           name: 'Tratamiento',
-          type: 'page', // Definido como página según Imagen 1 y 2
+          type: 'page',
           label: 'Tratamiento',
           labelField: 'tituloHero',
-          // Mapeo de URL estático según documentación
-          urlPath: '/tratamientos/{id}', 
+          // CORRECCIÓN: Especificamos que los tratamientos están en la subcarpeta
+          urlPath: '/tratamientos/{id}',
           fields: [
+            { name: 'type', type: 'string', const: 'Tratamiento', hidden: true },
             { name: 'id', type: 'string', required: true },
             { name: 'tituloHero', type: 'string', required: true, label: 'Título Hero' },
             { name: 'descripcionHero', type: 'text', required: true, label: 'Descripción Hero' },

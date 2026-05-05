@@ -1,0 +1,10 @@
+{
+  "type": "HomePage",
+  "title": "Inicio",
+  "hero": {
+    "title": "Excelencia Clínica & Calidez Humana",
+    "description": "Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.",
+    "buttonPrimary": "Conoce a la Dra. Gualtieri",
+    "buttonSecondary": "Ver Especialidades"
+  }
+}
