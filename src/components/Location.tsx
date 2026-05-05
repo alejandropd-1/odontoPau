@@ -4,16 +4,26 @@ import React from 'react';
 import { MapPin, Clock, MessageSquare, Phone, Navigation } from 'lucide-react';
 import Image from 'next/image';
 
-export default function Location() {
+import settings from '@/data/settings.json';
+
+export default function Location({ data }: { data: any }) {
+  const whatsappUrl = `https://wa.me/${settings.contact.whatsapp}?text=${settings.contact.whatsappMessage}`;
+
   return (
-    <section className="py-24 bg-surface-background" id="ubicacion">
+    <section 
+      className="py-24 bg-surface-background" 
+      id="ubicacion"
+      data-sb-field-path="locationSection"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Contact Info */}
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-6 tracking-tight">Visítanos en nuestro consultorio</h2>
-            <p className="text-lg text-on-surface-variant mb-10 leading-relaxed">
-              Un espacio diseñado para tu tranquilidad y confort, equipado con la mejor tecnología para tu cuidado dental.
+            <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-6 tracking-tight" data-sb-field-path=".title">
+              {data?.title || 'Visítanos en nuestro consultorio'}
+            </h2>
+            <p className="text-lg text-on-surface-variant mb-10 leading-relaxed" data-sb-field-path=".description">
+              {data?.description || 'Un espacio diseñado para tu tranquilidad y confort, equipado con la mejor tecnología para tu cuidado dental.'}
             </p>
 
             <div className="space-y-8 mb-10">
@@ -22,8 +32,12 @@ export default function Location() {
                   <MapPin className="text-primary-container w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-on-surface mb-1">Dirección</h4>
-                  <p className="text-on-surface-variant">Ramón Falcón 2401, Piso 1 Dpto. B<br/>Ciudad Autónoma de Buenos Aires - Flores</p>
+                  <h4 className="font-bold text-on-surface mb-1" data-sb-field-path=".addressTitle">
+                    {data?.addressTitle || 'Dirección'}
+                  </h4>
+                  <p className="text-on-surface-variant whitespace-pre-line" data-sb-field-path=".addressText">
+                    {data?.addressText || 'Ramón Falcón 2401, Piso 1 Dpto. B\nCiudad Autónoma de Buenos Aires - Flores'}
+                  </p>
                 </div>
               </div>
 
@@ -32,12 +46,11 @@ export default function Location() {
                   <Clock className="text-primary-container w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-on-surface mb-1">Horarios para solicitar turnos o consultas</h4>
-                  <p className="text-on-surface-variant">
-                    Lunes de 9 a 15hs<br/>
-                    Martes de 9 a 18hs<br/>
-                    Miércoles y jueves de 13 a 18hs<br/>
-                    Viernes de 9 a 15hs
+                  <h4 className="font-bold text-on-surface mb-1" data-sb-field-path=".scheduleTitle">
+                    {data?.scheduleTitle || 'Horarios para solicitar turnos o consultas'}
+                  </h4>
+                  <p className="text-on-surface-variant whitespace-pre-line" data-sb-field-path=".scheduleText">
+                    {data?.scheduleText || 'Lunes de 9 a 15hs\nMartes de 9 a 18hs\nMiércoles y jueves de 13 a 18hs\nViernes de 9 a 15hs'}
                   </p>
                 </div>
               </div>
@@ -45,12 +58,15 @@ export default function Location() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno"
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#128C7E] text-white font-bold px-8 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#075E54] transition-all shadow-lg shadow-[#128C7E]/20 hover:scale-105 active:scale-95"
               >
-                <MessageSquare className="w-5 h-5 fill-current" /> Contactar por WhatsApp
+                <MessageSquare className="w-5 h-5 fill-current" /> 
+                <span data-sb-field-path=".whatsappText">
+                  {data?.whatsappText || 'Contactar por WhatsApp'}
+                </span>
               </a>
             </div>
           </div>
@@ -58,12 +74,13 @@ export default function Location() {
           {/* Map Section */}
           <div className="glass-panel rounded-3xl p-2 relative h-[500px] overflow-hidden group">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.976372899936!2d-58.46496512431464!3d-34.630037358888586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca27fa9eee21%3A0x985e9d7976637b48!2sCnel.%20Ram%C3%B3n%20L.%20Falc%C3%B3n%202401%2C%20C1406%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1776957558537!5m2!1ses-419!2sar"
+              src={data?.mapUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.976372899936!2d-58.46496512431464!3d-34.630037358888586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca27fa9eee21%3A0x985e9d7976637b48!2sCnel.%20Ram%C3%B3n%20L.%20Falc%C3%B3n%202401%2C%20C1406%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1776957558537!5m2!1ses-419!2sar"}
               className="w-full h-full rounded-2xl border-0"
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Mapa de ubicación del consultorio de la Dra. Paula Gualtieri"
+              data-sb-field-path=".mapUrl"
             ></iframe>
             {/* Floating Location Card */}
             <div className="absolute bottom-6 left-6 right-6 glass-panel p-5 rounded-2xl flex items-center justify-between transform translate-y-2 group-hover:translate-y-0 transition-transform pointer-events-none">

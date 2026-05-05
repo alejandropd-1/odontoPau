@@ -5,6 +5,20 @@
   "descripcionHero": "Cuidado especializado y cercano para proteger la salud dental infantil, fomentando hábitos positivos para los más pequeños",
   "icon": "Smile",
   "heroImage": "/images/pediatria-hero.jpg",
+  "badge": "Cuidado Infantil Especializado",
+  "specialists": [
+    { "name": "Dra. Paula Gualtieri", "role": "" },
+    { "name": "Dra. Emilia Omastott", "role": "Especialistas en Odontopediatría" }
+  ],
+  "stats": [
+    { "label": "Pacientes Felices", "value": "500+" },
+    { "label": "Experiencia Positiva", "value": "100%" }
+  ],
+  "cta": {
+    "title": "Cuidamos la sonrisa de tus hijos",
+    "description": "Agenda una consulta pediátrica y asegura un futuro de salud dental para los más pequeños.",
+    "buttonText": "Agendar Cita"
+  },
   "features": [
     "Prevención temprana: control del desarrollo dental e intervención a tiempo.",
     "Enfoque adaptativo: manejo de ansiedad para experiencias sin miedo.",

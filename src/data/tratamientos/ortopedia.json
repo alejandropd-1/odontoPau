@@ -5,6 +5,19 @@
   "descripcionHero": "Guía del crecimiento óseo y correción funcional temprana para lograr una armonìa facial integral.",
   "icon": "Sparkles",
   "heroImage": "/images/ortopedia-hero.jpg",
+  "badge": "Desarrollo Funcional",
+  "specialists": [
+    { "name": "Dra. Paula Gualtieri", "role": "Especialista en Ortopedia Maxilar" }
+  ],
+  "stats": [
+    { "label": "Desarrollo Óseo", "value": "100%" },
+    { "label": "Funcionalidad", "value": "A+" }
+  ],
+  "cta": {
+    "title": "El futuro de su rostro comienza hoy",
+    "description": "Corregimos el crecimiento a tiempo para evitar problemas complejos. Consulta nuestra propuesta ortopédica.",
+    "buttonText": "Agendar Cita"
+  },
   "features": [
     "Desarrollo maxilar: Estimulaciòn y guìa del crecimiento del hueso de la cara.",
     "Correcciòn funcional: reeducación de la respiración, masticaciòn y degluciòn.",

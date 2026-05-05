@@ -5,6 +5,20 @@
   "descripcionHero": "Recupera la funcionalidad total y la estética natural de su sonrisa con nuestra tecnología de implantes. Un procedimiento seguro, indoloro y con resultados predecibles.",
   "icon": "Drill",
   "heroImage": "/images/implantes-hero.jpg",
+  "badge": "Excelencia Restaurativa",
+  "specialists": [
+    { "name": "Paula Gualtieri Odontología", "role": "" },
+    { "name": "Dr. Roberto Dominguez", "role": "Especialista en Rehabilitación Oral" }
+  ],
+  "stats": [
+    { "label": "Tasa de Éxito", "value": "98%" },
+    { "label": "Años de Experiencia", "value": "15+" }
+  ],
+  "cta": {
+    "title": "¿Listo para transformar su sonrisa?",
+    "description": "Unite a los pacientes que han recuperado su confianza con nuestro tratamientos de vanguardia.",
+    "buttonText": "Agendar Cita"
+  },
   "features": [
     "Materiales Bio-compatibles: Utilizamos titanio de grado médico de primer nivel, garantizando una osteointegración perfecta con el hueso.",
     "98% Tasa de éxito: Nuestra metodología y tecnología de vanguardia aseguran resultados óptimos en casi la totalidad de los casos.",

@@ -2,9 +2,102 @@
   "type": "HomePage",
   "title": "Inicio",
   "hero": {
+    "subtitle": "Paula Gualtieri Odontología",
+    "logo": "/images/p-solo.svg",
+    "backgroundImage": "/images/hero-bg.png",
     "title": "Excelencia Clínica & Calidez Humana",
     "description": "Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.",
     "buttonPrimary": "Conoce a la Dra. Gualtieri",
     "buttonSecondary": "Ver Especialidades"
+  },
+  "servicesSection": {
+    "title": "Tratamientos de Vanguardia",
+    "description": "Soluciones dentales precisas diseñadas con tecnología de última generación para resultados duraderos y estéticos."
+  },
+  "teamSection": {
+    "badge": "Conocé a los especialistas",
+    "title": "Equipo de trabajo",
+    "description": "Contamos con un equipo de profesionales altamente capacitados para brindarte la mejor atención en cada especialidad odontológica.",
+    "mainDoctor": {
+      "name": "Dra. Paula Gualtieri",
+      "mn": "MN",
+      "role": "Especialista en alineadores dentales y ortopedia.",
+      "image": "/images/dra-paula.jpg"
+    },
+    "members": [
+      {
+        "name": "Dr. Roberto Dominguez",
+        "mn": "MN",
+        "role": "Especialista en rehabilitación oral (Implantes y prótesis)."
+      },
+      {
+        "name": "Dra. Emilia Omastott",
+        "mn": "MN",
+        "role": "Atención niños, Maestría en cirugía dental."
+      },
+      {
+        "name": "Dr. Pablo Martinez",
+        "mn": "MN",
+        "role": "Especialista en Endodoncia."
+      }
+    ]
+  },
+  "testimonialsSection": {
+    "title": "Experiencias de nuestros pacientes",
+    "description": "Historias reales de personas que transformaron su salud bucal y su confianza con nosotros.",
+    "testimonials": [
+      {
+        "name": "Martina R.",
+        "content": "\"El tratamiento de ortodoncia invisible fue tal como la Dra. Paula me lo explicó. Sin dolor, rápido y los resultados son increíbles. La clínica transmite mucha paz.\"",
+        "source": "Instagram",
+        "rating": 5,
+        "img": "https://picsum.photos/seed/patient1/100/100"
+      },
+      {
+        "name": "Diego F.",
+        "content": "\"Le tenía terror al dentista hasta que vine aquí por un implante. El equipo es súper profesional y humano. Me explicaron cada paso y no sentí nada. Totalmente recomendados.\"",
+        "source": "Facebook",
+        "rating": 5,
+        "img": "https://picsum.photos/seed/patient2/100/100"
+      },
+      {
+        "name": "Lucía G.",
+        "content": "\"Me hice diseño de sonrisa y carillas. El cambio fue espectacular pero súper natural. La calidez de la doctora Paula hace la diferencia. Gracias por devolverme las ganas de sonreír.\"",
+        "source": "WhatsApp",
+        "rating": 5,
+        "img": "https://picsum.photos/seed/patient3/100/100"
+      },
+      {
+        "name": "Carlos M.",
+        "content": "\"Excelente atención. Me realicé un blanqueamiento y los resultados superaron mis expectativas. El ambiente es muy relajante y moderno.\"",
+        "source": "Google",
+        "rating": 5,
+        "img": "https://picsum.photos/seed/patient4/100/100"
+      },
+      {
+        "name": "Sofía L.",
+        "content": "\"La Dra. Paula es súper paciente y detallista. Me explicó todo el proceso de mi tratamiento de encías con mucha claridad. Me sentí en muy buenas manos.\"",
+        "source": "Instagram",
+        "rating": 5,
+        "img": "https://picsum.photos/seed/patient5/100/100"
+      },
+      {
+        "name": "Roberto P.",
+        "content": "\"Buscaba un lugar con tecnología de punta y lo encontré. El scanner intraoral es una maravilla, nada de moldes molestos. Muy recomendable.\"",
+        "source": "WhatsApp",
+        "rating": 5,
+        "img": "https://picsum.photos/seed/patient6/100/100"
+      }
+    ]
+  },
+  "locationSection": {
+    "title": "Visítanos en nuestro consultorio",
+    "description": "Un espacio diseñado para tu tranquilidad y confort, equipado con la mejor tecnología para tu cuidado dental.",
+    "addressTitle": "Dirección",
+    "addressText": "Ramón Falcón 2401, Piso 1 Dpto. B\nCiudad Autónoma de Buenos Aires - Flores",
+    "scheduleTitle": "Horarios para solicitar turnos o consultas",
+    "scheduleText": "Lunes de 9 a 15hs\nMartes de 9 a 18hs\nMiércoles y jueves de 13 a 18hs\nViernes de 9 a 15hs",
+    "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.976372899936!2d-58.46496512431464!3d-34.630037358888586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca27fa9eee21%3A0x985e9d7976637b48!2sCnel.%20Ram%C3%B3n%20L.%20Falc%C3%B3n%202401%2C%20C1406%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1776957558537!5m2!1ses-419!2sar",
+    "whatsappText": "Contactar por WhatsApp"
   }
 }

@@ -5,6 +5,19 @@
   "descripcionHero": "Tecnología avanzada para preservar tus piezas dentales naturales, eliminando el dolor y las infecciones de forma precisa, cómoda y segura",
   "icon": "Drill",
   "heroImage": "/images/endodoncia-hero.jpg",
+  "badge": "Preservación Dental",
+  "specialists": [
+    { "name": "Dr. Pablo Martinez", "role": "Especialista en Endodoncia" }
+  ],
+  "stats": [
+    { "label": "Dientes Salvados", "value": "1000+" },
+    { "label": "Sin Dolor", "value": "100%" }
+  ],
+  "cta": {
+    "title": "Salvando tus dientes naturales",
+    "description": "Un tratamiento de conductos a tiempo puede marcar la diferencia. Agenda tu evaluación.",
+    "buttonText": "Agendar Cita"
+  },
   "features": [
     "Prevención dental: salvamos el dientes y evitamos la extracción.",
     "Tecnología rotatoria: uso de sistema mecanizado que garantizan rapidez y eficacia.",
