@@ -5,3 +5,6 @@ coverage/
 *.log
 .env*
 !.env.example
+odontoPau.code-workspace
+pnpm-lock.yaml
+pnpm-workspace.yaml
