@@ -5,3 +5,6 @@ coverage/
 *.log
 .env*
 !.env.example
+odontoPau.code-workspace
+.codegraph/.gitignore
+.codegraph/config.json
