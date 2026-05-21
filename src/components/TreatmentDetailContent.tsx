@@ -134,6 +134,75 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
         </div>
       </section>
 
+      {/* Clinical Cases Section */}
+      {tratamiento.casosClinicos && tratamiento.casosClinicos.length > 0 && (
+        <section className="py-24 bg-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+              <div>
+                <h2 className="text-3xl md:text-5xl font-bold text-on-surface mb-4">Casos Clínicos</h2>
+                <p className="text-on-surface-variant max-w-xl">Descubre cómo hemos transformado vidas a través de la reconstrucción dental avanzada. Resultados reales de pacientes reales.</p>
+              </div>
+              <div className="flex gap-4">
+                <button 
+                  onClick={() => scroll('left')}
+                  className="p-4 rounded-full border border-surface-variant hover:bg-surface-background transition-colors"
+                  aria-label="Anterior caso"
+                >
+                  <ArrowRight className="w-6 h-6 rotate-180" />
+                </button>
+                <button 
+                  onClick={() => scroll('right')}
+                  className="p-4 rounded-full border border-surface-variant hover:bg-surface-background transition-colors"
+                  aria-label="Siguiente caso"
+                >
+                  <ArrowRight className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+
+            <div 
+              ref={scrollRef}
+              className="flex gap-8 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-8 scroll-smooth"
+            >
+              {tratamiento.casosClinicos.map((caso: any, idx: number) => (
+                <motion.div 
+                  key={caso.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className="max-w-[350px] w-full flex-shrink-0 bg-surface-background rounded-3xl overflow-hidden border border-surface-variant hover:shadow-xl transition-all duration-500 snap-start"
+                >
+                  <div className="aspect-[1.5/1] relative overflow-hidden bg-slate-200">
+                    <Image 
+                      src={caso.imagenDespues || caso.imagenAntes || (caso.imagenes && caso.imagenes.length > 0 ? caso.imagenes[caso.imagenes.length - 1] : '')} 
+                      alt={caso.titulo}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {caso.estado && (
+                      <div className="absolute top-4 left-4 px-3 py-1 bg-zinc-900/80 backdrop-blur text-white text-[10px] font-bold rounded-full">
+                        {caso.estado}
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-on-surface mb-6 leading-tight">{caso.titulo}</h3>
+                    <div className="flex items-center justify-between pt-6 border-t border-surface-variant">
+                      {caso.fecha && (
+                        <span className="text-xs text-on-surface-variant font-medium">{caso.fecha}</span>
+                      )}
+                      <Link href={`/tratamientos/${tratamiento.id}/casos/${caso.id}`} className="text-xs font-bold text-orange-600 hover:underline">Ver Caso Completo</Link>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Features Section (Orange Box) */}
       <section className="py-24 bg-surface-background">
         <div className="max-w-7xl mx-auto px-6">

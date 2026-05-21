@@ -52,7 +52,7 @@ The project has been migrated to a fully dynamic data architecture integrated wi
 All content is managed via JSON files located in the `src/data/` directory, which act as the single source of truth:
 - `src/data/home.json`: Controls all sections of the landing page (Hero, Services, Team, Testimonials, Location).
 - `src/data/settings.json`: Centralizes global configuration like contact info (WhatsApp), social media links, and footer text.
-- `src/data/tratamientos/`: Contains individual `.json` files for each treatment (e.g., `implantes.json`), including their specific clinical cases.
+- `src/data/tratamientos/`: Contains individual `.json` files for each treatment (e.g., `implantes.json`), including their specific clinical cases. Each treatment page dynamically renders these cases in a horizontal scrollable carousel section directly below the Hero.
 
 ### 3. CMS Configuration
 The content models and editing rules are defined in `stackbit.config.ts` located at the root of the project.

@@ -12,8 +12,12 @@ All notable changes to this project will be documented in this file.
 - **DRY Refactoring**: Extracted duplicated logic for fetching treatments and cases in `src/app/tratamientos/[id]/casos/[casoId]/page.tsx` into a shared `getTratamientoYCaso` function, based on Fallow duplication reports.
 - **Fallow Configuration**: Added inline `// fallow-ignore-file unused-file` to `stackbit.config.ts` to prevent false positive detection while maintaining CMS integration.
 
+### Fixed
+- **Treatment Page Layout Regression**: Restored the accidentally deleted "Clinical Cases" section below the Hero in the treatment detail view (`src/components/TreatmentDetailContent.tsx`) which was introduced during Stackbit visual editing integrations.
+
 ### Documentation
 - **Data Templates**: Added comprehensive markdown tables to the README detailing the structure of JSON data models (Configuración General, Tratamientos, Casos Clínicos, Testimonios) for Excel-based content management and CMS alignment.
+- **Clinical Cases Flow**: Documented in `README.md` the dynamic linkage and rendering of clinical cases on individual treatment pages.
 
 ## [Unreleased] - 2026-05-05
 
