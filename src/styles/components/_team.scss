@@ -1,0 +1,193 @@
+@use "../abstracts" as *;
+
+.team {
+  padding-block: spacing(section);
+  background-color: rgba(clr("accent", "050"), 0.5);
+
+  &__inner {
+    max-width: container(max);
+    margin-inline: auto;
+    padding-inline: size(6);
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: size(16);
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    padding-inline: size(4);
+    padding-block: size("1-5");
+    border-radius: radius(pill);
+    background-color: clr("accent", "100");
+    color: clr("accent", "800");
+    font-size: fs("175");
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: size(4);
+  }
+
+  &__title {
+    font-size: fs("750");
+    font-weight: 700;
+    color: $on-surface;
+    margin-bottom: size(6);
+
+    @include mq(md) {
+      font-size: fs("800");
+    }
+  }
+
+  &__description {
+    font-size: fs("400");
+    color: $on-surface-variant;
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: size(12);
+    align-items: start;
+
+    @include mq(lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__featured {
+    background-color: $surface-background;
+    border-radius: radius("3xl");
+    padding: size(8);
+    border: 1px solid $surface-variant;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: size(8);
+    align-items: center;
+
+    @include mq(md) {
+      text-align: left;
+      flex-direction: row;
+    }
+  }
+
+  &__avatar {
+    width: size(48);
+    height: size(48);
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 4px solid clr("neutral", "000");
+    box-shadow: shadow(xl);
+    position: relative;
+    background-color: clr("accent", "100");
+  }
+
+  &__avatar-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fdba74;
+    font-size: 3.75rem;
+    font-weight: 700;
+  }
+
+  &__avatar-image {
+    object-fit: cover;
+    position: relative;
+    z-index: 10;
+  }
+
+  &__featured-content {
+    // container for name/license/role in featured card
+  }
+
+  &__member-name {
+    font-size: fs("600");
+    font-weight: 700;
+    color: $on-surface;
+    margin-bottom: size(2);
+  }
+
+  &__member-license {
+    color: clr("accent", "600");
+    font-weight: 700;
+    margin-bottom: size(4);
+  }
+
+  &__member-role {
+    color: $on-surface-variant;
+    line-height: 1.625;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: size(6);
+  }
+
+  &__list-card {
+    display: flex;
+    align-items: flex-start;
+    gap: size(4);
+    padding: size(4);
+    border-radius: radius("2xl");
+    background-color: clr("neutral", "000");
+    border: 1px solid $surface-variant;
+    transition: box-shadow transition(base);
+
+    &:hover {
+      box-shadow: shadow(lg);
+    }
+
+    @include mq(lg) {
+      padding: size(5);
+    }
+  }
+
+  &__list-icon-wrap {
+    width: size(12);
+    height: size(12);
+    border-radius: 50%;
+    background-color: clr("accent", "050");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__list-icon {
+    width: size(6);
+    height: size(6);
+    color: clr("accent", "600");
+  }
+
+  &__list-content {
+    // container for name/license/role in list cards
+  }
+
+  &__list-name {
+    font-size: fs("400");
+    font-weight: 700;
+    color: $on-surface;
+  }
+
+  &__list-license {
+    font-size: fs("250");
+    color: clr("accent", "600");
+    font-weight: 700;
+    display: block;
+    margin-bottom: size(1);
+  }
+
+  &__list-role {
+    font-size: fs("250");
+    color: $on-surface-variant;
+  }
+}

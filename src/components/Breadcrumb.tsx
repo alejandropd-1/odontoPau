@@ -15,29 +15,29 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ items }: BreadcrumbProps) {
   return (
-    <nav className="flex px-6 max-w-7xl mx-auto w-full pt-8 pb-4 animate-in fade-in slide-in-from-left-4 duration-700 relative z-20" aria-label="Breadcrumb">
-      <ol className="flex items-center space-x-2 text-sm">
-        <li className="flex items-center">
+    <nav className="breadcrumb" aria-label="Breadcrumb">
+      <ol className="breadcrumb__list">
+        <li className="breadcrumb__item">
           <Link 
             href="/" 
-            className="text-on-surface-variant/60 hover:text-orange-600 flex items-center transition-colors gap-1.5 font-semibold"
+            className="breadcrumb__link"
           >
-            <Home className="w-3.5 h-3.5" />
+            <Home className="breadcrumb__link-icon" />
             Inicio
           </Link>
         </li>
         {items.map((item, index) => (
-          <li key={index} className="flex items-center gap-2">
-            <ChevronRight className="w-3.5 h-3.5 text-on-surface-variant/30" />
+          <li key={index} className="breadcrumb__item">
+            <ChevronRight className="breadcrumb__separator" />
             {item.href ? (
               <Link 
                 href={item.href} 
-                className="text-on-surface-variant/60 hover:text-orange-600 transition-colors font-semibold"
+                className="breadcrumb__link"
               >
                 {item.label}
               </Link>
             ) : (
-              <span className="text-orange-600 font-bold">
+              <span className="breadcrumb__current">
                 {item.label}
               </span>
             )}

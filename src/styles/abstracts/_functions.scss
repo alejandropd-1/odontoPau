@@ -1,0 +1,71 @@
+@use "sass:map";
+@use "colors" as *;
+@use "effects";
+@use "fonts";
+@use "sizes";
+@use "tokens" as *;
+@use "typography" as *;
+
+@function _from-map($map, $key, $name) {
+  @if map.has-key($map, $key) {
+    @return map.get($map, $key);
+  }
+
+  @error "`#{$key}` no existe en $#{$name}.";
+}
+
+@function clr($color, $shade, $scheme: $active-theme) {
+  $map: null;
+
+  @if $scheme == "light" {
+    $map: $light;
+  } @else if $scheme == "dark" {
+    $map: $dark;
+  } @else if $scheme == $active-theme {
+    $map: $active-theme;
+  } @else {
+    @error "unknown scheme";
+  }
+
+  @if map.has-key($map, $color, $shade) {
+    @return map.get($map, $color, $shade);
+  }
+
+  @error "$active-theme does not have color `#{$color}` with shade `#{$shade}`.";
+}
+
+@function size($size) {
+  @return _from-map(sizes.$sizes, $size, "sizes");
+}
+
+@function fs($font-size) {
+  @return var(--fs-#{$font-size});
+}
+
+@function ff($font-family) {
+  @return _from-map(fonts.$font-families, $font-family, "font-families");
+}
+
+@function radius($radius) {
+  @return _from-map($radii, $radius, "radii");
+}
+
+@function shadow($shadow) {
+  @return _from-map($shadows, $shadow, "shadows");
+}
+
+@function transition($transition) {
+  @return _from-map($transitions, $transition, "transitions");
+}
+
+@function container($container) {
+  @return _from-map($containers, $container, "containers");
+}
+
+@function spacing($spacing) {
+  @return _from-map($spacings, $spacing, "spacings");
+}
+
+@function glass($token) {
+  @return _from-map(effects.$glass, $token, "glass");
+}

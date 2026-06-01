@@ -1,0 +1,85 @@
+@use "../abstracts" as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  border-bottom: glass(border);
+  background-color: glass(bg);
+  backdrop-filter: glass(blur);
+  box-shadow: 0 1px 2px 0 rgba(255, 122, 0, 0.05);
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: $navbar-pad-x;
+    padding-block: $navbar-pad-y;
+    max-width: container(max);
+    margin-inline: auto;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: size(2);
+
+    span {
+      font-size: fs("500");
+      font-weight: 700;
+      background: linear-gradient(
+        to right,
+        clr("accent", "600"),
+        clr("accent", "400")
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-family: ff(sans);
+    }
+  }
+
+  &__links {
+    display: none;
+    align-items: center;
+    gap: size(8);
+
+    @include mq(md) {
+      display: flex;
+    }
+  }
+
+  &__link {
+    font-family: ff(sans);
+    font-size: fs("250");
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: clr("slate", "700");
+    transition: color transition(base);
+
+    &:hover {
+      color: clr("accent", "500");
+    }
+  }
+
+  &__cta {
+    background: linear-gradient(
+      to right,
+      clr("primary", "600"),
+      clr("primary", "700")
+    );
+    color: clr("neutral", "000");
+    font-family: ff(sans);
+    font-size: fs("250");
+    font-weight: 600;
+    padding-inline: size(6);
+    padding-block: size(3);
+    border-radius: radius(pill);
+    transition: opacity transition(base);
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

@@ -1,0 +1,138 @@
+$-clr-white: #ffffff;
+$-clr-black: #000000;
+
+$-clr-neutral-100: #f8f9fa;
+$-clr-neutral-150: #f3f4f5;
+$-clr-neutral-200: #edeeef;
+$-clr-neutral-250: #e7e8e9;
+$-clr-neutral-300: #e1e3e4;
+$-clr-neutral-400: #d9dadb;
+$-clr-neutral-500: #8c7263;
+$-clr-neutral-600: #584235;
+$-clr-neutral-700: #2e3132;
+$-clr-neutral-900: #191c1d;
+
+$-clr-primary-100: #ffdbc8;
+$-clr-primary-200: #ffb68b;
+$-clr-primary-500: #994700;
+$-clr-primary-600: #ff7a00;
+$-clr-primary-700: #ff9944;
+$-clr-primary-900: #5c2800;
+
+$-clr-accent-050: #fff7ed;
+$-clr-accent-100: #ffedd5;
+$-clr-accent-200: #fed7aa;
+$-clr-accent-400: #fb923c;
+$-clr-accent-500: #f97316;
+$-clr-accent-600: #ea580c;
+$-clr-accent-700: #c2410c;
+$-clr-accent-800: #9a3412;
+
+$-clr-slate-100: #f1f5f9;
+$-clr-slate-200: #e2e8f0;
+$-clr-slate-500: #64748b;
+$-clr-slate-700: #334155;
+
+$-clr-zinc-400: #a1a1aa;
+$-clr-zinc-900: #18181b;
+
+$-clr-whatsapp: #128c7e;
+$-clr-whatsapp-dark: #075e54;
+
+$-clr-error: #ba1a1a;
+
+$light: (
+  "neutral": (
+    "000": $-clr-white,
+    "100": $-clr-neutral-100,
+    "150": $-clr-neutral-150,
+    "200": $-clr-neutral-200,
+    "250": $-clr-neutral-250,
+    "300": $-clr-neutral-300,
+    "400": $-clr-neutral-400,
+    "500": $-clr-neutral-500,
+    "600": $-clr-neutral-600,
+    "700": $-clr-neutral-700,
+    "900": $-clr-neutral-900,
+    "1000": $-clr-black,
+  ),
+  "primary": (
+    "100": $-clr-primary-100,
+    "200": $-clr-primary-200,
+    "500": $-clr-primary-500,
+    "600": $-clr-primary-600,
+    "700": $-clr-primary-700,
+    "900": $-clr-primary-900,
+  ),
+  "accent": (
+    "050": $-clr-accent-050,
+    "100": $-clr-accent-100,
+    "200": $-clr-accent-200,
+    "400": $-clr-accent-400,
+    "500": $-clr-accent-500,
+    "600": $-clr-accent-600,
+    "700": $-clr-accent-700,
+    "800": $-clr-accent-800,
+  ),
+  "slate": (
+    "100": $-clr-slate-100,
+    "200": $-clr-slate-200,
+    "500": $-clr-slate-500,
+    "700": $-clr-slate-700,
+  ),
+  "zinc": (
+    "400": $-clr-zinc-400,
+    "900": $-clr-zinc-900,
+  ),
+  "whatsapp": (
+    "500": $-clr-whatsapp,
+    "700": $-clr-whatsapp-dark,
+  ),
+  "error": (
+    "500": $-clr-error,
+  ),
+);
+
+$dark: $light;
+
+$color-neutral-000: var(--neutral-000);
+$color-neutral-100: var(--neutral-100);
+$color-neutral-150: var(--neutral-150);
+$color-neutral-200: var(--neutral-200);
+$color-neutral-250: var(--neutral-250);
+$color-neutral-300: var(--neutral-300);
+$color-neutral-400: var(--neutral-400);
+$color-neutral-500: var(--neutral-500);
+$color-neutral-600: var(--neutral-600);
+$color-neutral-700: var(--neutral-700);
+$color-neutral-900: var(--neutral-900);
+$color-neutral-1000: var(--neutral-1000);
+
+$color-primary-100: var(--primary-100);
+$color-primary-200: var(--primary-200);
+$color-primary-500: var(--primary-500);
+$color-primary-600: var(--primary-600);
+$color-primary-700: var(--primary-700);
+$color-primary-900: var(--primary-900);
+
+$color-accent-050: var(--accent-050);
+$color-accent-100: var(--accent-100);
+$color-accent-200: var(--accent-200);
+$color-accent-400: var(--accent-400);
+$color-accent-500: var(--accent-500);
+$color-accent-600: var(--accent-600);
+$color-accent-700: var(--accent-700);
+$color-accent-800: var(--accent-800);
+
+$color-slate-100: var(--slate-100);
+$color-slate-200: var(--slate-200);
+$color-slate-500: var(--slate-500);
+$color-slate-700: var(--slate-700);
+
+$color-zinc-400: var(--zinc-400);
+$color-zinc-900: var(--zinc-900);
+
+$color-whatsapp-500: var(--whatsapp-500);
+$color-whatsapp-700: var(--whatsapp-700);
+
+$color-error-500: var(--error-500);

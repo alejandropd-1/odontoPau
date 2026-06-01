@@ -1,0 +1,219 @@
+@use "../abstracts" as *;
+
+.location {
+  padding-block: spacing(section);
+  background-color: $surface-background;
+
+  &__inner {
+    max-width: container(max);
+    margin-inline: auto;
+    padding-inline: size(6);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: size(16);
+    align-items: center;
+
+    @include mq(lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__content {
+    // container for info column
+  }
+
+  &__title {
+    font-size: fs("750");
+    font-weight: 700;
+    color: $on-surface;
+    margin-bottom: size(6);
+    letter-spacing: -0.025em;
+
+    @include mq(md) {
+      font-size: fs("700");
+    }
+  }
+
+  &__description {
+    font-size: fs("400");
+    color: $on-surface-variant;
+    margin-bottom: size(10);
+    line-height: 1.625;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: size(8);
+    margin-bottom: size(10);
+  }
+
+  &__detail {
+    display: flex;
+    align-items: flex-start;
+    gap: size(5);
+  }
+
+  &__detail-icon-wrap {
+    width: size(12);
+    height: size(12);
+    border-radius: 50%;
+    background-color: clr("accent", "100");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__detail-icon {
+    color: clr("primary", "600");
+    width: size(6);
+    height: size(6);
+  }
+
+  &__detail-content {
+    // container for detail title and text
+  }
+
+  &__detail-title {
+    font-weight: 700;
+    color: $on-surface;
+    margin-bottom: size(1);
+  }
+
+  &__detail-text {
+    color: $on-surface-variant;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: size(4);
+
+    @include mq(sm) {
+      flex-direction: row;
+    }
+  }
+
+  &__whatsapp {
+    background-color: clr("whatsapp", "500");
+    color: clr("neutral", "000");
+    font-weight: 700;
+    padding-inline: size(8);
+    padding-block: size(4);
+    border-radius: radius(pill);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: size(2);
+    transition: all transition(base);
+    box-shadow: 0 10px 15px -3px rgba(18, 140, 126, 0.2);
+
+    &:hover {
+      background-color: clr("whatsapp", "700");
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &__whatsapp-icon {
+    width: size(5);
+    height: size(5);
+    fill: currentColor;
+  }
+
+  &__map {
+    background-color: glass(bg);
+    backdrop-filter: glass(blur);
+    border: glass(border);
+    box-shadow: glass(shadow);
+    border-radius: radius("3xl");
+    padding: size(2);
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+
+    &:hover .location__floating-card {
+      transform: translateY(0);
+    }
+  }
+
+  &__iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: radius("2xl");
+    border: 0;
+  }
+
+  &__floating-card {
+    position: absolute;
+    bottom: size(6);
+    left: size(6);
+    right: size(6);
+    background-color: glass(bg);
+    backdrop-filter: glass(blur);
+    border: glass(border);
+    box-shadow: glass(shadow);
+    padding: size(5);
+    border-radius: radius("2xl");
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateY(0.5rem);
+    transition: transform transition(base);
+    pointer-events: none;
+  }
+
+  &__floating-main {
+    display: flex;
+    align-items: center;
+    gap: size(4);
+  }
+
+  &__floating-icon {
+    width: size(10);
+    height: size(10);
+    border-radius: 50%;
+    background-color: clr("primary", "600");
+    color: clr("neutral", "000");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 15px -3px rgba(255, 122, 0, 0.3);
+  }
+
+  &__floating-content {
+    // container for floating card text
+  }
+
+  &__floating-title {
+    font-weight: 700;
+    color: $on-surface;
+  }
+
+  &__floating-address {
+    font-size: fs("250");
+    color: $on-surface-variant;
+    font-weight: 500;
+  }
+
+  &__directions {
+    font-size: fs("250");
+    font-weight: 700;
+    color: clr("primary", "600");
+    pointer-events: auto;
+    transition: all transition(base);
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+  }
+}

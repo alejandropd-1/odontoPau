@@ -85,35 +85,35 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-24 bg-white" id="testimonios">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-4">Experiencias de nuestros pacientes</h2>
-            <p className="text-lg text-on-surface-variant">Historias reales de personas que transformaron su salud bucal y su confianza con nosotros.</p>
+    <section className="testimonials" id="testimonios">
+      <div className="testimonials__inner">
+        <div className="testimonials__header">
+          <div className="testimonials__copy">
+            <h2 className="testimonials__title">Experiencias de nuestros pacientes</h2>
+            <p className="testimonials__description">Historias reales de personas que transformaron su salud bucal y su confianza con nosotros.</p>
           </div>
-          <div className="flex gap-4">
+          <div className="testimonials__controls">
             <button
               onClick={prev}
-              className="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-orange-50 transition-colors active:scale-95"
+              className="testimonials__control"
               aria-label="Testimonio anterior"
             >
-              <ArrowLeft className="w-5 h-5 text-on-surface" />
+              <ArrowLeft className="testimonials__control-icon" />
             </button>
             <button
               onClick={next}
-              className="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-orange-50 transition-colors active:scale-95"
+              className="testimonials__control"
               aria-label="Siguiente testimonio"
             >
-              <ArrowRight className="w-5 h-5 text-on-surface" />
+              <ArrowRight className="testimonials__control-icon" />
             </button>
           </div>
         </div>
 
-        <div className="relative overflow-visible">
-          <div className="overflow-hidden">
+        <div className="testimonials__viewport-wrap">
+          <div className="testimonials__viewport">
             <motion.div
-              className="flex gap-8"
+              className="testimonials__track"
               animate={{
                 x: `calc(-${currentIndex * (100 / itemsToShow)}% - ${currentIndex * (32 / itemsToShow)}px)`
               }}
@@ -122,25 +122,25 @@ export default function Testimonials() {
               {testimonials.map((t, i) => (
                 <div
                   key={i}
-                  className="w-full md:w-[calc(50%-16px)] lg:w-[calc(33.333%-21.33px)] flex-shrink-0 bg-white border border-slate-100 rounded-2xl p-8 relative shadow-sm hover:shadow-md transition-shadow"
+                  className="testimonials__card"
                 >
-                  <Quote className="absolute top-6 right-6 text-orange-200 w-12 h-12" />
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-slate-100 overflow-hidden relative">
-                      <Image src={t.img} alt={t.name} fill className="object-cover" referrerPolicy="no-referrer" />
+                  <Quote className="testimonials__quote-icon" />
+                  <div className="testimonials__person">
+                    <div className="testimonials__avatar">
+                      <Image src={t.img} alt={t.name} fill className="testimonials__avatar-image" referrerPolicy="no-referrer" />
                     </div>
-                    <div>
-                      <h3 className="font-bold text-on-surface">{t.name}</h3>
-                      <div className="flex text-orange-500">
+                    <div className="testimonials__person-info">
+                      <h3 className="testimonials__name">{t.name}</h3>
+                      <div className="testimonials__stars">
                         {[...Array(t.rating)].map((_, idx) => (
-                          <Star key={idx} className="w-3.5 h-3.5 fill-current" />
+                          <Star key={idx} className="testimonials__star" />
                         ))}
                       </div>
                     </div>
                   </div>
-                  <p className="text-on-surface-variant italic mb-6 leading-relaxed">{t.content}</p>
-                  <div className="flex items-center gap-2 text-slate-500 text-xs font-semibold uppercase tracking-wider">
-                    <t.icon className="w-4 h-4" /> Vía {t.source}
+                  <p className="testimonials__content">{t.content}</p>
+                  <div className="testimonials__source">
+                    <t.icon className="testimonials__source-icon" /> Vía {t.source}
                   </div>
                 </div>
               ))}

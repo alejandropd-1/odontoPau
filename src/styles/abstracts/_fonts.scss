@@ -1,0 +1,15 @@
+$-ff-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+$font-family-base: $-ff-sans;
+
+$font-families: (
+  sans: $font-family-base,
+) !default;
+
+$font-weights: (
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  extrabold: 800,
+) !default;

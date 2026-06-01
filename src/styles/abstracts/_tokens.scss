@@ -1,0 +1,100 @@
+@use "colors" as *;
+@use "fonts" as *;
+@use "sizes" as *;
+@use "typography" as *;
+
+$active-theme: $light;
+$enable-media-query-dark-mode: false;
+
+$color-text-default: $color-neutral-900;
+$color-background-default: $color-neutral-000;
+$color-text-interactive-default: $color-primary-600;
+$color-text-interactive-hover: $color-primary-700;
+
+$body-font-family: $font-family-base;
+$body-font-size: $font-size-300;
+$body-text-color: $color-text-default;
+$body-background-color: $color-background-default;
+
+$heading-font-family: $font-family-base;
+$heading-font-weight: 700;
+$heading-line-height: 1.2;
+
+$heading-1-font-size: $font-size-900;
+$heading-2-font-size: $font-size-800;
+$heading-3-font-size: $font-size-700;
+$heading-4-font-size: $font-size-600;
+
+$surface-background: $color-neutral-100;
+$surface-variant: $color-neutral-300;
+$on-surface: $color-neutral-900;
+$on-surface-variant: $color-neutral-600;
+
+$container-max: 80rem;
+$container-narrow: 60rem;
+$container-pad: $size-6;
+
+$navbar-pad-x: $size-6;
+$navbar-pad-y: $size-4;
+
+$spacing-section: $size-24;
+$spacing-component: $size-8;
+$spacing-element: $size-4;
+
+$radius-sm: $size-1;
+$radius-md: 0.75rem;
+$radius-lg: $size-4;
+$radius-xl: $size-6;
+$radius-2xl: 2rem;
+$radius-3xl: 3rem;
+$radius-3-5xl: 3.5rem;
+$radius-pill: 9999px;
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  0 4px 6px -4px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  0 8px 10px -6px rgba(0, 0, 0, 0.1);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+$transition-fast: 150ms ease;
+$transition-base: 300ms ease;
+$transition-slow: 500ms ease;
+
+$radii: (
+  sm: $radius-sm,
+  md: $radius-md,
+  lg: $radius-lg,
+  xl: $radius-xl,
+  "2xl": $radius-2xl,
+  "3xl": $radius-3xl,
+  "3-5xl": $radius-3-5xl,
+  pill: $radius-pill,
+) !default;
+
+$shadows: (
+  sm: $shadow-sm,
+  md: $shadow-md,
+  lg: $shadow-lg,
+  xl: $shadow-xl,
+  "2xl": $shadow-2xl,
+) !default;
+
+$transitions: (
+  fast: $transition-fast,
+  base: $transition-base,
+  slow: $transition-slow,
+) !default;
+
+$containers: (
+  max: $container-max,
+  narrow: $container-narrow,
+  pad: $container-pad,
+) !default;
+
+$spacings: (
+  section: $spacing-section,
+  component: $spacing-component,
+  element: $spacing-element,
+) !default;

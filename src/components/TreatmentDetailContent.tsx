@@ -37,28 +37,28 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
   const objectId = `src/data/tratamientos/${id}.json`;
 
   return (
-    <div className="min-h-screen bg-surface-background" data-sb-object-id={objectId}>
+    <div className="treatment-detail" data-sb-object-id={objectId}>
       <Navbar />
       
-      <div className="pt-24">
+      <div className="treatment-detail__breadcrumb-spacer">
         <Breadcrumb items={[{ label: tratamiento.tituloHero }]} />
       </div>
 
       {/* Hero Section */}
-      <section className="relative pb-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="treatment-detail__hero">
+        <div className="treatment-detail__hero-inner">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold tracking-wider uppercase mb-6">
+            <span className="treatment-detail__hero-eyebrow">
               Excelencia Restaurativa
             </span>
             
             {/* Etiqueta de título para el lápiz */}
             <h1 
-              className="text-4xl md:text-6xl font-bold text-on-surface mb-6 leading-tight"
+              className="treatment-detail__hero-title"
               data-sb-field-path="tituloHero"
             >
               {tratamiento.tituloHero}
@@ -66,7 +66,7 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
             
             {/* Etiqueta de descripción para el lápiz */}
             <p 
-              className="text-lg text-on-surface-variant mb-10 max-w-xl leading-relaxed"
+              className="treatment-detail__hero-description"
               data-sb-field-path="descripcionHero"
             >
               {tratamiento.descripcionHero}
@@ -76,9 +76,9 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
               href={getWhatsAppLink(`Hola, quiero solicitar una valoración para ${tratamiento.tituloHero}`)}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full md:w-fit justify-center px-8 py-4 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all shadow-lg shadow-orange-600/20 flex items-center gap-2"
+              className="treatment-detail__hero-cta"
             >
-              Solicitar Valoración <ArrowRight className="w-5 h-5" />
+              Solicitar Valoración <ArrowRight className="treatment-detail__hero-cta-icon" />
             </a>
           </motion.div>
 
@@ -86,46 +86,46 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="relative"
+            className="treatment-detail__hero-media"
           >
-            <div className="aspect-[4/5] rounded-[2rem] overflow-hidden relative shadow-2xl">
+            <div className="treatment-detail__hero-image-wrap">
               <Image 
                 src={tratamiento.heroImage} 
                 alt={tratamiento.tituloHero}
                 fill
-                className="object-cover"
+                className="treatment-detail__hero-image"
                 data-sb-field-path="heroImage"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/40 to-transparent"></div>
+              <div className="treatment-detail__hero-image-overlay"></div>
             </div>
             {/* Dr. Badge Overlay */}
-            <div className="absolute top-10 -right-6 md:right-10 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center shrink-0">
-                <span className="text-orange-600 font-bold">PG</span>
+            <div className="treatment-detail__doctor-badge">
+              <div className="treatment-detail__doctor-badge-avatar">
+                <span className="treatment-detail__doctor-badge-initials">PG</span>
               </div>
-              <div>
+              <div className="treatment-detail__doctor-badge-info">
                 {id === 'pediatria' ? (
                   <>
-                    <p className="text-xs font-bold text-on-surface">Dra. Paula Gualtieri</p>
-                    <p className="text-xs font-bold text-on-surface mt-1">Dra. Emilia Omastott</p>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter mt-1">Especialistas en {tratamiento.tituloHero}</p>
+                    <p className="treatment-detail__doctor-badge-name">Dra. Paula Gualtieri</p>
+                    <p className="treatment-detail__doctor-badge-name">Dra. Emilia Omastott</p>
+                    <p className="treatment-detail__doctor-badge-role">Especialistas en {tratamiento.tituloHero}</p>
                   </>
                 ) : id === 'implantes' ? (
                   <>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Paula Gualtieri Odontología</p>
-                    <p className="text-xs font-bold text-on-surface mt-1">Dr. Roberto Dominguez</p>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter mt-1">Especialista en Rehabilitación Oral</p>
+                    <p className="treatment-detail__doctor-badge-role">Paula Gualtieri Odontología</p>
+                    <p className="treatment-detail__doctor-badge-name">Dr. Roberto Dominguez</p>
+                    <p className="treatment-detail__doctor-badge-role">Especialista en Rehabilitación Oral</p>
                   </>
                 ) : id === 'estetica-dental' ? (
                   <>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Paula Gualtieri Odontología</p>
-                    <p className="text-xs font-bold text-on-surface mt-1">Dr. Roberto Dominguez</p>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter mt-1">Especialista en {tratamiento.tituloHero}</p>
+                    <p className="treatment-detail__doctor-badge-role">Paula Gualtieri Odontología</p>
+                    <p className="treatment-detail__doctor-badge-name">Dr. Roberto Dominguez</p>
+                    <p className="treatment-detail__doctor-badge-role">Especialista en {tratamiento.tituloHero}</p>
                   </>
                 ) : (
                   <>
-                    <p className="text-xs font-bold text-on-surface">Dra. Paula Gualtieri</p>
-                    <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">Especialista en {tratamiento.tituloHero}</p>
+                    <p className="treatment-detail__doctor-badge-name">Dra. Paula Gualtieri</p>
+                    <p className="treatment-detail__doctor-badge-role">Especialista en {tratamiento.tituloHero}</p>
                   </>
                 )}
               </div>
@@ -136,34 +136,34 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
 
       {/* Clinical Cases Section */}
       {tratamiento.casosClinicos && tratamiento.casosClinicos.length > 0 && (
-        <section className="py-24 bg-white overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <section className="treatment-detail__cases">
+          <div className="treatment-detail__cases-inner">
+            <div className="treatment-detail__cases-header">
               <div>
-                <h2 className="text-3xl md:text-5xl font-bold text-on-surface mb-4">Casos Clínicos</h2>
-                <p className="text-on-surface-variant max-w-xl">Descubre cómo hemos transformado vidas a través de la reconstrucción dental avanzada. Resultados reales de pacientes reales.</p>
+                <h2 className="treatment-detail__cases-title">Casos Clínicos</h2>
+                <p className="treatment-detail__cases-description">Descubre cómo hemos transformado vidas a través de la reconstrucción dental avanzada. Resultados reales de pacientes reales.</p>
               </div>
-              <div className="flex gap-4">
+              <div className="treatment-detail__cases-controls">
                 <button 
                   onClick={() => scroll('left')}
-                  className="p-4 rounded-full border border-surface-variant hover:bg-surface-background transition-colors"
+                  className="treatment-detail__cases-control"
                   aria-label="Anterior caso"
                 >
-                  <ArrowRight className="w-6 h-6 rotate-180" />
+                  <ArrowRight className="treatment-detail__cases-control-icon treatment-detail__cases-control-icon--left" />
                 </button>
                 <button 
                   onClick={() => scroll('right')}
-                  className="p-4 rounded-full border border-surface-variant hover:bg-surface-background transition-colors"
+                  className="treatment-detail__cases-control"
                   aria-label="Siguiente caso"
                 >
-                  <ArrowRight className="w-6 h-6" />
+                  <ArrowRight className="treatment-detail__cases-control-icon" />
                 </button>
               </div>
             </div>
 
             <div 
               ref={scrollRef}
-              className="flex gap-8 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-8 scroll-smooth"
+              className="treatment-detail__cases-scroller"
             >
               {tratamiento.casosClinicos.map((caso: any, idx: number) => (
                 <motion.div 
@@ -172,28 +172,28 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
                   viewport={{ once: true }}
-                  className="max-w-[350px] w-full flex-shrink-0 bg-surface-background rounded-3xl overflow-hidden border border-surface-variant hover:shadow-xl transition-all duration-500 snap-start"
+                  className="treatment-detail__case-card"
                 >
-                  <div className="aspect-[1.5/1] relative overflow-hidden bg-slate-200">
+                  <div className="treatment-detail__case-card-image-wrap">
                     <Image 
                       src={caso.imagenDespues || caso.imagenAntes || (caso.imagenes && caso.imagenes.length > 0 ? caso.imagenes[caso.imagenes.length - 1] : '')} 
                       alt={caso.titulo}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="treatment-detail__case-card-image"
                     />
                     {caso.estado && (
-                      <div className="absolute top-4 left-4 px-3 py-1 bg-zinc-900/80 backdrop-blur text-white text-[10px] font-bold rounded-full">
+                      <div className="treatment-detail__case-card-status">
                         {caso.estado}
                       </div>
                     )}
                   </div>
-                  <div className="p-8">
-                    <h3 className="text-xl font-bold text-on-surface mb-6 leading-tight">{caso.titulo}</h3>
-                    <div className="flex items-center justify-between pt-6 border-t border-surface-variant">
+                  <div className="treatment-detail__case-card-content">
+                    <h3 className="treatment-detail__case-card-title">{caso.titulo}</h3>
+                    <div className="treatment-detail__case-card-footer">
                       {caso.fecha && (
-                        <span className="text-xs text-on-surface-variant font-medium">{caso.fecha}</span>
+                        <span className="treatment-detail__case-card-date">{caso.fecha}</span>
                       )}
-                      <Link href={`/tratamientos/${tratamiento.id}/casos/${caso.id}`} className="text-xs font-bold text-orange-600 hover:underline">Ver Caso Completo</Link>
+                      <Link href={`/tratamientos/${tratamiento.id}/casos/${caso.id}`} className="treatment-detail__case-card-link">Ver Caso Completo</Link>
                     </div>
                   </div>
                 </motion.div>
@@ -204,37 +204,37 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
       )}
 
       {/* Features Section (Orange Box) */}
-      <section className="py-24 bg-surface-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-orange-600 rounded-[3rem] p-8 md:p-16 text-white grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative overflow-hidden shadow-2xl shadow-orange-600/20">
+      <section className="treatment-detail__features">
+        <div className="treatment-detail__features-inner">
+          <div className="treatment-detail__features-box">
              {/* Decorative Background Icon */}
-             <div className="absolute -bottom-10 -right-10 opacity-10 rotate-12 pointer-events-none">
+             <div className="treatment-detail__features-bg-icon">
                 {/* @ts-ignore */}
                 <tratamiento.icon className="w-96 h-96" />
              </div>
 
-             <div className="relative z-10">
-               <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-tight">¿Por qué elegir nuestros {tratamiento.tituloHero.toLowerCase()}?</h2>
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-sb-field-path="features">
+             <div className="treatment-detail__features-content">
+               <h2 className="treatment-detail__features-title">¿Por qué elegir nuestros {tratamiento.tituloHero.toLowerCase()}?</h2>
+               <div className="treatment-detail__features-grid" data-sb-field-path="features">
                  {tratamiento.features.map((feature: string, i: number) => (
-                   <div key={i} className="flex items-center gap-4 bg-white/10 backdrop-blur-sm p-5 rounded-2xl border border-white/10" data-sb-field-path={`.${i}`}>
-                     <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
-                       <CheckCircle2 className="w-6 h-6 text-orange-600" />
+                   <div key={i} className="treatment-detail__feature-item" data-sb-field-path={`.${i}`}>
+                     <div className="treatment-detail__feature-icon-wrap">
+                       <CheckCircle2 className="treatment-detail__feature-icon" />
                      </div>
-                     <span className="font-semibold text-sm md:text-base">{feature}</span>
+                     <span className="treatment-detail__feature-text">{feature}</span>
                    </div>
                  ))}
                </div>
              </div>
 
-             <div className="grid grid-cols-2 gap-6 relative z-10">
-                <div className="bg-white p-8 rounded-[2rem] text-zinc-900 shadow-xl">
-                  <p className="text-4xl font-bold text-orange-600 mb-2">98%</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Tasa de Éxito</p>
+             <div className="treatment-detail__features-stats">
+                <div className="treatment-detail__stat-card">
+                  <p className="treatment-detail__stat-value">98%</p>
+                  <p className="treatment-detail__stat-label">Tasa de Éxito</p>
                 </div>
-                <div className="bg-white p-8 rounded-[2rem] text-zinc-900 shadow-xl mt-8">
-                  <p className="text-4xl font-bold text-orange-600 mb-2">15+</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Años de Experiencia</p>
+                <div className="treatment-detail__stat-card">
+                  <p className="treatment-detail__stat-value">15+</p>
+                  <p className="treatment-detail__stat-label">Años de Experiencia</p>
                 </div>
              </div>
           </div>
@@ -242,22 +242,22 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
       </section>
 
       {/* CTA Section */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-zinc-900 rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/10 via-transparent to-transparent opacity-50"></div>
+      <section className="treatment-detail__cta">
+        <div className="treatment-detail__cta-inner">
+          <div className="treatment-detail__cta-box">
+            <div className="treatment-detail__cta-bg-glow"></div>
             
-            <div className="relative z-10">
-              <h2 className="text-3xl md:text-6xl font-bold text-white mb-8">¿Listo para transformar su sonrisa?</h2>
-              <p className="text-zinc-400 mb-12 max-w-2xl mx-auto text-lg leading-relaxed">Unite a los pacientes que han recuperado su confianza con nuestro tratamientos de vanguardia.</p>
-              <div className="flex flex-wrap justify-center gap-4 relative z-10">
+            <div className="treatment-detail__cta-content">
+              <h2 className="treatment-detail__cta-title">¿Listo para transformar su sonrisa?</h2>
+              <p className="treatment-detail__cta-description">Unite a los pacientes que han recuperado su confianza con nuestro tratamientos de vanguardia.</p>
+              <div className="treatment-detail__cta-actions">
                 <a 
                   href={getWhatsAppLink(`Hola, quiero agendar mi cita para el tratamiento de ${tratamiento.tituloHero}`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-10 py-4 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-all flex items-center gap-2"
+                  className="treatment-detail__cta-button"
                 >
-                  Agendar Cita <CheckCircle2 className="w-5 h-5" />
+                  Agendar Cita <CheckCircle2 className="treatment-detail__cta-button-icon" />
                 </a>
               </div>
             </div>

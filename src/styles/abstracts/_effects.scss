@@ -1,0 +1,13 @@
+$glass-bg: rgba(255, 255, 255, 0.7);
+$glass-blur-amount: 15px;
+$glass-border-color: rgba(255, 255, 255, 0.2);
+$glass-border: 1px solid $glass-border-color;
+$glass-shadow: 0 4px 6px -1px rgba(255, 122, 0, 0.05),
+  0 2px 4px -1px rgba(255, 122, 0, 0.03);
+
+$glass: (
+  bg: $glass-bg,
+  blur: blur($glass-blur-amount),
+  border: $glass-border,
+  shadow: $glass-shadow,
+) !default;

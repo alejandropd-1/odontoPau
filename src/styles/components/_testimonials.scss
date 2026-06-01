@@ -1,0 +1,189 @@
+@use "../abstracts" as *;
+
+.testimonials {
+  padding-block: spacing(section);
+  background-color: clr("neutral", "000");
+
+  &__inner {
+    max-width: container(max);
+    margin-inline: auto;
+    padding-inline: size(6);
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: size(16);
+    gap: size(8);
+
+    @include mq(md) {
+      flex-direction: row;
+    }
+  }
+
+  &__copy {
+    max-width: 42rem;
+  }
+
+  &__title {
+    font-size: fs("750");
+    font-weight: 700;
+    color: $on-surface;
+    margin-bottom: size(4);
+
+    @include mq(md) {
+      font-size: fs("700");
+    }
+  }
+
+  &__description {
+    font-size: fs("400");
+    color: $on-surface-variant;
+  }
+
+  &__controls {
+    display: flex;
+    gap: size(4);
+  }
+
+  &__control {
+    width: size(12);
+    height: size(12);
+    border-radius: 50%;
+    background-color: glass(bg);
+    backdrop-filter: glass(blur);
+    border: glass(border);
+    box-shadow: glass(shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color transition(base);
+    cursor: pointer;
+
+    &:hover {
+      background-color: clr("accent", "050");
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &__control-icon {
+    width: size(5);
+    height: size(5);
+    color: $on-surface;
+  }
+
+  &__viewport-wrap {
+    position: relative;
+    overflow: visible;
+  }
+
+  &__viewport {
+    overflow: hidden;
+  }
+
+  &__track {
+    display: flex;
+    gap: size(8);
+  }
+
+  &__card {
+    width: 100%;
+    flex-shrink: 0;
+    background-color: clr("neutral", "000");
+    border: 1px solid clr("slate", "100");
+    border-radius: radius("2xl");
+    padding: size(8);
+    position: relative;
+    box-shadow: shadow(sm);
+    transition: box-shadow transition(base);
+
+    &:hover {
+      box-shadow: shadow(md);
+    }
+
+    @include mq(md) {
+      width: calc(50% - 16px);
+    }
+
+    @include mq(lg) {
+      width: calc(33.333% - 21.33px);
+    }
+  }
+
+  &__quote-icon {
+    position: absolute;
+    top: size(6);
+    right: size(6);
+    color: clr("accent", "200");
+    width: size(12);
+    height: size(12);
+  }
+
+  &__person {
+    display: flex;
+    align-items: center;
+    gap: size(4);
+    margin-bottom: size(6);
+  }
+
+  &__avatar {
+    width: size(12);
+    height: size(12);
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    background-color: clr("slate", "100");
+  }
+
+  &__avatar-image {
+    object-fit: cover;
+  }
+
+  &__person-info {
+    // container for name and stars
+  }
+
+  &__name {
+    font-weight: 700;
+    color: $on-surface;
+  }
+
+  &__stars {
+    display: flex;
+    color: clr("accent", "500");
+  }
+
+  &__star {
+    width: 0.875rem;
+    height: 0.875rem;
+    fill: currentColor;
+  }
+
+  &__content {
+    color: $on-surface-variant;
+    font-style: italic;
+    margin-bottom: size(6);
+    line-height: 1.625;
+  }
+
+  &__source {
+    display: flex;
+    align-items: center;
+    gap: size(2);
+    color: clr("slate", "500");
+    font-size: fs("175");
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__source-icon {
+    width: size(4);
+    height: size(4);
+  }
+}

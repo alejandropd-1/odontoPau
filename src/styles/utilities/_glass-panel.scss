@@ -1,0 +1,8 @@
+@use "../abstracts" as *;
+
+.glass-panel {
+  background-color: glass(bg);
+  backdrop-filter: glass(blur);
+  border: glass(border);
+  box-shadow: glass(shadow);
+}

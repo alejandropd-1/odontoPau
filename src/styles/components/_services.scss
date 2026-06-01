@@ -1,0 +1,151 @@
+@use "../abstracts" as *;
+
+.services {
+  padding-block: spacing(section);
+  background-color: $surface-background;
+  position: relative;
+  overflow: hidden;
+
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+    filter: blur(64px);
+    pointer-events: none;
+
+    &--top {
+      top: 0;
+      left: 0;
+      width: size(96);
+      height: size(96);
+      background-color: clr("accent", "100");
+      opacity: 0.3;
+      transform: translate(-50%, -50%);
+    }
+
+    &--bottom {
+      bottom: 0;
+      right: 0;
+      width: 500px;
+      height: 500px;
+      background-color: clr("accent", "050");
+      opacity: 0.2;
+      transform: translate(33.333%, 33.333%);
+    }
+  }
+
+  &__inner {
+    max-width: container(max);
+    margin-inline: auto;
+    padding-inline: size(6);
+    position: relative;
+    z-index: 10;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: size(16);
+  }
+
+  &__title {
+    font-size: fs("750");
+    font-weight: 700;
+    color: $on-surface;
+    margin-bottom: size(4);
+    letter-spacing: -0.025em;
+  }
+
+  &__description {
+    font-size: fs("400");
+    color: $on-surface-variant;
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: size(8);
+
+    @include mq(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__card {
+    background-color: glass(bg);
+    backdrop-filter: glass(blur);
+    border: glass(border);
+    box-shadow: glass(shadow);
+    border-radius: radius("2xl");
+    padding: size(8);
+    transition: all transition(base);
+    position: relative;
+
+    &--featured {
+      border-color: rgba(clr("accent", "500"), 0.3);
+    }
+  }
+
+  &__card-border {
+    position: absolute;
+    inset: 0;
+    border: 2px solid clr("primary", "600");
+    opacity: 0.1;
+    border-radius: radius("2xl");
+    pointer-events: none;
+  }
+
+  &__icon-wrap {
+    width: size(14);
+    height: size(14);
+    border-radius: 50%;
+    background-color: clr("accent", "100");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: size(6);
+  }
+
+  &__icon {
+    color: clr("primary", "600");
+    width: size(8);
+    height: size(8);
+  }
+
+  &__card-title {
+    font-size: fs("600");
+    font-weight: 700;
+    color: $on-surface;
+    margin-bottom: size(3);
+  }
+
+  &__card-description {
+    color: $on-surface-variant;
+    margin-bottom: size(6);
+    line-height: 1.625;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: size(2);
+    font-size: fs("250");
+    font-weight: 700;
+    color: clr("primary", "600");
+    transition: color transition(base);
+
+    &:hover {
+      color: clr("primary", "700");
+    }
+  }
+
+  &__link-icon {
+    width: size(4);
+    height: size(4);
+  }
+}
