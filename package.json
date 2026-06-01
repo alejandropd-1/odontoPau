@@ -32,7 +32,10 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "@parcel/watcher"
+      "@netlify/content-engine",
+      "@parcel/watcher",
+      "es5-ext",
+      "esbuild"
     ]
   }
 }
