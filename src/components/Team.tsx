@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'motion/react';
 import { CheckCircle2 } from 'lucide-react';
 
@@ -30,15 +29,6 @@ export default function Team() {
               <div className="team__avatar-fallback">
                 PG
               </div>
-              <Image 
-                src="/images/dra-paula.jpg" 
-                alt="Dra. Paula Gualtieri" 
-                fill 
-                className="team__avatar-image"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                }}
-              />
             </div>
             <div className="team__featured-content">
               <h3 className="team__member-name">Dra. Paula Gualtieri</h3>

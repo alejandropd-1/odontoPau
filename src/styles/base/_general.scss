@@ -1,5 +1,7 @@
 @use "../abstracts" as *;
 
 body {
+  overflow-x: hidden;
+  background-color: $body-background-color;
   font-family: ff(sans);
 }

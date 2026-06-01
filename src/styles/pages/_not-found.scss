@@ -1,0 +1,113 @@
+@use "../abstracts" as *;
+
+.not-found-page {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: size(6);
+  background-color: clr("neutral", "100");
+
+  &__background {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(clr("neutral", "000"), 0.72),
+        rgba(clr("neutral", "000"), 0.9)
+      ),
+      url("/images/hero-bg.png") center / cover;
+    filter: grayscale(8%);
+    opacity: 0.72;
+  }
+
+  &__panel {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 42rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: size(8);
+    border-radius: radius("3xl");
+    border: glass(border);
+    background-color: glass(bg);
+    backdrop-filter: glass(blur);
+    box-shadow: glass(shadow);
+
+    @include mq(md) {
+      padding: size(14);
+    }
+  }
+
+  &__logo {
+    width: size(24);
+    height: size(24);
+    display: grid;
+    place-items: center;
+    margin-bottom: size(6);
+  }
+
+  &__eyebrow {
+    margin-bottom: size(3);
+    color: clr("primary", "600");
+    font-size: fs("250");
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  &__title {
+    max-width: 12ch;
+    margin-bottom: size(4);
+    color: $on-surface;
+    font-size: fs("750");
+    font-weight: 800;
+    line-height: lh(tight);
+
+    @include mq(md) {
+      font-size: fs("800");
+    }
+  }
+
+  &__description {
+    max-width: 34rem;
+    margin-bottom: size(8);
+    color: $on-surface-variant;
+    font-size: fs("300");
+    line-height: lh(relaxed);
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: size(12);
+    padding-inline: size(8);
+    border-radius: radius(pill);
+    background: linear-gradient(
+      to right,
+      clr("primary", "600"),
+      clr("primary", "700")
+    );
+    color: clr("neutral", "000");
+    font-size: fs("250");
+    font-weight: 800;
+    box-shadow: 0 12px 24px rgba(clr("primary", "600"), 0.18);
+    transition:
+      transform transition(base),
+      box-shadow transition(base);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(clr("primary", "600"), 0.28);
+    }
+
+    &:focus-visible {
+      outline: 3px solid clr("primary", "200");
+      outline-offset: size(1);
+    }
+  }
+}

@@ -1,3 +1,17 @@
+@use "../abstracts" as *;
+
 html {
+  --navbar-height: 5.5rem;
+  --scrollbar-thumb: #{clr("accent", "200")};
+  --scrollbar-thumb-hover: #{clr("primary", "200")};
+  --scrollbar-track: transparent;
+
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }

@@ -42,6 +42,10 @@
   @return var(--fs-#{$font-size});
 }
 
+@function lh($line-height) {
+  @return _from-map($line-heights, $line-height, "line-heights");
+}
+
 @function ff($font-family) {
   @return _from-map(fonts.$font-families, $font-family, "font-families");
 }

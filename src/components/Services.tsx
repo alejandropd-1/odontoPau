@@ -23,7 +23,7 @@ export default function Services() {
             <motion.div
               key={service.id}
               whileHover={{ y: -8 }}
-              className={`services__card${service.id === 'ortodoncia-invisible' ? ' services__card--featured' : ''}`}
+              className="services__card"
             >
               <div className="services__card-border"></div>
               <div className="services__icon-wrap">

@@ -32,16 +32,19 @@
   &__title {
     font-size: fs("750");
     font-weight: 700;
+    line-height: lh(tight);
     color: $on-surface;
     margin-bottom: size(6);
 
     @include mq(md) {
       font-size: fs("800");
+      line-height: lh(solid);
     }
   }
 
   &__description {
     font-size: fs("400");
+    line-height: lh(body);
     color: $on-surface-variant;
     max-width: 42rem;
     margin-inline: auto;

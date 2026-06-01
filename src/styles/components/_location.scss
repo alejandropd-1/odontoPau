@@ -28,12 +28,13 @@
   &__title {
     font-size: fs("750");
     font-weight: 700;
+    line-height: lh(tight);
     color: $on-surface;
     margin-bottom: size(6);
     letter-spacing: -0.025em;
 
     @include mq(md) {
-      font-size: fs("700");
+      font-size: fs("750");
     }
   }
 

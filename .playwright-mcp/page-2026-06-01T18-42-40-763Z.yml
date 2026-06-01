@@ -1,0 +1,272 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e6]: Paula Gualtieri
+        - generic [ref=e7]:
+          - link "Inicio" [ref=e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=e9] [cursor=pointer]:
+            - /url: /#servicios
+          - link "Testimonios" [ref=e10] [cursor=pointer]:
+            - /url: /#testimonios
+          - link "Ubicación" [ref=e11] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=e12] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - generic [ref=e13]:
+      - img "Consultorio de Paula Gualtieri" [ref=e15]
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - img "Isologo Paula Gualtieri" [ref=e21]
+          - generic [ref=e22]: Paula Gualtieri Odontología
+        - heading "Excelencia Clínica & Calidez Humana" [level=1] [ref=e23]:
+          - text: Excelencia Clínica
+          - text: "& Calidez Humana"
+        - paragraph [ref=e24]: Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.
+        - generic [ref=e25]:
+          - button "Conoce a la Dra. Gualtieri" [ref=e26] [cursor=pointer]
+          - button "Ver Especialidades" [ref=e27] [cursor=pointer]
+      - button "Descubrir" [ref=e28] [cursor=pointer]:
+        - generic [ref=e29]: Descubrir
+        - img [ref=e30]
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - heading "Tratamientos de Vanguardia" [level=2] [ref=e35]
+        - paragraph [ref=e36]: Soluciones dentales precisas diseñadas con tecnología de última generación para resultados duraderos y estéticos.
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - img [ref=e40]
+          - heading "Implantes Dentales" [level=3] [ref=e46]
+          - paragraph [ref=e47]: Recupera la funcionalidad total y la estética natural de su sonrisa con nuestra tecnología de implantes. Un procedimiento seguro, indoloro y con resultados predecibles.
+          - link "Saber más" [ref=e48] [cursor=pointer]:
+            - /url: /tratamientos/implantes
+            - text: Saber más
+            - img [ref=e49]
+        - generic [ref=e51]:
+          - img [ref=e53]
+          - heading "Ortodoncia Invisible" [level=3] [ref=e56]
+          - paragraph [ref=e57]: Alinea tus dientes de forma discreta y cómoda con alineadores transparentes de última generación. La solución perfecta para adultos que buscan estética y resultados rápidos.
+          - link "Saber más" [ref=e58] [cursor=pointer]:
+            - /url: /tratamientos/ortodoncia-invisible
+            - text: Saber más
+            - img [ref=e59]
+        - generic [ref=e61]:
+          - img [ref=e63]
+          - heading "Estética Dental" [level=3] [ref=e66]
+          - paragraph [ref=e67]: Diseño de sonrisa personalizado mediante carillas de diferentes materiales y blanqueamiento avanzado. Resultados armónicos que potencian tu belleza natural.
+          - link "Saber más" [ref=e68] [cursor=pointer]:
+            - /url: /tratamientos/estetica-dental
+            - text: Saber más
+            - img [ref=e69]
+        - generic [ref=e71]:
+          - img [ref=e73]
+          - heading "Ortopedia" [level=3] [ref=e76]
+          - paragraph [ref=e77]: Guía del crecimiento óseo y correción funcional temprana para lograr una armonìa facial integral.
+          - link "Saber más" [ref=e78] [cursor=pointer]:
+            - /url: /tratamientos/ortopedia
+            - text: Saber más
+            - img [ref=e79]
+        - generic [ref=e81]:
+          - img [ref=e83]
+          - heading "Odontología Pediátrica" [level=3] [ref=e86]
+          - paragraph [ref=e87]: Cuidado especializado y cercano para proteger la salud dental infantil, fomentando hábitos positivos para los más pequeños
+          - link "Saber más" [ref=e88] [cursor=pointer]:
+            - /url: /tratamientos/pediatria
+            - text: Saber más
+            - img [ref=e89]
+        - generic [ref=e91]:
+          - img [ref=e93]
+          - heading "Endodoncia" [level=3] [ref=e99]
+          - paragraph [ref=e100]: Tecnología avanzada para preservar tus piezas dentales naturales, eliminando el dolor y las infecciones de forma precisa, cómoda y segura
+          - link "Saber más" [ref=e101] [cursor=pointer]:
+            - /url: /tratamientos/endodoncia
+            - text: Saber más
+            - img [ref=e102]
+    - generic [ref=e105]:
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - heading "Experiencias de nuestros pacientes" [level=2] [ref=e108]
+          - paragraph [ref=e109]: Historias reales de personas que transformaron su salud bucal y su confianza con nosotros.
+        - generic [ref=e110]:
+          - button "Testimonio anterior" [ref=e111] [cursor=pointer]:
+            - img [ref=e112]
+          - button "Siguiente testimonio" [ref=e114] [cursor=pointer]:
+            - img [ref=e115]
+      - generic [ref=e119]:
+        - generic [ref=e120]:
+          - img [ref=e121]
+          - generic [ref=e124]:
+            - img "Martina R." [ref=e126]
+            - generic [ref=e127]:
+              - heading "Martina R." [level=3] [ref=e128]
+              - generic [ref=e129]:
+                - img [ref=e130]
+                - img [ref=e132]
+                - img [ref=e134]
+                - img [ref=e136]
+                - img [ref=e138]
+          - paragraph [ref=e140]: "\"El tratamiento de ortodoncia invisible fue tal como la Dra. Paula me lo explicó. Sin dolor, rápido y los resultados son increíbles. La clínica transmite mucha paz.\""
+          - generic [ref=e141]:
+            - img [ref=e142]
+            - text: Vía Instagram
+        - generic [ref=e145]:
+          - img [ref=e146]
+          - generic [ref=e149]:
+            - img "Diego F." [ref=e151]
+            - generic [ref=e152]:
+              - heading "Diego F." [level=3] [ref=e153]
+              - generic [ref=e154]:
+                - img [ref=e155]
+                - img [ref=e157]
+                - img [ref=e159]
+                - img [ref=e161]
+                - img [ref=e163]
+          - paragraph [ref=e165]: "\"Le tenía terror al dentista hasta que vine aquí por un implante. El equipo es súper profesional y humano. Me explicaron cada paso y no sentí nada. Totalmente recomendados.\""
+          - generic [ref=e166]:
+            - img [ref=e167]
+            - text: Vía Facebook
+        - generic [ref=e169]:
+          - img [ref=e170]
+          - generic [ref=e173]:
+            - img "Lucía G." [ref=e175]
+            - generic [ref=e176]:
+              - heading "Lucía G." [level=3] [ref=e177]
+              - generic [ref=e178]:
+                - img [ref=e179]
+                - img [ref=e181]
+                - img [ref=e183]
+                - img [ref=e185]
+                - img [ref=e187]
+          - paragraph [ref=e189]: "\"Me hice diseño de sonrisa y carillas. El cambio fue espectacular pero súper natural. La calidez de la doctora Paula hace la diferencia. Gracias por devolverme las ganas de sonreír.\""
+          - generic [ref=e190]:
+            - img [ref=e191]
+            - text: Vía WhatsApp
+        - generic [ref=e193]:
+          - img [ref=e194]
+          - generic [ref=e197]:
+            - img "Carlos M." [ref=e199]
+            - generic [ref=e200]:
+              - heading "Carlos M." [level=3] [ref=e201]
+              - generic [ref=e202]:
+                - img [ref=e203]
+                - img [ref=e205]
+                - img [ref=e207]
+                - img [ref=e209]
+                - img [ref=e211]
+          - paragraph [ref=e213]: "\"Excelente atención. Me realicé un blanqueamiento y los resultados superaron mis expectativas. El ambiente es muy relajante y moderno.\""
+          - generic [ref=e214]:
+            - img [ref=e215]
+            - text: Vía Google
+        - generic [ref=e217]:
+          - img [ref=e218]
+          - generic [ref=e221]:
+            - img "Sofía L." [ref=e223]
+            - generic [ref=e224]:
+              - heading "Sofía L." [level=3] [ref=e225]
+              - generic [ref=e226]:
+                - img [ref=e227]
+                - img [ref=e229]
+                - img [ref=e231]
+                - img [ref=e233]
+                - img [ref=e235]
+          - paragraph [ref=e237]: "\"La Dra. Paula es súper paciente y detallista. Me explicó todo el proceso de mi tratamiento de encías con mucha claridad. Me sentí en muy buenas manos.\""
+          - generic [ref=e238]:
+            - img [ref=e239]
+            - text: Vía Instagram
+        - generic [ref=e242]:
+          - img [ref=e243]
+          - generic [ref=e246]:
+            - img "Roberto P." [ref=e248]
+            - generic [ref=e249]:
+              - heading "Roberto P." [level=3] [ref=e250]
+              - generic [ref=e251]:
+                - img [ref=e252]
+                - img [ref=e254]
+                - img [ref=e256]
+                - img [ref=e258]
+                - img [ref=e260]
+          - paragraph [ref=e262]: "\"Buscaba un lugar con tecnología de punta y lo encontré. El scanner intraoral es una maravilla, nada de moldes molestos. Muy recomendable.\""
+          - generic [ref=e263]:
+            - img [ref=e264]
+            - text: Vía WhatsApp
+    - generic [ref=e267]:
+      - generic [ref=e268]:
+        - generic [ref=e269]: Conocé a los especialistas
+        - heading "Equipo de trabajo" [level=2] [ref=e270]
+        - paragraph [ref=e271]: Contamos con un equipo de profesionales altamente capacitados para brindarte la mejor atención en cada especialidad odontológica.
+      - generic [ref=e272]:
+        - generic [ref=e273]:
+          - generic [ref=e275]: PG
+          - generic [ref=e276]:
+            - heading "Dra. Paula Gualtieri" [level=3] [ref=e277]
+            - paragraph [ref=e278]: MN
+            - paragraph [ref=e279]: Especialista en alineadores dentales y ortopedia.
+        - generic [ref=e280]:
+          - generic [ref=e281]:
+            - img [ref=e283]
+            - generic [ref=e286]:
+              - heading "Dr. Roberto Dominguez" [level=3] [ref=e287]
+              - generic [ref=e288]: MN
+              - paragraph [ref=e289]: Especialista en rehabilitación oral (Implantes y prótesis).
+          - generic [ref=e290]:
+            - img [ref=e292]
+            - generic [ref=e295]:
+              - heading "Dra. Emilia Omastott" [level=3] [ref=e296]
+              - generic [ref=e297]: MN
+              - paragraph [ref=e298]: Atención niños, Maestría en cirugía dental.
+          - generic [ref=e299]:
+            - img [ref=e301]
+            - generic [ref=e304]:
+              - heading "Dr. Pablo Martinez" [level=3] [ref=e305]
+              - generic [ref=e306]: MN
+              - paragraph [ref=e307]: Especialista en Endodoncia.
+    - generic [ref=e310]:
+      - generic [ref=e311]:
+        - heading "Visítanos en nuestro consultorio" [level=2] [ref=e312]
+        - paragraph [ref=e313]: Un espacio diseñado para tu tranquilidad y confort, equipado con la mejor tecnología para tu cuidado dental.
+        - generic [ref=e314]:
+          - generic [ref=e315]:
+            - img [ref=e317]
+            - generic [ref=e320]:
+              - heading "Dirección" [level=4] [ref=e321]
+              - paragraph [ref=e322]:
+                - text: Ramón Falcón 2401, Piso 1 Dpto. B
+                - text: Ciudad Autónoma de Buenos Aires - Flores
+          - generic [ref=e323]:
+            - img [ref=e325]
+            - generic [ref=e328]:
+              - heading "Horarios para solicitar turnos o consultas" [level=4] [ref=e329]
+              - paragraph [ref=e330]:
+                - text: Lunes de 9 a 15hs
+                - text: Martes de 9 a 18hs
+                - text: Miércoles y jueves de 13 a 18hs
+                - text: Viernes de 9 a 15hs
+        - link "Contactar por WhatsApp" [ref=e332] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+          - img [ref=e333]
+          - text: Contactar por WhatsApp
+      - generic [ref=e335]:
+        - iframe [ref=e336]
+        - generic:
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - heading "Paula Gualtieri" [level=5]
+              - text: Ramón Falcón 2401
+          - link "Cómo llegar" [ref=e337] [cursor=pointer]:
+            - /url: https://www.google.com/maps/dir/?api=1&destination=Cnel.+Ramón+L.+Falcón+2401,+C1406+CABA
+    - generic [ref=e339]:
+      - generic [ref=e340]: Paula Gualtieri
+      - generic [ref=e341]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=e342]:
+        - link "Instagram" [ref=e343] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=e344] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=e345] [cursor=pointer]:
+          - /url: "#"
+  - scrollbar "Progreso de desplazamiento" [ref=e346]

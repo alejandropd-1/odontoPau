@@ -1,0 +1,56 @@
+@use "../abstracts" as *;
+
+.custom-scroll {
+  position: fixed;
+  top: var(--scroll-track-top, var(--navbar-height));
+  right: size(1);
+  bottom: var(--scroll-track-bottom);
+  z-index: 60;
+  width: size(2);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity transition(base);
+
+  &[data-visible="true"] {
+    opacity: 1;
+  }
+
+  &[data-dragging="true"] &__thumb {
+    cursor: grabbing;
+    box-shadow: 0 0 22px rgba(clr("primary", "600"), 0.28);
+  }
+
+  &__thumb {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: size("1-5");
+    height: var(--scroll-thumb-size);
+    min-height: size(12);
+    border-radius: radius(pill);
+    background: linear-gradient(
+      to bottom,
+      clr("primary", "700"),
+      clr("primary", "600")
+    );
+    box-shadow: 0 0 18px rgba(clr("primary", "600"), 0.18);
+    cursor: grab;
+    pointer-events: auto;
+    touch-action: none;
+    transform: translateY(var(--scroll-thumb-offset));
+    transition:
+      background-color transition(base),
+      box-shadow transition(base);
+
+    &:hover,
+    &:focus-visible {
+      background: linear-gradient(
+        to bottom,
+        clr("primary", "200"),
+        clr("primary", "700")
+      );
+      box-shadow: 0 0 22px rgba(clr("primary", "600"), 0.28);
+      outline: none;
+    }
+  }
+}

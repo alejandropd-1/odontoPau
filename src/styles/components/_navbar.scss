@@ -3,7 +3,9 @@
 .navbar {
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
+  right: 0;
+  width: 100vw;
   z-index: 50;
   border-bottom: glass(border);
   background-color: glass(bg);

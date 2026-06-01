@@ -53,10 +53,12 @@
     color: $on-surface;
     margin-bottom: size(4);
     letter-spacing: -0.025em;
+    line-height: lh(tight);
   }
 
   &__description {
     font-size: fs("400");
+    line-height: lh(body);
     color: $on-surface-variant;
     max-width: 42rem;
     margin-inline: auto;
@@ -79,10 +81,13 @@
     box-shadow: glass(shadow);
     border-radius: radius("2xl");
     padding: size(8);
-    transition: all transition(base);
+    transition:
+      border-color transition(base),
+      box-shadow transition(base);
     position: relative;
 
-    &--featured {
+    &--featured,
+    &:hover {
       border-color: rgba(clr("accent", "500"), 0.3);
     }
   }
@@ -116,6 +121,7 @@
   &__card-title {
     font-size: fs("600");
     font-weight: 700;
+    line-height: lh(card);
     color: $on-surface;
     margin-bottom: size(3);
   }
