@@ -1,2 +1,5 @@
-// Base element styles will be added here during component migration.
-// Tailwind preflight handles base styles during the transition.
+@use "../abstracts" as *;
+
+body {
+  font-family: ff(sans);
+}

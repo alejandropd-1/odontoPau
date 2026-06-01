@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen" data-sb-object-id="src/data/home.json">
+    <main className="home-page" data-sb-object-id="src/data/home.json">
       <Navbar />
       <Hero data={homeData.hero} />
       <Services />

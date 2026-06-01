@@ -8,6 +8,7 @@
     padding-top: size(24);
   }
 
+  // Hero Section
   &__hero {
     position: relative;
     padding-bottom: size(20);
@@ -26,10 +27,6 @@
     @include mq(lg) {
       grid-template-columns: repeat(2, 1fr);
     }
-  }
-
-  &__hero-copy {
-    // container for hero text content
   }
 
   &__hero-eyebrow {
@@ -54,7 +51,7 @@
     line-height: 1.25;
 
     @include mq(md) {
-      font-size: fs("900");
+      font-size: fs("800");
     }
   }
 
@@ -67,8 +64,9 @@
   }
 
   &__hero-cta {
-    width: 100%;
-    justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    gap: size(2);
     padding-inline: size(8);
     padding-block: size(4);
     background-color: clr("accent", "600");
@@ -77,9 +75,6 @@
     font-weight: 700;
     transition: all transition(base);
     box-shadow: 0 10px 15px -3px rgba(clr("accent", "600"), 0.2);
-    display: flex;
-    align-items: center;
-    gap: size(2);
 
     &:hover {
       background-color: clr("accent", "700");
@@ -157,7 +152,7 @@
   }
 
   &__doctor-badge-info {
-    // container for doctor info
+    // container for badge text
   }
 
   &__doctor-badge-name {
@@ -166,22 +161,15 @@
     color: $on-surface;
   }
 
-  &__doctor-badge-name + &__doctor-badge-name {
-    margin-top: size(1);
-  }
-
   &__doctor-badge-role {
     font-size: 10px;
     color: $on-surface-variant;
     text-transform: uppercase;
     letter-spacing: -0.05em;
-  }
-
-  &__doctor-badge-role + &__doctor-badge-role,
-  &__doctor-badge-name + &__doctor-badge-role {
     margin-top: size(1);
   }
 
+  // Cases Section
   &__cases {
     padding-block: spacing(section);
     background-color: clr("neutral", "000");
@@ -197,13 +185,13 @@
   &__cases-header {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: size(12);
     gap: size(6);
+    margin-bottom: size(12);
 
     @include mq(md) {
       flex-direction: row;
       align-items: flex-end;
+      justify-content: space-between;
     }
   }
 
@@ -232,9 +220,9 @@
     padding: size(4);
     border-radius: radius(pill);
     border: 1px solid $surface-variant;
-    transition: background-color transition(base);
-    cursor: pointer;
     background: none;
+    cursor: pointer;
+    transition: background-color transition(base);
 
     &:hover {
       background-color: $surface-background;
@@ -244,19 +232,25 @@
   &__cases-control-icon {
     width: size(6);
     height: size(6);
-  }
 
-  &__cases-control-icon--left {
-    transform: rotate(180deg);
+    &--left {
+      transform: rotate(180deg);
+    }
   }
 
   &__cases-scroller {
     display: flex;
     gap: size(8);
     overflow-x: auto;
+    scroll-snap-type: x mandatory;
     padding-bottom: size(8);
     scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    scrollbar-width: none;
   }
 
   &__case-card {
@@ -335,13 +329,13 @@
     font-size: fs("175");
     font-weight: 700;
     color: clr("accent", "600");
-    transition: all transition(base);
 
     &:hover {
       text-decoration: underline;
     }
   }
 
+  // Features Section
   &__features {
     padding-block: spacing(section);
     background-color: $surface-background;
@@ -382,8 +376,11 @@
     opacity: 0.1;
     transform: rotate(12deg);
     pointer-events: none;
-    width: size(96);
-    height: size(96);
+  }
+
+  &__features-bg-icon-svg {
+    width: 24rem;
+    height: 24rem;
   }
 
   &__features-content {
@@ -465,7 +462,7 @@
     box-shadow: shadow(xl);
   }
 
-  &__stat-card + &__stat-card {
+  &__stat-card--offset {
     margin-top: size(8);
   }
 
@@ -484,6 +481,7 @@
     color: clr("zinc", "400");
   }
 
+  // CTA Section
   &__cta {
     padding-block: spacing(section);
   }
@@ -518,7 +516,6 @@
     background: radial-gradient(
       circle at center,
       rgba(clr("accent", "500"), 0.1),
-      transparent,
       transparent
     );
     opacity: 0.5;
@@ -537,7 +534,7 @@
     margin-bottom: size(8);
 
     @include mq(md) {
-      font-size: fs("900");
+      font-size: fs("800");
     }
   }
 
@@ -560,6 +557,9 @@
   }
 
   &__cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: size(2);
     padding-inline: size(10);
     padding-block: size(4);
     background-color: clr("accent", "600");
@@ -567,9 +567,6 @@
     border-radius: radius(pill);
     font-weight: 700;
     transition: all transition(base);
-    display: flex;
-    align-items: center;
-    gap: size(2);
 
     &:hover {
       background-color: clr("accent", "700");

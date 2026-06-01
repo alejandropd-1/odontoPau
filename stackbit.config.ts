@@ -6,8 +6,8 @@ export default defineStackbitConfig({
   stackbitVersion: '~0.6.0',
   ssgName: 'nextjs',
   nodeVersion: '20',
-  devCommand: 'npm run dev',
-  installCommand: 'npm install',
+  devCommand: 'pnpm run dev',
+  installCommand: 'pnpm install',
   
   assets: {
     referenceType: 'static',

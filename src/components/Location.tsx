@@ -55,7 +55,7 @@ export default function Location() {
 
           <div className="location__map">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.976372899936!2d-58.46496512431464!3d-34.630037358888586!2m3:1f0!2f0!3f0!3m2:1i1024!2i768!4f13.1!3m3:1m2:1s0x95bcca27fa9eee21%3A0x985e9d7976637b48!2sCnel.%20Ram%C3%B3n%20L.%20Falc%C3%B3n%202401%2C%20C1406%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2:1ses-419!2sar!4v1776957558537!5m2:1ses-419!2sar"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.976372899936!2d-58.46496512431464!3d-34.630037358888586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca27fa9eee21%3A0x985e9d7976637b48!2sCnel.%20Ram%C3%B3n%20L.%20Falc%C3%B3n%202401%2C%20C1406%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1776957558537!5m2!1ses-419!2sar"
               className="location__iframe"
               allowFullScreen
               loading="lazy"
@@ -65,7 +65,7 @@ export default function Location() {
             <div className="location__floating-card">
               <div className="location__floating-main">
                 <div className="location__floating-icon">
-                  <Navigation className="w-5 h-5 fill-current" />
+                  <Navigation className="location__floating-icon-svg" />
                 </div>
                 <div className="location__floating-content">
                   <h5 className="location__floating-title">Paula Gualtieri</h5>

@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased] - 2026-06-01
+
+### Added
+- **SASS Architecture**: Created modular SASS architecture in `src/styles/` with abstracts (tokens, functions, mixins, breakpoints), base (reset, root, global), utilities (glass-panel, no-scrollbar), components (BEM), pages, and `main.scss` entry point.
+- **Design Token System**: Implemented tokenized design system with SASS functions: `clr()`, `size()`, `fs()`, `ff()`, `radius()`, `shadow()`, `transition()`, `container()`, `spacing()`, `glass()`.
+- **Responsive Mixin**: Added `@include mq($breakpoint)` mixin with mobile-first breakpoints (sm: 40em, md: 48em, lg: 64em, xl: 80em).
+- **Page Styles**: Created `src/styles/pages/_home.scss` for home page layout.
+
+### Changed
+- **Full Styling Migration**: Migrated all 10 components from Tailwind CSS utility classes to BEM naming convention with SASS stylesheets: Footer, Breadcrumb, Navbar, Services, Team, Location, Testimonials, Hero, TreatmentDetailContent, CaseDetailContent.
+- **Base Styles**: Moved `body` font-family and `html` scroll-behavior from Tailwind to SASS base styles (`src/styles/base/_general.scss`, `_global.scss`).
+- **PostCSS Configuration**: Removed `@tailwindcss/postcss` plugin from `postcss.config.mjs`, keeping only `autoprefixer`.
+- **Layout Import**: Replaced `import './globals.css'` with `import '@/styles/main.scss'` in `src/app/layout.tsx`.
+
+### Removed
+- **Tailwind CSS**: Completely removed Tailwind CSS and all related dependencies (`tailwindcss`, `@tailwindcss/postcss`, `tailwind-merge`, `clsx`, `tw-animate-css`).
+- **globals.css**: Deleted `src/app/globals.css` — all content (theme tokens, glass-panel utility, no-scrollbar utility, scroll-behavior) was migrated to SASS equivalents.
+- **Dead Dependencies**: Removed `tailwind-merge` and `clsx` (never used in any component).
+
+### Preserved
+- **Stackbit/Netlify Create**: All `data-sb-object-id` and `data-sb-field-path` attributes remain intact across Hero, TreatmentDetailContent, and page.tsx.
+- **Visual Output**: No visual changes — the migration preserves the existing design pixel-for-pixel.
+- **Motion/Animations**: All Framer Motion animations preserved without modification.
+- **Content/Routes**: No changes to content, routes, CMS integration, or component behavior.
+
 ## [Unreleased] - 2026-05-20
 
 ### Removed

@@ -135,7 +135,7 @@ Depth in this design system is achieved through **Glassmorphism and Layered Blur
 
 The shape language is defined by **Softened Precision**. While the clinic is a place of medical accuracy, sharp corners can feel aggressive. A "Rounded" setting (0.5rem / 8px base) is applied to all standard components to echo the friendly curves of the logo's "P".
 
-Large containers and feature cards should use `rounded-xl` (1.5rem) to emphasize the soft, approachable glass effect. Buttons and input fields use `rounded-lg` (1rem) to create a distinct, modern silhouette that feels comfortable for touch-based interaction on mobile devices.
+Large containers and feature cards should use a 1.5rem border-radius to emphasize the soft, approachable glass effect. Buttons and input fields use a 1rem border-radius to create a distinct, modern silhouette that feels comfortable for touch-based interaction on mobile devices.
 
 ## Components
 

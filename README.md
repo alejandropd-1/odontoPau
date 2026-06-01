@@ -12,7 +12,7 @@
 This project is built with the latest web technologies to ensure performance, SEO, and a premium user experience.
 
 - **Core**: [Next.js 15+](https://nextjs.org/) (App Router) & [React 19](https://react.dev/)
-- **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/) (Using a custom Glassmorphism design system)
+- **Styling**: SASS/SCSS modular with design tokens, functions, mixins, and BEM naming convention (Modern Glassmorphism design system)
 - **Animations**: [Framer Motion](https://www.framer.com/motion/) (Smooth transitions and micro-interactions)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
@@ -26,9 +26,15 @@ This project is built with the latest web technologies to ensure performance, SE
 odontoPau/
 ├── src/
 │   ├── app/                # Next.js App Router (Pages, Layouts, Metadata)
-│   │   ├── tratamientos/   # Dynamic routes for Treatment & Clinical Cases
-│   │   └── globals.css     # Global styles & Tailwind 4 configuration
+│   │   └── tratamientos/   # Dynamic routes for Treatment & Clinical Cases
 │   ├── components/         # Reusable UI Components (Hero, Navbar, Footer, etc.)
+│   ├── styles/             # Visual architecture (SASS)
+│   │   ├── abstracts/      # Tokens, functions, mixins, breakpoints
+│   │   ├── base/           # Reset, root (CSS custom props), global styles
+│   │   ├── utilities/      # Reusable utility classes (glass-panel, no-scrollbar)
+│   │   ├── components/     # BEM component styles
+│   │   ├── pages/          # Page-specific styles
+│   │   └── main.scss       # Entry point
 │   ├── data/               # 💡 MAIN CONTENT SOURCE (Treatments, Cases)
 │   ├── hooks/              # Custom React hooks
 │   ├── lib/                # Utility functions and shared logic
@@ -59,13 +65,56 @@ The content models and editing rules are defined in `stackbit.config.ts` located
 
 ---
 
+## 🎨 Visual Architecture
+
+The project uses **SASS/SCSS** as its sole styling architecture, organized in a modular, tokenized system with BEM naming convention.
+
+- **SASS is the single source of truth** for all visual styles. No utility-first frameworks are used.
+- **Components use BEM classes** (e.g., `.hero`, `.hero__title`, `.hero__button--primary`).
+- **Component styles live in** `src/styles/components/` (one `_component-name.scss` per component).
+- **Tokens and functions** are defined in `src/styles/abstracts/` and consumed via `@use "../abstracts" as *;`.
+
+### Available SASS Functions
+
+| Function | Purpose | Example |
+|---|---|---|
+| `clr($family, $shade)` | Color tokens | `clr("primary", "600")` |
+| `size($step)` | Spacing/sizing scale | `size(8)` → 2rem |
+| `fs($step)` | Font-size scale (responsive) | `fs("750")` |
+| `ff($family)` | Font-family | `ff(sans)` |
+| `radius($size)` | Border-radius tokens | `radius("2xl")` |
+| `shadow($level)` | Box-shadow tokens | `shadow(xl)` |
+| `transition($speed)` | Transition presets | `transition(base)` |
+| `container($type)` | Container widths | `container(max)` |
+| `spacing($type)` | Semantic spacing | `spacing(section)` |
+| `glass($prop)` | Glassmorphism tokens | `glass(bg)` |
+
+### Responsive Design
+
+Use `@include mq($breakpoint)` for responsive styles (mobile-first):
+
+```scss
+.hero__title {
+  font-size: fs("750");
+
+  @include mq(md) {
+    font-size: fs("800");
+  }
+}
+```
+
+Available breakpoints: `sm` (40em), `md` (48em), `lg` (64em), `xl` (80em).
+
+---
+
 ## 🤖 AI Agent Guidelines
 
 If you are an AI assistant working on this project:
 1. **Design Consistency**: Always refer to `DESIGN.md` before creating new components. Follow the "Vital Precision" (Modern Glassmorphism) aesthetic.
 2. **Data Structure**: When adding new treatments or cases, ensure they follow the `Tratamiento` and `CasoClinico` interfaces defined in `src/data/tratamientos.ts`.
-3. **Responsive Design**: Use Tailwind's responsive prefixes. The site is optimized for mobile-first clinical environments.
-4. **Icons**: Always use `lucide-react` icons.
+3. **Styling Convention**: Use BEM classes for components. Styles go in `src/styles/components/_component-name.scss` with `@use "../abstracts" as *;`. Use SASS tokens/functions (`clr()`, `size()`, `fs()`, etc.) instead of hardcoded values. Use `@include mq(...)` for responsive design. **Do not add utility-first CSS classes; the project does not use any utility-first framework.**
+4. **Stackbit Preservation**: Preserve all `data-sb-object-id` and `data-sb-field-path` attributes when modifying components. These are required for the Netlify Create visual editor.
+5. **Icons**: Always use `lucide-react` icons.
 
 ---
 
@@ -80,14 +129,14 @@ This project uses **Fallow** for static analysis, dead code elimination, and cod
 
 ## 🏁 Getting Started
 
-1. **Prerequisites**: Node.js 20+ installed.
+1. **Prerequisites**: Node.js 20+ and pnpm 11+ installed.
 2. **Install Dependencies**:
    ```bash
-   npm install
+   pnpm install
    ```
 3. **Run Development Server**:
    ```bash
-   npm run dev
+   pnpm run dev
    ```
    Open [http://localhost:3000](http://localhost:3000) to see the result.
 

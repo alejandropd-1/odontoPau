@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { tratamientos } from '@/data/tratamientos';
 import Image from 'next/image';
@@ -208,10 +208,10 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
         <div className="treatment-detail__features-inner">
           <div className="treatment-detail__features-box">
              {/* Decorative Background Icon */}
-             <div className="treatment-detail__features-bg-icon">
-                {/* @ts-ignore */}
-                <tratamiento.icon className="w-96 h-96" />
-             </div>
+              <div className="treatment-detail__features-bg-icon">
+                 {/* @ts-ignore */}
+                 <tratamiento.icon className="treatment-detail__features-bg-icon-svg" />
+              </div>
 
              <div className="treatment-detail__features-content">
                <h2 className="treatment-detail__features-title">¿Por qué elegir nuestros {tratamiento.tituloHero.toLowerCase()}?</h2>

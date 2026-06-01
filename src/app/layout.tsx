@@ -1,6 +1,5 @@
 import type {Metadata} from 'next';
 import { Manrope } from 'next/font/google';
-import './globals.css';
 import '@/styles/main.scss';
 
 const manrope = Manrope({
@@ -66,7 +65,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="es" className={`${manrope.variable}`}>
-      <body suppressHydrationWarning className="font-sans">{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
