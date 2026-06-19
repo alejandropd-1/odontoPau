@@ -3,22 +3,20 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
-import { tratamientos } from '@/data/tratamientos';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Breadcrumb from '@/components/Breadcrumb';
+import TreatmentIcon from '@/components/TreatmentIcon';
+import type { Tratamiento } from '@/data/tratamientos';
 
 interface TreatmentDetailContentProps {
-  id: string;
+  tratamiento: Tratamiento;
 }
 
-export default function TreatmentDetailContent({ id }: TreatmentDetailContentProps) {
-  const tratamiento = tratamientos.find((t) => t.id === id);
+export default function TreatmentDetailContent({ tratamiento }: TreatmentDetailContentProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
-
-  if (!tratamiento) return null;
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -33,11 +31,8 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
   const getWhatsAppLink = (message: string) => 
     `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-  // La ruta del archivo para el object-id en Netlify
-  const objectId = `src/data/tratamientos/${id}.json`;
-
   return (
-    <div className="treatment-detail" data-sb-object-id={objectId}>
+    <div className="treatment-detail" data-sb-object-id={tratamiento.sourcePath}>
       <Navbar />
       
       <div className="treatment-detail__breadcrumb-spacer">
@@ -104,19 +99,19 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
                 <span className="treatment-detail__doctor-badge-initials">PG</span>
               </div>
               <div className="treatment-detail__doctor-badge-info">
-                {id === 'pediatria' ? (
+                {tratamiento.id === 'pediatria' ? (
                   <>
                     <p className="treatment-detail__doctor-badge-name">Dra. Paula Gualtieri</p>
                     <p className="treatment-detail__doctor-badge-name">Dra. Emilia Omastott</p>
                     <p className="treatment-detail__doctor-badge-role">Especialistas en {tratamiento.tituloHero}</p>
                   </>
-                ) : id === 'implantes' ? (
+                ) : tratamiento.id === 'implantes' ? (
                   <>
                     <p className="treatment-detail__doctor-badge-role">Paula Gualtieri Odontología</p>
                     <p className="treatment-detail__doctor-badge-name">Dr. Roberto Dominguez</p>
                     <p className="treatment-detail__doctor-badge-role">Especialista en Rehabilitación Oral</p>
                   </>
-                ) : id === 'estetica-dental' ? (
+                ) : tratamiento.id === 'estetica-dental' ? (
                   <>
                     <p className="treatment-detail__doctor-badge-role">Paula Gualtieri Odontología</p>
                     <p className="treatment-detail__doctor-badge-name">Dr. Roberto Dominguez</p>
@@ -209,8 +204,7 @@ export default function TreatmentDetailContent({ id }: TreatmentDetailContentPro
           <div className="treatment-detail__features-box">
              {/* Decorative Background Icon */}
               <div className="treatment-detail__features-bg-icon">
-                 {/* @ts-ignore */}
-                 <tratamiento.icon className="treatment-detail__features-bg-icon-svg" />
+                 <TreatmentIcon name={tratamiento.icon} className="treatment-detail__features-bg-icon-svg" />
               </div>
 
              <div className="treatment-detail__features-content">

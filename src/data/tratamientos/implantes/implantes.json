@@ -1,6 +1,9 @@
 {
   "type": "Tratamiento",
   "id": "implantes",
+  "category": "implantes",
+  "categoryLabel": "Implantes",
+  "order": 1,
   "tituloHero": "Implantes Dentales",
   "descripcionHero": "Recupera la funcionalidad total y la estética natural de su sonrisa con nuestra tecnología de implantes. Un procedimiento seguro, indoloro y con resultados predecibles.",
   "icon": "Drill",

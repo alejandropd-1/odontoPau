@@ -1,0 +1,201 @@
+@use "../abstracts" as *;
+
+.treatments-page {
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(clr("neutral", "000"), 0.96), rgba(clr("accent", "050"), 0.72) 34rem),
+    $surface-background;
+}
+
+.treatments-index {
+  padding-block: calc(var(--navbar-height) + #{size(12)}) spacing(section);
+
+  &__inner {
+    max-width: container(max);
+    margin-inline: auto;
+    padding-inline: size(6);
+  }
+
+  &__header {
+    max-width: 52rem;
+    margin-bottom: size(14);
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    padding-inline: size(4);
+    padding-block: size("1-5");
+    border-radius: radius(pill);
+    background-color: clr("accent", "100");
+    color: clr("accent", "800");
+    font-size: fs("175");
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin-top: size(5);
+    color: $on-surface;
+    font-size: fs("800");
+    line-height: lh(tight);
+    letter-spacing: 0;
+  }
+
+  &__description {
+    max-width: 42rem;
+    margin-top: size(5);
+    color: $on-surface-variant;
+    font-size: fs("400");
+    line-height: lh(relaxed);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: size(8);
+  }
+
+  &__card {
+    overflow: hidden;
+    border: 1px solid rgba(clr("neutral", "300"), 0.9);
+    border-radius: radius("2xl");
+    background-color: clr("neutral", "000");
+    box-shadow: glass(shadow);
+    transition:
+      border-color transition(base),
+      box-shadow transition(base),
+      transform transition(base);
+
+    &:hover {
+      border-color: rgba(clr("accent", "600"), 0.34);
+      box-shadow: shadow(lg);
+      transform: translateY(-#{size(1)});
+    }
+  }
+
+  &__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background-color: clr("accent", "100");
+  }
+
+  &__image {
+    object-fit: cover;
+    transition: transform transition(slow);
+
+    .treatments-index__card:hover & {
+      transform: scale(1.04);
+    }
+  }
+
+  &__card-body {
+    padding: size(8);
+  }
+
+  &__icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: size(12);
+    height: size(12);
+    margin-bottom: size(5);
+    border-radius: radius(pill);
+    background-color: clr("accent", "100");
+    color: clr("accent", "700");
+  }
+
+  &__icon {
+    width: size(6);
+    height: size(6);
+  }
+
+  &__card-title {
+    color: $on-surface;
+    font-size: fs("600");
+    line-height: lh(card);
+
+    a {
+      color: inherit;
+
+      &:hover {
+        color: clr("accent", "700");
+      }
+    }
+  }
+
+  &__card-description {
+    margin-top: size(3);
+    color: $on-surface-variant;
+    line-height: lh(relaxed);
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: clip;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: size(2);
+    margin-top: size(6);
+    color: clr("accent", "700");
+    font-weight: 900;
+
+    &:hover {
+      color: clr("primary", "500");
+    }
+  }
+
+  &__link-icon {
+    width: size(4);
+    height: size(4);
+  }
+}
+
+.treatments-instructions {
+  padding-block: size(6) spacing(section);
+  background-color: $surface-background;
+
+  &__inner {
+    max-width: container(max);
+    margin-inline: auto;
+    padding-inline: size(6);
+  }
+
+  &__header {
+    max-width: 48rem;
+    margin-bottom: size(10);
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    padding-inline: size(4);
+    padding-block: size("1-5");
+    border-radius: radius(pill);
+    background-color: clr("accent", "100");
+    color: clr("accent", "800");
+    font-size: fs("175");
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin-top: size(5);
+    color: $on-surface;
+    font-size: fs("750");
+    line-height: lh(tight);
+    letter-spacing: 0;
+  }
+
+  &__description {
+    max-width: 42rem;
+    margin-top: size(4);
+    color: $on-surface-variant;
+    font-size: fs("400");
+    line-height: lh(relaxed);
+  }
+}

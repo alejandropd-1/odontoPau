@@ -4,9 +4,14 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { tratamientos } from '@/data/tratamientos';
+import TreatmentIcon from '@/components/TreatmentIcon';
+import type { Tratamiento } from '@/data/tratamientos';
 
-export default function Services() {
+interface ServicesProps {
+  tratamientos: Tratamiento[];
+}
+
+export default function Services({ tratamientos }: ServicesProps) {
   return (
     <section className="services" id="servicios">
       <div className="services__orb services__orb--top" aria-hidden="true"></div>
@@ -27,7 +32,7 @@ export default function Services() {
             >
               <div className="services__card-border"></div>
               <div className="services__icon-wrap">
-                <service.icon className="services__icon" />
+                <TreatmentIcon name={service.icon} className="services__icon" />
               </div>
               <h3 className="services__card-title">{service.tituloHero}</h3>
               <p className="services__card-description">{service.descripcionHero}</p>

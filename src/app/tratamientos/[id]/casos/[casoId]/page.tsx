@@ -1,6 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { tratamientos } from '@/data/tratamientos';
+import { getTratamientoById, getTratamientos } from '@/data/tratamientos';
 import CaseDetailContent from '@/components/CaseDetailContent';
 import { Metadata } from 'next';
 
@@ -9,9 +9,18 @@ type Props = {
 }
 
 function getTratamientoYCaso(id: string, casoId: string) {
-  const tratamiento = tratamientos.find((t) => t.id === id);
+  const tratamiento = getTratamientoById(id);
   const caso = tratamiento?.casosClinicos.find((c) => c.id.toString() === casoId);
   return { tratamiento, caso };
+}
+
+export function generateStaticParams() {
+  return getTratamientos().flatMap((tratamiento) =>
+    tratamiento.casosClinicos.map((caso) => ({
+      id: tratamiento.id,
+      casoId: caso.id.toString(),
+    }))
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -40,5 +49,5 @@ export default async function CaseDetailPage({ params }: Props) {
     notFound();
   }
 
-  return <CaseDetailContent id={id} casoId={casoId} />;
+  return <CaseDetailContent tratamiento={tratamiento} caso={caso} />;
 }

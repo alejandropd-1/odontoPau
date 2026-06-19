@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased] - 2026-06-19
+
+### Added
+- **Patient Instructions**: Added the `/instrucciones` index and shareable instruction detail pages at `/instrucciones/[category]/[slug]`.
+- **Initial Instruction Content**: Added categorized patient instructions for whitening aftercare/dieta blanca and aligner care.
+- **Share Menu**: Added an inline article share control with Web Share API support plus WhatsApp, email, and copy-link fallbacks.
+- **Treatments Index**: Added a dedicated `/tratamientos` page so all services can be browsed outside the home page.
+- **Instruction Cards**: Added reusable instruction cards for the instructions index and treatment/service sections.
+- **SEO Metadata**: Added canonical, OpenGraph, and Twitter metadata for instruction pages, including image support for shared links.
+
+### Changed
+- **Navigation**: Added `Instrucciones` to the header and routed `Servicios` to the new treatments index.
+- **Categorized Content Model**: Reorganized treatment JSON files into `src/data/tratamientos/<categoria>/` and added `category`, `categoryLabel`, and `order` metadata.
+- **Recursive Loaders**: Updated treatment and instruction data loading to discover JSON files recursively from category folders.
+- **Client/Server Data Flow**: Refactored client components to receive treatment data through page props instead of importing server-side filesystem loaders.
+- **CMS Configuration**: Updated Stackbit models to support nested `tratamientos/**/*.json` and `instrucciones/**/*.json` documents.
+- **Sitemap & Static Params**: Updated route generation so treatment, case, and instruction URLs are derived from the JSON content.
+
+### Preserved
+- **Stackbit Editing Hooks**: Kept visual editing object/field annotations compatible with the Git CMS flow while adding nested content support.
+
 ## [Unreleased] - 2026-06-01
 
 ### Added
