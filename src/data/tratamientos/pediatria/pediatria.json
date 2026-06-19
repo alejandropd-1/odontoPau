@@ -1,6 +1,9 @@
 {
   "type": "Tratamiento",
   "id": "pediatria",
+  "category": "pediatria",
+  "categoryLabel": "Odontología Pediátrica",
+  "order": 5,
   "tituloHero": "Odontología Pediátrica",
   "descripcionHero": "Cuidado especializado y cercano para proteger la salud dental infantil, fomentando hábitos positivos para los más pequeños",
   "icon": "Smile",

@@ -1,6 +1,9 @@
 {
   "type": "Tratamiento",
   "id": "ortopedia",
+  "category": "ortopedia",
+  "categoryLabel": "Ortopedia",
+  "order": 4,
   "tituloHero": "Ortopedia",
   "descripcionHero": "Guía del crecimiento óseo y correción funcional temprana para lograr una armonìa facial integral.",
   "icon": "Sparkles",

@@ -8,19 +8,14 @@ import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Breadcrumb from '@/components/Breadcrumb';
-
-import { tratamientos } from '@/data/tratamientos';
+import type { CasoClinico, Tratamiento } from '@/data/tratamientos';
 
 interface CaseDetailContentProps {
-  id: string;
-  casoId: string;
+  tratamiento: Tratamiento;
+  caso: CasoClinico;
 }
 
-export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps) {
-  const tratamiento = tratamientos.find((t) => t.id === id);
-  const caso = tratamiento?.casosClinicos.find((c) => c.id.toString() === casoId);
-
-  if (!tratamiento || !caso) return null;
+export default function CaseDetailContent({ tratamiento, caso }: CaseDetailContentProps) {
   const whatsappNumber = '5491137854198';
   const getWhatsAppLink = (message: string) => 
     `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
@@ -32,7 +27,7 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
       <div className="case-detail__breadcrumb-spacer">
         <Breadcrumb 
           items={[
-            { label: tratamiento.tituloHero, href: `/tratamientos/${id}` },
+            { label: tratamiento.tituloHero, href: `/tratamientos/${tratamiento.id}` },
             { label: `Caso: ${caso.titulo}` }
           ]} 
         />
@@ -210,7 +205,7 @@ export default function CaseDetailContent({ id, casoId }: CaseDetailContentProps
                 Agendar Consulta <ArrowRight className="case-detail__cta-button-icon" />
               </a>
               <Link 
-                href={`/tratamientos/${id}`}
+                href={`/tratamientos/${tratamiento.id}`}
                 className="case-detail__cta-button case-detail__cta-button--secondary"
               >
                 Ver otros casos

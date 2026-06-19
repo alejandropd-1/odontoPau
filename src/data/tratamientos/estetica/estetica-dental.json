@@ -1,6 +1,9 @@
 {
   "type": "Tratamiento",
   "id": "estetica-dental",
+  "category": "estetica",
+  "categoryLabel": "Estética Dental",
+  "order": 3,
   "tituloHero": "Estética Dental",
   "descripcionHero": "Diseño de sonrisa personalizado mediante carillas de diferentes materiales y blanqueamiento avanzado. Resultados armónicos que potencian tu belleza natural.",
   "icon": "Sparkles",

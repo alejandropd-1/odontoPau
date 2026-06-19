@@ -1,0 +1,46 @@
+{
+  "type": "Instruccion",
+  "id": "blanqueamiento-dieta-blanca",
+  "slug": "dieta-blanca",
+  "category": "blanqueamiento",
+  "categoryLabel": "Blanqueamiento",
+  "serviceId": "estetica-dental",
+  "title": "Cuidados posteriores al blanqueamiento: dieta blanca",
+  "excerpt": "Indicaciones simples para las primeras 48 horas despues de un blanqueamiento dental y para sostener el resultado con buenos habitos.",
+  "date": "19 Jun, 2026",
+  "tags": ["Blanqueamiento", "Dieta blanca", "Cuidados"],
+  "readTime": "3 min de lectura",
+  "published": true,
+  "heroLabel": "Indicaciones para pacientes",
+  "whatsappMessage": "Hola, te comparto las indicaciones de cuidados posteriores al blanqueamiento y dieta blanca.",
+  "sections": [
+    {
+      "title": "Durante las primeras 48 horas",
+      "intro": "Despues del blanqueamiento, el esmalte queda mas sensible a pigmentos externos. En este periodo conviene elegir alimentos claros y evitar todo lo que pueda manchar.",
+      "items": [
+        "Evita cafe, mate, te negro, vino tinto, gaseosas oscuras y jugos con colorantes.",
+        "No consumas salsa de tomate, soja, curry, remolacha, frutos rojos ni chocolate.",
+        "Elegir agua, leche, yogur natural, arroz, pastas claras, pollo, pescado, papa, banana o manzana pelada."
+      ]
+    },
+    {
+      "title": "Higiene y sensibilidad",
+      "intro": "La higiene ayuda a conservar el color logrado y a reducir molestias temporales.",
+      "items": [
+        "Cepillate con suavidad despues de cada comida.",
+        "Si notas sensibilidad, evita alimentos muy frios o muy calientes durante ese dia.",
+        "No uses pastas abrasivas ni productos blanqueadores adicionales sin indicacion profesional."
+      ]
+    },
+    {
+      "title": "Habitos que ayudan a mantener el resultado",
+      "intro": "El resultado dura mas cuando se reduce la exposicion frecuente a pigmentos y se sostienen controles periodicos.",
+      "items": [
+        "Si tomas cafe, mate o bebidas con pigmento despues de las primeras 48 horas, enjuagate con agua al terminar.",
+        "Evita fumar, especialmente durante los primeros dias.",
+        "Mantene tus controles y limpiezas profesionales segun la indicacion de Paula."
+      ],
+      "note": "Si aparece dolor intenso, sensibilidad persistente o alguna molestia que no cede, escribinos para revisar el caso."
+    }
+  ]
+}
