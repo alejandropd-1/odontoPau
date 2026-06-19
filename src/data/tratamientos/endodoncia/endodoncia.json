@@ -1,6 +1,9 @@
 {
   "type": "Tratamiento",
   "id": "endodoncia",
+  "category": "endodoncia",
+  "categoryLabel": "Endodoncia",
+  "order": 6,
   "tituloHero": "Endodoncia",
   "descripcionHero": "Tecnología avanzada para preservar tus piezas dentales naturales, eliminando el dolor y las infecciones de forma precisa, cómoda y segura",
   "icon": "Drill",

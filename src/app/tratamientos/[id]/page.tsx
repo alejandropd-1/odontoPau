@@ -1,6 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { tratamientos } from '@/data/tratamientos';
+import { getTratamientoById, getTratamientos } from '@/data/tratamientos';
 import TreatmentDetailContent from '@/components/TreatmentDetailContent';
 import { Metadata } from 'next';
 
@@ -8,9 +8,15 @@ type Props = {
   params: Promise<{ id: string }>
 }
 
+export function generateStaticParams() {
+  return getTratamientos().map((tratamiento) => ({
+    id: tratamiento.id,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = (await params).id;
-  const tratamiento = tratamientos.find((t) => t.id === id);
+  const tratamiento = getTratamientoById(id);
 
   if (!tratamiento) return { title: 'Tratamiento no encontrado' };
 
@@ -28,11 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TreatmentPage({ params }: Props) {
   const id = (await params).id;
-  const tratamiento = tratamientos.find((t) => t.id === id);
+  const tratamiento = getTratamientoById(id);
 
   if (!tratamiento) {
     notFound();
   }
 
-  return <TreatmentDetailContent id={id} />;
+  return <TreatmentDetailContent tratamiento={tratamiento} />;
 }

@@ -1,0 +1,46 @@
+{
+  "type": "Instruccion",
+  "id": "ortodoncia-cuidados-alineadores",
+  "slug": "cuidados-alineadores",
+  "category": "ortodoncia",
+  "categoryLabel": "Ortodoncia",
+  "serviceId": "ortodoncia-invisible",
+  "title": "Cuidados diarios para alineadores invisibles",
+  "excerpt": "Recomendaciones breves para usar, higienizar y conservar los alineadores durante el tratamiento de ortodoncia invisible.",
+  "date": "19 Jun, 2026",
+  "tags": ["Ortodoncia", "Alineadores", "Higiene"],
+  "readTime": "3 min de lectura",
+  "published": true,
+  "heroLabel": "Indicaciones para pacientes",
+  "whatsappMessage": "Hola, te comparto las indicaciones para cuidar tus alineadores invisibles.",
+  "sections": [
+    {
+      "title": "Uso durante el dia",
+      "intro": "Para que el tratamiento avance segun lo planificado, los alineadores necesitan muchas horas de uso continuo.",
+      "items": [
+        "Usalos el tiempo indicado por Paula, retirandolos solo para comer y para higienizarte.",
+        "Guardalos siempre en su estuche cuando no los tengas puestos.",
+        "No los envuelvas en servilletas ni los dejes sueltos en bolsillos o carteras."
+      ]
+    },
+    {
+      "title": "Higiene",
+      "intro": "La limpieza diaria evita mal olor, manchas y acumulacion de placa sobre el material.",
+      "items": [
+        "Lavalos con agua fria o tibia y cepillo suave.",
+        "No uses agua caliente porque puede deformarlos.",
+        "Cepillate los dientes antes de volver a colocarlos despues de comer."
+      ]
+    },
+    {
+      "title": "Cuidados importantes",
+      "intro": "Pequenos habitos ayudan a proteger tanto los alineadores como el movimiento dental.",
+      "items": [
+        "No comas con los alineadores puestos.",
+        "Evita bebidas con azucar o colorantes mientras los usas.",
+        "Si un alineador se rompe o se pierde, escribinos antes de avanzar al siguiente."
+      ],
+      "note": "Trae tus alineadores a los controles para revisar ajuste, uso y progreso."
+    }
+  ]
+}
