@@ -7,7 +7,7 @@
   "tituloHero": "Odontología Pediátrica",
   "descripcionHero": "Cuidado especializado y cercano para proteger la salud dental infantil, fomentando hábitos positivos para los más pequeños",
   "icon": "Smile",
-  "heroImage": "/images/pediatria-hero.jpg",
+  "heroImage": "/images/pediatria-hero.jpeg",
   "features": [
     "Prevención temprana: control del desarrollo dental e intervención a tiempo.",
     "Enfoque adaptativo: manejo de ansiedad para experiencias sin miedo.",
@@ -18,14 +18,26 @@
     {
       "id": 1,
       "paciente": "Paciente",
-      "fecha": "Septiembre 2024",
-      "titulo": "Rehabilitación Infantil",
-      "descripcion": "Tratamiento amigable y sin dolor para múltiples caries.",
-      "testimonio": "Mi hijo entró con miedo y salió sonriendo. La paciencia de las doctoras es increíble.",
-      "desafio": "Paciente de 5 años con múltiples caries de primera infancia y mucho temor al dentista.",
-      "diagnostico": "Caries de la primera infancia severa.",
-      "duracion": "4 sesiones cortas",
-      "solucion": "Adaptación al entorno dental mediante juegos, y posterior restauración con resinas estéticas."
+      "fecha": "Julio 2026",
+      "titulo": "Sonrisas felices",
+      "descripcion": "Recuperó su seguridad al hablar y sonreír tras un tratamiento de implantes de carga inmediata.",
+      "imagenAntes": "/images/casos/pediatria_caso-01-a.jpg",
+      "testimonio": "No imaginé que el cambio sería tan radical. Ahora vivo sin la inseguridad de comer cualquier cosa.",
+      "desafio": "Llegó con una pérdida significativa de piezas dentales superiores debido a años de desgaste y periodontitis. El mayor obstáculo no era solo rehabilitar su sonrisa, sino devolverle la confianza para comer y hablar sin dolor.",
+      "diagnostico": "Atrofia alveolar y colapso oclusal.",
+      "duracion": "3 meses de tratamiento.",
+      "solucion": "Implementamos un protocolo de implantes de carga inmediata. Utilizamos escaneo intraoral 3D para diseñar una prótesis fija que respeta la biomecánica natural de la paciente.",
+      "solucionFeatures": [
+        "Cirugía Guiada por Computadora",
+        "Prótesis Cerámica Pre-tallada",
+        "Ajuste Oclusal Dinámico"
+      ],
+      "stats": [
+        { "label": "Recuperación Funcional", "value": "100%" },
+        { "label": "Dolor Post-Op", "value": "0" },
+        { "label": "Estética Natural", "value": "A++" },
+        { "label": "Años de Durabilidad", "value": "10+" }
+      ]
     }
   ]
 }
