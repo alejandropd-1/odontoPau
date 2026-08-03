@@ -91,3 +91,7 @@ El detalle de articulo SHALL presentar un cuerpo editorial continuo, con el anch
 #### Scenario: Imagen social de un borrador en preview
 - **WHEN** una plataforma consulta la URL de un articulo no publicado dentro de un Deploy Preview
 - **THEN** recibe una URL absoluta de imagen accesible en ese mismo deploy mientras la canonical permanece en produccion y la pagina continua no indexable
+
+#### Scenario: Cierre editorial con fuentes y tratamiento
+- **WHEN** un articulo incluye etiquetas, fuentes y uno o mas tratamientos relacionados
+- **THEN** el detalle los agrupa en un cierre compacto, jerarquico y responsive que conserva las fuentes visibles y ofrece una accion clara para continuar navegando

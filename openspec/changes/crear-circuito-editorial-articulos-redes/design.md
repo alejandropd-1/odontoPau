@@ -60,6 +60,8 @@ El detalle usara una composicion editorial adaptable y conservara el lenguaje vi
 
 La URL canonica seguira apuntando a produccion. En un Deploy Preview, la URL de compartir y la imagen OpenGraph usaran el dominio publico del propio deploy para que revisores y plataformas puedan descargar assets que aun no existen en `main`, manteniendo el documento como `noindex` mientras no este publicado.
 
+El cierre del articulo reunira temas, fuentes consultadas y tratamientos relacionados en una unica composicion editorial. Los temas funcionaran como contexto del bloque; las fuentes mantendran mayor jerarquia y trazabilidad, y los tratamientos se presentaran como una accion compacta para continuar navegando, evitando contenedores vacios o desproporcionados cuando solo exista una relacion.
+
 ### Derivados sociales separados
 
 Los paquetes sociales versionados se guardaran fuera de `src/data` para que no formen parte del build publico. Cada paquete identificara el articulo fuente, canal, formato, copy, assets, CTA, estado de aprobacion y fecha planificada.

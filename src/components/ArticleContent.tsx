@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Clock, MessageCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, ExternalLink, MessageCircle, Tag } from 'lucide-react';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
@@ -172,6 +172,13 @@ export default function ArticleContent({ article, services, shareUrl }: ArticleC
     ? article.sections[primaryGalleryIndex] as ArticleGallerySection
     : undefined;
   const leadImages = primaryGallerySection?.images || [article.heroImage];
+  const hasSources = Boolean(article.sources?.length);
+  const hasServices = services.length > 0;
+  const footerGridModifier = hasSources && hasServices
+    ? ''
+    : hasSources
+      ? ' article-detail__footer-grid--sources-only'
+      : ' article-detail__footer-grid--services-only';
   const breadcrumbItems = services.length > 0
     ? [
         { label: services[0].tituloHero, href: `/tratamientos/${services[0].id}` },
@@ -244,37 +251,63 @@ export default function ArticleContent({ article, services, shareUrl }: ArticleC
           </div>
 
           <footer className="article-detail__footer">
-            {article.sources && article.sources.length > 0 && (
-              <section className="article-detail__sources" aria-labelledby="article-sources-title">
-                <h2 id="article-sources-title">Fuentes generales</h2>
-                <p>Referencias educativas. La información específica del caso fue provista y debe ser validada por el equipo tratante.</p>
-                <ul>
-                  {article.sources.map((source) => (
-                    <li key={source.url}>
-                      <a href={source.url} target="_blank" rel="noopener noreferrer">
-                        {source.title}
-                      </a>
-                      <span>{source.publisher}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            <div className="article-detail__tags" aria-label="Etiquetas">
-              {article.tags.map((tag) => <span key={tag}>{tag}</span>)}
+            <div className="article-detail__topics">
+              <h2 className="article-detail__topics-title">
+                <Tag aria-hidden="true" />
+                Temas del artículo
+              </h2>
+              <div className="article-detail__tags" aria-label="Temas del artículo">
+                {article.tags.map((tag) => <span key={tag}>{tag}</span>)}
+              </div>
             </div>
 
-            {services.length > 0 && (
-              <div className="article-detail__services">
-                <h2>Tratamientos relacionados</h2>
-                <div>
-                  {services.map((service) => (
-                    <Link key={service.id} href={`/tratamientos/${service.id}`}>{service.tituloHero}</Link>
-                  ))}
-                </div>
-              </div>
-            )}
+            <div className={`article-detail__footer-grid${footerGridModifier}`}>
+              {article.sources && article.sources.length > 0 && (
+                <section className="article-detail__sources" aria-labelledby="article-sources-title">
+                  <div className="article-detail__sources-heading">
+                    <BookOpen aria-hidden="true" />
+                    <div>
+                      <h2 id="article-sources-title">Fuentes consultadas</h2>
+                      <p>Referencias educativas. La información específica del caso debe ser validada por el equipo tratante.</p>
+                    </div>
+                  </div>
+                  <ol>
+                    {article.sources.map((source, sourceIndex) => (
+                      <li key={source.url}>
+                        <span className="article-detail__source-index" aria-hidden="true">
+                          {String(sourceIndex + 1).padStart(2, '0')}
+                        </span>
+                        <div>
+                          <a href={source.url} target="_blank" rel="noopener noreferrer">
+                            {source.title}
+                            <ExternalLink aria-hidden="true" />
+                          </a>
+                          <span>{source.publisher}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              )}
+
+              {services.length > 0 && (
+                <aside className="article-detail__services" aria-labelledby="article-services-title">
+                  <span className="article-detail__services-eyebrow">Seguí explorando</span>
+                  <h2 id="article-services-title">Tratamientos relacionados</h2>
+                  <div className="article-detail__service-list">
+                    {services.map((service) => (
+                      <Link key={service.id} className="article-detail__service-card" href={`/tratamientos/${service.id}`}>
+                        <strong>{service.tituloHero}</strong>
+                        <span>
+                          Ver tratamiento
+                          <ArrowRight aria-hidden="true" />
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </aside>
+              )}
+            </div>
           </footer>
         </div>
       </article>
