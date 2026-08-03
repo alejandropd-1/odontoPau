@@ -1,0 +1,109 @@
+{
+  "type": "Articulo",
+  "id": "endodoncia-necrosis-pulpar-caso-01",
+  "slug": "tratamiento-endodontico-necrosis-pulpar",
+  "category": "endodoncia",
+  "categoryLabel": "Endodoncia",
+  "serviceIds": [
+    "endodoncia"
+  ],
+  "title": "Tratamiento endodóntico mecanizado en un caso de necrosis pulpar",
+  "excerpt": "Un caso clínico documentado con radiografías antes y después, tratado mediante una técnica endodóntica mecanizada.",
+  "author": "Equipo de Paula Gualtieri Odontología",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "draft",
+  "updatedAt": "2026-08-02",
+  "readTime": "3 min de lectura",
+  "tags": [
+    "endodoncia",
+    "necrosis pulpar",
+    "tratamiento mecanizado"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/endodoncia-necrosis-pulpar/radiografia-despues.webp",
+    "alt": "Radiografía de control posterior al tratamiento endodóntico del caso clínico",
+    "width": 1162,
+    "height": 1600,
+    "label": "Después",
+    "caption": "Imagen posterior al tratamiento. La interpretación clínica corresponde al profesional tratante."
+  },
+  "sources": [
+    {
+      "title": "What is a Root Canal?",
+      "publisher": "American Association of Endodontists",
+      "url": "https://www.aae.org/patients/root-canal-treatment/what-is-a-root-canal/"
+    },
+    {
+      "title": "Treatment of pulpal and apical disease: S3-level clinical practice guideline",
+      "publisher": "European Society of Endodontology / PubMed",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37772327/"
+    }
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "¿Qué se trató en este caso?",
+      "paragraphs": [
+        "El caso correspondió a una necrosis pulpar y fue tratado mediante una técnica endodóntica mecanizada, según la información clínica provista por Paula.",
+        "La endodoncia trabaja sobre el sistema de conductos del diente. La indicación y el plan se definen después de una evaluación clínica y radiográfica individual."
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Registro radiográfico antes y después",
+      "intro": "Las imágenes pertenecen al mismo caso y se presentan en el orden confirmado. No sustituyen la evaluación profesional.",
+      "images": [
+        {
+          "src": "/images/articulos/endodoncia-necrosis-pulpar/radiografia-antes.webp",
+          "alt": "Radiografía previa al tratamiento endodóntico del caso clínico",
+          "width": 1172,
+          "height": 1600,
+          "label": "Antes",
+          "caption": "Registro radiográfico previo al tratamiento."
+        },
+        {
+          "src": "/images/articulos/endodoncia-necrosis-pulpar/radiografia-despues.webp",
+          "alt": "Radiografía de control posterior al tratamiento endodóntico del caso clínico",
+          "width": 1162,
+          "height": 1600,
+          "label": "Después",
+          "caption": "Registro radiográfico posterior al tratamiento."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "title": "¿Qué significa que la técnica sea mecanizada?",
+      "paragraphs": [
+        "En una endodoncia mecanizada, parte de la preparación de los conductos se realiza con instrumental accionado por un motor específico. El profesional selecciona el sistema y la secuencia según la anatomía y las necesidades del caso.",
+        "La técnica utilizada es solo una parte del tratamiento: el diagnóstico, la planificación, el control y la restauración posterior también dependen de cada situación clínica."
+      ]
+    },
+    {
+      "type": "faq",
+      "title": "Preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Una radiografía alcanza para indicar una endodoncia?",
+          "answer": "No. La radiografía aporta información, pero la indicación se define con la evaluación clínica y los estudios que el profesional considere necesarios."
+        },
+        {
+          "question": "¿Todos los tratamientos endodónticos son iguales?",
+          "answer": "No. La anatomía, el diagnóstico y el estado de cada pieza cambian el abordaje. Por eso no corresponde trasladar el resultado de este caso a todas las personas."
+        },
+        {
+          "question": "¿Qué cuidados se indican después?",
+          "answer": "Las indicaciones y la necesidad de una restauración posterior dependen del caso. El profesional tratante debe definirlas y controlar la evolución."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Evaluación profesional",
+      "title": "¿Tenés una consulta sobre endodoncia?",
+      "text": "Podés escribirnos para coordinar una evaluación. El diagnóstico y las opciones de tratamiento se definen de manera personalizada.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20endodoncia",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

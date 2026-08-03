@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getTratamientos } from '@/data/tratamientos';
 import { publishedInstrucciones } from '@/data/instrucciones';
+import { publishedArticles } from '@/data/articulos';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://paulagualtieri.com';
@@ -16,6 +17,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const instructionUrls = publishedInstrucciones.map((instruction) => ({
     url: `${baseUrl}/instrucciones/${instruction.category}/${instruction.slug}`,
     lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  const articleUrls = publishedArticles.map((article) => ({
+    url: `${baseUrl}/articulos/${article.slug}`,
+    lastModified: new Date(`${article.updatedAt}T00:00:00Z`),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
@@ -48,8 +56,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/articulos`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
     ...treatmentUrls,
     ...instructionUrls,
+    ...articleUrls,
     ...caseUrls,
   ];
 }

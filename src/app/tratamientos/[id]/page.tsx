@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getTratamientoById, getTratamientos } from '@/data/tratamientos';
 import TreatmentDetailContent from '@/components/TreatmentDetailContent';
 import { Metadata } from 'next';
+import { getPublishedArticlesByServiceId } from '@/data/articulos';
 
 type Props = {
   params: Promise<{ id: string }>
@@ -40,5 +41,12 @@ export default async function TreatmentPage({ params }: Props) {
     notFound();
   }
 
-  return <TreatmentDetailContent tratamiento={tratamiento} />;
+  const relatedArticles = getPublishedArticlesByServiceId(tratamiento.id).map((article) => ({
+    slug: article.slug,
+    title: article.title,
+    excerpt: article.excerpt,
+    readTime: article.readTime,
+  }));
+
+  return <TreatmentDetailContent tratamiento={tratamiento} relatedArticles={relatedArticles} />;
 }

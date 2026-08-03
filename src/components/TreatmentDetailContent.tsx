@@ -13,9 +13,15 @@ import type { Tratamiento } from '@/data/tratamientos';
 
 interface TreatmentDetailContentProps {
   tratamiento: Tratamiento;
+  relatedArticles: {
+    slug: string;
+    title: string;
+    excerpt: string;
+    readTime: string;
+  }[];
 }
 
-export default function TreatmentDetailContent({ tratamiento }: TreatmentDetailContentProps) {
+export default function TreatmentDetailContent({ tratamiento, relatedArticles }: TreatmentDetailContentProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -192,6 +198,29 @@ export default function TreatmentDetailContent({ tratamiento }: TreatmentDetailC
                     </div>
                   </div>
                 </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {relatedArticles.length > 0 && (
+        <section className="treatment-detail__articles" aria-labelledby="related-articles-title">
+          <div className="treatment-detail__articles-inner">
+            <div className="treatment-detail__articles-header">
+              <span>Para entender mejor el tratamiento</span>
+              <h2 id="related-articles-title">Artículos relacionados</h2>
+            </div>
+            <div className="treatment-detail__articles-grid">
+              {relatedArticles.map((article) => (
+                <article key={article.slug} className="treatment-detail__article-card">
+                  <span>{article.readTime}</span>
+                  <h3>{article.title}</h3>
+                  <p>{article.excerpt}</p>
+                  <Link href={`/articulos/${article.slug}`}>
+                    Leer artículo <ArrowRight aria-hidden="true" />
+                  </Link>
+                </article>
               ))}
             </div>
           </div>

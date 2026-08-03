@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { siteFeatures } from '@/config/site-features';
 
 export default function Navbar() {
   return (
@@ -13,8 +14,11 @@ export default function Navbar() {
         <div className="navbar__links">
           <Link className="navbar__link" href="/#inicio">Inicio</Link>
           <Link className="navbar__link" href="/tratamientos">Servicios</Link>
+          <Link className="navbar__link" href="/articulos">Artículos</Link>
           <Link className="navbar__link" href="/instrucciones">Instrucciones</Link>
-          <Link className="navbar__link" href="/#testimonios">Testimonios</Link>
+          {siteFeatures.testimonials && (
+            <Link className="navbar__link" href="/#testimonios">Testimonios</Link>
+          )}
           <Link className="navbar__link" href="/#ubicacion">Ubicación</Link>
         </div>
         <a 

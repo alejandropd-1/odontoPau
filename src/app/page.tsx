@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import { Metadata } from 'next';
 import homeData from '@/data/home.json';
 import { getTratamientos } from '@/data/tratamientos';
+import { siteFeatures } from '@/config/site-features';
 
 export const metadata: Metadata = {
   title: 'Inicio | Dra. Paula Gualtieri - Odontología de Vanguardia',
@@ -22,7 +23,7 @@ export default function Home() {
       <Navbar />
       <Hero data={homeData.hero} />
       <Services tratamientos={tratamientos} />
-      <Testimonials />
+      {siteFeatures.testimonials && <Testimonials />}
       <Team />
       <Location />
       <Footer />
