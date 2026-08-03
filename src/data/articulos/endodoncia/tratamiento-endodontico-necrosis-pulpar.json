@@ -7,6 +7,8 @@
   "serviceIds": [
     "endodoncia"
   ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Necrosis pulpar",
   "title": "Tratamiento endodóntico mecanizado en un caso de necrosis pulpar",
   "excerpt": "Un caso clínico documentado con radiografías antes y después, tratado mediante una técnica endodóntica mecanizada.",
   "author": "Equipo de Paula Gualtieri Odontología",

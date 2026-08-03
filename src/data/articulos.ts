@@ -112,6 +112,8 @@ export interface Article {
   category: string;
   categoryLabel: string;
   serviceIds: string[];
+  titlePrefix?: string;
+  breadcrumbLabel?: string;
   title: string;
   excerpt: string;
   author: string;
@@ -262,6 +264,14 @@ function loadArticle(filePath: string): Article {
   requireStringList(article.serviceIds, 'serviceIds', sourcePath);
   requireStringList(article.tags, 'tags', sourcePath);
 
+  if (article.titlePrefix !== undefined) {
+    requireString(article.titlePrefix, 'titlePrefix', sourcePath);
+  }
+
+  if (article.breadcrumbLabel !== undefined) {
+    requireString(article.breadcrumbLabel, 'breadcrumbLabel', sourcePath);
+  }
+
   if (article.sources) {
     if (!Array.isArray(article.sources)) {
       throw new Error(`Articulo invalido en ${sourcePath}: sources debe ser una lista.`);
@@ -359,4 +369,24 @@ export function getPublishedArticlesByServiceId(serviceId: string) {
 
 export function getArticleCanonicalUrl(slug: string) {
   return `https://paulagualtieri.com/articulos/${slug}`;
+}
+
+function getArticlePublicBaseUrl() {
+  if (isEditorialPreviewBuild()) {
+    const previewUrl = process.env.DEPLOY_PRIME_URL || process.env.DEPLOY_URL;
+
+    if (previewUrl) {
+      return previewUrl;
+    }
+  }
+
+  return 'https://paulagualtieri.com';
+}
+
+export function getArticleShareUrl(slug: string) {
+  return new URL(`/articulos/${slug}`, getArticlePublicBaseUrl()).toString();
+}
+
+export function getArticleAssetUrl(src: string) {
+  return new URL(src, getArticlePublicBaseUrl()).toString();
 }

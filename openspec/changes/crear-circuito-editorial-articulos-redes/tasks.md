@@ -17,6 +17,7 @@
 - [x] 2.7 Agregar modelos Stackbit alineados con TypeScript y anotaciones de edicion visual
 - [x] 2.8 Ocultar temporalmente la seccion de testimonios y su enlace mediante una opcion reversible, conservando la implementacion existente
 - [x] 2.9 Implementar cuerpo editorial continuo y maquetacion adaptable para articulos con una, dos o tres imagenes
+- [x] 2.10 Alinear breadcrumb, titulo, animaciones, galeria principal y contenedores con la plantilla visual existente de casos clinicos
 
 ## 3. Contenido piloto e imagenes
 
@@ -40,7 +41,8 @@
 - [x] 5.4 Ejecutar `pnpm run build`
 - [x] 5.5 Verificar listado y detalle en desktop y mobile, incluyendo imagenes, tablas, antes/despues, 404 y accesibilidad basica
 - [x] 5.6 Verificar preview OpenGraph/Twitter y que ningun articulo no publicado sea accesible en produccion ni indexable en preview
-- [ ] 5.7 Presentar preview al responsable del sitio y esperar aprobacion explicita antes de publicar o desplegar
+- [x] 5.7 Verificar que la imagen OpenGraph del borrador sea absoluta y descargable desde el dominio del Deploy Preview
+- [ ] 5.8 Presentar preview al responsable del sitio y esperar aprobacion explicita antes de publicar o desplegar
 
 ## 6. Publicacion controlada
 

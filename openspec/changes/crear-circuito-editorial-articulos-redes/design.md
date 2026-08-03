@@ -56,7 +56,9 @@ Se reutilizaran Navbar, Footer, Breadcrumb, ShareArticleMenu, `next/image`, meta
 
 El CMS existente no se reemplazara. Los modelos nuevos se incorporaran a `stackbit.config.ts` y sus documentos seguiran siendo archivos JSON versionados por Git y editables desde Netlify Visual Editor.
 
-El detalle usara una composicion editorial adaptable. Con una imagen, la pieza visual acompana al encabezado; con dos o mas, el encabezado sera tipografico y las imagenes se presentaran en una galeria ordenada dentro del cuerpo para evitar duplicaciones. Las secciones de texto compartiran una unica superficie visual: el contenedor y los medios usaran el ancho disponible, mientras los parrafos conservaran una medida maxima legible.
+El detalle usara una composicion editorial adaptable y conservara el lenguaje visual de los casos clinicos existentes: breadcrumb jerarquico, prefijo de titulo negro, titulo en acento, entrada animada y contenedores neutros con CTA naranja. El encabezado sera tipografico y centrado; inmediatamente despues se mostrara una unica galeria principal capaz de resolver una, dos o tres imagenes sin duplicarlas. Las secciones de texto compartiran una unica superficie visual: el contenedor y los medios usaran el ancho disponible, mientras los parrafos conservaran una medida maxima legible.
+
+La URL canonica seguira apuntando a produccion. En un Deploy Preview, la URL de compartir y la imagen OpenGraph usaran el dominio publico del propio deploy para que revisores y plataformas puedan descargar assets que aun no existen en `main`, manteniendo el documento como `noindex` mientras no este publicado.
 
 ### Derivados sociales separados
 

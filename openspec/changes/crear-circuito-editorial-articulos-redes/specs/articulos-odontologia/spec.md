@@ -70,11 +70,11 @@ El detalle de articulo SHALL presentar un cuerpo editorial continuo, con el anch
 
 #### Scenario: Articulo con una imagen
 - **WHEN** el articulo tiene una unica imagen clinica
-- **THEN** la imagen se muestra junto al encabezado en escritorio y apilada en mobile sin duplicarse en el cuerpo
+- **THEN** el encabezado permanece centrado y la imagen se muestra inmediatamente debajo, centrada y sin duplicarse en el cuerpo
 
 #### Scenario: Articulo con dos imagenes
 - **WHEN** el articulo tiene dos imagenes clinicas
-- **THEN** el encabezado prioriza titulo y resumen, y las imagenes se muestran como un par ordenado dentro del cuerpo
+- **THEN** el encabezado prioriza titulo y resumen, y las imagenes se muestran inmediatamente debajo como un par ordenado
 
 #### Scenario: Articulo con tres imagenes
 - **WHEN** el articulo tiene tres imagenes clinicas
@@ -83,3 +83,11 @@ El detalle de articulo SHALL presentar un cuerpo editorial continuo, con el anch
 #### Scenario: Lectura del cuerpo
 - **WHEN** el articulo contiene varias secciones de texto
 - **THEN** las secciones pertenecen a una unica superficie visual, conservan jerarquia de encabezados y no se presentan como tarjetas independientes
+
+#### Scenario: Articulo con poco contenido textual
+- **WHEN** un caso aprobado solo dispone de un resumen breve y una o mas imagenes
+- **THEN** el encabezado, la galeria principal y el CTA conservan una composicion completa sin exigir bloques clinicos no confirmados
+
+#### Scenario: Imagen social de un borrador en preview
+- **WHEN** una plataforma consulta la URL de un articulo no publicado dentro de un Deploy Preview
+- **THEN** recibe una URL absoluta de imagen accesible en ese mismo deploy mientras la canonical permanece en produccion y la pagina continua no indexable

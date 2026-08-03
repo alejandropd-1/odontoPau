@@ -202,6 +202,8 @@ export default defineStackbitConfig({
             { name: 'category', type: 'string', required: true, label: 'Categoría' },
             { name: 'categoryLabel', type: 'string', required: true, label: 'Nombre visible de categoría' },
             { name: 'serviceIds', type: 'list', required: true, items: { type: 'string' }, label: 'Tratamientos vinculados' },
+            { name: 'titlePrefix', type: 'string', label: 'Prefijo visual del título' },
+            { name: 'breadcrumbLabel', type: 'string', label: 'Texto breve del breadcrumb' },
             { name: 'title', type: 'string', required: true, label: 'Título' },
             { name: 'excerpt', type: 'text', required: true, label: 'Resumen' },
             { name: 'author', type: 'string', required: true, label: 'Autor' },

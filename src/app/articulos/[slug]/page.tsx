@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import ArticleContent from '@/components/ArticleContent';
 import {
   getArticleCanonicalUrl,
+  getArticleAssetUrl,
+  getArticleShareUrl,
   getRoutableArticleBySlug,
   getRoutableArticles,
 } from '@/data/articulos';
@@ -27,6 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const canonicalUrl = getArticleCanonicalUrl(article.slug);
+  const shareUrl = getArticleShareUrl(article.slug);
+  const socialImageUrl = getArticleAssetUrl(article.heroImage.src);
   const isPublished = article.status === 'published';
 
   return {
@@ -37,14 +41,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: 'article',
       locale: 'es_AR',
-      url: canonicalUrl,
+      url: shareUrl,
       title: article.title,
       description: article.excerpt,
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt,
       authors: [article.author],
       images: [{
-        url: article.heroImage.src,
+        url: socialImageUrl,
         width: article.heroImage.width,
         height: article.heroImage.height,
         alt: article.heroImage.alt,
@@ -54,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: article.title,
       description: article.excerpt,
-      images: [article.heroImage.src],
+      images: [socialImageUrl],
     },
   };
 }
@@ -71,6 +75,7 @@ export default async function ArticlePage({ params }: Props) {
     .map(getTratamientoById)
     .filter((service) => service !== undefined);
   const canonicalUrl = getArticleCanonicalUrl(article.slug);
+  const shareUrl = getArticleShareUrl(article.slug);
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -96,7 +101,7 @@ export default async function ArticlePage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
         />
       )}
-      <ArticleContent article={article} services={services} canonicalUrl={canonicalUrl} />
+      <ArticleContent article={article} services={services} shareUrl={shareUrl} />
     </>
   );
 }
