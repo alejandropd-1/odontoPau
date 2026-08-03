@@ -14,7 +14,7 @@
   "author": "Equipo de Paula Gualtieri Odontología",
   "clinicalReviewer": "Paula Gualtieri",
   "status": "draft",
-  "updatedAt": "2026-08-02",
+  "updatedAt": "2026-08-03",
   "readTime": "3 min de lectura",
   "tags": [
     "endodoncia",
@@ -43,12 +43,30 @@
   ],
   "sections": [
     {
-      "type": "text",
-      "title": "¿Qué se trató en este caso?",
+      "type": "case_summary",
+      "title": "El caso",
       "paragraphs": [
         "El caso correspondió a una necrosis pulpar y fue tratado mediante una técnica endodóntica mecanizada, según la información clínica provista por Paula.",
         "La endodoncia trabaja sobre el sistema de conductos del diente. La indicación y el plan se definen después de una evaluación clínica y radiográfica individual."
-      ]
+      ],
+      "facts": [
+        {
+          "label": "Diagnóstico informado",
+          "value": "Necrosis pulpar"
+        },
+        {
+          "label": "Técnica informada",
+          "value": "Endodoncia mecanizada"
+        }
+      ],
+      "approach": {
+        "title": "Abordaje documentado",
+        "text": "El tratamiento se realizó mediante una técnica endodóntica mecanizada. Las radiografías aportadas registran el caso antes y después del tratamiento.",
+        "items": [
+          "Técnica endodóntica mecanizada",
+          "Registro radiográfico anterior y posterior"
+        ]
+      }
     },
     {
       "type": "gallery",

@@ -5,7 +5,7 @@ import { CSSProperties, KeyboardEvent, PointerEvent, useEffect, useRef, useState
 const MIN_THUMB_SIZE = 48;
 
 export default function CustomScrollIndicator() {
-  const trackRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
   const dragOffsetRef = useRef(0);
   const isScrollableRef = useRef(false);
@@ -150,9 +150,10 @@ export default function CustomScrollIndicator() {
   };
 
   return (
-    <div
+    <aside
       ref={trackRef}
       className="custom-scroll"
+      aria-label="Control de desplazamiento"
       data-visible={isScrollable}
       data-dragging={isDragging}
       style={{
@@ -165,6 +166,7 @@ export default function CustomScrollIndicator() {
         className="custom-scroll__thumb"
         role="scrollbar"
         aria-label="Progreso de desplazamiento"
+        aria-controls="site-content"
         aria-orientation="vertical"
         aria-valuemin={0}
         aria-valuemax={100}
@@ -177,6 +179,6 @@ export default function CustomScrollIndicator() {
           '--scroll-thumb-offset': '0px',
         } as CSSProperties}
       />
-    </div>
+    </aside>
   );
 }

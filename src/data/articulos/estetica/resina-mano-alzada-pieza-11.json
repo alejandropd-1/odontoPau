@@ -1,0 +1,60 @@
+{
+  "type": "Articulo",
+  "id": "estetica-resina-mano-alzada-caso-03",
+  "slug": "resina-mano-alzada-pieza-11",
+  "category": "estetica-dental",
+  "categoryLabel": "Estética Dental",
+  "serviceIds": [
+    "estetica-dental"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Resina en pieza 11",
+  "title": "Reconstrucción con resina a mano alzada en pieza 11",
+  "excerpt": "Registro de una reconstrucción con resina a mano alzada después de un traumatismo en la pieza 11.",
+  "author": "Equipo de Paula Gualtieri Odontología",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "draft",
+  "updatedAt": "2026-08-03",
+  "readTime": "1 min de lectura",
+  "tags": [
+    "estética dental",
+    "resina",
+    "pieza 11"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/resina-mano-alzada-pieza-11/registro-comparativo.webp",
+    "alt": "Registro comparativo de una reconstrucción con resina en la pieza 11",
+    "width": 1280,
+    "height": 1280,
+    "caption": "Registro comparativo aportado para el caso."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "El caso",
+      "paragraphs": [
+        "Paula informó que la pieza 11 había sufrido un traumatismo y fue reconstruida con resina a mano alzada."
+      ]
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/articulos/resina-mano-alzada-pieza-11/registro-comparativo.webp",
+          "alt": "Registro comparativo de una reconstrucción con resina en la pieza 11",
+          "width": 1280,
+          "height": 1280,
+          "caption": "Registro comparativo aportado para el caso."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Evaluación profesional",
+      "title": "¿Tenés una consulta sobre una pieza traumatizada?",
+      "text": "Podés escribirnos para coordinar una evaluación. Las opciones de reconstrucción dependen de cada situación clínica.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20una%20reconstrucci%C3%B3n%20dental",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

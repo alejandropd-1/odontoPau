@@ -62,6 +62,16 @@ La URL canonica seguira apuntando a produccion. En un Deploy Preview, la URL de 
 
 El cierre del articulo reunira temas, fuentes consultadas y tratamientos relacionados en una unica composicion editorial. Los temas funcionaran como contexto del bloque; las fuentes mantendran mayor jerarquia y trazabilidad, y los tratamientos se presentaran como una accion compacta para continuar navegando, evitando contenedores vacios o desproporcionados cuando solo exista una relacion.
 
+La plantilla sera unica y modular, no una coleccion de maquetas independientes. Un bloque opcional de resumen de caso recuperara los recursos mas utiles de la plantilla clinica original: icono y contexto, tarjetas de datos confirmados y un panel naranja de abordaje. Cada submodulo se renderizara solo si su contenido existe. De esta manera la identidad, jerarquia y orden general permanecen estables, mientras el mismo contrato resuelve casos minimos, intermedios y completos sin placeholders, espacios reservados ni afirmaciones inventadas.
+
+Las tres densidades de referencia seran:
+
+- minima: resumen confirmado, una imagen y CTA;
+- intermedia: resumen, uno o mas datos confirmados, una o dos imagenes y CTA;
+- completa: resumen, datos, panel de abordaje, contenido educativo, FAQ y/o fuentes.
+
+La densidad no se almacenara como una variante visual manual: surgira de los campos realmente completados. Esto evita que el editor tenga que elegir una maqueta y permite que un articulo crezca con informacion validada sin migrarlo a otra plantilla.
+
 ### Derivados sociales separados
 
 Los paquetes sociales versionados se guardaran fuera de `src/data` para que no formen parte del build publico. Cada paquete identificara el articulo fuente, canal, formato, copy, assets, CTA, estado de aprobacion y fecha planificada.

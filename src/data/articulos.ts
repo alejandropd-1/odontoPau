@@ -24,6 +24,25 @@ export interface ArticleSource {
   url: string;
 }
 
+export interface ArticleCaseFact {
+  label: string;
+  value: string;
+}
+
+export interface ArticleCaseApproach {
+  title: string;
+  text: string;
+  items?: string[];
+}
+
+export interface ArticleCaseSummarySection {
+  type: 'case_summary';
+  title: string;
+  paragraphs: string[];
+  facts?: ArticleCaseFact[];
+  approach?: ArticleCaseApproach;
+}
+
 export interface ArticleTextSection {
   type: 'text';
   title?: string;
@@ -96,6 +115,7 @@ export interface ArticleCtaSection {
 }
 
 export type ArticleSection =
+  | ArticleCaseSummarySection
   | ArticleTextSection
   | ArticleListSection
   | ArticleComparisonSection
@@ -196,6 +216,29 @@ function validateSection(section: ArticleSection, index: number, sourcePath: str
   requireString(section?.type, `${field}.type`, sourcePath);
 
   switch (section.type) {
+    case 'case_summary':
+      requireString(section.title, `${field}.title`, sourcePath);
+      requireStringList(section.paragraphs, `${field}.paragraphs`, sourcePath);
+      if (section.facts !== undefined) {
+        if (!Array.isArray(section.facts) || section.facts.length === 0) {
+          throw new Error(`Articulo invalido en ${sourcePath}: ${field}.facts debe contener al menos un dato.`);
+        }
+        section.facts.forEach((fact, factIndex) => {
+          requireString(fact.label, `${field}.facts[${factIndex}].label`, sourcePath);
+          requireString(fact.value, `${field}.facts[${factIndex}].value`, sourcePath);
+        });
+      }
+      if (section.approach !== undefined) {
+        requireString(section.approach.title, `${field}.approach.title`, sourcePath);
+        requireString(section.approach.text, `${field}.approach.text`, sourcePath);
+        if (section.approach.items !== undefined) {
+          requireStringList(section.approach.items, `${field}.approach.items`, sourcePath);
+          if (section.approach.items.length === 0) {
+            throw new Error(`Articulo invalido en ${sourcePath}: ${field}.approach.items no puede estar vacio.`);
+          }
+        }
+      }
+      break;
     case 'text':
       requireStringList(section.paragraphs, `${field}.paragraphs`, sourcePath);
       break;

@@ -19,6 +19,7 @@
 - [x] 2.9 Implementar cuerpo editorial continuo y maquetacion adaptable para articulos con una, dos o tres imagenes
 - [x] 2.10 Alinear breadcrumb, titulo, animaciones, galeria principal y contenedores con la plantilla visual existente de casos clinicos
 - [x] 2.11 Integrar temas, fuentes consultadas y tratamientos relacionados en un cierre editorial compacto y responsive
+- [x] 2.12 Implementar una plantilla clinica modular unica con resumen, datos y abordaje opcionales, y comprobar sus estados minimo, intermedio y completo
 
 ## 3. Contenido piloto e imagenes
 

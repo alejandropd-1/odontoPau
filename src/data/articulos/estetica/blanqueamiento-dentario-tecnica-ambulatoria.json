@@ -1,0 +1,86 @@
+{
+  "type": "Articulo",
+  "id": "estetica-blanqueamiento-ambulatorio-caso-01",
+  "slug": "blanqueamiento-dentario-tecnica-ambulatoria",
+  "category": "estetica-dental",
+  "categoryLabel": "Estética Dental",
+  "serviceIds": [
+    "estetica-dental"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Blanqueamiento dentario",
+  "title": "Blanqueamiento dentario con técnica ambulatoria",
+  "excerpt": "Registro clínico de un blanqueamiento dentario realizado con técnica ambulatoria, indicada en este caso para favorecer menor sensibilidad.",
+  "author": "Equipo de Paula Gualtieri Odontología",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "draft",
+  "updatedAt": "2026-08-03",
+  "readTime": "2 min de lectura",
+  "tags": [
+    "estética dental",
+    "blanqueamiento dentario",
+    "técnica ambulatoria"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/blanqueamiento-dentario-tecnica-ambulatoria/registro-comparativo-frontal.webp",
+    "alt": "Registro comparativo frontal del caso de blanqueamiento dentario",
+    "width": 1080,
+    "height": 1080,
+    "caption": "Registro comparativo frontal aportado para el caso."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "El caso",
+      "paragraphs": [
+        "Este caso documenta un blanqueamiento dentario realizado con técnica ambulatoria. Paula indicó que esta modalidad fue elegida en el caso para favorecer menor sensibilidad."
+      ],
+      "facts": [
+        {
+          "label": "Tratamiento informado",
+          "value": "Blanqueamiento dentario"
+        },
+        {
+          "label": "Modalidad informada",
+          "value": "Técnica ambulatoria"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Registros comparativos",
+      "intro": "Las dos composiciones documentan distintas vistas del mismo caso.",
+      "images": [
+        {
+          "src": "/images/articulos/blanqueamiento-dentario-tecnica-ambulatoria/registro-comparativo-frontal.webp",
+          "alt": "Registro comparativo frontal del caso de blanqueamiento dentario",
+          "width": 1080,
+          "height": 1080,
+          "caption": "Vista frontal del registro comparativo."
+        },
+        {
+          "src": "/images/articulos/blanqueamiento-dentario-tecnica-ambulatoria/registro-comparativo-lateral.webp",
+          "alt": "Registro comparativo lateral del caso de blanqueamiento dentario",
+          "width": 1080,
+          "height": 1080,
+          "caption": "Vista lateral del registro comparativo."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "title": "Una indicación individual",
+      "paragraphs": [
+        "La modalidad, las pautas de uso y el seguimiento de un blanqueamiento deben definirse después de una evaluación profesional. La experiencia de este caso no determina la indicación para otras personas."
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Evaluación profesional",
+      "title": "¿Querés consultar por un blanqueamiento dentario?",
+      "text": "Podés escribirnos para coordinar una evaluación y conocer qué opciones se ajustan a tu situación.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20blanqueamiento%20dentario",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

@@ -223,6 +223,7 @@ export default defineStackbitConfig({
               items: {
                 type: 'model',
                 models: [
+                  'ArticleCaseSummarySection',
                   'ArticleTextSection',
                   'ArticleListSection',
                   'ArticleComparisonSection',
@@ -259,6 +260,40 @@ export default defineStackbitConfig({
             { name: 'title', type: 'string', required: true, label: 'Título' },
             { name: 'publisher', type: 'string', required: true, label: 'Institución o publicación' },
             { name: 'url', type: 'string', required: true, label: 'URL' }
+          ]
+        },
+        {
+          name: 'ArticleCaseSummarySection',
+          type: 'object',
+          label: 'Resumen de caso clínico',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'case_summary', hidden: true },
+            { name: 'title', type: 'string', required: true, label: 'Título del contexto' },
+            { name: 'paragraphs', type: 'list', required: true, items: { type: 'text' }, label: 'Contexto confirmado' },
+            { name: 'facts', type: 'list', items: { type: 'model', models: ['ArticleCaseFact'] }, label: 'Datos confirmados' },
+            { name: 'approach', type: 'model', models: ['ArticleCaseApproach'], label: 'Abordaje opcional' }
+          ]
+        },
+        {
+          name: 'ArticleCaseFact',
+          type: 'object',
+          label: 'Dato confirmado del caso',
+          labelField: 'label',
+          fields: [
+            { name: 'label', type: 'string', required: true, label: 'Etiqueta' },
+            { name: 'value', type: 'text', required: true, label: 'Valor' }
+          ]
+        },
+        {
+          name: 'ArticleCaseApproach',
+          type: 'object',
+          label: 'Abordaje del caso',
+          labelField: 'title',
+          fields: [
+            { name: 'title', type: 'string', required: true, label: 'Título' },
+            { name: 'text', type: 'text', required: true, label: 'Descripción confirmada' },
+            { name: 'items', type: 'list', items: { type: 'text' }, label: 'Puntos confirmados' }
           ]
         },
         {

@@ -1,6 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, ExternalLink, MessageCircle, Tag } from 'lucide-react';
+import {
+  AlertCircle,
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Calendar,
+  CheckCircle2,
+  Clock,
+  ExternalLink,
+  MessageCircle,
+  Tag,
+} from 'lucide-react';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
@@ -56,6 +67,63 @@ function renderSection(section: ArticleSection, index: number, hiddenGalleryInde
   const key = `${section.type}-${index}`;
 
   switch (section.type) {
+    case 'case_summary': {
+      const hasFacts = Boolean(section.facts?.length);
+      const hasApproach = Boolean(section.approach);
+      const summaryClassName = [
+        'article-detail__case-summary',
+        hasApproach && 'article-detail__case-summary--with-approach',
+        !hasFacts && !hasApproach && 'article-detail__case-summary--minimal',
+      ].filter(Boolean).join(' ');
+      const titleId = `article-case-summary-${index}`;
+
+      return (
+        <section
+          key={key}
+          className={summaryClassName}
+          data-sb-field-path={`sections.${index}`}
+          aria-labelledby={titleId}
+        >
+          <div className="article-detail__case-context">
+            <div className="article-detail__case-heading">
+              <AlertCircle aria-hidden="true" />
+              <h2 id={titleId} data-sb-field-path="title">{section.title}</h2>
+            </div>
+            <div className="article-detail__case-copy" data-sb-field-path="paragraphs">
+              {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+
+            {section.facts && section.facts.length > 0 && (
+              <dl className="article-detail__case-facts" data-sb-field-path="facts">
+                {section.facts.map((fact, factIndex) => (
+                  <div key={`${fact.label}-${fact.value}`} className="article-detail__case-fact" data-sb-field-path={`.${factIndex}`}>
+                    <dt>{fact.label}</dt>
+                    <dd>{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </div>
+
+          {section.approach && (
+            <div className="article-detail__case-approach" data-sb-field-path="approach">
+              <h3>{section.approach.title}</h3>
+              <p>{section.approach.text}</p>
+              {section.approach.items && section.approach.items.length > 0 && (
+                <ul>
+                  {section.approach.items.map((item) => (
+                    <li key={item}>
+                      <span aria-hidden="true"><CheckCircle2 /></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </section>
+      );
+    }
     case 'text':
       return (
         <section key={key} className="article-detail__section" data-sb-field-path={`sections.${index}`}>

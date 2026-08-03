@@ -95,3 +95,22 @@ El detalle de articulo SHALL presentar un cuerpo editorial continuo, con el anch
 #### Scenario: Cierre editorial con fuentes y tratamiento
 - **WHEN** un articulo incluye etiquetas, fuentes y uno o mas tratamientos relacionados
 - **THEN** el detalle los agrupa en un cierre compacto, jerarquico y responsive que conserva las fuentes visibles y ofrece una accion clara para continuar navegando
+
+### Requirement: Plantilla clinica modular unica
+El sistema SHALL usar una unica plantilla de articulo con un resumen de caso compuesto por contexto, datos confirmados y abordaje opcional. Cada submodulo MUST renderizarse unicamente cuando contiene informacion y MUST mantener una jerarquia semantica y visual consistente.
+
+#### Scenario: Caso minimo con una imagen
+- **WHEN** el articulo solo dispone de contexto confirmado, una imagen y CTA
+- **THEN** el resumen ocupa el ancho util, no muestra tarjetas ni panel de abordaje vacios y la pagina conserva una composicion completa
+
+#### Scenario: Caso intermedio con datos parciales
+- **WHEN** el articulo dispone de contexto, uno o mas datos confirmados y una o dos imagenes pero no tiene un abordaje detallado
+- **THEN** las tarjetas presentes se adaptan al ancho disponible y no se reserva espacio para el panel naranja ausente
+
+#### Scenario: Caso completo
+- **WHEN** el articulo dispone de contexto, datos confirmados, abordaje, contenido educativo y fuentes o preguntas frecuentes
+- **THEN** el resumen se presenta en dos columnas en escritorio, el abordaje usa el panel de acento y todos los modulos se apilan en orden logico en mobile
+
+#### Scenario: Informacion agregada despues de la revision
+- **WHEN** un editor completa un submodulo anteriormente ausente
+- **THEN** el articulo incorpora ese contenido dentro de la misma plantilla y contrato de datos sin migracion ni seleccion manual de maqueta
