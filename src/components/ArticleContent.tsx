@@ -25,7 +25,7 @@ function formatDate(date: string) {
   return dateFormatter.format(new Date(`${date}T00:00:00Z`));
 }
 
-function renderSection(section: ArticleSection, index: number) {
+function renderSection(section: ArticleSection, index: number, hiddenGalleryIndex: number) {
   const key = `${section.type}-${index}`;
 
   switch (section.type) {
@@ -89,11 +89,15 @@ function renderSection(section: ArticleSection, index: number) {
         </section>
       );
     case 'gallery':
+      if (index === hiddenGalleryIndex) {
+        return null;
+      }
+
       return (
         <section key={key} className="article-detail__section" data-sb-field-path={`sections.${index}`}>
           {section.title && <h2 className="article-detail__section-title">{section.title}</h2>}
           {section.intro && <p className="article-detail__section-intro">{section.intro}</p>}
-          <div className="article-detail__gallery">
+          <div className="article-detail__gallery" data-image-count={Math.min(section.images.length, 3)}>
             {section.images.map((image, imageIndex) => (
               <figure key={image.src} className="article-detail__gallery-item" data-sb-field-path={`images.${imageIndex}`}>
                 <div className="article-detail__gallery-media">
@@ -153,6 +157,11 @@ function renderSection(section: ArticleSection, index: number) {
 
 export default function ArticleContent({ article, services, canonicalUrl }: ArticleContentProps) {
   const editorialDate = article.publishedAt || article.updatedAt;
+  const primaryGalleryIndex = article.sections.findIndex((section) => section.type === 'gallery');
+  const primaryGallerySection = primaryGalleryIndex >= 0 ? article.sections[primaryGalleryIndex] : undefined;
+  const primaryImageCount = primaryGallerySection?.type === 'gallery' ? primaryGallerySection.images.length : 1;
+  const showHeroMedia = primaryImageCount === 1;
+  const hiddenGalleryIndex = showHeroMedia && primaryGalleryIndex >= 0 ? primaryGalleryIndex : -1;
 
   return (
     <main className="article-detail" data-sb-object-id={article.sourcePath}>
@@ -175,7 +184,7 @@ export default function ArticleContent({ article, services, canonicalUrl }: Arti
             </p>
           )}
 
-          <header className="article-detail__hero">
+          <header className={`article-detail__hero${showHeroMedia ? '' : ' article-detail__hero--text-only'}`}>
             <div className="article-detail__hero-content">
               <span className="article-detail__eyebrow" data-sb-field-path="categoryLabel">{article.categoryLabel}</span>
               <h1 className="article-detail__title" data-sb-field-path="title">{article.title}</h1>
@@ -195,22 +204,24 @@ export default function ArticleContent({ article, services, canonicalUrl }: Arti
               </div>
             </div>
 
-            <figure className="article-detail__hero-media" data-sb-field-path="heroImage">
-              <Image
-                src={article.heroImage.src}
-                alt={article.heroImage.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 36rem, 100vw"
-                className="article-detail__hero-image"
-              />
-              {article.heroImage.label && <span className="article-detail__image-label">{article.heroImage.label}</span>}
-              {article.heroImage.caption && <figcaption>{article.heroImage.caption}</figcaption>}
-            </figure>
+            {showHeroMedia && (
+              <figure className="article-detail__hero-media" data-sb-field-path="heroImage">
+                <Image
+                  src={article.heroImage.src}
+                  alt={article.heroImage.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 36rem, 100vw"
+                  className="article-detail__hero-image"
+                />
+                {article.heroImage.label && <span className="article-detail__image-label">{article.heroImage.label}</span>}
+                {article.heroImage.caption && <figcaption>{article.heroImage.caption}</figcaption>}
+              </figure>
+            )}
           </header>
 
           <div className="article-detail__body">
-            {article.sections.map(renderSection)}
+            {article.sections.map((section, index) => renderSection(section, index, hiddenGalleryIndex))}
           </div>
 
           <footer className="article-detail__footer">

@@ -56,6 +56,8 @@ Se reutilizaran Navbar, Footer, Breadcrumb, ShareArticleMenu, `next/image`, meta
 
 El CMS existente no se reemplazara. Los modelos nuevos se incorporaran a `stackbit.config.ts` y sus documentos seguiran siendo archivos JSON versionados por Git y editables desde Netlify Visual Editor.
 
+El detalle usara una composicion editorial adaptable. Con una imagen, la pieza visual acompana al encabezado; con dos o mas, el encabezado sera tipografico y las imagenes se presentaran en una galeria ordenada dentro del cuerpo para evitar duplicaciones. Las secciones de texto compartiran una unica superficie visual: el contenedor y los medios usaran el ancho disponible, mientras los parrafos conservaran una medida maxima legible.
+
 ### Derivados sociales separados
 
 Los paquetes sociales versionados se guardaran fuera de `src/data` para que no formen parte del build publico. Cada paquete identificara el articulo fuente, canal, formato, copy, assets, CTA, estado de aprobacion y fecha planificada.

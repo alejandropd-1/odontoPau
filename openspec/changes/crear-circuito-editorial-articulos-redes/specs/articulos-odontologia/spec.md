@@ -64,3 +64,22 @@ Los modelos de Stackbit MUST reflejar exactamente el contrato TypeScript y las p
 #### Scenario: Edicion de una seccion
 - **WHEN** un editor cambia una seccion desde Netlify Visual Editor
 - **THEN** el cambio se guarda en el JSON correcto y se representa sin conversion manual
+
+### Requirement: Maquetacion editorial adaptable
+El detalle de articulo SHALL presentar un cuerpo editorial continuo, con el ancho visual disponible para medios y componentes y una medida de lectura acotada para parrafos extensos.
+
+#### Scenario: Articulo con una imagen
+- **WHEN** el articulo tiene una unica imagen clinica
+- **THEN** la imagen se muestra junto al encabezado en escritorio y apilada en mobile sin duplicarse en el cuerpo
+
+#### Scenario: Articulo con dos imagenes
+- **WHEN** el articulo tiene dos imagenes clinicas
+- **THEN** el encabezado prioriza titulo y resumen, y las imagenes se muestran como un par ordenado dentro del cuerpo
+
+#### Scenario: Articulo con tres imagenes
+- **WHEN** el articulo tiene tres imagenes clinicas
+- **THEN** las imagenes forman una grilla de tres columnas en escritorio y se apilan en mobile respetando su orden editorial
+
+#### Scenario: Lectura del cuerpo
+- **WHEN** el articulo contiene varias secciones de texto
+- **THEN** las secciones pertenecen a una unica superficie visual, conservan jerarquia de encabezados y no se presentan como tarjetas independientes

@@ -37,3 +37,10 @@ Endodoncia/caso-01 queda seleccionado como piloto por tener antes/despues, autor
 - La seccion de testimonios y su enlace de navegacion quedan temporalmente ocultos.
 - El componente, los estilos, los datos y los modelos del editor visual se conservan para una futura reactivacion.
 - La visibilidad se controla desde una unica opcion en `src/config/site-features.ts`.
+
+## Maquetacion de articulos
+
+- Una imagen se presenta junto al encabezado en escritorio y apilada en mobile.
+- Dos o tres imagenes se presentan dentro del cuerpo como galeria ordenada y no se duplica una imagen en el encabezado.
+- Las secciones de contenido forman un unico cuerpo editorial; los encabezados conservan la jerarquia sin crear una tarjeta por seccion.
+- El cuerpo y los medios usan el ancho disponible del contenedor, mientras que los parrafos mantienen una medida maxima de lectura.

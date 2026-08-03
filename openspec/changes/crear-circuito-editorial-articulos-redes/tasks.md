@@ -16,6 +16,7 @@
 - [x] 2.6 Integrar articulos publicados en sitemap, navegacion y enlaces internos desde/hacia tratamientos
 - [x] 2.7 Agregar modelos Stackbit alineados con TypeScript y anotaciones de edicion visual
 - [x] 2.8 Ocultar temporalmente la seccion de testimonios y su enlace mediante una opcion reversible, conservando la implementacion existente
+- [x] 2.9 Implementar cuerpo editorial continuo y maquetacion adaptable para articulos con una, dos o tres imagenes
 
 ## 3. Contenido piloto e imagenes
 
