@@ -24,7 +24,7 @@
 
 ## 5. Preparación del cierre
 
-- [ ] 5.1 Preparar commit y push selectivos en `change/crear-menu-movil-topbar`, abrir un Draft PR y confirmar que CI y Deploy Preview correspondan a la revisión exacta.
+- [x] 5.1 Preparar commit y push selectivos en `change/crear-menu-movil-topbar`, abrir un Draft PR y confirmar que CI y Deploy Preview correspondan a la revisión exacta.
 - [x] 5.2 Corregir observaciones y repetir OpenSpec, TypeScript, lint, build, Playwright y control de overflow sin hacer merge ni archive.
 
 ## 6. Validación final de Alejandro
