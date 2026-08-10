@@ -29,4 +29,3 @@ El cambio SHALL limitarse al footer publico y MUST conservar las referencias edi
 #### Scenario: Referencias internas fuera del footer
 - **WHEN** se implementa el retiro de enlaces inactivos
 - **THEN** no se eliminan etiquetas, iconos o metadatos de redes del dashboard editorial ni de testimonios
-
