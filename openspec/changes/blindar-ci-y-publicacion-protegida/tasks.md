@@ -35,7 +35,7 @@
 - [x] 5.3 Configurar Visual Editor para publicar mediante pull request desde una rama de trabajo separada y verificarlo con una edicion no clinica.
 - [x] 5.4 Activar proteccion de `main` con el check exitoso, sin force-push ni borrado, y comprobar el procedimiento de rollback.
 - [x] 5.5 Activar deploys de produccion Git-only en Netlify, manteniendo Deploy Previews, y registrar evidencia sin secretos.
-- [ ] 5.6 Repetir el preflight final, confirmar el Draft PR y Deploy Preview de la revision exacta y dejar el cambio listo para validacion humana sin merge ni archive.
+- [x] 5.6 Repetir el preflight final, confirmar el Draft PR y Deploy Preview de la revision exacta y dejar el cambio listo para validacion humana sin merge ni archive.
 
 ## 6. Mantenimiento
 
