@@ -91,4 +91,3 @@ Cada OpenSpec implementable SHALL usar una rama exclusiva `change/<id-exacto-del
 #### Scenario: Produccion posterior al archive
 - **WHEN** el pull request con implementacion y archive se mezcla a `main`
 - **THEN** Netlify ejecuta el deploy de produccion y su verificacion se registra en el pull request o reporte de release sin reabrir el OpenSpec
-
