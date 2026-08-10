@@ -60,13 +60,21 @@ Verificacion: intentar actualizar un PR con un fallo controlado en una rama desc
 
 ## Netlify Visual Editor: publicacion mediante PR
 
-1. Confirmar que la working branch es distinta de `main`, por ejemplo `preview`.
+1. Confirmar que la working branch es `editorial-preview`, creada desde el `main` vigente y distinta de la rama de produccion.
 2. Confirmar que la content publishing branch es `main`.
 3. Configurar Git CMS para abrir pull request en lugar de mezclar directamente.
 4. Usar una edicion institucional inocua para verificar que el cambio queda en la working branch y genera un PR.
 5. Descartar o revertir la prueba si no forma parte de un cambio aprobado.
 
 No usar una afirmacion clinica, imagen de paciente ni estado `published` como prueba de configuracion.
+
+Configuracion verificada el 10 de agosto de 2026:
+
+- `editorial-preview` se creo desde `main@75ef693` sin reescribir la rama historica `preview`, que estaba divergida y contenia cambios obsoletos.
+- Visual Editor quedo configurado con working branch `editorial-preview` y `Pull request to main`.
+- Una edicion temporal de `src/data/home.json.title` creo el PR de prueba #3. El valor se restauro, la rama quedo sin diferencias de contenido respecto de `main` y el PR se cerro sin merge.
+- El Preview Server de `editorial-preview` quedo operativo en `https://devserver-editorial-preview--paulagualtieri.netlify.app`.
+- El log del editor aun informa incompatibilidades de modelado en secciones anidadas de instrucciones y configuracion de assets. Esas correcciones pertenecen al OpenSpec `hacer-sitio-autoadministrable-desde-cms` y no impiden considerar probado el circuito rama -> PR para un campo institucional simple.
 
 ## Netlify: produccion Git-only
 
