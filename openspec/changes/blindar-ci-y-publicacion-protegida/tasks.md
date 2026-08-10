@@ -44,4 +44,4 @@
 
 ## 7. Validacion final de Alejandro
 
-- [ ] 7.1 Alejandro revisa el Deploy Preview final, confirma el funcionamiento de CI y las protecciones configuradas, y autoriza el commit de cierre, el OpenSpec Archive y la preparacion del merge a `main`. Esta tarea es exclusivamente manual y ningun agente puede marcarla.
+- [x] 7.1 Alejandro revisa el Deploy Preview final, confirma el funcionamiento de CI y las protecciones configuradas, y autoriza el commit de cierre, el OpenSpec Archive y la preparacion del merge a `main`. Esta tarea es exclusivamente manual y ningun agente puede marcarla.
