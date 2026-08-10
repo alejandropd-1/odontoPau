@@ -31,7 +31,7 @@
 ## 5. Checkpoint remoto y publicacion protegida
 
 - [x] 5.1 Preparar commit y push selectivos solo despues de revisar el checkpoint local y recibir autorizacion explicita.
-- [ ] 5.2 Abrir un pull request y confirmar que el workflow remoto aparece con el nombre previsto y finaliza correctamente.
+- [x] 5.2 Abrir un pull request y confirmar que el workflow remoto aparece con el nombre previsto y finaliza correctamente.
 - [ ] 5.3 Configurar Visual Editor para publicar mediante pull request desde una rama de trabajo separada y verificarlo con una edicion no clinica.
 - [ ] 5.4 Activar proteccion de `main` con el check exitoso, sin force-push ni borrado, y comprobar el procedimiento de rollback.
 - [ ] 5.5 Activar deploys de produccion Git-only en Netlify, manteniendo Deploy Previews, y registrar evidencia sin secretos.
