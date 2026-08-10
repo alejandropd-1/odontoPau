@@ -10,6 +10,7 @@ import Footer from '@/components/Footer';
 import Breadcrumb from '@/components/Breadcrumb';
 import TreatmentIcon from '@/components/TreatmentIcon';
 import type { Tratamiento } from '@/data/tratamientos';
+import { getTreatmentProfessionalMobileRole } from '@/lib/treatment-professionals';
 
 interface TreatmentDetailContentProps {
   tratamiento: Tratamiento;
@@ -126,7 +127,14 @@ export default function TreatmentDetailContent({
                   {tratamiento.professionals.map((professional) => (
                     <li key={professional.name}>
                       <p className="treatment-detail__doctor-badge-name">{professional.name}</p>
-                      <p className="treatment-detail__doctor-badge-role">{professional.role}</p>
+                      <p className="treatment-detail__doctor-badge-role">
+                        <span className="treatment-detail__doctor-badge-role-mobile">
+                          {getTreatmentProfessionalMobileRole(professional)}
+                        </span>
+                        <span className="treatment-detail__doctor-badge-role-desktop">
+                          {professional.role}
+                        </span>
+                      </p>
                     </li>
                   ))}
                 </ul>
