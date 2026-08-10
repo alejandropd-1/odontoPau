@@ -37,29 +37,13 @@
   }
 
   &__copyright {
+    text-align: center;
     font-size: fs("250");
     font-weight: 500;
     color: clr("slate", "500");
-  }
 
-  &__links {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: size(8);
-  }
-
-  &__link {
-    font-size: fs("175");
-    font-weight: 700;
-    color: clr("slate", "500");
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    transition: color transition(base);
-
-    &:hover {
-      color: clr("accent", "500");
+    @include mq(md) {
+      text-align: right;
     }
   }
 }
