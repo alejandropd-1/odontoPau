@@ -1,0 +1,96 @@
+- generic [active] [ref=f5e1]:
+  - main [ref=f5e2]:
+    - navigation [ref=f5e3]:
+      - generic [ref=f5e4]:
+        - link "Paula Gualtieri" [ref=f5e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f5e7]:
+          - link "Inicio" [ref=f5e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=f5e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=f5e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=f5e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=f5e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=f5e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f5e15]:
+      - list [ref=f5e16]:
+        - listitem [ref=f5e17]:
+          - link "Inicio" [ref=f5e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f5e22]:
+          - link "Ortodoncia Invisible" [ref=f5e25] [cursor=pointer]:
+            - /url: /tratamientos/ortodoncia-invisible
+        - listitem [ref=f5e26]:
+          - generic [ref=f5e29]: "Caso: Evolución de ortodoncia"
+    - article [ref=f5e30]:
+      - generic [ref=f5e31]:
+        - link "Volver a articulos" [ref=f5e32] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=f5e35]: "Vista previa editorial · Estado: technical_review · No indexada"
+        - generic [ref=f5e37]:
+          - generic [ref=f5e38]: Ortodoncia
+          - 'heading "Caso clínico: Evolución de un tratamiento de ortodoncia" [level=1] [ref=f5e39]':
+            - generic [ref=f5e40]: "Caso clínico:"
+            - text: Evolución de un tratamiento de ortodoncia
+          - paragraph [ref=f5e41]: Registro anterior y posterior de un caso de ortodoncia, presentado en el orden confirmado por Paula.
+          - generic [ref=f5e42]:
+            - generic [ref=f5e43]: 4 de agosto de 2026
+            - generic [ref=f5e46]: 1 min de lectura
+            - generic [ref=f5e50]: Por Equipo de Paula Gualtieri Odontología
+            - button "Compartir" [ref=f5e52] [cursor=pointer]
+        - region "Imágenes del caso" [ref=f5e59]:
+          - generic [ref=f5e60]:
+            - figure "Registro anterior al tratamiento." [ref=f5e61]:
+              - generic [ref=f5e62]:
+                - img "Registro inicial de un caso de ortodoncia" [ref=f5e63]
+                - generic [ref=f5e64]: Antes
+            - figure "Registro posterior al tratamiento." [ref=f5e66]:
+              - generic [ref=f5e67]:
+                - img "Registro posterior de un caso de ortodoncia" [ref=f5e68]
+                - generic [ref=f5e69]: Después
+        - generic [ref=f5e71]:
+          - region [ref=f5e72]:
+            - generic [ref=f5e73]:
+              - heading "El caso" [level=2] [ref=f5e77]
+              - generic [ref=f5e78]:
+                - paragraph [ref=f5e79]: Las imágenes documentan la evolución de un tratamiento de ortodoncia y se presentan en el orden confirmado por Paula.
+                - paragraph [ref=f5e80]: El material recibido no especifica el tipo de aparatología ni otras características clínicas, por lo que esos datos no se atribuyen al caso.
+          - generic [ref=f5e81]:
+            - generic [ref=f5e82]:
+              - text: Evaluación profesional
+              - heading "¿Querés consultar por un tratamiento de ortodoncia?" [level=2] [ref=f5e83]
+              - paragraph [ref=f5e84]: Podés escribirnos para coordinar una evaluación. El plan y las alternativas dependen de cada situación clínica.
+            - link "Consultar por WhatsApp" [ref=f5e85] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20ortodoncia
+        - generic [ref=f5e88]:
+          - generic [ref=f5e89]:
+            - heading "Temas del artículo" [level=2] [ref=f5e90]
+            - generic "Temas del artículo" [ref=f5e94]:
+              - generic [ref=f5e95]: ortodoncia
+              - generic [ref=f5e96]: evolución
+              - generic [ref=f5e97]: caso clínico
+          - complementary [ref=f5e99]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=f5e100]
+            - link [ref=f5e102] [cursor=pointer]:
+              - /url: /tratamientos/ortodoncia-invisible
+              - strong [ref=f5e103]: Ortodoncia Invisible
+              - generic [ref=f5e104]: Ver tratamiento
+    - generic [ref=f5e108]:
+      - generic [ref=f5e109]: Paula Gualtieri
+      - generic [ref=f5e110]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f5e111]:
+        - link "Instagram" [ref=f5e112] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f5e113] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f5e114] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f5e115]
+  - alert [ref=f5e116]

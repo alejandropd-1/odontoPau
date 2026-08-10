@@ -1,0 +1,91 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - navigation [ref=f3e3]:
+      - generic [ref=f3e4]:
+        - link "Paula Gualtieri" [ref=f3e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f3e7]:
+          - link "Inicio" [ref=f3e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=f3e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=f3e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=f3e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=f3e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=f3e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f3e15]:
+      - list [ref=f3e16]:
+        - listitem [ref=f3e17]:
+          - link "Inicio" [ref=f3e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f3e22]:
+          - generic [ref=f3e25]: Rehabilitación
+    - generic [ref=f3e27]:
+      - generic [ref=f3e28]:
+        - generic [ref=f3e29]: Atención odontológica
+        - heading "Rehabilitación" [level=1] [ref=f3e30]
+        - paragraph [ref=f3e31]: Planificación personalizada para recuperar función y armonía mediante alternativas restauradoras y protésicas definidas después de una evaluación clínica.
+        - link "Solicitar evaluación" [ref=f3e32] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20solicitar%20una%20evaluaci%C3%B3n%20para%20Rehabilitaci%C3%B3n
+      - generic [ref=f3e35]:
+        - img "Rehabilitación" [ref=f3e37]
+        - generic [ref=f3e39]:
+          - img "Retrato del Dr. Roberto Domínguez" [ref=f3e42]
+          - list "Profesionales del tratamiento" [ref=f3e43]:
+            - listitem [ref=f3e44]:
+              - paragraph [ref=f3e45]: Dr. Roberto Domínguez
+              - paragraph [ref=f3e46]: Especialista en Rehabilitación Oral (Implantes y Prótesis) y Estética Dental
+    - generic [ref=f3e48]:
+      - generic [ref=f3e49]:
+        - generic [ref=f3e50]:
+          - heading "Casos Clínicos" [level=2] [ref=f3e51]
+          - paragraph [ref=f3e52]: Registros clínicos autorizados que documentan distintos abordajes del equipo.
+        - generic [ref=f3e53]:
+          - button "Anterior caso" [ref=f3e54] [cursor=pointer]
+          - button "Siguiente caso" [ref=f3e57] [cursor=pointer]
+      - generic [ref=f3e61]:
+        - img "Rehabilitación del sector anterosuperior" [ref=f3e63]
+        - generic [ref=f3e64]:
+          - heading "Rehabilitación del sector anterosuperior" [level=3] [ref=f3e65]
+          - link "Ver caso completo" [ref=f3e67] [cursor=pointer]:
+            - /url: /articulos/rehabilitacion-sector-anterosuperior
+    - region [ref=f3e68]:
+      - generic [ref=f3e69]:
+        - generic [ref=f3e70]:
+          - text: Para entender mejor el tratamiento
+          - heading "Artículos relacionados" [level=2] [ref=f3e71]
+        - article [ref=f3e73]:
+          - generic [ref=f3e74]: 2 min de lectura
+          - heading "Rehabilitación del sector anterosuperior" [level=3] [ref=f3e75]
+          - paragraph [ref=f3e76]: Remoción de coronas anteriores y opacificación de pernos metálicos para la colocación final de coronas libres de metal.
+          - link "Leer artículo" [ref=f3e77] [cursor=pointer]:
+            - /url: /articulos/rehabilitacion-sector-anterosuperior
+    - generic [ref=f3e83]:
+      - heading "Aspectos de rehabilitación" [level=2] [ref=f3e84]
+      - generic [ref=f3e85]:
+        - generic [ref=f3e86]: Evaluación integral de la función, la estructura dentaria y las necesidades de cada persona.
+        - generic [ref=f3e92]: Planificación de alternativas restauradoras y protésicas según el caso clínico.
+        - generic [ref=f3e98]: Selección individual de técnicas y materiales por parte del equipo tratante.
+        - generic [ref=f3e104]: Controles y seguimiento definidos de acuerdo con la evolución del tratamiento.
+    - generic [ref=f3e113]:
+      - heading "¿Querés consultar por este tratamiento?" [level=2] [ref=f3e114]
+      - paragraph [ref=f3e115]: Escribinos para coordinar una evaluación y conversar sobre las opciones adecuadas para tu caso.
+      - link "Solicitar evaluación" [ref=f3e117] [cursor=pointer]:
+        - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20solicitar%20una%20evaluaci%C3%B3n%20para%20Rehabilitaci%C3%B3n
+    - contentinfo [ref=f3e121]:
+      - generic [ref=f3e122]:
+        - generic [ref=f3e123]: Paula Gualtieri
+        - generic [ref=f3e124]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+        - generic [ref=f3e125]:
+          - link "Instagram" [ref=f3e126] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f3e127] [cursor=pointer]:
+            - /url: "#"
+          - link "Aviso Legal" [ref=f3e128] [cursor=pointer]:
+            - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f3e129]

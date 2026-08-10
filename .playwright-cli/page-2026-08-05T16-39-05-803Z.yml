@@ -1,0 +1,94 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - link "Inicio" [ref=e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link "Inicio" [ref=e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e22]:
+          - link "Odontología Pediátrica" [ref=e25] [cursor=pointer]:
+            - /url: /tratamientos/pediatria
+        - listitem [ref=e26]:
+          - generic [ref=e29]: "Caso: Cuidado bucal en la infancia"
+    - article [ref=e30]:
+      - generic [ref=e31]:
+        - link "Volver a articulos" [ref=e32] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=e35]: "Vista previa editorial · Estado: technical_review · No indexada"
+        - generic [ref=e37]:
+          - generic [ref=e38]: Odontología Pediátrica
+          - 'heading "Caso clínico: Aprender a cuidar la sonrisa desde chicos" [level=1] [ref=e39]':
+            - generic [ref=e40]: "Caso clínico:"
+            - text: Aprender a cuidar la sonrisa desde chicos
+          - paragraph [ref=e41]: Una consulta pensada para acercar el cuidado bucal con paciencia, juego y mucha confianza.
+          - generic [ref=e42]:
+            - generic [ref=e43]: 5 de agosto de 2026
+            - generic [ref=e46]: 1 min de lectura
+            - generic [ref=e50]: Por Equipo clínico
+            - button "Compartir" [ref=e52] [cursor=pointer]
+        - region "Imágenes del caso" [ref=e59]:
+          - generic [ref=e60]:
+            - figure "Un momento para conocernos y ganar confianza." [ref=e61]:
+              - img "Paciente pediátrica con protección visual sonriendo durante una consulta" [ref=e63]
+            - figure "Aprender jugando también forma parte del cuidado." [ref=e65]:
+              - img "Paciente pediátrica con protección visual sosteniendo un elemento de higiene oral" [ref=e67]
+            - figure "Cada pequeño avance merece ser celebrado." [ref=e69]:
+              - img "Paciente pediátrica con protección visual junto a recursos educativos de salud bucal" [ref=e71]
+        - generic [ref=e73]:
+          - region [ref=e74]:
+            - generic [ref=e75]:
+              - heading "Cuidar también se aprende" [level=2] [ref=e79]
+              - generic [ref=e80]:
+                - paragraph [ref=e81]: Los primeros encuentros con el odontólogo pueden ser una linda oportunidad para incorporar hábitos que acompañen toda la vida.
+                - paragraph [ref=e82]: Con tiempo, palabras simples y recursos adaptados a su edad, cada chico puede acercarse al cepillado y vivir la consulta con mayor tranquilidad.
+          - generic [ref=e83]:
+            - generic [ref=e84]:
+              - text: Para las familias
+              - heading "¿Querés acompañar sus primeros cuidados?" [level=2] [ref=e85]
+              - paragraph [ref=e86]: Escribinos para coordinar una consulta tranquila y adaptada a la edad y las necesidades de cada chico.
+            - link "Consultar por WhatsApp" [ref=e87] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20odontolog%C3%ADa%20pedi%C3%A1trica
+        - generic [ref=e90]:
+          - generic [ref=e91]:
+            - heading "Temas del artículo" [level=2] [ref=e92]
+            - generic "Temas del artículo" [ref=e96]:
+              - generic [ref=e97]: odontología pediátrica
+              - generic [ref=e98]: higiene oral
+              - generic [ref=e99]: infancia
+          - complementary [ref=e101]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=e102]
+            - link [ref=e104] [cursor=pointer]:
+              - /url: /tratamientos/pediatria
+              - strong [ref=e105]: Odontología Pediátrica
+              - generic [ref=e106]: Ver tratamiento
+    - generic [ref=e110]:
+      - generic [ref=e111]: Paula Gualtieri
+      - generic [ref=e112]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=e113]:
+        - link "Instagram" [ref=e114] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=e115] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=e116] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=e117]
+  - alert [ref=e118]

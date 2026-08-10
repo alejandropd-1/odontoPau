@@ -1,0 +1,111 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - link "Inicio" [ref=e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link "Inicio" [ref=e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e22]:
+          - generic [ref=e25]: Estética Dental
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]: Atención odontológica
+        - heading "Estética Dental" [level=1] [ref=e30]
+        - paragraph [ref=e31]: Alternativas personalizadas para trabajar color, forma y armonía de la sonrisa después de una evaluación clínica individual.
+        - link "Solicitar evaluación" [ref=e32] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20solicitar%20una%20evaluaci%C3%B3n%20para%20Est%C3%A9tica%20Dental
+      - generic [ref=e35]:
+        - img "Estética Dental" [ref=e37]
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - img "Retrato del Dr. Roberto Domínguez" [ref=e42]
+            - img "Retrato de la Dra. Paula Gualtieri" [ref=e44]
+          - list "Profesionales del tratamiento" [ref=e45]:
+            - listitem [ref=e46]:
+              - paragraph [ref=e47]: Dr. Roberto Domínguez
+              - paragraph [ref=e48]: Especialista en Rehabilitación Oral (Implantes y Prótesis) y Estética Dental
+            - listitem [ref=e49]:
+              - paragraph [ref=e50]: Dra. Paula Gualtieri
+              - paragraph [ref=e51]: Dirección clínica
+    - generic [ref=e53]:
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - heading "Casos Clínicos" [level=2] [ref=e56]
+          - paragraph [ref=e57]: Registros clínicos autorizados que documentan distintos abordajes del equipo.
+        - generic [ref=e58]:
+          - button "Anterior caso" [ref=e59] [cursor=pointer]
+          - button "Siguiente caso" [ref=e62] [cursor=pointer]
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - img "Blanqueamiento dentario ambulatorio" [ref=e68]
+          - generic [ref=e69]:
+            - heading "Blanqueamiento dentario ambulatorio" [level=3] [ref=e70]
+            - link "Ver caso completo" [ref=e72] [cursor=pointer]:
+              - /url: /articulos/blanqueamiento-dentario-tecnica-ambulatoria
+        - generic [ref=e73]:
+          - img "Reconstrucción con resina en pieza 11" [ref=e75]
+          - generic [ref=e76]:
+            - heading "Reconstrucción con resina en pieza 11" [level=3] [ref=e77]
+            - link "Ver caso completo" [ref=e79] [cursor=pointer]:
+              - /url: /articulos/resina-mano-alzada-pieza-11
+    - region [ref=e80]:
+      - generic [ref=e81]:
+        - generic [ref=e82]:
+          - text: Para entender mejor el tratamiento
+          - heading "Artículos relacionados" [level=2] [ref=e83]
+        - generic [ref=e84]:
+          - article [ref=e85]:
+            - generic [ref=e86]: 2 min de lectura
+            - heading "Blanqueamiento dentario con técnica ambulatoria" [level=3] [ref=e87]
+            - paragraph [ref=e88]: Registro clínico de un blanqueamiento dentario realizado con técnica ambulatoria, indicada en este caso para favorecer menor sensibilidad.
+            - link "Leer artículo" [ref=e89] [cursor=pointer]:
+              - /url: /articulos/blanqueamiento-dentario-tecnica-ambulatoria
+          - article [ref=e92]:
+            - generic [ref=e93]: 1 min de lectura
+            - heading "Reconstrucción con resina a mano alzada en pieza 11" [level=3] [ref=e94]
+            - paragraph [ref=e95]: Registro de una reconstrucción con resina a mano alzada después de un traumatismo en la pieza 11.
+            - link "Leer artículo" [ref=e96] [cursor=pointer]:
+              - /url: /articulos/resina-mano-alzada-pieza-11
+    - generic [ref=e102]:
+      - heading "Aspectos de estética dental" [level=2] [ref=e103]
+      - generic [ref=e104]:
+        - generic [ref=e105]: Blanqueamiento con modalidad y seguimiento definidos para cada persona.
+        - generic [ref=e111]: Reconstrucciones con resina para situaciones que requieren recuperar forma dentaria.
+        - generic [ref=e117]: Alternativas restauradoras seleccionadas según la necesidad clínica.
+        - generic [ref=e123]: Planificación orientada a integrar estética, función y salud bucal.
+    - generic [ref=e132]:
+      - heading "¿Querés consultar por este tratamiento?" [level=2] [ref=e133]
+      - paragraph [ref=e134]: Escribinos para coordinar una evaluación y conversar sobre las opciones adecuadas para tu caso.
+      - link "Solicitar evaluación" [ref=e136] [cursor=pointer]:
+        - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20solicitar%20una%20evaluaci%C3%B3n%20para%20Est%C3%A9tica%20Dental
+    - contentinfo [ref=e140]:
+      - generic [ref=e141]:
+        - generic [ref=e142]: Paula Gualtieri
+        - generic [ref=e143]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+        - generic [ref=e144]:
+          - link "Instagram" [ref=e145] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=e146] [cursor=pointer]:
+            - /url: "#"
+          - link "Aviso Legal" [ref=e147] [cursor=pointer]:
+            - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=e148]
+  - alert [ref=e149]

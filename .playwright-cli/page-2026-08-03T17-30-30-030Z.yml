@@ -1,0 +1,98 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - link "Inicio" [ref=e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link "Inicio" [ref=e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e22]:
+          - link "Estética Dental" [ref=e25] [cursor=pointer]:
+            - /url: /tratamientos/estetica-dental
+        - listitem [ref=e26]:
+          - generic [ref=e29]: "Caso: Blanqueamiento dentario"
+    - article [ref=e30]:
+      - generic [ref=e31]:
+        - link "Volver a articulos" [ref=e32] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=e35]: "Vista previa editorial · Estado: draft · No indexada"
+        - generic [ref=e37]:
+          - generic [ref=e38]: Estética Dental
+          - 'heading "Caso clínico: Blanqueamiento dentario con técnica ambulatoria" [level=1] [ref=e39]':
+            - generic [ref=e40]: "Caso clínico:"
+            - text: Blanqueamiento dentario con técnica ambulatoria
+          - paragraph [ref=e41]: Registro clínico de un blanqueamiento dentario realizado con técnica ambulatoria, indicada en este caso para favorecer menor sensibilidad.
+          - generic [ref=e42]:
+            - generic [ref=e43]: 3 de agosto de 2026
+            - generic [ref=e46]: 2 min de lectura
+            - generic [ref=e50]: Por Equipo de Paula Gualtieri Odontología
+            - button "Compartir" [ref=e52] [cursor=pointer]
+        - region "Imágenes del caso" [ref=e59]:
+          - generic [ref=e60]:
+            - figure "Vista frontal del registro comparativo." [ref=e61]:
+              - img "Registro comparativo frontal del caso de blanqueamiento dentario" [ref=e63]
+            - figure "Vista lateral del registro comparativo." [ref=e65]:
+              - img "Registro comparativo lateral del caso de blanqueamiento dentario" [ref=e67]
+        - generic [ref=e69]:
+          - region [ref=e70]:
+            - generic [ref=e71]:
+              - heading "El caso" [level=2] [ref=e75]
+              - paragraph [ref=e77]: Este caso documenta un blanqueamiento dentario realizado con técnica ambulatoria. Paula indicó que esta modalidad fue elegida en el caso para favorecer menor sensibilidad.
+              - generic [ref=e78]:
+                - generic [ref=e79]:
+                  - term [ref=e80]: Tratamiento informado
+                  - definition [ref=e81]: Blanqueamiento dentario
+                - generic [ref=e82]:
+                  - term [ref=e83]: Modalidad informada
+                  - definition [ref=e84]: Técnica ambulatoria
+          - generic [ref=e85]:
+            - heading "Una indicación individual" [level=2] [ref=e86]
+            - paragraph [ref=e88]: La modalidad, las pautas de uso y el seguimiento de un blanqueamiento deben definirse después de una evaluación profesional. La experiencia de este caso no determina la indicación para otras personas.
+          - generic [ref=e89]:
+            - generic [ref=e90]:
+              - text: Evaluación profesional
+              - heading "¿Querés consultar por un blanqueamiento dentario?" [level=2] [ref=e91]
+              - paragraph [ref=e92]: Podés escribirnos para coordinar una evaluación y conocer qué opciones se ajustan a tu situación.
+            - link "Consultar por WhatsApp" [ref=e93] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20blanqueamiento%20dentario
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - heading "Temas del artículo" [level=2] [ref=e98]
+            - generic "Temas del artículo" [ref=e102]:
+              - generic [ref=e103]: estética dental
+              - generic [ref=e104]: blanqueamiento dentario
+              - generic [ref=e105]: técnica ambulatoria
+          - complementary [ref=e107]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=e108]
+            - link [ref=e110] [cursor=pointer]:
+              - /url: /tratamientos/estetica-dental
+              - strong [ref=e111]: Estética Dental
+              - generic [ref=e112]: Ver tratamiento
+    - generic [ref=e116]:
+      - generic [ref=e117]: Paula Gualtieri
+      - generic [ref=e118]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=e119]:
+        - link "Instagram" [ref=e120] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=e121] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=e122] [cursor=pointer]:
+          - /url: "#"
+  - scrollbar "Progreso de desplazamiento" [ref=e123]

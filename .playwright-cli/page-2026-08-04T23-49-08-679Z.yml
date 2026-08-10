@@ -1,0 +1,99 @@
+- generic [active] [ref=f6e1]:
+  - generic [ref=f6e2]:
+    - navigation [ref=f6e3]:
+      - generic [ref=f6e4]:
+        - link "Paula Gualtieri" [ref=f6e5] [cursor=pointer]:
+          - /url: /
+        - link "Agendar Turno" [ref=f6e7] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f6e9]:
+      - list [ref=f6e10]:
+        - listitem [ref=f6e11]:
+          - link "Inicio" [ref=f6e12] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f6e16]:
+          - generic [ref=f6e19]: Estética Dental
+    - generic [ref=f6e21]:
+      - generic [ref=f6e22]:
+        - generic [ref=f6e23]: Atención odontológica
+        - heading "Estética Dental" [level=1] [ref=f6e24]
+        - paragraph [ref=f6e25]: Alternativas personalizadas para trabajar color, forma y armonía de la sonrisa después de una evaluación clínica individual.
+        - link "Solicitar evaluación" [ref=f6e26] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20solicitar%20una%20evaluaci%C3%B3n%20para%20Est%C3%A9tica%20Dental
+      - generic [ref=f6e29]:
+        - img "Estética Dental" [ref=f6e31]
+        - generic [ref=f6e33]:
+          - generic [ref=f6e34]:
+            - img "Retrato del Dr. Roberto Domínguez" [ref=f6e36]
+            - img "Retrato de la Dra. Paula Gualtieri" [ref=f6e38]
+          - list "Profesionales del tratamiento" [ref=f6e39]:
+            - listitem [ref=f6e40]:
+              - paragraph [ref=f6e41]: Dr. Roberto Domínguez
+              - paragraph [ref=f6e42]: Especialista en Rehabilitación Oral (Implantes y Prótesis) y Estética Dental
+            - listitem [ref=f6e43]:
+              - paragraph [ref=f6e44]: Dra. Paula Gualtieri
+              - paragraph [ref=f6e45]: Dirección clínica
+    - generic [ref=f6e47]:
+      - generic [ref=f6e48]:
+        - generic [ref=f6e49]:
+          - heading "Casos Clínicos" [level=2] [ref=f6e50]
+          - paragraph [ref=f6e51]: Registros clínicos autorizados que documentan distintos abordajes del equipo.
+        - generic [ref=f6e52]:
+          - button "Anterior caso" [ref=f6e53] [cursor=pointer]
+          - button "Siguiente caso" [ref=f6e56] [cursor=pointer]
+      - generic [ref=f6e59]:
+        - generic [ref=f6e60]:
+          - img "Blanqueamiento dentario ambulatorio" [ref=f6e62]
+          - generic [ref=f6e63]:
+            - heading "Blanqueamiento dentario ambulatorio" [level=3] [ref=f6e64]
+            - link "Ver caso completo" [ref=f6e66] [cursor=pointer]:
+              - /url: /articulos/blanqueamiento-dentario-tecnica-ambulatoria
+        - generic [ref=f6e67]:
+          - img "Reconstrucción con resina en pieza 11" [ref=f6e69]
+          - generic [ref=f6e70]:
+            - heading "Reconstrucción con resina en pieza 11" [level=3] [ref=f6e71]
+            - link "Ver caso completo" [ref=f6e73] [cursor=pointer]:
+              - /url: /articulos/resina-mano-alzada-pieza-11
+    - region [ref=f6e74]:
+      - generic [ref=f6e75]:
+        - generic [ref=f6e76]:
+          - text: Para entender mejor el tratamiento
+          - heading "Artículos relacionados" [level=2] [ref=f6e77]
+        - generic [ref=f6e78]:
+          - article [ref=f6e79]:
+            - generic [ref=f6e80]: 2 min de lectura
+            - heading "Blanqueamiento dentario con técnica ambulatoria" [level=3] [ref=f6e81]
+            - paragraph [ref=f6e82]: Registro clínico de un blanqueamiento dentario realizado con técnica ambulatoria, indicada en este caso para favorecer menor sensibilidad.
+            - link "Leer artículo" [ref=f6e83] [cursor=pointer]:
+              - /url: /articulos/blanqueamiento-dentario-tecnica-ambulatoria
+          - article [ref=f6e86]:
+            - generic [ref=f6e87]: 1 min de lectura
+            - heading "Reconstrucción con resina a mano alzada en pieza 11" [level=3] [ref=f6e88]
+            - paragraph [ref=f6e89]: Registro de una reconstrucción con resina a mano alzada después de un traumatismo en la pieza 11.
+            - link "Leer artículo" [ref=f6e90] [cursor=pointer]:
+              - /url: /articulos/resina-mano-alzada-pieza-11
+    - generic [ref=f6e96]:
+      - heading "Aspectos de estética dental" [level=2] [ref=f6e97]
+      - generic [ref=f6e98]:
+        - generic [ref=f6e99]: Blanqueamiento con modalidad y seguimiento definidos para cada persona.
+        - generic [ref=f6e105]: Reconstrucciones con resina para situaciones que requieren recuperar forma dentaria.
+        - generic [ref=f6e111]: Alternativas restauradoras seleccionadas según la necesidad clínica.
+        - generic [ref=f6e117]: Planificación orientada a integrar estética, función y salud bucal.
+    - generic [ref=f6e126]:
+      - heading "¿Querés consultar por este tratamiento?" [level=2] [ref=f6e127]
+      - paragraph [ref=f6e128]: Escribinos para coordinar una evaluación y conversar sobre las opciones adecuadas para tu caso.
+      - link "Solicitar evaluación" [ref=f6e130] [cursor=pointer]:
+        - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20solicitar%20una%20evaluaci%C3%B3n%20para%20Est%C3%A9tica%20Dental
+    - contentinfo [ref=f6e134]:
+      - generic [ref=f6e135]:
+        - generic [ref=f6e136]: Paula Gualtieri
+        - generic [ref=f6e137]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+        - generic [ref=f6e138]:
+          - link "Instagram" [ref=f6e139] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f6e140] [cursor=pointer]:
+            - /url: "#"
+          - link "Aviso Legal" [ref=f6e141] [cursor=pointer]:
+            - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f6e142]

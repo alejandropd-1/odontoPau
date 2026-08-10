@@ -1,0 +1,78 @@
+- generic [active] [ref=f4e1]:
+  - main [ref=f4e2]:
+    - navigation [ref=f4e3]:
+      - generic [ref=f4e4]:
+        - link "Paula Gualtieri" [ref=f4e5] [cursor=pointer]:
+          - /url: /
+        - link "Agendar Turno" [ref=f4e7] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f4e9]:
+      - list [ref=f4e10]:
+        - listitem [ref=f4e11]:
+          - link "Inicio" [ref=f4e12] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f4e15]:
+          - link "Odontología Pediátrica" [ref=f4e18] [cursor=pointer]:
+            - /url: /tratamientos/pediatria
+        - listitem [ref=f4e19]:
+          - generic [ref=f4e22]: "Caso: Atención pediátrica"
+    - article [ref=f4e23]:
+      - generic [ref=f4e24]:
+        - link "Volver a articulos" [ref=f4e25] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=f4e28]: "Vista previa editorial · Estado: technical_review · No indexada"
+        - generic [ref=f4e30]:
+          - generic [ref=f4e31]: Odontología Pediátrica
+          - 'heading "Caso clínico: Atención odontológica pediátrica con paciencia y respeto" [level=1] [ref=f4e32]':
+            - generic [ref=f4e33]: "Caso clínico:"
+            - text: Atención odontológica pediátrica con paciencia y respeto
+          - paragraph [ref=f4e34]: Un registro de atención infantil basado en la paciencia y el respeto que los más chicos se merecen.
+          - generic [ref=f4e35]:
+            - generic [ref=f4e36]: 4 de agosto de 2026
+            - generic [ref=f4e39]: 1 min de lectura
+            - generic [ref=f4e43]: Por Equipo de Paula Gualtieri Odontología
+            - button "Compartir" [ref=f4e45] [cursor=pointer]
+        - region "Imágenes del caso" [ref=f4e52]:
+          - figure "Imagen autorizada y protegida para preservar la identidad de la menor." [ref=f4e54]:
+            - img "Profesional del equipo junto a una paciente pediátrica con protección visual en los ojos" [ref=f4e56]
+        - generic [ref=f4e58]:
+          - region [ref=f4e59]:
+            - generic [ref=f4e60]:
+              - heading "La atención" [level=2] [ref=f4e64]
+              - generic [ref=f4e65]:
+                - paragraph [ref=f4e66]: "Paula definió este registro con una idea central: atender a los pacientes pediátricos con la paciencia y el respeto que los más chicos se merecen."
+                - paragraph [ref=f4e67]: La imagen acompaña ese enfoque y no describe un diagnóstico ni un tratamiento específico.
+          - generic [ref=f4e68]:
+            - generic [ref=f4e69]:
+              - text: Consulta para familias
+              - heading "¿Querés coordinar una consulta pediátrica?" [level=2] [ref=f4e70]
+              - paragraph [ref=f4e71]: Podés escribirnos para conversar sobre la atención y coordinar una evaluación adaptada a las necesidades de tu familia.
+            - link "Consultar por WhatsApp" [ref=f4e72] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20odontolog%C3%ADa%20pedi%C3%A1trica
+        - generic [ref=f4e74]:
+          - generic [ref=f4e75]:
+            - heading "Temas del artículo" [level=2] [ref=f4e76]
+            - generic "Temas del artículo" [ref=f4e80]:
+              - generic [ref=f4e81]: odontología pediátrica
+              - generic [ref=f4e82]: atención infantil
+              - generic [ref=f4e83]: acompañamiento
+          - complementary [ref=f4e85]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=f4e86]
+            - link [ref=f4e88] [cursor=pointer]:
+              - /url: /tratamientos/pediatria
+              - strong [ref=f4e89]: Odontología Pediátrica
+              - generic [ref=f4e90]: Ver tratamiento
+    - generic [ref=f4e94]:
+      - generic [ref=f4e95]: Paula Gualtieri
+      - generic [ref=f4e96]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f4e97]:
+        - link "Instagram" [ref=f4e98] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f4e99] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f4e100] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f4e101]
+  - alert [ref=f4e102]

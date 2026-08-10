@@ -1,0 +1,56 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e2]:
+    - navigation [ref=f4e3]:
+      - generic [ref=f4e4]:
+        - link "Paula Gualtieri" [ref=f4e5] [cursor=pointer]:
+          - /url: /
+        - link "Agendar Turno" [ref=f4e7] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f4e9]:
+      - list [ref=f4e10]:
+        - listitem [ref=f4e11]:
+          - link "Inicio" [ref=f4e12] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f4e16]:
+          - generic [ref=f4e19]: Ortopedia
+    - generic [ref=f4e21]:
+      - generic [ref=f4e22]:
+        - generic [ref=f4e23]: Atención odontológica
+        - heading "Ortopedia" [level=1] [ref=f4e24]
+        - paragraph [ref=f4e25]: Evaluación y acompañamiento del crecimiento y de las funciones orales durante etapas tempranas del desarrollo.
+        - link "Solicitar evaluación" [ref=f4e26] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20solicitar%20una%20evaluaci%C3%B3n%20para%20Ortopedia
+      - generic [ref=f4e29]:
+        - img "Ortopedia" [ref=f4e31]
+        - generic [ref=f4e33]:
+          - img "Retrato de la Dra. Paula Gualtieri" [ref=f4e36]
+          - list "Profesionales del tratamiento" [ref=f4e37]:
+            - listitem [ref=f4e38]:
+              - paragraph [ref=f4e39]: Dra. Paula Gualtieri
+              - paragraph [ref=f4e40]: Alineadores dentales y ortopedia
+    - generic [ref=f4e44]:
+      - heading "Aspectos de ortopedia" [level=2] [ref=f4e45]
+      - generic [ref=f4e46]:
+        - generic [ref=f4e47]: Evaluación del crecimiento y del desarrollo de los maxilares.
+        - generic [ref=f4e53]: Observación de funciones como respiración, masticación y deglución.
+        - generic [ref=f4e59]: Aparatología indicada de acuerdo con la etapa y la necesidad individual.
+        - generic [ref=f4e65]: Controles para acompañar los cambios durante el crecimiento.
+    - generic [ref=f4e74]:
+      - heading "¿Querés consultar por este tratamiento?" [level=2] [ref=f4e75]
+      - paragraph [ref=f4e76]: Escribinos para coordinar una evaluación y conversar sobre las opciones adecuadas para tu caso.
+      - link "Solicitar evaluación" [ref=f4e78] [cursor=pointer]:
+        - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20solicitar%20una%20evaluaci%C3%B3n%20para%20Ortopedia
+    - contentinfo [ref=f4e82]:
+      - generic [ref=f4e83]:
+        - generic [ref=f4e84]: Paula Gualtieri
+        - generic [ref=f4e85]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+        - generic [ref=f4e86]:
+          - link "Instagram" [ref=f4e87] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f4e88] [cursor=pointer]:
+            - /url: "#"
+          - link "Aviso Legal" [ref=f4e89] [cursor=pointer]:
+            - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f4e90]
+  - alert [ref=f4e91]

@@ -1,0 +1,242 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - link "Agendar Turno" [ref=e7] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=e9]:
+      - list [ref=e10]:
+        - listitem [ref=e11]:
+          - link "Inicio" [ref=e12] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e16]:
+          - link "Instrucciones" [ref=e19] [cursor=pointer]:
+            - /url: /instrucciones
+        - listitem [ref=e20]:
+          - generic [ref=e23]: Dieta blanca
+    - article [ref=e24]:
+      - generic [ref=e25]:
+        - link "Volver a instrucciones" [ref=e26] [cursor=pointer]:
+          - /url: /instrucciones
+        - status [ref=e29]: "Vista previa editorial · Estado: approved · No indexada"
+        - generic [ref=e30]:
+          - generic [ref=e31]: Indicaciones para pacientes
+          - 'heading "Guía: Dieta blanca" [level=1] [ref=e32]'
+          - paragraph [ref=e33]: Guía práctica de alimentos, bebidas y productos indicados, a evitar o a consumir con precaución.
+          - generic [ref=e34]:
+            - generic [ref=e35]: Actualizada el 4 de agosto de 2026
+            - generic [ref=e38]: 4 min de lectura
+            - generic [ref=e42]: Revisada por Paula Gualtieri
+            - generic [ref=e47]:
+              - button "Compartir" [expanded] [active] [ref=e48] [cursor=pointer]
+              - generic [ref=e328]:
+                - button "Elegir app" [ref=e329] [cursor=pointer]
+                - link "WhatsApp" [ref=e336] [cursor=pointer]:
+                  - /url: https://wa.me/?text=Dieta%20blanca%0A%0AGu%C3%ADa%20pr%C3%A1ctica%20de%20alimentos%2C%20bebidas%20y%20productos%20indicados%2C%20a%20evitar%20o%20a%20consumir%20con%20precauci%C3%B3n.%0A%0Ahttps%3A%2F%2Fdeploy-preview-1--paulagualtieri.netlify.app%2Finstrucciones%2Fblanqueamiento%2Fdieta-blanca
+                - link "Email" [ref=e339] [cursor=pointer]:
+                  - /url: mailto:?subject=Dieta%20blanca&body=Dieta%20blanca%0A%0AGu%C3%ADa%20pr%C3%A1ctica%20de%20alimentos%2C%20bebidas%20y%20productos%20indicados%2C%20a%20evitar%20o%20a%20consumir%20con%20precauci%C3%B3n.%0A%0Ahttps%3A%2F%2Fdeploy-preview-1--paulagualtieri.netlify.app%2Finstrucciones%2Fblanqueamiento%2Fdieta-blanca
+                - button "Copiar link" [ref=e343] [cursor=pointer]
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - complementary [ref=e57]:
+              - generic [ref=e60]:
+                - heading "Antes de empezar" [level=2] [ref=e61]
+                - paragraph [ref=e62]: Estas son indicaciones generales. Si recibiste una pauta diferente durante la consulta, seguí la indicación personalizada del profesional tratante.
+            - region [ref=e63]:
+              - heading "Qué elegir y qué evitar" [level=2] [ref=e64]
+              - paragraph [ref=e65]: La clasificación reproduce la guía entregada por Paula.
+              - generic [ref=e66]:
+                - region [ref=e67]:
+                  - heading "Vegetales" [level=3] [ref=e68]
+                  - generic [ref=e69]:
+                    - generic [ref=e70]:
+                      - heading "Sí" [level=4] [ref=e71]
+                      - list [ref=e75]:
+                        - listitem [ref=e76]: Legumbres claras bien cocidas
+                        - listitem [ref=e77]: Repollo blanco
+                        - listitem [ref=e78]: Lechugas en cualquier variedad
+                        - listitem [ref=e79]: Cebolla
+                        - listitem [ref=e80]: Papas
+                        - listitem [ref=e81]: Endivias
+                        - listitem [ref=e82]: Palmitos
+                        - listitem [ref=e83]: Arroz
+                        - listitem [ref=e84]: Mandioca
+                    - generic [ref=e85]:
+                      - heading "Precaución" [level=4] [ref=e86]
+                      - list [ref=e89]:
+                        - listitem [ref=e90]: Tomate crudo
+                        - listitem [ref=e91]: Zanahoria cruda
+                        - listitem [ref=e92]: Berenjena
+                    - generic [ref=e93]:
+                      - heading "No" [level=4] [ref=e94]
+                      - list [ref=e99]:
+                        - listitem [ref=e100]: Tomates con conserva
+                        - listitem [ref=e101]: Verduras de hoja color verde intenso (acelga, espinaca, berro, etc.)
+                        - listitem [ref=e102]: Zanahorias
+                        - listitem [ref=e103]: Remolachas
+                        - listitem [ref=e104]: Zapallo
+                - region [ref=e105]:
+                  - heading "Carnes" [level=3] [ref=e106]
+                  - generic [ref=e107]:
+                    - generic [ref=e108]:
+                      - heading "Sí" [level=4] [ref=e109]
+                      - list [ref=e113]:
+                        - listitem [ref=e114]: Carnes blancas
+                        - listitem [ref=e115]: Aves
+                        - listitem [ref=e116]: Pescados
+                    - generic [ref=e117]:
+                      - heading "Precaución" [level=4] [ref=e118]
+                      - list [ref=e121]:
+                        - listitem [ref=e122]: Carnes rojas
+                        - listitem [ref=e123]: Fiambres sin colorantes
+                - region [ref=e124]:
+                  - heading "Frutas" [level=3] [ref=e125]
+                  - generic [ref=e126]:
+                    - generic [ref=e127]:
+                      - heading "Sí" [level=4] [ref=e128]
+                      - list [ref=e132]:
+                        - listitem [ref=e133]: Peras
+                        - listitem [ref=e134]: Bananas
+                        - listitem [ref=e135]: Duraznos blancos
+                        - listitem [ref=e136]: Ananá
+                    - generic [ref=e137]:
+                      - heading "Precaución" [level=4] [ref=e138]
+                      - list [ref=e141]:
+                        - listitem [ref=e142]: Uvas
+                        - listitem [ref=e143]: Kiwis
+                        - listitem [ref=e144]: Frutas disecadas
+                        - listitem [ref=e145]: Manzanas
+                        - listitem [ref=e146]: Duraznos en almíbar
+                    - generic [ref=e147]:
+                      - heading "No" [level=4] [ref=e148]
+                      - list [ref=e153]:
+                        - listitem [ref=e154]: Frutillas
+                        - listitem [ref=e155]: Cítricos
+                        - listitem [ref=e156]: Moras
+                        - listitem [ref=e157]: Uvas coloradas
+                        - listitem [ref=e158]: Mango
+                        - listitem [ref=e159]: Kaki
+                - region [ref=e160]:
+                  - heading "Lápiz labial" [level=3] [ref=e161]
+                  - generic [ref=e162]:
+                    - generic [ref=e163]:
+                      - heading "Sí" [level=4] [ref=e164]
+                      - list [ref=e168]:
+                        - listitem [ref=e169]: Incoloros
+                    - generic [ref=e170]:
+                      - heading "No" [level=4] [ref=e171]
+                      - list [ref=e176]:
+                        - listitem [ref=e177]: De cualquier coloración
+                - region [ref=e178]:
+                  - heading "Colutorios orales" [level=3] [ref=e179]
+                  - generic [ref=e180]:
+                    - generic [ref=e181]:
+                      - heading "Sí" [level=4] [ref=e182]
+                      - list [ref=e186]:
+                        - listitem [ref=e187]: Incoloros
+                    - generic [ref=e188]:
+                      - heading "No" [level=4] [ref=e189]
+                      - list [ref=e194]:
+                        - listitem [ref=e195]: Con colorantes pigmentarios en sí mismo
+                        - listitem [ref=e196]: Clorhexidina
+                - region [ref=e197]:
+                  - heading "Aderezos y salsas" [level=3] [ref=e198]
+                  - generic [ref=e199]:
+                    - generic [ref=e200]:
+                      - heading "Sí" [level=4] [ref=e201]
+                      - list [ref=e205]:
+                        - listitem [ref=e206]: Crema de leche
+                        - listitem [ref=e207]: Salsa blanca
+                        - listitem [ref=e208]: Quesos blancos
+                    - generic [ref=e209]:
+                      - heading "Precaución" [level=4] [ref=e210]
+                      - list [ref=e213]:
+                        - listitem [ref=e214]: Mayonesa no hecha con huevo
+                    - generic [ref=e215]:
+                      - heading "No" [level=4] [ref=e216]
+                      - list [ref=e221]:
+                        - listitem [ref=e222]: Salsas rojas a base de tomate
+                        - listitem [ref=e223]: Ketchup
+                        - listitem [ref=e224]: Salsa de soja
+                - region [ref=e225]:
+                  - heading "Bebidas" [level=3] [ref=e226]
+                  - generic [ref=e227]:
+                    - generic [ref=e228]:
+                      - heading "Sí" [level=4] [ref=e229]
+                      - list [ref=e233]:
+                        - listitem [ref=e234]: Agua mineral
+                        - listitem [ref=e235]: Gaseosas incoloras
+                        - listitem [ref=e236]: Vino blanco
+                        - listitem [ref=e237]: Champagne
+                        - listitem [ref=e238]: Yogurt sin colorantes
+                        - listitem [ref=e239]: Leche
+                    - generic [ref=e240]:
+                      - heading "No" [level=4] [ref=e241]
+                      - list [ref=e246]:
+                        - listitem [ref=e247]: Café
+                        - listitem [ref=e248]: Té
+                        - listitem [ref=e249]: Mate
+                        - listitem [ref=e250]: Vinos rosados y tintos
+                        - listitem [ref=e251]: Gaseosas con colorantes
+                        - listitem [ref=e252]: Jugos de frutas o verduras (preparados o para preparar)
+                - region [ref=e253]:
+                  - heading "Dentífricos" [level=3] [ref=e254]
+                  - generic [ref=e255]:
+                    - generic [ref=e256]:
+                      - heading "Sí" [level=4] [ref=e257]
+                      - list [ref=e261]:
+                        - listitem [ref=e262]: Incoloros o blancos
+                    - generic [ref=e263]:
+                      - heading "No" [level=4] [ref=e264]
+                      - list [ref=e269]:
+                        - listitem [ref=e270]: Con colorantes
+                - region [ref=e271]:
+                  - heading "Condimentos" [level=3] [ref=e272]
+                  - generic [ref=e274]:
+                    - heading "No" [level=4] [ref=e275]
+                    - list [ref=e280]:
+                      - listitem [ref=e281]: Mostaza
+                      - listitem [ref=e282]: Pimentón
+                      - listitem [ref=e283]: Azafrán
+                - region [ref=e284]:
+                  - heading "Tabaco" [level=3] [ref=e285]
+                  - generic [ref=e287]:
+                    - heading "No" [level=4] [ref=e288]
+                    - list [ref=e293]:
+                      - listitem [ref=e294]: De cualquier tipo y cualquier forma
+          - complementary [ref=e295]:
+            - generic [ref=e296]:
+              - text: Recurso para guardar
+              - heading "Guía visual de dieta blanca" [level=2] [ref=e297]
+              - paragraph [ref=e298]: La misma información está disponible en el contenido de esta página para facilitar su lectura.
+            - 'link "Abrir imagen completa: Guía visual de dieta blanca" [ref=e299] [cursor=pointer]':
+              - /url: /images/instrucciones/dieta-blanca/guia-dieta-blanca.jpg
+              - img "Infografía de dieta blanca con alimentos y productos clasificados como sí, precaución y no" [ref=e300]
+            - generic [ref=e301]:
+              - link "Ver imagen completa" [ref=e302] [cursor=pointer]:
+                - /url: /images/instrucciones/dieta-blanca/guia-dieta-blanca.jpg
+              - link "Descargar guía de dieta blanca" [ref=e307] [cursor=pointer]:
+                - /url: /images/instrucciones/dieta-blanca/guia-dieta-blanca.jpg
+        - generic [ref=e311]:
+          - paragraph [ref=e312]:
+            - strong [ref=e313]: "Importante:"
+            - text: esta guía acompaña la atención profesional y no reemplaza una evaluación ni las indicaciones personalizadas.
+          - generic "Temas de la instrucción" [ref=e314]:
+            - generic [ref=e315]: Blanqueamiento
+            - generic [ref=e316]: Dieta blanca
+            - generic [ref=e317]: Cuidados
+    - generic [ref=e319]:
+      - generic [ref=e320]: Paula Gualtieri
+      - generic [ref=e321]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=e322]:
+        - link "Instagram" [ref=e323] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=e324] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=e325] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=e326]
+  - alert [ref=e327]

@@ -1,0 +1,90 @@
+- generic [active] [ref=f145e1]:
+  - main [ref=f145e2]:
+    - navigation [ref=f145e3]:
+      - generic [ref=f145e4]:
+        - link "Paula Gualtieri" [ref=f145e5] [cursor=pointer]:
+          - /url: /
+        - link "Agendar Turno" [ref=f145e7] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f145e9]:
+      - list [ref=f145e10]:
+        - listitem [ref=f145e11]:
+          - link "Inicio" [ref=f145e12] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f145e16]:
+          - link "Ortopedia" [ref=f145e19] [cursor=pointer]:
+            - /url: /tratamientos/ortopedia
+        - listitem [ref=f145e20]:
+          - generic [ref=f145e23]: "Caso: Placas removibles"
+    - article [ref=f145e24]:
+      - generic [ref=f145e25]:
+        - link "Volver a articulos" [ref=f145e26] [cursor=pointer]:
+          - /url: /articulos
+        - generic [ref=f145e30]:
+          - generic [ref=f145e31]: Ortopedia
+          - 'heading "Caso clínico: Tratamiento de ortopedia con placas removibles" [level=1] [ref=f145e32]':
+            - generic [ref=f145e33]: "Caso clínico:"
+            - text: Tratamiento de ortopedia con placas removibles
+          - paragraph [ref=f145e34]: Luego de un exhaustivo diagnóstico, se colocaron placas activas superior e inferior logrando cambios favorables en un año de tratamiento.
+          - generic [ref=f145e35]:
+            - generic [ref=f145e36]: 10 de agosto de 2026
+            - generic [ref=f145e39]: 2 min de lectura
+            - generic [ref=f145e43]: Por Equipo clínico
+            - button "Compartir" [ref=f145e45] [cursor=pointer]
+        - region "Imágenes del caso" [ref=f145e52]:
+          - generic [ref=f145e53]:
+            - figure "Intraoral inicial previo al tratamiento de ortopedia." [ref=f145e54]:
+              - img "Intraoral inicial previo al tratamiento de ortopedia" [ref=f145e56]
+            - figure "Perfil de paciente previo al tratamiento." [ref=f145e58]:
+              - img "Perfil de paciente previo al tratamiento" [ref=f145e60]
+            - figure "Resultado intraoral luego del tratamiento de ortopedia." [ref=f145e62]:
+              - img "Resultado intraoral luego del tratamiento de ortopedia" [ref=f145e64]
+            - figure "Perfil luego del tratamiento de ortopedia." [ref=f145e66]:
+              - img "Perfil luego del tratamiento de ortopedia" [ref=f145e68]
+        - generic [ref=f145e70]:
+          - region [ref=f145e71]:
+            - generic [ref=f145e72]:
+              - heading "Diagnóstico y planificación" [level=2] [ref=f145e76]
+              - generic [ref=f145e77]:
+                - paragraph [ref=f145e78]: Luego de realizar un exhaustivo diagnóstico cefalométrico, fotográfico y de modelos, se decidió comenzar un tratamiento de ortopedia. Se colocaron dos placas, superior e inferior, con tornillo medio.
+                - paragraph [ref=f145e79]: Luego de un año de tratamiento se puede observar los cambios intraorales y en el perfil de la paciente generando un terreno óseo propicio para la dentición definitiva.
+                - paragraph [ref=f145e80]: En el caso de aparatos removibles, para lograr el éxito del tratamiento en plazos cortos es fundamental la colaboración del paciente, siguiendo las indicaciones de las horas de uso de la aparatología.
+              - generic [ref=f145e81]:
+                - generic [ref=f145e82]:
+                  - term [ref=f145e83]: Tratamiento
+                  - definition [ref=f145e84]: Ortopedia con placas removibles
+                - generic [ref=f145e85]:
+                  - term [ref=f145e86]: Tiempo
+                  - definition [ref=f145e87]: 1 año
+          - generic [ref=f145e88]:
+            - generic [ref=f145e89]:
+              - text: Consulta odontopediátrica
+              - heading "¿Notás alguna alteración en la mordida de tu hijo/a?" [level=2] [ref=f145e90]
+              - paragraph [ref=f145e91]: Escribinos por WhatsApp para coordinar un diagnóstico oportuno.
+            - link "Consultar por WhatsApp" [ref=f145e92] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20ortopedia
+        - generic [ref=f145e95]:
+          - generic [ref=f145e96]:
+            - heading "Temas del artículo" [level=2] [ref=f145e97]
+            - generic "Temas del artículo" [ref=f145e101]:
+              - generic [ref=f145e102]: ortopedia
+              - generic [ref=f145e103]: placas removibles
+              - generic [ref=f145e104]: diagnóstico cefalométrico
+          - complementary [ref=f145e106]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=f145e107]
+            - link [ref=f145e109] [cursor=pointer]:
+              - /url: /tratamientos/ortopedia
+              - strong [ref=f145e110]: Ortopedia
+              - generic [ref=f145e111]: Ver tratamiento
+    - generic [ref=f145e115]:
+      - generic [ref=f145e116]: Paula Gualtieri
+      - generic [ref=f145e117]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f145e118]:
+        - link "Instagram" [ref=f145e119] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f145e120] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f145e121] [cursor=pointer]:
+          - /url: "#"
+  - alert [ref=f145e122]

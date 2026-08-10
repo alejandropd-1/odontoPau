@@ -1,0 +1,85 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - link "Inicio" [ref=e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link "Inicio" [ref=e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e22]:
+          - link "Estética Dental" [ref=e25] [cursor=pointer]:
+            - /url: /tratamientos/estetica-dental
+        - listitem [ref=e26]:
+          - generic [ref=e29]: "Caso: Resina en pieza 11"
+    - article [ref=e30]:
+      - generic [ref=e31]:
+        - link "Volver a articulos" [ref=e32] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=e35]: "Vista previa editorial · Estado: draft · No indexada"
+        - generic [ref=e37]:
+          - generic [ref=e38]: Estética Dental
+          - 'heading "Caso clínico: Reconstrucción con resina a mano alzada en pieza 11" [level=1] [ref=e39]':
+            - generic [ref=e40]: "Caso clínico:"
+            - text: Reconstrucción con resina a mano alzada en pieza 11
+          - paragraph [ref=e41]: Registro de una reconstrucción con resina a mano alzada después de un traumatismo en la pieza 11.
+          - generic [ref=e42]:
+            - generic [ref=e43]: 3 de agosto de 2026
+            - generic [ref=e46]: 1 min de lectura
+            - generic [ref=e50]: Por Equipo de Paula Gualtieri Odontología
+            - button "Compartir" [ref=e52] [cursor=pointer]
+        - region "Imágenes del caso" [ref=e59]:
+          - figure "Registro comparativo aportado para el caso." [ref=e61]:
+            - img "Registro comparativo de una reconstrucción con resina en la pieza 11" [ref=e63]
+        - generic [ref=e65]:
+          - region [ref=e66]:
+            - generic [ref=e67]:
+              - heading "El caso" [level=2] [ref=e71]
+              - paragraph [ref=e73]: Paula informó que la pieza 11 había sufrido un traumatismo y fue reconstruida con resina a mano alzada.
+          - generic [ref=e74]:
+            - generic [ref=e75]:
+              - text: Evaluación profesional
+              - heading "¿Tenés una consulta sobre una pieza traumatizada?" [level=2] [ref=e76]
+              - paragraph [ref=e77]: Podés escribirnos para coordinar una evaluación. Las opciones de reconstrucción dependen de cada situación clínica.
+            - link "Consultar por WhatsApp" [ref=e78] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20una%20reconstrucci%C3%B3n%20dental
+        - generic [ref=e81]:
+          - generic [ref=e82]:
+            - heading "Temas del artículo" [level=2] [ref=e83]
+            - generic "Temas del artículo" [ref=e87]:
+              - generic [ref=e88]: estética dental
+              - generic [ref=e89]: resina
+              - generic [ref=e90]: pieza 11
+          - complementary [ref=e92]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=e93]
+            - link [ref=e95] [cursor=pointer]:
+              - /url: /tratamientos/estetica-dental
+              - strong [ref=e96]: Estética Dental
+              - generic [ref=e97]: Ver tratamiento
+    - generic [ref=e101]:
+      - generic [ref=e102]: Paula Gualtieri
+      - generic [ref=e103]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=e104]:
+        - link "Instagram" [ref=e105] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=e106] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=e107] [cursor=pointer]:
+          - /url: "#"
+  - scrollbar "Progreso de desplazamiento" [ref=e108]

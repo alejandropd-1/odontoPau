@@ -1,0 +1,90 @@
+- generic [active] [ref=f2e1]:
+  - main [ref=f2e2]:
+    - navigation [ref=f2e3]:
+      - generic [ref=f2e4]:
+        - link "Paula Gualtieri" [ref=f2e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f2e7]:
+          - link "Inicio" [ref=f2e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=f2e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=f2e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=f2e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=f2e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=f2e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f2e15]:
+      - list [ref=f2e16]:
+        - listitem [ref=f2e17]:
+          - link "Inicio" [ref=f2e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f2e22]:
+          - link "Estética Dental" [ref=f2e25] [cursor=pointer]:
+            - /url: /tratamientos/estetica-dental
+        - listitem [ref=f2e26]:
+          - generic [ref=f2e29]: "Caso: Resina en pieza 11"
+    - article [ref=f2e30]:
+      - generic [ref=f2e31]:
+        - link "Volver a articulos" [ref=f2e32] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=f2e35]: "Vista previa editorial · Estado: technical_review · No indexada"
+        - generic [ref=f2e37]:
+          - generic [ref=f2e38]: Estética Dental
+          - 'heading "Caso clínico: Reconstrucción con resina a mano alzada en pieza 11" [level=1] [ref=f2e39]':
+            - generic [ref=f2e40]: "Caso clínico:"
+            - text: Reconstrucción con resina a mano alzada en pieza 11
+          - paragraph [ref=f2e41]: Registro de una reconstrucción con resina a mano alzada después de un traumatismo en la pieza 11.
+          - generic [ref=f2e42]:
+            - generic [ref=f2e43]: 4 de agosto de 2026
+            - generic [ref=f2e46]: 1 min de lectura
+            - generic [ref=f2e50]: Por Equipo de Paula Gualtieri Odontología
+            - button "Compartir" [ref=f2e52] [cursor=pointer]
+        - region "Imágenes del caso" [ref=f2e59]:
+          - generic [ref=f2e60]:
+            - figure "Vista frontal aportada por el equipo tratante." [ref=f2e61]:
+              - img "Registro frontal de una pieza 11 traumatizada y su reconstrucción con resina" [ref=f2e63]
+            - figure "Vista cercana aportada por el equipo tratante." [ref=f2e65]:
+              - img "Vista cercana de una pieza 11 traumatizada y su reconstrucción con resina" [ref=f2e67]
+        - generic [ref=f2e69]:
+          - region [ref=f2e70]:
+            - generic [ref=f2e71]:
+              - heading "El caso" [level=2] [ref=f2e75]
+              - paragraph [ref=f2e77]: Paula informó que la pieza 11 había sufrido un traumatismo y fue reconstruida con resina a mano alzada.
+          - generic [ref=f2e78]:
+            - generic [ref=f2e79]:
+              - text: Evaluación profesional
+              - heading "¿Tenés una consulta sobre una pieza traumatizada?" [level=2] [ref=f2e80]
+              - paragraph [ref=f2e81]: Podés escribirnos para coordinar una evaluación. Las opciones de reconstrucción dependen de cada situación clínica.
+            - link "Consultar por WhatsApp" [ref=f2e82] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20una%20reconstrucci%C3%B3n%20dental
+        - generic [ref=f2e85]:
+          - generic [ref=f2e86]:
+            - heading "Temas del artículo" [level=2] [ref=f2e87]
+            - generic "Temas del artículo" [ref=f2e91]:
+              - generic [ref=f2e92]: estética dental
+              - generic [ref=f2e93]: resina
+              - generic [ref=f2e94]: pieza 11
+          - complementary [ref=f2e96]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=f2e97]
+            - link [ref=f2e99] [cursor=pointer]:
+              - /url: /tratamientos/estetica-dental
+              - strong [ref=f2e100]: Estética Dental
+              - generic [ref=f2e101]: Ver tratamiento
+    - generic [ref=f2e105]:
+      - generic [ref=f2e106]: Paula Gualtieri
+      - generic [ref=f2e107]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f2e108]:
+        - link "Instagram" [ref=f2e109] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f2e110] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f2e111] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f2e112]
+  - alert [ref=f2e113]

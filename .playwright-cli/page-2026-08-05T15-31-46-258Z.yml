@@ -1,0 +1,141 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - link "Inicio" [ref=e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link "Inicio" [ref=e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e22]:
+          - link "Endodoncia" [ref=e25] [cursor=pointer]:
+            - /url: /tratamientos/endodoncia
+        - listitem [ref=e26]:
+          - generic [ref=e29]: "Caso: Necrosis pulpar"
+    - article [ref=e30]:
+      - generic [ref=e31]:
+        - link "Volver a articulos" [ref=e32] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=e35]: "Vista previa editorial · Estado: technical_review · No indexada"
+        - generic [ref=e37]:
+          - generic [ref=e38]: Endodoncia
+          - 'heading "Caso clínico: Tratamiento endodóntico mecanizado en un caso de necrosis pulpar" [level=1] [ref=e39]':
+            - generic [ref=e40]: "Caso clínico:"
+            - text: Tratamiento endodóntico mecanizado en un caso de necrosis pulpar
+          - paragraph [ref=e41]: Un caso clínico documentado con radiografías antes y después, tratado mediante una técnica endodóntica mecanizada.
+          - generic [ref=e42]:
+            - generic [ref=e43]: 4 de agosto de 2026
+            - generic [ref=e46]: 3 min de lectura
+            - generic [ref=e50]: Por Equipo clínico
+            - button "Compartir" [ref=e52] [cursor=pointer]
+        - region "Imágenes del caso" [ref=e59]:
+          - generic [ref=e60]:
+            - figure "Registro radiográfico previo al tratamiento." [ref=e61]:
+              - generic [ref=e62]:
+                - img "Radiografía previa al tratamiento endodóntico del caso clínico" [ref=e63]
+                - generic [ref=e64]: Antes
+            - figure "Registro radiográfico posterior al tratamiento." [ref=e66]:
+              - generic [ref=e67]:
+                - img "Radiografía de control posterior al tratamiento endodóntico del caso clínico" [ref=e68]
+                - generic [ref=e69]: Después
+        - generic [ref=e71]:
+          - region [ref=e72]:
+            - generic [ref=e73]:
+              - heading "El caso" [level=2] [ref=e77]
+              - generic [ref=e78]:
+                - paragraph [ref=e79]: El caso correspondió a una necrosis pulpar y fue tratado mediante una técnica endodóntica mecanizada.
+                - paragraph [ref=e80]: La endodoncia trabaja sobre el sistema de conductos del diente. La indicación y el plan se definen después de una evaluación clínica y radiográfica individual.
+              - generic [ref=e81]:
+                - generic [ref=e82]:
+                  - term [ref=e83]: Diagnóstico informado
+                  - definition [ref=e84]: Necrosis pulpar
+                - generic [ref=e85]:
+                  - term [ref=e86]: Técnica informada
+                  - definition [ref=e87]: Endodoncia mecanizada
+            - generic [ref=e88]:
+              - heading "Abordaje documentado" [level=3] [ref=e89]
+              - paragraph [ref=e90]: El tratamiento se realizó mediante una técnica endodóntica mecanizada. Las radiografías aportadas registran el caso antes y después del tratamiento.
+              - list [ref=e91]:
+                - listitem [ref=e92]: Técnica endodóntica mecanizada
+                - listitem [ref=e97]: Registro radiográfico anterior y posterior
+          - generic [ref=e102]:
+            - heading "¿Qué significa que la técnica sea mecanizada?" [level=2] [ref=e103]
+            - generic [ref=e104]:
+              - paragraph [ref=e105]: En una endodoncia mecanizada, parte de la preparación de los conductos se realiza con instrumental accionado por un motor específico. El profesional selecciona el sistema y la secuencia según la anatomía y las necesidades del caso.
+              - paragraph [ref=e106]: "La técnica utilizada es solo una parte del tratamiento: el diagnóstico, la planificación, el control y la restauración posterior también dependen de cada situación clínica."
+          - generic [ref=e107]:
+            - heading "Preguntas frecuentes" [level=2] [ref=e108]
+            - generic [ref=e109]:
+              - group [ref=e110]:
+                - generic "¿Una radiografía alcanza para indicar una endodoncia?" [ref=e111] [cursor=pointer]
+              - group [ref=e112]:
+                - generic "¿Todos los tratamientos endodónticos son iguales?" [ref=e113] [cursor=pointer]
+              - group [ref=e114]:
+                - generic "¿Qué cuidados se indican después?" [ref=e115] [cursor=pointer]
+          - generic [ref=e116]:
+            - generic [ref=e117]:
+              - text: Evaluación profesional
+              - heading "¿Tenés una consulta sobre endodoncia?" [level=2] [ref=e118]
+              - paragraph [ref=e119]: Podés escribirnos para coordinar una evaluación. El diagnóstico y las opciones de tratamiento se definen de manera personalizada.
+            - link "Consultar por WhatsApp" [ref=e120] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20endodoncia
+        - generic [ref=e123]:
+          - generic [ref=e124]:
+            - heading "Temas del artículo" [level=2] [ref=e125]
+            - generic "Temas del artículo" [ref=e129]:
+              - generic [ref=e130]: endodoncia
+              - generic [ref=e131]: necrosis pulpar
+              - generic [ref=e132]: tratamiento mecanizado
+          - generic [ref=e133]:
+            - region [ref=e134]:
+              - generic [ref=e138]:
+                - heading "Fuentes consultadas" [level=2] [ref=e139]
+                - paragraph [ref=e140]: Referencias educativas. La información específica del caso debe ser validada por el equipo tratante.
+              - list [ref=e141]:
+                - listitem [ref=e142]:
+                  - generic [ref=e143]: "01"
+                  - generic [ref=e144]:
+                    - link "What is a Root Canal?" [ref=e145] [cursor=pointer]:
+                      - /url: https://www.aae.org/patients/root-canal-treatment/what-is-a-root-canal/
+                    - generic [ref=e150]: American Association of Endodontists
+                - listitem [ref=e151]:
+                  - generic [ref=e152]: "02"
+                  - generic [ref=e153]:
+                    - 'link "Treatment of pulpal and apical disease: S3-level clinical practice guideline" [ref=e154] [cursor=pointer]':
+                      - /url: https://pubmed.ncbi.nlm.nih.gov/37772327/
+                    - generic [ref=e159]: European Society of Endodontology / PubMed
+            - complementary [ref=e160]:
+              - text: Seguí explorando
+              - heading "Tratamientos relacionados" [level=2] [ref=e161]
+              - link [ref=e163] [cursor=pointer]:
+                - /url: /tratamientos/endodoncia
+                - strong [ref=e164]: Endodoncia
+                - generic [ref=e165]: Ver tratamiento
+    - generic [ref=e169]:
+      - generic [ref=e170]: Paula Gualtieri
+      - generic [ref=e171]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=e172]:
+        - link "Instagram" [ref=e173] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=e174] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=e175] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=e176]
+  - alert [ref=e177]

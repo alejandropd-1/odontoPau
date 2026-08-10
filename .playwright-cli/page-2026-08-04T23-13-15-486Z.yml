@@ -1,0 +1,57 @@
+- generic [active] [ref=f6e1]:
+  - generic [ref=f6e2]:
+    - navigation [ref=f6e3]:
+      - generic [ref=f6e4]:
+        - link "Paula Gualtieri" [ref=f6e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f6e7]:
+          - link "Inicio" [ref=f6e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=f6e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=f6e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=f6e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=f6e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=f6e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f6e15]:
+      - list [ref=f6e16]:
+        - listitem [ref=f6e17]:
+          - link "Inicio" [ref=f6e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f6e22]:
+          - link "Odontología Pediátrica" [ref=f6e25] [cursor=pointer]:
+            - /url: /tratamientos/pediatria
+        - listitem [ref=f6e26]:
+          - generic [ref=f6e29]: "Caso: Atención odontológica pediátrica"
+    - generic [ref=f6e31]:
+      - generic [ref=f6e32]: "Caso clínico: Odontología Pediátrica"
+      - 'heading "Caso clínico: Atención odontológica pediátrica" [level=1] [ref=f6e33]'
+      - paragraph [ref=f6e34]: Atención con la paciencia y el respeto que los más chicos se merecen.
+    - region "Registros del caso" [ref=f6e35]:
+      - img "Registro 1 del caso Atención odontológica pediátrica" [ref=f6e40]
+    - generic [ref=f6e43]:
+      - heading "¿Querés consultar por este tratamiento?" [level=2] [ref=f6e44]
+      - paragraph [ref=f6e45]: Cada situación requiere una evaluación individual. Podés escribirnos para coordinar una consulta.
+      - generic [ref=f6e46]:
+        - link "Solicitar evaluación" [ref=f6e47] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola%2C%20vi%20el%20caso%20de%20Odontolog%C3%ADa%20Pedi%C3%A1trica%20y%20quiero%20coordinar%20una%20evaluaci%C3%B3n
+        - link "Ver otros casos" [ref=f6e50] [cursor=pointer]:
+          - /url: /tratamientos/pediatria
+    - contentinfo [ref=f6e51]:
+      - generic [ref=f6e52]:
+        - generic [ref=f6e53]: Paula Gualtieri
+        - generic [ref=f6e54]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+        - generic [ref=f6e55]:
+          - link "Instagram" [ref=f6e56] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f6e57] [cursor=pointer]:
+            - /url: "#"
+          - link "Aviso Legal" [ref=f6e58] [cursor=pointer]:
+            - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f6e59]
+  - alert [ref=f6e60]

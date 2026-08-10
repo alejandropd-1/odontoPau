@@ -1,0 +1,110 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - link "Inicio" [ref=e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - region [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: Nuestros tratamientos
+          - heading "Distintas formas de cuidar tu sonrisa" [level=1] [ref=e18]
+          - paragraph [ref=e19]: Te acompañamos con una mirada integral y un plan pensado para vos, desde la primera consulta hasta cada control.
+        - generic [ref=e20]:
+          - article [ref=e21]:
+            - link "Ver Rehabilitación" [ref=e22] [cursor=pointer]:
+              - /url: /tratamientos/rehabilitacion
+              - img "Rehabilitación" [ref=e23]
+            - generic [ref=e24]:
+              - heading [level=2] [ref=e32]:
+                - link "Rehabilitación" [ref=e33] [cursor=pointer]:
+                  - /url: /tratamientos/rehabilitacion
+              - paragraph [ref=e34]: Planificación personalizada para recuperar función y armonía mediante alternativas restauradoras y protésicas definidas después de una evaluación clínica.
+              - link "Conocer el tratamiento" [ref=e35] [cursor=pointer]:
+                - /url: /tratamientos/rehabilitacion
+          - article [ref=e38]:
+            - link "Ver Ortodoncia Invisible" [ref=e39] [cursor=pointer]:
+              - /url: /tratamientos/ortodoncia-invisible
+              - img "Ortodoncia Invisible" [ref=e40]
+            - generic [ref=e41]:
+              - heading [level=2] [ref=e46]:
+                - link "Ortodoncia Invisible" [ref=e47] [cursor=pointer]:
+                  - /url: /tratamientos/ortodoncia-invisible
+              - paragraph [ref=e48]: Planificación con alineadores transparentes y controles periódicos para acompañar movimientos dentarios definidos de manera individual.
+              - link "Conocer el tratamiento" [ref=e49] [cursor=pointer]:
+                - /url: /tratamientos/ortodoncia-invisible
+          - article [ref=e52]:
+            - link "Ver Estética Dental" [ref=e53] [cursor=pointer]:
+              - /url: /tratamientos/estetica-dental
+              - img "Estética Dental" [ref=e54]
+            - generic [ref=e55]:
+              - heading [level=2] [ref=e60]:
+                - link "Estética Dental" [ref=e61] [cursor=pointer]:
+                  - /url: /tratamientos/estetica-dental
+              - paragraph [ref=e62]: Alternativas personalizadas para trabajar color, forma y armonía de la sonrisa después de una evaluación clínica individual.
+              - link "Conocer el tratamiento" [ref=e63] [cursor=pointer]:
+                - /url: /tratamientos/estetica-dental
+          - article [ref=e66]:
+            - link "Ver Ortopedia" [ref=e67] [cursor=pointer]:
+              - /url: /tratamientos/ortopedia
+              - img "Ortopedia" [ref=e68]
+            - generic [ref=e69]:
+              - heading [level=2] [ref=e74]:
+                - link "Ortopedia" [ref=e75] [cursor=pointer]:
+                  - /url: /tratamientos/ortopedia
+              - paragraph [ref=e76]: Evaluación y acompañamiento del crecimiento y de las funciones orales durante etapas tempranas del desarrollo.
+              - link "Conocer el tratamiento" [ref=e77] [cursor=pointer]:
+                - /url: /tratamientos/ortopedia
+          - article [ref=e80]:
+            - link "Ver Odontología Pediátrica" [ref=e81] [cursor=pointer]:
+              - /url: /tratamientos/pediatria
+              - img "Odontología Pediátrica" [ref=e82]
+            - generic [ref=e83]:
+              - heading [level=2] [ref=e88]:
+                - link "Odontología Pediátrica" [ref=e89] [cursor=pointer]:
+                  - /url: /tratamientos/pediatria
+              - paragraph [ref=e90]: Atención odontológica infantil con un enfoque cercano, paciente y respetuoso, adaptado a cada etapa y a las necesidades de cada familia.
+              - link "Conocer el tratamiento" [ref=e91] [cursor=pointer]:
+                - /url: /tratamientos/pediatria
+          - article [ref=e94]:
+            - link "Ver Endodoncia" [ref=e95] [cursor=pointer]:
+              - /url: /tratamientos/endodoncia
+              - img "Endodoncia" [ref=e96]
+            - generic [ref=e97]:
+              - heading [level=2] [ref=e105]:
+                - link "Endodoncia" [ref=e106] [cursor=pointer]:
+                  - /url: /tratamientos/endodoncia
+              - paragraph [ref=e107]: Evaluación y tratamiento del sistema de conductos para abordar lesiones pulpares y buscar conservar la pieza dental cuando la situación clínica lo permite.
+              - link "Conocer el tratamiento" [ref=e108] [cursor=pointer]:
+                - /url: /tratamientos/endodoncia
+    - region [ref=e111]:
+      - generic [ref=e113]:
+        - generic [ref=e114]: Para tener siempre a mano
+        - heading "Indicaciones para volver a consultar cuando las necesites" [level=2] [ref=e115]
+        - paragraph [ref=e116]: Guías claras y simples para repasar desde el teléfono los cuidados recomendados después de la consulta.
+    - generic [ref=e118]:
+      - generic [ref=e119]: Paula Gualtieri
+      - generic [ref=e120]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=e121]:
+        - link "Instagram" [ref=e122] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=e123] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=e124] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=e125]
+  - alert [ref=e126]

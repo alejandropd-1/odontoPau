@@ -1,0 +1,85 @@
+- generic [active] [ref=f2e1]:
+  - main [ref=f2e2]:
+    - navigation [ref=f2e3]:
+      - generic [ref=f2e4]:
+        - link "Paula Gualtieri" [ref=f2e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f2e7]:
+          - link "Inicio" [ref=f2e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=f2e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=f2e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=f2e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=f2e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=f2e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - region [ref=f2e14]:
+      - generic [ref=f2e15]:
+        - generic [ref=f2e16]:
+          - generic [ref=f2e17]: Guias para pacientes
+          - heading "Instrucciones claras para seguir el cuidado en casa" [level=1] [ref=f2e18]
+          - paragraph [ref=f2e19]: Material revisado para repasar los cuidados indicados después de cada consulta y compartir desde cualquier dispositivo.
+          - status [ref=f2e20]: "Vista previa editorial: también se muestran instrucciones que todavía no están publicadas."
+        - generic [ref=f2e21]:
+          - article [ref=f2e22]:
+            - generic [ref=f2e24]:
+              - generic [ref=f2e25]:
+                - generic [ref=f2e26]: Actualizada el 4 de agosto de 2026
+                - generic [ref=f2e27]: Preview · approved
+              - heading [level=2] [ref=f2e28]:
+                - link "Dieta blanca" [ref=f2e29] [cursor=pointer]:
+                  - /url: /instrucciones/blanqueamiento/dieta-blanca
+              - paragraph [ref=f2e30]: Guía práctica de alimentos, bebidas y productos indicados, a evitar o a consumir con precaución.
+            - generic [ref=f2e31]:
+              - generic [ref=f2e32]: Blanqueamiento
+              - generic [ref=f2e36]: 4 min de lectura
+            - link "Ver Dieta blanca" [ref=f2e40] [cursor=pointer]:
+              - /url: /instrucciones/blanqueamiento/dieta-blanca
+              - text: Ver instrucciones
+          - article [ref=f2e43]:
+            - generic [ref=f2e45]:
+              - generic [ref=f2e46]:
+                - generic [ref=f2e47]: Actualizada el 4 de agosto de 2026
+                - generic [ref=f2e48]: Preview · approved
+              - heading [level=2] [ref=f2e49]:
+                - link "Indicaciones post extracción" [ref=f2e50] [cursor=pointer]:
+                  - /url: /instrucciones/cirugia/indicaciones-post-extraccion
+              - paragraph [ref=f2e51]: Guía de cuidados generales para repasar después de una extracción dental.
+            - generic [ref=f2e52]:
+              - generic [ref=f2e53]: Extracción dental
+              - generic [ref=f2e57]: 4 min de lectura
+            - link "Ver Indicaciones post extracción" [ref=f2e61] [cursor=pointer]:
+              - /url: /instrucciones/cirugia/indicaciones-post-extraccion
+              - text: Ver instrucciones
+          - article [ref=f2e64]:
+            - generic [ref=f2e66]:
+              - generic [ref=f2e67]:
+                - generic [ref=f2e68]: Actualizada el 19 de junio de 2026
+                - generic [ref=f2e69]: Preview · draft
+              - heading [level=2] [ref=f2e70]:
+                - link "Cuidados diarios para alineadores invisibles" [ref=f2e71] [cursor=pointer]:
+                  - /url: /instrucciones/ortodoncia/cuidados-alineadores
+              - paragraph [ref=f2e72]: Borrador de recomendaciones para usar, higienizar y conservar los alineadores durante el tratamiento.
+            - generic [ref=f2e73]:
+              - generic [ref=f2e74]: Ortodoncia
+              - generic [ref=f2e78]: 3 min de lectura
+            - link "Ver Cuidados diarios para alineadores invisibles" [ref=f2e82] [cursor=pointer]:
+              - /url: /instrucciones/ortodoncia/cuidados-alineadores
+              - text: Ver instrucciones
+    - generic [ref=f2e86]:
+      - generic [ref=f2e87]: Paula Gualtieri
+      - generic [ref=f2e88]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f2e89]:
+        - link "Instagram" [ref=f2e90] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f2e91] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f2e92] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f2e93]
+  - alert [ref=f2e94]
