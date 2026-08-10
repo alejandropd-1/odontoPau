@@ -67,3 +67,8 @@
 - [ ] 8.3 Auditar que configuraciones, logs, fixtures y commits no contengan secretos, datos sensibles ni rutas privadas absolutas
 - [ ] 8.4 Confirmar que ningún job puede cambiar estados a `published`, hacer push, merge, deploy o publicar en redes
 - [ ] 8.5 Obtener aprobación explícita antes de habilitar el runner para preparar el primer borrador real
+
+## 9. Cierre por OpenSpec
+
+- [ ] 9.1 Preparar commit y push selectivos en `change/preparar-runner-editorial-lm-studio-link`, abrir un Draft PR y adjuntar el reporte del piloto, los checks y la demostración equivalente a preview sin habilitar producción.
+- [ ] 9.2 Alejandro revisa el diff, el reporte del piloto, los límites de seguridad y la demostración final, y autoriza el commit de cierre y el OpenSpec Archive. Esta tarea es exclusivamente manual y ningún agente puede marcarla.

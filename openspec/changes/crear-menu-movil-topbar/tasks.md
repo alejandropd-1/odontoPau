@@ -22,7 +22,11 @@
 - [ ] 4.3 Validar con Playwright 320, 375, 390, 767 y desktop, incluyendo `scrollWidth <= clientWidth`, apertura, cierre, navegación y consola limpia.
 - [ ] 4.4 Revisar Inicio, Tratamientos, Artículos e Instrucciones en un Deploy Preview sin publicar producción.
 
-## 5. Aprobación y release
+## 5. Preparación del cierre
 
-- [ ] 5.1 Obtener aprobación visual y funcional del menú mobile.
-- [ ] 5.2 Realizar commit, push, integración y verificación de producción sólo después de autorización explícita.
+- [ ] 5.1 Preparar commit y push selectivos en `change/crear-menu-movil-topbar`, abrir un Draft PR y confirmar que CI y Deploy Preview correspondan a la revisión exacta.
+- [ ] 5.2 Corregir observaciones y repetir OpenSpec, TypeScript, lint, build, Playwright y control de overflow sin hacer merge ni archive.
+
+## 6. Validación final de Alejandro
+
+- [ ] 6.1 Alejandro revisa el menú mobile en el Deploy Preview final y autoriza el commit de cierre, el OpenSpec Archive y la preparación del merge a `main`. Esta tarea es exclusivamente manual y ningún agente puede marcarla.
