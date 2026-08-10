@@ -18,12 +18,18 @@
 
 ## Cambios estructurales separados
 
-- `Implantes Dentales` se renombrara a `Rehabilitacion` en un OpenSpec propio, incluyendo identificador, carpetas, rutas, enlaces, SEO, Stackbit y redireccion de la URL anterior.
+- `Implantes Dentales` se renombra a `Rehabilitación` mediante el OpenSpec `integrar-lote-clinico-y-rehabilitacion`, incluyendo identificador, carpetas, rutas, enlaces, SEO, Stackbit y redirección de la URL anterior.
 - La carga flexible de profesionales, galerias y etiquetas opcionales se tratara en otro OpenSpec antes de incorporar todos los casos.
 
 ## Piloto pendiente
 
 Endodoncia/caso-01 queda seleccionado como piloto por tener antes/despues, autorizacion confirmada y una descripcion clinica concreta: tratamiento endodontico en necrosis pulpar con tecnica mecanizada. Todo dato no informado se omitira hasta la revision de Paula.
+
+## Validación de las tres maquetas - 2026-08-04
+
+- Prueba 1, Endodoncia/necrosis pulpar: Paula aprobó la estructura, el contenido y las imágenes. Pasa a `technical_review`; todavía requiere la revisión visual y autorización de publicación del responsable del sitio.
+- Prueba 2, Estética dental/blanqueamiento ambulatorio: Paula aprobó la estructura, el contenido y las imágenes. Pasa a `technical_review`; todavía requiere la revisión visual y autorización de publicación del responsable del sitio.
+- Prueba 3, Estética dental/resina a mano alzada en pieza 11: Paula aprobó la estructura y el contenido, pero rechazó la imagen porque no corresponde al traumatismo de la pieza 11. Permanece en `draft`, bloqueada para publicación hasta recibir y validar la imagen correcta. No se reemplazará por una imagen inferida o similar.
 
 ## Produccion y CMS
 

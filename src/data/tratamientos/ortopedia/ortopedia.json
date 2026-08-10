@@ -5,27 +5,36 @@
   "categoryLabel": "Ortopedia",
   "order": 4,
   "tituloHero": "Ortopedia",
-  "descripcionHero": "Guía del crecimiento óseo y correción funcional temprana para lograr una armonìa facial integral.",
+  "descripcionHero": "Evaluación y acompañamiento del crecimiento y de las funciones orales durante etapas tempranas del desarrollo.",
   "icon": "Sparkles",
-  "heroImage": "/images/ortopedia-hero.jpg",
+  "heroImage": "/images/ortopedia-hero-collage.webp",
+  "professionals": [
+    {
+      "name": "Dra. Paula Gualtieri",
+      "role": "Alineadores dentales y ortopedia",
+      "image": "/images/profesionales/paula-gualtieri-estudio.webp",
+      "imageAlt": "Retrato de la Dra. Paula Gualtieri"
+    }
+  ],
   "features": [
-    "Desarrollo maxilar: Estimulaciòn y guìa del crecimiento del hueso de la cara.",
-    "Correcciòn funcional: reeducación de la respiración, masticaciòn y degluciòn.",
-    "Equilibrio facial: Mejora del perfil y la simetría mandibular.",
-    "Prevenciòn: evita extracciones y cirugìas complejas en la adultez."
+    "Evaluación del crecimiento y del desarrollo de los maxilares.",
+    "Observación de funciones como respiración, masticación y deglución.",
+    "Aparatología indicada de acuerdo con la etapa y la necesidad individual.",
+    "Controles para acompañar los cambios durante el crecimiento."
   ],
   "casosClinicos": [
     {
       "id": 1,
+      "articleSlug": "tratamiento-ortopedia-placas-removibles",
       "paciente": "Paciente",
-      "fecha": "Octubre 2024",
-      "titulo": "Ortopedia Maxilar",
-      "descripcion": "Expansión maxilar y guía de crecimiento.",
-      "testimonio": "Notamos un gran cambio en la respiración y postura desde que iniciamos.",
-      "desafio": "Falta de espacio para la erupción de los dientes permanentes y respiración bucal.",
-      "diagnostico": "Maxilar estrecho y mordida cruzada posterior.",
-      "duracion": "18 meses",
-      "solucion": "Uso de aparatología ortopédica funcional para expandir el maxilar y reeducar la postura lingual."
+      "titulo": "Tratamiento de ortopedia con placas removibles",
+      "descripcion": "Luego de realizar un exhaustivo diagnóstico, se decidió comenzar un tratamiento de ortopedia con placas removibles.",
+      "imagenes": [
+        "/images/casos/ortopedia/caso-01/foto-01.webp",
+        "/images/casos/ortopedia/caso-01/foto-02.webp",
+        "/images/casos/ortopedia/caso-01/foto-03.webp",
+        "/images/casos/ortopedia/caso-01/foto-04.webp"
+      ]
     }
   ]
 }

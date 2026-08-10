@@ -1,6 +1,7 @@
 import React from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { getTratamientoById, getTratamientos } from '@/data/tratamientos';
+import { getRoutableArticleBySlug } from '@/data/articulos';
 import CaseDetailContent from '@/components/CaseDetailContent';
 import { Metadata } from 'next';
 
@@ -29,14 +30,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!tratamiento || !caso) return { title: 'Caso no encontrado' };
 
+  const caseImage = caso.imagenDespues || caso.imagenAntes || caso.imagenes?.[caso.imagenes.length - 1];
+  const canonicalUrl = `https://paulagualtieri.com/tratamientos/${tratamiento.id}/casos/${casoId}`;
+
   return {
-    title: `Caso Clínico: ${caso.paciente}`,
+    title: `Caso clínico: ${caso.titulo}`,
     description: caso.descripcion,
+    alternates: { canonical: canonicalUrl },
     openGraph: {
-      title: `Caso de Éxito: ${caso.titulo} | Dra. Paula Gualtieri`,
+      title: `Caso clínico: ${caso.titulo} | Dra. Paula Gualtieri`,
       description: caso.descripcion,
       type: 'article',
-      url: `https://paulagualtieri.com/tratamientos/${id}/casos/${casoId}`,
+      url: canonicalUrl,
+      images: caseImage ? [{ url: caseImage, alt: caso.titulo }] : undefined,
     }
   };
 }
@@ -47,6 +53,14 @@ export default async function CaseDetailPage({ params }: Props) {
 
   if (!tratamiento || !caso) {
     notFound();
+  }
+
+  const linkedArticle = caso.articleSlug
+    ? getRoutableArticleBySlug(caso.articleSlug)
+    : undefined;
+
+  if (linkedArticle) {
+    permanentRedirect(`/articulos/${linkedArticle.slug}`);
   }
 
   return <CaseDetailContent tratamiento={tratamiento} caso={caso} />;

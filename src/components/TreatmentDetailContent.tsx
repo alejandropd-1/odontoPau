@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,16 +13,24 @@ import type { Tratamiento } from '@/data/tratamientos';
 
 interface TreatmentDetailContentProps {
   tratamiento: Tratamiento;
+  caseArticleHrefs: Record<string, string>;
   relatedArticles: {
     slug: string;
     title: string;
     excerpt: string;
     readTime: string;
   }[];
+  relatedArticlesHref?: string;
 }
 
-export default function TreatmentDetailContent({ tratamiento, relatedArticles }: TreatmentDetailContentProps) {
+export default function TreatmentDetailContent({
+  tratamiento,
+  caseArticleHrefs,
+  relatedArticles,
+  relatedArticlesHref,
+}: TreatmentDetailContentProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -49,12 +57,12 @@ export default function TreatmentDetailContent({ tratamiento, relatedArticles }:
       <section className="treatment-detail__hero">
         <div className="treatment-detail__hero-inner">
           <motion.div 
-            initial={{ opacity: 0, x: -20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
           >
             <span className="treatment-detail__hero-eyebrow">
-              Excelencia Restaurativa
+              Atención odontológica
             </span>
             
             {/* Etiqueta de título para el lápiz */}
@@ -74,19 +82,19 @@ export default function TreatmentDetailContent({ tratamiento, relatedArticles }:
             </p>
             
             <a 
-              href={getWhatsAppLink(`Hola, quiero solicitar una valoración para ${tratamiento.tituloHero}`)}
+              href={getWhatsAppLink(`Hola, quiero solicitar una evaluación para ${tratamiento.tituloHero}`)}
               target="_blank"
               rel="noopener noreferrer"
               className="treatment-detail__hero-cta"
             >
-              Solicitar Valoración <ArrowRight className="treatment-detail__hero-cta-icon" />
+              Solicitar evaluación <ArrowRight className="treatment-detail__hero-cta-icon" />
             </a>
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.8 }}
             className="treatment-detail__hero-media"
           >
             <div className="treatment-detail__hero-image-wrap">
@@ -99,38 +107,31 @@ export default function TreatmentDetailContent({ tratamiento, relatedArticles }:
               />
               <div className="treatment-detail__hero-image-overlay"></div>
             </div>
-            {/* Dr. Badge Overlay */}
-            <div className="treatment-detail__doctor-badge">
-              <div className="treatment-detail__doctor-badge-avatar">
-                <span className="treatment-detail__doctor-badge-initials">PG</span>
+            {tratamiento.professionals && tratamiento.professionals.length > 0 && (
+              <div className="treatment-detail__doctor-badge">
+                <div className="treatment-detail__doctor-badge-avatars">
+                  {tratamiento.professionals.map((professional) => (
+                    <div className="treatment-detail__doctor-badge-avatar" key={professional.name}>
+                      <Image
+                        src={professional.image}
+                        alt={professional.imageAlt}
+                        fill
+                        sizes="48px"
+                        className="treatment-detail__doctor-badge-avatar-image"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <ul className="treatment-detail__doctor-badge-info" aria-label="Profesionales del tratamiento">
+                  {tratamiento.professionals.map((professional) => (
+                    <li key={professional.name}>
+                      <p className="treatment-detail__doctor-badge-name">{professional.name}</p>
+                      <p className="treatment-detail__doctor-badge-role">{professional.role}</p>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="treatment-detail__doctor-badge-info">
-                {tratamiento.id === 'pediatria' ? (
-                  <>
-                    <p className="treatment-detail__doctor-badge-name">Dra. Paula Gualtieri</p>
-                    <p className="treatment-detail__doctor-badge-name">Dra. Emilia Omastott</p>
-                    <p className="treatment-detail__doctor-badge-role">Especialistas en {tratamiento.tituloHero}</p>
-                  </>
-                ) : tratamiento.id === 'implantes' ? (
-                  <>
-                    <p className="treatment-detail__doctor-badge-role">Paula Gualtieri Odontología</p>
-                    <p className="treatment-detail__doctor-badge-name">Dr. Roberto Dominguez</p>
-                    <p className="treatment-detail__doctor-badge-role">Especialista en Rehabilitación Oral</p>
-                  </>
-                ) : tratamiento.id === 'estetica-dental' ? (
-                  <>
-                    <p className="treatment-detail__doctor-badge-role">Paula Gualtieri Odontología</p>
-                    <p className="treatment-detail__doctor-badge-name">Dr. Roberto Dominguez</p>
-                    <p className="treatment-detail__doctor-badge-role">Especialista en {tratamiento.tituloHero}</p>
-                  </>
-                ) : (
-                  <>
-                    <p className="treatment-detail__doctor-badge-name">Dra. Paula Gualtieri</p>
-                    <p className="treatment-detail__doctor-badge-role">Especialista en {tratamiento.tituloHero}</p>
-                  </>
-                )}
-              </div>
-            </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -142,7 +143,7 @@ export default function TreatmentDetailContent({ tratamiento, relatedArticles }:
             <div className="treatment-detail__cases-header">
               <div>
                 <h2 className="treatment-detail__cases-title">Casos Clínicos</h2>
-                <p className="treatment-detail__cases-description">Descubre cómo hemos transformado vidas a través de la reconstrucción dental avanzada. Resultados reales de pacientes reales.</p>
+                <p className="treatment-detail__cases-description">Registros clínicos que documentan distintos abordajes del equipo.</p>
               </div>
               <div className="treatment-detail__cases-controls">
                 <button 
@@ -166,12 +167,12 @@ export default function TreatmentDetailContent({ tratamiento, relatedArticles }:
               ref={scrollRef}
               className="treatment-detail__cases-scroller"
             >
-              {tratamiento.casosClinicos.map((caso: any, idx: number) => (
+              {tratamiento.casosClinicos.map((caso, idx) => (
                 <motion.div 
                   key={caso.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
+                  transition={{ delay: shouldReduceMotion ? 0 : idx * 0.1 }}
                   viewport={{ once: true }}
                   className="treatment-detail__case-card"
                 >
@@ -194,7 +195,12 @@ export default function TreatmentDetailContent({ tratamiento, relatedArticles }:
                       {caso.fecha && (
                         <span className="treatment-detail__case-card-date">{caso.fecha}</span>
                       )}
-                      <Link href={`/tratamientos/${tratamiento.id}/casos/${caso.id}`} className="treatment-detail__case-card-link">Ver Caso Completo</Link>
+                      <Link
+                        href={caseArticleHrefs[String(caso.id)] ?? `/tratamientos/${tratamiento.id}/casos/${caso.id}`}
+                        className="treatment-detail__case-card-link"
+                      >
+                        Ver caso completo
+                      </Link>
                     </div>
                   </div>
                 </motion.div>
@@ -223,6 +229,14 @@ export default function TreatmentDetailContent({ tratamiento, relatedArticles }:
                 </article>
               ))}
             </div>
+            {relatedArticlesHref && (
+              <div className="treatment-detail__articles-more">
+                <Link href={relatedArticlesHref}>
+                  Ver todos los artículos de {tratamiento.tituloHero}
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+              </div>
+            )}
           </div>
         </section>
       )}
@@ -237,7 +251,7 @@ export default function TreatmentDetailContent({ tratamiento, relatedArticles }:
               </div>
 
              <div className="treatment-detail__features-content">
-               <h2 className="treatment-detail__features-title">¿Por qué elegir nuestros {tratamiento.tituloHero.toLowerCase()}?</h2>
+               <h2 className="treatment-detail__features-title">Aspectos de {tratamiento.tituloHero.toLowerCase()}</h2>
                <div className="treatment-detail__features-grid" data-sb-field-path="features">
                  {tratamiento.features.map((feature: string, i: number) => (
                    <div key={i} className="treatment-detail__feature-item" data-sb-field-path={`.${i}`}>
@@ -250,16 +264,6 @@ export default function TreatmentDetailContent({ tratamiento, relatedArticles }:
                </div>
              </div>
 
-             <div className="treatment-detail__features-stats">
-                <div className="treatment-detail__stat-card">
-                  <p className="treatment-detail__stat-value">98%</p>
-                  <p className="treatment-detail__stat-label">Tasa de Éxito</p>
-                </div>
-                <div className="treatment-detail__stat-card">
-                  <p className="treatment-detail__stat-value">15+</p>
-                  <p className="treatment-detail__stat-label">Años de Experiencia</p>
-                </div>
-             </div>
           </div>
         </div>
       </section>
@@ -271,16 +275,16 @@ export default function TreatmentDetailContent({ tratamiento, relatedArticles }:
             <div className="treatment-detail__cta-bg-glow"></div>
             
             <div className="treatment-detail__cta-content">
-              <h2 className="treatment-detail__cta-title">¿Listo para transformar su sonrisa?</h2>
-              <p className="treatment-detail__cta-description">Unite a los pacientes que han recuperado su confianza con nuestro tratamientos de vanguardia.</p>
+              <h2 className="treatment-detail__cta-title">¿Querés consultar por este tratamiento?</h2>
+              <p className="treatment-detail__cta-description">Escribinos para coordinar una evaluación y conversar sobre las opciones adecuadas para tu caso.</p>
               <div className="treatment-detail__cta-actions">
                 <a 
-                  href={getWhatsAppLink(`Hola, quiero agendar mi cita para el tratamiento de ${tratamiento.tituloHero}`)}
+                  href={getWhatsAppLink(`Hola, quiero solicitar una evaluación para ${tratamiento.tituloHero}`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="treatment-detail__cta-button"
                 >
-                  Agendar Cita <CheckCircle2 className="treatment-detail__cta-button-icon" />
+                  Solicitar evaluación <CheckCircle2 className="treatment-detail__cta-button-icon" />
                 </a>
               </div>
             </div>

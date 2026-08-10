@@ -3,7 +3,11 @@ import { notFound } from 'next/navigation';
 import { getTratamientoById, getTratamientos } from '@/data/tratamientos';
 import TreatmentDetailContent from '@/components/TreatmentDetailContent';
 import { Metadata } from 'next';
-import { getPublishedArticlesByServiceId } from '@/data/articulos';
+import {
+  getListableArticlesByServiceId,
+  getTreatmentArticlesArchivePath,
+  RELATED_ARTICLES_LIMIT,
+} from '@/data/articulos';
 
 type Props = {
   params: Promise<{ id: string }>
@@ -24,11 +28,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: tratamiento.tituloHero,
     description: tratamiento.descripcionHero,
+    alternates: {
+      canonical: `https://paulagualtieri.com/tratamientos/${tratamiento.id}`,
+    },
     openGraph: {
       title: `${tratamiento.tituloHero} | Dra. Paula Gualtieri`,
       description: tratamiento.descripcionHero,
       type: 'article',
-      url: `https://paulagualtieri.com/tratamientos/${id}`,
+      url: `https://paulagualtieri.com/tratamientos/${tratamiento.id}`,
+      images: [
+        {
+          url: tratamiento.heroImage,
+          alt: tratamiento.tituloHero,
+        },
+      ],
     }
   };
 }
@@ -41,12 +54,32 @@ export default async function TreatmentPage({ params }: Props) {
     notFound();
   }
 
-  const relatedArticles = getPublishedArticlesByServiceId(tratamiento.id).map((article) => ({
+  const allRelatedArticles = getListableArticlesByServiceId(tratamiento.id);
+  const relatedArticles = allRelatedArticles.slice(0, RELATED_ARTICLES_LIMIT).map((article) => ({
     slug: article.slug,
     title: article.title,
     excerpt: article.excerpt,
     readTime: article.readTime,
   }));
+  const availableArticleSlugs = new Set(allRelatedArticles.map((article) => article.slug));
+  const caseArticleHrefs = Object.fromEntries(
+    tratamiento.casosClinicos.flatMap((caso) =>
+      caso.articleSlug && availableArticleSlugs.has(caso.articleSlug)
+        ? [[String(caso.id), `/articulos/${caso.articleSlug}`]]
+        : [],
+    ),
+  );
 
-  return <TreatmentDetailContent tratamiento={tratamiento} relatedArticles={relatedArticles} />;
+  return (
+    <TreatmentDetailContent
+      tratamiento={tratamiento}
+      relatedArticles={relatedArticles}
+      caseArticleHrefs={caseArticleHrefs}
+      relatedArticlesHref={
+        allRelatedArticles.length > RELATED_ARTICLES_LIMIT
+          ? getTreatmentArticlesArchivePath(tratamiento.id)
+          : undefined
+      }
+    />
+  );
 }

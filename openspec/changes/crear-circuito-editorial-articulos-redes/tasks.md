@@ -20,6 +20,11 @@
 - [x] 2.10 Alinear breadcrumb, titulo, animaciones, galeria principal y contenedores con la plantilla visual existente de casos clinicos
 - [x] 2.11 Integrar temas, fuentes consultadas y tratamientos relacionados en un cierre editorial compacto y responsive
 - [x] 2.12 Implementar una plantilla clinica modular unica con resumen, datos y abordaje opcionales, y comprobar sus estados minimo, intermedio y completo
+- [x] 2.13 Implementar seleccion de articulos listables que excluya `draft` en preview y todo estado no publicado en produccion
+- [x] 2.14 Paginar `/articulos` de a nueve con URLs estaticas, canonical propio y controles accesibles
+- [x] 2.15 Crear archivos por tratamiento paginados de a nueve bajo `/articulos/tratamiento/[serviceId]`
+- [x] 2.16 Limitar cada tratamiento a tres articulos y mostrar la accion al archivo completo solo cuando exista contenido adicional
+- [x] 2.17 Validar orden, estados vacios, limites, rutas, teclado, metadata y responsive de los archivos
 
 ## 3. Contenido piloto e imagenes
 

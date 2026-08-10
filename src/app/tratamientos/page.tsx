@@ -12,7 +12,8 @@ import TreatmentIcon from '@/components/TreatmentIcon';
 
 export const metadata: Metadata = {
   title: 'Tratamientos',
-  description: 'Conoce los tratamientos odontologicos disponibles en Paula Gualtieri Odontologia: implantes, ortodoncia, estetica dental, ortopedia, pediatria y endodoncia.',
+  description: 'Conocé los tratamientos odontológicos disponibles en Paula Gualtieri Odontología: rehabilitación, ortodoncia, estética dental, ortopedia, pediatría y endodoncia.',
+  alternates: { canonical: 'https://paulagualtieri.com/tratamientos' },
 };
 
 export default function TratamientosPage() {
@@ -25,12 +26,12 @@ export default function TratamientosPage() {
       <section className="treatments-index" aria-labelledby="treatments-title">
         <div className="treatments-index__inner">
           <div className="treatments-index__header">
-            <span className="treatments-index__eyebrow">Servicios odontologicos</span>
+            <span className="treatments-index__eyebrow">Nuestros tratamientos</span>
             <h1 id="treatments-title" className="treatments-index__title">
-              Tratamientos para cuidar cada etapa de tu sonrisa
+              Distintas formas de cuidar tu sonrisa
             </h1>
             <p className="treatments-index__description">
-              Especialidades coordinadas con criterio clinico, tecnologia precisa y una atencion cercana para cada paciente.
+              Te acompañamos con una mirada integral y un plan pensado para vos, desde la primera consulta hasta cada control.
             </p>
           </div>
 
@@ -57,7 +58,7 @@ export default function TratamientosPage() {
                   </h2>
                   <p className="treatments-index__card-description">{treatment.descripcionHero}</p>
                   <Link className="treatments-index__link" href={`/tratamientos/${treatment.id}`}>
-                    Saber mas
+                    Conocer el tratamiento
                     <ArrowRight className="treatments-index__link-icon" />
                   </Link>
                 </div>
@@ -70,12 +71,12 @@ export default function TratamientosPage() {
       <section className="treatments-instructions" aria-labelledby="treatments-instructions-title">
         <div className="treatments-instructions__inner">
           <div className="treatments-instructions__header">
-            <span className="treatments-instructions__eyebrow">Para compartir despues de la consulta</span>
+            <span className="treatments-instructions__eyebrow">Para tener siempre a mano</span>
             <h2 id="treatments-instructions-title" className="treatments-instructions__title">
-              Instrucciones listas para enviar a pacientes
+              Indicaciones para volver a consultar cuando las necesites
             </h2>
             <p className="treatments-instructions__description">
-              Guias breves relacionadas con los tratamientos para que cada paciente pueda repasar cuidados y recomendaciones desde su telefono.
+              Guías claras y simples para repasar desde el teléfono los cuidados recomendados después de la consulta.
             </p>
           </div>
 

@@ -2,8 +2,8 @@
 
 > Borrador v1 para revisión. Este documento reúne únicamente información confirmada en el sitio o por Paula y Alejandro. No habilita a inventar datos clínicos, resultados ni testimonios.
 
-**Version:** v1
-**Last updated:** 2026-08-03
+**Version:** v2
+**Last updated:** 2026-08-04
 
 ## Producto y marca
 
@@ -32,7 +32,7 @@ Necesidades editoriales principales:
 - Ortodoncia Invisible.
 - Ortopedia.
 - Odontología Pediátrica.
-- Implantes Dentales, pendiente de una modificación estructural separada para pasar a llamarse “Rehabilitación”.
+- Rehabilitación.
 
 ## Objetivos del contenido
 
@@ -54,6 +54,7 @@ La acción principal es iniciar una consulta o solicitar un turno por WhatsApp. 
 - Sereno, sin alarmismo ni exageraciones.
 - Términos clínicos explicados en lenguaje cotidiano cuando sea posible.
 - Párrafos breves y títulos descriptivos.
+- Voz institucional: la copia pública describe el caso o la indicación sin fórmulas como “Paula dijo”, “Paula informó” o “Paula sugiere”. La procedencia y la revisión clínica se conservan como metadatos internos, no como parte del relato.
 
 ## Evidencia disponible
 
@@ -97,6 +98,8 @@ Una única plantilla modular debe aceptar tres densidades de información sin ca
 
 Los módulos incompletos no se renderizan. La ausencia de información nunca debe producir espacios vacíos ni contenido de relleno.
 
+Cuando un caso clínico cuenta con un artículo disponible, el artículo es su experiencia pública canónica. La ficha histórica del tratamiento queda como respaldo mientras el artículo todavía no sea publicable.
+
 ## Información todavía no confirmada
 
 - Métricas de negocio o de conversión.
@@ -108,4 +111,5 @@ Los módulos incompletos no se renderizan. La ausencia de información nunca deb
 
 ## Changelog
 
+- **v2 — 2026-08-04:** Rehabilitación reemplaza a Implantes Dentales como servicio canónico dentro del cambio `integrar-lote-clinico-y-rehabilitacion`.
 - **v1 — 2026-08-03:** contexto inicial para el circuito editorial, basado en el sitio actual y en decisiones confirmadas durante la preparación de los primeros casos.

@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased] - 2026-08-05
+
+### Added
+- **Editorial Articles**: Added the JSON-driven `/articulos` archive, dynamic article routes, service-specific archives and pagination with nine articles per page.
+- **Adaptive Article Template**: Added one modular article experience that renders only the sections supplied by each case and supports one, two, three or more images without empty modules.
+- **Clinical Article Batch**: Added review versions for Endodontics, whitening, piece 11 resin reconstruction, orthodontics, pediatric dentistry, anterior rehabilitation and the second visual-only batch.
+- **Patient Instructions**: Added complete Dieta Blanca and post-extraction instruction pages with structured mobile-friendly content and downloadable/source artwork.
+- **Professional Heroes**: Added editable professional data and optimized portraits for Paula Gualtieri, Roberto Domínguez, Pablo Alejandro Martínez and María Emilia Omastott.
+- **Ortopedia Hero**: Added an optimized collage created from confirmed appliance photographs.
+- **OpenSpec History**: Added changes for the editorial circuit, patient instructions, the confirmed clinical batch and future LM Studio Link runner research.
+- **Operational Handoff**: Added `docs/HANDOFF-EDITORIAL-2026-08-05.md` with the full continuation routine, Netlify draft procedure and remaining approval gates.
+
+### Changed
+- **Rehabilitación Canonical Service**: Renamed the Implantes Dentales service, folder, ID, metadata and canonical route to Rehabilitación.
+- **Historical URLs**: Added permanent redirects from the former `/tratamientos/implantes` routes to their Rehabilitación equivalents.
+- **Treatment Heroes**: Replaced hardcoded professional badges with JSON-driven one-or-many professional cards and stabilized their responsive layout.
+- **Estética Dental Team**: Added Paula Gualtieri alongside Roberto Domínguez in the service hero.
+- **Treatment Covers**: Made `/tratamientos` reuse each service's current `heroImage`, including the new Rehabilitación and Ortopedia assets.
+- **Case Navigation**: Linked treatment cases to their canonical articles when the article is available in the current environment.
+- **Editorial Voice**: Rewrote public copy with a warmer institutional tone, removed internal attributions such as “Paula dijo” and avoided mechanical descriptions of supplied images.
+- **Article Body Layout**: Consolidated content into a continuous modular body and retained optional richer case-summary modules only when supported by confirmed information.
+- **Article Footer**: Reorganized sources, topics and related treatments into a clearer closing area.
+- **Social Metadata**: Updated preview URLs and image resolution so article links can expose an OpenGraph image in supported clients.
+- **Treatments and Instructions Copy**: Reworked headings and descriptions to use clear Argentine Spanish and a more approachable tone.
+
+### Fixed
+- **Piece 11 Asset Association**: Replaced the incorrect image with the confirmed files from `estetica_dental/caso-02`.
+- **Pediatric Case Contamination**: Removed inherited implant content and replaced it with authorized pediatric material.
+- **Minor Privacy**: Used only the authorized anonymized pediatric images and kept identity protection visible.
+- **Optional Image Labels**: Prevented `Antes`/`Después` labels from appearing when a single image or an unconfirmed sequence is supplied.
+- **Hero Overflow**: Fixed professional pills shrinking, touching image edges or overflowing with long roles.
+- **Instruction Masonry**: Removed equal-height gaps from instruction cards so short and long categories flow naturally.
+- **Unsupported Claims**: Removed fictitious testimonials, hardcoded success percentages, unsupported durations and universal outcome promises from the migrated services.
+
+### Safety and publication gates
+- All new clinical articles remain in review states and are excluded from production routes, archives and sitemap until explicitly approved.
+- The public author is `Equipo clínico`; named clinical reviewers remain internal metadata.
+- Production continues to deploy from `main`; no commit, push, merge or production deploy has been performed for this batch.
+- The LM Studio Link runner is documented as a future research change only and has not been implemented or granted release permissions.
+
+### Validation
+- Passed strict OpenSpec validation, TypeScript, ESLint and Next.js builds in production and deploy-preview contexts.
+- Verified desktop and mobile layouts with Playwright, including hero cards, article variants, instructions, console output and horizontal overflow.
+- Deployed and verified the isolated Netlify draft `6a7368a1efc601008519c9fd`; the corresponding new article routes continued to return 404 on production.
+
 ## [Unreleased] - 2026-06-19
 
 ### Added

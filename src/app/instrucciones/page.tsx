@@ -3,14 +3,19 @@ import { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import InstructionCards from '@/components/InstructionCards';
-import { publishedInstrucciones } from '@/data/instrucciones';
+import { getRoutableInstructions, isInstructionPreviewBuild } from '@/data/instrucciones';
 
 export const metadata: Metadata = {
   title: 'Instrucciones para pacientes',
-  description: 'Indicaciones breves para pacientes de Paula Gualtieri Odontologia: cuidados posteriores, recomendaciones y enlaces directos para WhatsApp.',
+  description: 'Indicaciones odontológicas breves para pacientes: cuidados posteriores, recomendaciones y recursos disponibles.',
+  alternates: { canonical: 'https://paulagualtieri.com/instrucciones' },
+  robots: isInstructionPreviewBuild() ? { index: false, follow: false } : undefined,
 };
 
 export default function InstruccionesPage() {
+  const instructions = getRoutableInstructions();
+  const isPreview = isInstructionPreviewBuild();
+
   return (
     <main className="instructions-page">
       <Navbar />
@@ -23,11 +28,20 @@ export default function InstruccionesPage() {
               Instrucciones claras para seguir el cuidado en casa
             </h1>
             <p className="instructions-index__description">
-              Material breve para compartir por WhatsApp despues de cada consulta, con indicaciones simples y faciles de repasar.
+              Material para descargar luego de los procedimientos.
             </p>
+            {isPreview && (
+              <p className="instructions-index__preview-notice" role="status">
+                Vista previa editorial: también se muestran instrucciones que todavía no están publicadas.
+              </p>
+            )}
           </div>
 
-          <InstructionCards instructions={publishedInstrucciones} />
+          {instructions.length > 0 ? (
+            <InstructionCards instructions={instructions} />
+          ) : (
+            <p className="instructions-index__empty">Las instrucciones se encuentran en revisión editorial.</p>
+          )}
         </div>
       </section>
 

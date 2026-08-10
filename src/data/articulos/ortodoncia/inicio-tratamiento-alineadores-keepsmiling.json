@@ -1,0 +1,90 @@
+{
+  "type": "Articulo",
+  "id": "ortodoncia-caso-03",
+  "slug": "inicio-tratamiento-alineadores-keepsmiling",
+  "category": "ortodoncia-invisible",
+  "categoryLabel": "Ortodoncia",
+  "serviceIds": [
+    "ortodoncia-invisible"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Inicio con KeepSmiling",
+  "title": "Inicio de tratamiento con alineadores invisibles KeepSmiling",
+  "excerpt": "Entrega del primer alineador de la primera etapa del tratamiento con alineadores KeepSmiling diseñados para mejorar la sonrisa de forma cómoda y estética.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-06T13:55:59.539Z",
+  "updatedAt": "2026-08-07T10:37:59.474Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "readTime": "2 min de lectura",
+  "tags": [
+    "ortodoncia invisible",
+    "KeepSmiling",
+    "alineadores",
+    "inicio de tratamiento"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/inicio-tratamiento-alineadores-keepsmiling/registro-01.webp",
+    "alt": "Inicio de tratamiento con alineadores invisibles KeepSmiling",
+    "width": 1200,
+    "height": 1200,
+    "caption": "Colocación e inicio del plan de alineamiento con placas KeepSmiling."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Comenzar a alinear de forma imperceptible",
+      "paragraphs": [
+        "Los alineadores invisibles KeepSmiling son placas transparentes a medida que ejercen presiones suaves sobre los dientes para guiarlos hacia su posición ideal.",
+        "Al iniciar el tratamiento, el paciente recibe sus primeros pares de alineadores junto con las pautas de uso diario y cuidado para acompañar el avance con total comodidad."
+      ],
+      "facts": [
+        {
+          "label": "Tratamiento",
+          "value": "Alineadores KeepSmiling"
+        },
+        {
+          "label": "Etapa",
+          "value": "Inicio del plan clínico"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Registros iniciales del tratamiento",
+      "images": [
+        {
+          "src": "/images/articulos/inicio-tratamiento-alineadores-keepsmiling/registro-01.webp",
+          "alt": "Vista frontal del inicio con placas KeepSmiling",
+          "width": 1200,
+          "height": 1200,
+          "caption": "Entrega de kit de limpieza y cuidado de los alineadores."
+        },
+        {
+          "src": "/images/articulos/inicio-tratamiento-alineadores-keepsmiling/registro-02.webp",
+          "alt": "Detalle de los alineadores KeepSmiling en boca",
+          "width": 1200,
+          "height": 1200,
+          "caption": "Transparencia y adaptación estética con los alineadores en boca."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "title": "Guía práctica para el paciente",
+      "paragraphs": [
+        "Para garantizar el movimiento planificado, es fundamental usar los alineadores durante 22 horas al día, retirándolos solo para comer e higienizar la boca.",
+        "La constancia en los primeros días ayuda a que la boca se adapte rápidamente a la sensación de las placas."
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Indicaciones de paciente",
+      "title": "¿Querés saber cómo cuidar tus alineadores KeepSmiling?",
+      "text": "Revisá nuestra guía paso a paso con recomendaciones de higiene, colocación y conservación diaria de tus placas.",
+      "href": "/instrucciones/ortodoncia/indicaciones-alineadores-keepsmiling",
+      "buttonLabel": "Ver guía de KeepSmiling"
+    }
+  ]
+}

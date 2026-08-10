@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle2 } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Team() {
   return (
@@ -26,15 +26,19 @@ export default function Team() {
             className="team__featured"
           >
             <div className="team__avatar">
-              <div className="team__avatar-fallback">
-                PG
-              </div>
+              <Image
+                src="/images/profesionales/paula-gualtieri-estudio.webp"
+                alt="Retrato de la Dra. Paula Gualtieri"
+                fill
+                sizes="192px"
+                className="team__avatar-image"
+              />
             </div>
             <div className="team__featured-content">
               <h3 className="team__member-name">Dra. Paula Gualtieri</h3>
-              <p className="team__member-license">MN</p>
+              <p className="team__member-license">MN 31757</p>
               <p className="team__member-role">
-                Especialista en alineadores dentales y ortopedia.
+                Especialista en ortodoncia y ortopedia.
               </p>
             </div>
           </motion.div>
@@ -48,23 +52,35 @@ export default function Team() {
             {[
               {
                 name: 'Dr. Roberto Dominguez',
-                mn: 'MN',
-                role: 'Especialista en rehabilitación oral (Implantes y prótesis).'
+                mn: 'MN 32457',
+                role: 'Especialista en rehabilitación oral (Implantes y prótesis).',
+                image: '/images/profesionales/roberto-dominguez-estudio.webp',
+                imageAlt: 'Retrato del Dr. Roberto Dominguez'
               },
               {
                 name: 'Dra. Emilia Omastott',
-                mn: 'MN',
-                role: 'Atención niños, Maestría en cirugía dental.'
+                mn: 'MN 40113',
+                role: 'Atención niños, Maestría en cirugía dental.',
+                image: '/images/profesionales/maria-emilia-omastott-estudio.webp',
+                imageAlt: 'Retrato de la Dra. Emilia Omastott'
               },
               {
                 name: 'Dr. Pablo Martinez',
-                mn: 'MN',
-                role: 'Especialista en Endodoncia.'
+                mn: 'MN 33337',
+                role: 'Especialista en Endodoncia.',
+                image: '/images/profesionales/pablo-alejandro-martinez-estudio.webp',
+                imageAlt: 'Retrato del Dr. Pablo Martinez'
               }
             ].map((member, idx) => (
               <div key={idx} className="team__list-card">
-                <div className="team__list-icon-wrap">
-                  <CheckCircle2 className="team__list-icon" />
+                <div className="team__list-avatar">
+                  <Image
+                    src={member.image}
+                    alt={member.imageAlt}
+                    fill
+                    sizes="48px"
+                    className="team__list-avatar-image"
+                  />
                 </div>
                 <div className="team__list-content">
                   <h3 className="team__list-name">{member.name}</h3>

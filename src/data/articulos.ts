@@ -29,6 +29,11 @@ export interface ArticleCaseFact {
   value: string;
 }
 
+export interface ArticleDownload {
+  name: string;
+  url: string;
+}
+
 export interface ArticleCaseApproach {
   title: string;
   text: string;
@@ -139,12 +144,14 @@ export interface Article {
   author: string;
   clinicalReviewer?: string;
   status: ArticleStatus;
+  createdAt?: string;
   publishedAt?: string;
   updatedAt: string;
   readTime: string;
   tags: string[];
   heroImage: ArticleImage;
   sources?: ArticleSource[];
+  downloads?: ArticleDownload[];
   sections: ArticleSection[];
   sourcePath: string;
 }
@@ -329,6 +336,16 @@ function loadArticle(filePath: string): Article {
     });
   }
 
+  if (article.downloads) {
+    if (!Array.isArray(article.downloads)) {
+      throw new Error(`Articulo invalido en ${sourcePath}: downloads debe ser una lista.`);
+    }
+    article.downloads.forEach((download, index) => {
+      requireString(download.name, `downloads[${index}].name`, sourcePath);
+      requireString(download.url, `downloads[${index}].url`, sourcePath);
+    });
+  }
+
   if (article.type !== 'Articulo') {
     throw new Error(`Articulo invalido en ${sourcePath}: type debe ser Articulo.`);
   }
@@ -388,6 +405,9 @@ export const articles = articlesData.sort((a, b) => {
 
 export const publishedArticles = articles.filter((article) => article.status === 'published');
 
+export const ARTICLES_PER_PAGE = 9;
+export const RELATED_ARTICLES_LIMIT = 3;
+
 export function isEditorialPreviewBuild() {
   return (
     process.env.NODE_ENV === 'development' ||
@@ -402,12 +422,51 @@ export function getRoutableArticles() {
   return isEditorialPreviewBuild() ? articles : publishedArticles;
 }
 
+export function getListableArticles() {
+  return isEditorialPreviewBuild()
+    ? articles.filter((article) => article.status !== 'draft')
+    : publishedArticles;
+}
+
 export function getRoutableArticleBySlug(slug: string) {
   return getRoutableArticles().find((article) => article.slug === slug);
 }
 
 export function getPublishedArticlesByServiceId(serviceId: string) {
   return publishedArticles.filter((article) => article.serviceIds.includes(serviceId));
+}
+
+export function getListableArticlesByServiceId(serviceId: string) {
+  return getListableArticles().filter((article) => article.serviceIds.includes(serviceId));
+}
+
+export function paginateArticles(items: Article[], page: number) {
+  const totalPages = Math.max(1, Math.ceil(items.length / ARTICLES_PER_PAGE));
+  const start = (page - 1) * ARTICLES_PER_PAGE;
+
+  return {
+    articles: items.slice(start, start + ARTICLES_PER_PAGE),
+    currentPage: page,
+    totalItems: items.length,
+    totalPages,
+  };
+}
+
+export function getArticlesArchivePath(page = 1) {
+  return page === 1 ? '/articulos' : `/articulos/pagina/${page}`;
+}
+
+export function getTreatmentArticlesArchivePath(serviceId: string, page = 1) {
+  const basePath = `/articulos/tratamiento/${serviceId}`;
+  return page === 1 ? basePath : `${basePath}/pagina/${page}`;
+}
+
+export function getArticlesArchiveCanonicalUrl(page = 1) {
+  return `https://paulagualtieri.com${getArticlesArchivePath(page)}`;
+}
+
+export function getTreatmentArticlesArchiveCanonicalUrl(serviceId: string, page = 1) {
+  return `https://paulagualtieri.com${getTreatmentArticlesArchivePath(serviceId, page)}`;
 }
 
 export function getArticleCanonicalUrl(slug: string) {

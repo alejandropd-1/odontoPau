@@ -27,6 +27,7 @@ $-clr-accent-500: #f97316;
 $-clr-accent-600: #ea580c;
 $-clr-accent-700: #c2410c;
 $-clr-accent-800: #9a3412;
+$-clr-accent-900: #7c2d12;
 
 $-clr-slate-100: #f1f5f9;
 $-clr-slate-200: #e2e8f0;
@@ -39,7 +40,16 @@ $-clr-zinc-900: #18181b;
 $-clr-whatsapp: #128c7e;
 $-clr-whatsapp-dark: #075e54;
 
-$-clr-error: #ba1a1a;
+$-clr-success-100: #dcfce7;
+$-clr-success-800: #166534;
+$-clr-warning-100: #fef3c7;
+$-clr-warning-600: #b45309;
+$-clr-warning-800: #78350f;
+$-clr-error-050: #fef2f2;
+$-clr-error-100: #fee2e2;
+$-clr-error-500: #ba1a1a;
+$-clr-error-600: #b91c1c;
+$-clr-error-800: #991b1b;
 
 $light: (
   "neutral": (
@@ -73,6 +83,7 @@ $light: (
     "600": $-clr-accent-600,
     "700": $-clr-accent-700,
     "800": $-clr-accent-800,
+    "900": $-clr-accent-900,
   ),
   "slate": (
     "100": $-clr-slate-100,
@@ -89,7 +100,20 @@ $light: (
     "700": $-clr-whatsapp-dark,
   ),
   "error": (
-    "500": $-clr-error,
+    "050": $-clr-error-050,
+    "100": $-clr-error-100,
+    "500": $-clr-error-500,
+    "600": $-clr-error-600,
+    "800": $-clr-error-800,
+  ),
+  "success": (
+    "100": $-clr-success-100,
+    "800": $-clr-success-800,
+  ),
+  "warning": (
+    "100": $-clr-warning-100,
+    "600": $-clr-warning-600,
+    "800": $-clr-warning-800,
   ),
 );
 
@@ -123,6 +147,7 @@ $color-accent-500: var(--accent-500);
 $color-accent-600: var(--accent-600);
 $color-accent-700: var(--accent-700);
 $color-accent-800: var(--accent-800);
+$color-accent-900: var(--accent-900);
 
 $color-slate-100: var(--slate-100);
 $color-slate-200: var(--slate-200);
@@ -135,4 +160,13 @@ $color-zinc-900: var(--zinc-900);
 $color-whatsapp-500: var(--whatsapp-500);
 $color-whatsapp-700: var(--whatsapp-700);
 
+$color-error-050: var(--error-050);
+$color-error-100: var(--error-100);
 $color-error-500: var(--error-500);
+$color-error-600: var(--error-600);
+$color-error-800: var(--error-800);
+$color-success-100: var(--success-100);
+$color-success-800: var(--success-800);
+$color-warning-100: var(--warning-100);
+$color-warning-600: var(--warning-600);
+$color-warning-800: var(--warning-800);

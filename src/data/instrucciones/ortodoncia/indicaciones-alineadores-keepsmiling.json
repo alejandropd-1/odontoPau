@@ -1,0 +1,125 @@
+{
+  "type": "Instruccion",
+  "id": "ortodoncia-indicaciones-keepsmiling",
+  "slug": "indicaciones-alineadores-keepsmiling",
+  "category": "ortodoncia",
+  "categoryLabel": "Ortodoncia",
+  "serviceId": "ortodoncia-invisible",
+  "title": "Indicaciones y uso diario de alineadores KeepSmiling",
+  "excerpt": "Guía práctica e indicaciones paso a paso para la colocación, remoción, limpieza y mantenimiento diario de tus alineadores KeepSmiling.",
+  "status": "published",
+  "updatedAt": "2026-08-09T23:15:16.714Z",
+  "readTime": "3 min de lectura",
+  "clinicalReviewer": "Paula Gualtieri",
+  "tags": [
+    "Ortodoncia",
+    "KeepSmiling",
+    "Alineadores",
+    "Indicaciones"
+  ],
+  "resourceImage": {
+    "src": "/images/instrucciones/cuidados-alineadores-keepsmiling/registro-01.webp",
+    "alt": "Alineadores invisibles KeepSmiling preparados para su uso",
+    "width": 1200,
+    "height": 1200
+  },
+  "resourceGallery": {
+    "title": "Cómo limpiar tus alineadores KeepSmiling",
+    "intro": "Consultá cada imagen en orden. En la primera y la última tarjeta podés reproducir o descargar sus respectivos videos.",
+    "images": [
+      {
+        "src": "/images/instrucciones/cuidados-alineadores-keepsmiling/registro-01.webp",
+        "alt": "Portada de la guía sobre cómo lavar los alineadores KeepSmiling",
+        "width": 1080,
+        "height": 1080,
+        "label": "Guía de lavado · Portada",
+        "downloadLabel": "Descargar video paso a paso",
+        "downloadSrc": "/videos/instrucciones/cuidados-alineadores-keepsmiling/paso-a-paso-video.mp4"
+      },
+      {
+        "src": "/images/instrucciones/cuidados-alineadores-keepsmiling/registro-05.webp",
+        "alt": "Paso 1: llenar el vaso plegable con agua y colocar una tableta limpiadora",
+        "width": 1080,
+        "height": 1080,
+        "label": "Paso 1 · Preparar la solución"
+      },
+      {
+        "src": "/images/instrucciones/cuidados-alineadores-keepsmiling/registro-06.webp",
+        "alt": "Paso 2: sumergir los alineadores en el vaso y dejarlos reposar",
+        "width": 1080,
+        "height": 1080,
+        "label": "Paso 2 · Dejar actuar"
+      },
+      {
+        "src": "/images/instrucciones/cuidados-alineadores-keepsmiling/registro-07.webp",
+        "alt": "Paso 3: retirar los alineadores del vaso y cepillarlos suavemente",
+        "width": 1080,
+        "height": 1080,
+        "label": "Paso 3 · Cepillar suavemente"
+      },
+      {
+        "src": "/images/instrucciones/cuidados-alineadores-keepsmiling/registro-08.webp",
+        "alt": "Paso 4: enjuagar los alineadores luego de la limpieza",
+        "width": 1080,
+        "height": 1080,
+        "label": "Paso 4 · Enjuagar"
+      },
+      {
+        "src": "/images/instrucciones/cuidados-alineadores-keepsmiling/registro-09.webp",
+        "alt": "Portada del video brochure sobre limpieza de alineadores KeepSmiling",
+        "width": 900,
+        "height": 1599,
+        "label": "Videos KeepSmiling · Portada",
+        "downloadLabel": "Descargar video brochure",
+        "downloadSrc": "/videos/instrucciones/cuidados-alineadores-keepsmiling/video-brochute.mp4"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "type": "steps",
+      "title": "Pautas principales de uso",
+      "items": [
+        "Utilizá tus alineadores KeepSmiling un mínimo de 22 horas al día para asegurar el movimiento continuo planificado.",
+        "Retiralos únicamente para comer, beber líquidos calientes o azucarados, y para realizar tu higiene bucal.",
+        "Al colocar cada placa, presioná suavemente en el frente y luego sobre los molares hasta sentir que calza con precisión.",
+        "Para retirarlos, desenganchá suavemente con la yema del dedo desde la parte interna de las muelas traseras hacia adelante.",
+        "Guardá siempre tus alineadores dentro de su estuche rígido protector cuando no los estés usando.",
+        "Higienizalos todos los días con agua fría o templada y un cepillo de cerdas suaves. Evitá el agua caliente porque puede deformar el material.",
+        "Cepillate los dientes y pasá hilo dental antes de volver a colocártelos tras cada comida.",
+        "Ante cualquier desprendimiento de atache o molestia persistente al cambiar de placa, escribinos para asesorarte."
+      ]
+    },
+    {
+      "type": "matrix",
+      "title": "Cuidado y conservación de las placas",
+      "groups": [
+        {
+          "title": "Hábitos durante el tratamiento",
+          "yes": [
+            "Usar 22 h al día",
+            "Limpiar con agua templada y cepillo suave",
+            "Guardar siempre en su estuche"
+          ],
+          "caution": [
+            "Mate, café o infusiones calientes (retirar placa)",
+            "Enjuagues bucales con colorantes intensos"
+          ],
+          "no": [
+            "Usar agua hirviendo o caliente",
+            "Comer con las placas colocadas",
+            "Envolver en servilletas o guardar en bolsillos"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "notice",
+      "tone": "info",
+      "title": "Acompañamiento en cada etapa",
+      "text": "El cambio de placa se realiza según el esquema planificado. Conservá el par de alineadores anterior en su sobre numerado como respaldo."
+    }
+  ],
+  "createdAt": "2026-08-06T13:54:59.744Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z"
+}

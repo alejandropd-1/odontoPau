@@ -1,0 +1,78 @@
+{
+  "type": "Articulo",
+  "id": "estetica-caso-04",
+  "slug": "registro-clinico-estetica-dental-caso-04",
+  "category": "estetica-dental",
+  "categoryLabel": "Estética Dental",
+  "serviceIds": [
+    "estetica-dental"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Estética Dental",
+  "title": "Un abordaje personalizado en Estética Dental",
+  "excerpt": "Cada sonrisa tiene su propia historia y merece una mirada atenta, cuidada y personalizada.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-05T15:58:59.384Z",
+  "updatedAt": "2026-08-07T10:41:34.946Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "readTime": "1 min de lectura",
+  "tags": [
+    "estética dental",
+    "registro clínico",
+    "caso clínico"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/registro-clinico-estetica-dental-caso-04/registro-01.webp",
+    "alt": "Vista clínica de piezas dentarias aisladas durante un procedimiento",
+    "width": 379,
+    "height": 735,
+    "caption": "Cada detalle se evalúa con cuidado antes de avanzar."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Cada detalle cuenta",
+      "paragraphs": [
+        "En Estética Dental no hay soluciones iguales para todos. Cada caso empieza con una evaluación cuidadosa y una conversación sobre lo que la persona necesita.",
+        "A partir de ahí, buscamos una alternativa que acompañe la salud bucal, la función y la apariencia natural de la sonrisa."
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "El trabajo de cerca",
+      "images": [
+        {
+          "src": "/images/articulos/registro-clinico-estetica-dental-caso-04/registro-01.webp",
+          "alt": "Vista clínica de piezas dentarias aisladas durante un procedimiento",
+          "width": 379,
+          "height": 735,
+          "caption": "Cada caso se planifica de manera individual."
+        },
+        {
+          "src": "/images/articulos/registro-clinico-estetica-dental-caso-04/registro-02.webp",
+          "alt": "Vista cercana de piezas dentarias aisladas durante el mismo procedimiento",
+          "width": 417,
+          "height": 489,
+          "caption": "Resina directa devolviendo forma y función."
+        },
+        {
+          "src": "/images/articulos/registro-clinico-estetica-dental-caso-04/registro-03.webp",
+          "alt": "Vista extraoral de piezas dentarias sobre un dispositivo de aislamiento",
+          "width": 1200,
+          "height": 1600,
+          "caption": "El aislamiento absoluto es importante para lograr mayor durabilidad en las restauraciones."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Evaluación profesional",
+      "title": "¿Hay algo de tu sonrisa que te gustaría mejorar?",
+      "text": "Escribinos para coordinar una evaluación y conversar con tranquilidad sobre las alternativas para tu caso.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20est%C3%A9tica%20dental",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

@@ -12,7 +12,7 @@ El sistema SHALL cargar articulos tipados desde archivos JSON ubicados recursiva
 - **THEN** la validacion tecnica falla antes de publicar
 
 ### Requirement: Control de visibilidad publica
-El sistema MUST excluir del build de produccion, listados, sitemap y relaciones publicas cualquier articulo cuyo estado no sea `published`. Los builds de preview MAY generar una ruta directa no indexable para revisar borradores autorizados, sin incluirlos en listados, sitemap ni relaciones publicas.
+El sistema MUST excluir del build de produccion, listados, sitemap y relaciones publicas cualquier articulo cuyo estado no sea `published`. Los builds de preview MAY generar rutas no indexables para revisar contenido autorizado: los estados de revision distintos de `draft` MAY incorporarse a listados y relaciones editoriales de preview, mientras un `draft` puro MUST permanecer disponible solo por URL directa. Ningun contenido no publicado SHALL incorporarse al sitemap.
 
 #### Scenario: Articulo en borrador
 - **WHEN** un articulo tiene estado `draft`, `clinical_review`, `technical_review` o `approved` en produccion
@@ -20,7 +20,7 @@ El sistema MUST excluir del build de produccion, listados, sitemap y relaciones 
 
 #### Scenario: Articulo en preview
 - **WHEN** Netlify construye un Deploy Preview o Branch Deploy autorizado
-- **THEN** la ruta directa puede renderizar el borrador con `noindex`, aviso de estado y sin incorporarlo al listado o sitemap
+- **THEN** la ruta directa puede renderizar el contenido con `noindex` y aviso de estado; los estados de revision pueden incorporarse a listados de preview, pero `draft` queda excluido y ninguno se agrega al sitemap
 
 #### Scenario: Articulo publicado
 - **WHEN** un articulo validado cambia a estado `published`
@@ -37,12 +37,39 @@ El sitio SHALL ofrecer `/articulos` y `/articulos/[slug]` con navegacion, breadc
 - **WHEN** se solicita un slug no publicado o inexistente
 - **THEN** el sitio responde con la experiencia 404 existente
 
+### Requirement: Archivos paginados de articulos
+El archivo general y los archivos por tratamiento SHALL ordenar los articulos elegibles del mas reciente al mas antiguo y SHALL mostrar como maximo nueve tarjetas por pagina. La primera pagina SHALL conservar una URL sin sufijo y las siguientes SHALL usar `/pagina/[numero]` con canonical propio.
+
+#### Scenario: Archivo general con hasta nueve articulos
+- **WHEN** existen nueve articulos elegibles o menos
+- **THEN** `/articulos` muestra todos y no renderiza controles de paginacion
+
+#### Scenario: Archivo general con diez articulos
+- **WHEN** existe un decimo articulo elegible
+- **THEN** `/articulos` muestra los nueve mas recientes y ofrece navegacion a `/articulos/pagina/2`
+
+#### Scenario: Archivo por tratamiento
+- **WHEN** se visita `/articulos/tratamiento/[serviceId]`
+- **THEN** se muestran unicamente articulos asociados a ese tratamiento, con la misma paginacion de nueve elementos y URLs estaticas enlazables
+
+#### Scenario: Navegacion accesible entre paginas
+- **WHEN** una persona usa teclado o tecnologia asistiva en un archivo con varias paginas
+- **THEN** encuentra un `nav` etiquetado, enlaces anterior/siguiente y numerados, y la pagina actual indicada semanticamente
+
 ### Requirement: Relacion con tratamientos
-Cada articulo SHALL declarar uno o mas `serviceIds` validos y los tratamientos SHALL poder mostrar sus articulos publicados relacionados.
+Cada articulo SHALL declarar uno o mas `serviceIds` validos y los tratamientos SHALL poder mostrar hasta tres articulos elegibles relacionados.
 
 #### Scenario: Tratamiento relacionado
 - **WHEN** un articulo publicado incluye el ID de un tratamiento existente
 - **THEN** se muestra un enlace reciproco entre articulo y tratamiento
+
+#### Scenario: Tratamiento con mas de tres articulos
+- **WHEN** un tratamiento posee cuatro o mas articulos elegibles
+- **THEN** muestra solo los tres mas recientes y una accion hacia su archivo completo por tratamiento
+
+#### Scenario: Tratamiento con hasta tres articulos
+- **WHEN** un tratamiento posee tres articulos elegibles o menos
+- **THEN** muestra todos y no presenta una accion redundante hacia el archivo completo
 
 ### Requirement: SEO y distribucion web
 Cada articulo publicado SHALL incluir titulo, descripcion, canonical, OpenGraph, Twitter, imagen social, fecha de publicacion y datos estructurados apropiados; SHALL formar parte del sitemap.

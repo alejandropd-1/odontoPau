@@ -29,21 +29,29 @@
 
   &__list {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
     gap: size(2);
     font-size: fs("250");
   }
 
   &__item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: size(2);
+
+    @media (max-width: 48rem) {
+      &:last-child {
+        flex-basis: 100%;
+        width: 100%;
+      }
+    }
   }
 
   &__link {
     color: rgba(clr("neutral", "600"), 0.6);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: size("1-5");
     font-weight: 600;
     transition: color transition(base);
@@ -53,14 +61,12 @@
     }
   }
 
-  &__link-icon {
-    width: 0.875rem;
-    height: 0.875rem;
-  }
-
+  &__link-icon,
   &__separator {
     width: 0.875rem;
     height: 0.875rem;
+    flex-shrink: 0;
+    margin-top: 0.22em;
     color: rgba(clr("neutral", "600"), 0.3);
   }
 

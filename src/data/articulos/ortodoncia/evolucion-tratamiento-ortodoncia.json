@@ -1,0 +1,84 @@
+{
+  "type": "Articulo",
+  "id": "ortodoncia-caso-01",
+  "slug": "evolucion-tratamiento-ortodoncia",
+  "category": "ortodoncia-invisible",
+  "categoryLabel": "Ortodoncia",
+  "serviceIds": [
+    "ortodoncia-invisible"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Evolución de ortodoncia",
+  "title": "Evolución y alineación: el progreso de una sonrisa",
+  "excerpt": "Un recorrido visual que muestra cómo el tratamiento de ortodoncia ordena la mordida y devuelve la armonía.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-04T23:05:33.895Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "updatedAt": "2026-08-07T10:38:32.211Z",
+  "readTime": "1 min de lectura",
+  "tags": [
+    "ortodoncia",
+    "alineación dental",
+    "evolución clínica"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/evolucion-tratamiento-ortodoncia/registro-inicial.webp",
+    "alt": "Registro inicial de la sonrisa antes de comenzar el tratamiento de ortodoncia",
+    "width": 738,
+    "height": 1600,
+    "label": "Antes",
+    "caption": "Registro inicial previo al proceso de alineación."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Un cambio gradual hacia la alineación",
+      "paragraphs": [
+        "La ortodoncia es un trabajo en equipo donde cada etapa suma para alinear los dientes, mejorar la mordida y lograr una sonrisa saludable con la que te sientas a gusto.",
+        "Este registro muestra el progreso logrado paso a paso, buscando la estabilidad y la estética funcional al sonreír."
+      ],
+      "facts": [
+        {
+          "label": "Tratamiento",
+          "value": "Ortodoncia"
+        },
+        {
+          "label": "Objetivo",
+          "value": "Alineación y armonía estética"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Antes y después del tratamiento",
+      "images": [
+        {
+          "src": "/images/articulos/evolucion-tratamiento-ortodoncia/registro-inicial.webp",
+          "alt": "Registro inicial de la sonrisa antes de comenzar el tratamiento de ortodoncia",
+          "width": 738,
+          "height": 1600,
+          "label": "Antes",
+          "caption": "Registro inicial previo a la alineación."
+        },
+        {
+          "src": "/images/articulos/evolucion-tratamiento-ortodoncia/registro-posterior.webp",
+          "alt": "Registro posterior con los dientes alineados tras el tratamiento de ortodoncia",
+          "width": 738,
+          "height": 1600,
+          "label": "Después",
+          "caption": "Resultado tras el proceso de ortodoncia."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Ortodoncia a tu medida",
+      "title": "¿Estás pensando en alinear tus dientes?",
+      "text": "Escribinos por WhatsApp para coordinar un diagnóstico y conocer las opciones disponibles para tu caso.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20ortodoncia",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

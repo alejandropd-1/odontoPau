@@ -72,6 +72,14 @@ Las tres densidades de referencia seran:
 
 La densidad no se almacenara como una variante visual manual: surgira de los campos realmente completados. Esto evita que el editor tenga que elegir una maqueta y permite que un articulo crezca con informacion validada sin migrarlo a otra plantilla.
 
+### Acumulacion, archivos y paginacion
+
+El archivo general mostrara nueve articulos por pagina, ordenados del mas reciente al mas antiguo. La primera pagina conservara `/articulos`; las siguientes usaran URLs estaticas y enlazables como `/articulos/pagina/2`. Cada pagina tendra canonical propio y un paginador semantico con enlaces anterior, siguiente y numerados, estado actual perceptible y navegacion completa por teclado.
+
+Cada tratamiento mostrara como maximo tres articulos relacionados. Si existen mas, ofrecera una unica accion `Ver todos los articulos de [Tratamiento]` hacia un archivo estable en `/articulos/tratamiento/[serviceId]`. Ese archivo reutilizara la misma regla de nueve elementos y agregara `/pagina/[numero]` cuando sea necesario. No se usara scroll infinito: las URLs reales facilitan compartir, volver atras, rastrear e indexar correctamente el contenido.
+
+En produccion solo `published` participara de listados y relaciones. En Deploy Preview, los estados de revision distintos de `draft` podran aparecer en los archivos editoriales para facilitar su evaluacion conjunta, siempre con `noindex` y fuera del sitemap; un `draft` puro permanecera disponible unicamente por su URL directa. Esta distincion evita promocionar material rechazado o incompleto dentro del propio preview.
+
 ### Derivados sociales separados
 
 Los paquetes sociales versionados se guardaran fuera de `src/data` para que no formen parte del build publico. Cada paquete identificara el articulo fuente, canal, formato, copy, assets, CTA, estado de aprobacion y fecha planificada.

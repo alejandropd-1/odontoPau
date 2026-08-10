@@ -5,38 +5,61 @@
   "categoryLabel": "Odontología Pediátrica",
   "order": 5,
   "tituloHero": "Odontología Pediátrica",
-  "descripcionHero": "Cuidado especializado y cercano para proteger la salud dental infantil, fomentando hábitos positivos para los más pequeños",
+  "descripcionHero": "Atención odontológica infantil con un enfoque cercano, paciente y respetuoso, adaptado a cada etapa y a las necesidades de cada familia.",
   "icon": "Smile",
-  "heroImage": "/images/pediatria-hero.jpeg",
+  "heroImage": "/images/pediatria-hero.webp",
+  "professionals": [
+    {
+      "name": "Dra. Paula Gualtieri",
+      "role": "Dirección clínica",
+      "image": "/images/profesionales/paula-gualtieri-estudio.webp",
+      "imageAlt": "Retrato de la Dra. Paula Gualtieri"
+    },
+    {
+      "name": "Dra. María Emilia Omastott",
+      "role": "Atención odontológica infantil",
+      "image": "/images/profesionales/maria-emilia-omastott-estudio.webp",
+      "imageAlt": "Retrato de la Dra. María Emilia Omastott"
+    }
+  ],
   "features": [
-    "Prevención temprana: control del desarrollo dental e intervención a tiempo.",
-    "Enfoque adaptativo: manejo de ansiedad para experiencias sin miedo.",
-    "Educación en salud: guía en higiene y nutrición para niños y padres.",
-    "Crecimiento sano: monitoreo del recambio dentario y mantenimiento de espacios."
+    "Controles para acompañar el desarrollo dental y el recambio dentario.",
+    "Atención gradual, paciente y respetuosa, adaptada a cada chico.",
+    "Orientación a las familias sobre higiene y hábitos de cuidado.",
+    "Seguimiento definido de acuerdo con la edad y las necesidades individuales."
   ],
   "casosClinicos": [
     {
       "id": 1,
+      "articleSlug": "atencion-odontologica-pediatrica",
       "paciente": "Paciente",
-      "fecha": "Julio 2026",
-      "titulo": "Sonrisas felices",
-      "descripcion": "Recuperó su seguridad al hablar y sonreír tras un tratamiento de implantes de carga inmediata.",
-      "imagenAntes": "/images/casos/pediatria_caso-01-a.jpg",
-      "testimonio": "No imaginé que el cambio sería tan radical. Ahora vivo sin la inseguridad de comer cualquier cosa.",
-      "desafio": "Llegó con una pérdida significativa de piezas dentales superiores debido a años de desgaste y periodontitis. El mayor obstáculo no era solo rehabilitar su sonrisa, sino devolverle la confianza para comer y hablar sin dolor.",
-      "diagnostico": "Atrofia alveolar y colapso oclusal.",
-      "duracion": "3 meses de tratamiento.",
-      "solucion": "Implementamos un protocolo de implantes de carga inmediata. Utilizamos escaneo intraoral 3D para diseñar una prótesis fija que respeta la biomecánica natural de la paciente.",
-      "solucionFeatures": [
-        "Cirugía Guiada por Computadora",
-        "Prótesis Cerámica Pre-tallada",
-        "Ajuste Oclusal Dinámico"
-      ],
-      "stats": [
-        { "label": "Recuperación Funcional", "value": "100%" },
-        { "label": "Dolor Post-Op", "value": "0" },
-        { "label": "Estética Natural", "value": "A++" },
-        { "label": "Años de Durabilidad", "value": "10+" }
+      "titulo": "Una experiencia tranquila y cuidada para los más chicos",
+      "descripcion": "Atención con la paciencia y el respeto que los más chicos se merecen.",
+      "imagenes": [
+        "/images/articulos/atencion-odontologica-pediatrica/atencion-pediatrica.webp"
+      ]
+    },
+    {
+      "id": 2,
+      "articleSlug": "aprendizaje-higiene-oral-infancia",
+      "paciente": "Paciente",
+      "titulo": "Aprender a cuidar la sonrisa desde chicos",
+      "descripcion": "Una consulta pensada para acercar el cuidado bucal con paciencia, juego y mucha confianza.",
+      "imagenes": [
+        "/images/articulos/aprendizaje-higiene-oral-infancia/registro-01.webp",
+        "/images/articulos/aprendizaje-higiene-oral-infancia/registro-02.webp",
+        "/images/articulos/aprendizaje-higiene-oral-infancia/registro-03.webp"
+      ]
+    },
+    {
+      "id": 3,
+      "articleSlug": "adaptacion-y-cuidado-pediatrico",
+      "paciente": "Paciente",
+      "titulo": "Acompañamiento y prevención en la consulta infantil",
+      "descripcion": "Un encuentro enfocado en brindar seguridad y fomentar el hábito del cuidado dental.",
+      "imagenes": [
+        "/images/articulos/adaptacion-y-cuidado-pediatrico/registro-01.webp",
+        "/images/articulos/adaptacion-y-cuidado-pediatrico/registro-02.webp"
       ]
     }
   ]

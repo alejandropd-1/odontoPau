@@ -11,6 +11,7 @@ import {
   ExternalLink,
   MessageCircle,
   Tag,
+  Download,
 } from 'lucide-react';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
@@ -33,7 +34,8 @@ const dateFormatter = new Intl.DateTimeFormat('es-AR', {
 });
 
 function formatDate(date: string) {
-  return dateFormatter.format(new Date(`${date}T00:00:00Z`));
+  const dateString = date.includes('T') ? date : `${date}T00:00:00Z`;
+  return dateFormatter.format(new Date(dateString));
 }
 
 function renderGallery(

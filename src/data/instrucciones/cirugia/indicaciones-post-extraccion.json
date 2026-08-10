@@ -1,0 +1,60 @@
+{
+  "type": "Instruccion",
+  "id": "cirugia-indicaciones-post-extraccion",
+  "slug": "indicaciones-post-extraccion",
+  "category": "cirugia",
+  "categoryLabel": "Cirugía",
+  "title": "Indicaciones post extracción, Implante o Cirugía Dental",
+  "excerpt": "Guía de cuidados generales para repasar después de una extracción dental.",
+  "status": "published",
+  "updatedAt": "2026-08-04T16:52:06.701Z",
+  "clinicalReviewer": "Paula Gualtieri",
+  "tags": [
+    "Extracción dental",
+    "Cuidados",
+    "Postoperatorio"
+  ],
+  "readTime": "4 min de lectura",
+  "heroLabel": "Indicaciones para pacientes",
+  "resourceImage": {
+    "src": "/images/instrucciones/post-extraccion/indicaciones-post-extraccion.jpg",
+    "alt": "Infografía con once indicaciones de cuidado posterior a una extracción dental",
+    "width": 856,
+    "height": 1266,
+    "label": "Guía visual post extracción",
+    "downloadLabel": "Descargar indicaciones post extracción"
+  },
+  "sections": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "title": "Una guía general",
+      "text": "Si recibiste una indicación diferente durante la consulta, seguí la pauta personalizada del profesional tratante."
+    },
+    {
+      "type": "steps",
+      "title": "Cuidados después de la extracción, Implante o Cirugía Dental",
+      "items": [
+        "Mantener una gasa estéril durante 45 minutos a 1 hora y retirarla.",
+        "Es aconsejable no fumar, no mascar chicles, no escupir con fuerza, no tomar mate ni nada con bombilla durante las primeras 24 horas.",
+        "No realizar actividades físicas ni trabajos forzados (no agacharse o levantar peso) durante 1 o 2 días después de la extracción.",
+        "Dieta blanda, beber líquido abundantemente (no caliente). Almorzar o cenar utilizando las piezas dentales del lado contrario de la extracción durante 2 días.",
+        "En caso de hemorragia (salida profusa de sangre), consultar con el odontólogo. No confundir con salivar con tinte rosado, es normal.",
+        "Si se le han aplicado puntos de sutura, el hilo es no reabsorbible, por lo que deberá concurrir a la semana para el retiro y control postoperatorio.",
+        "En caso de edema (notar la cara hinchada) pero sin dolor, colocar compresas frías, 10 minutos cada 1 o 2 horas durante el día.",
+        "En caso de dolor, infección o retardo del cierre de la herida, consultar con el odontólogo enseguida.",
+        "Los hematomas ocasionales en la piel o mucosa no revisten gravedad y se eliminan solos en pocos días.",
+        "La boca debe higienizarse de acuerdo a las indicaciones del profesional.",
+        "Evitar enjuagues bucales, salvo indicación del odontólogo."
+      ]
+    },
+    {
+      "type": "notice",
+      "tone": "contact",
+      "title": "Cuándo consultar",
+      "text": "En caso de hemorragia, dolor, infección o retardo del cierre de la herida, consultá con el odontólogo según las indicaciones de esta guía."
+    }
+  ],
+  "createdAt": "2026-08-04T16:52:06.701Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z"
+}

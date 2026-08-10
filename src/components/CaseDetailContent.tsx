@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { CheckCircle2, ArrowRight, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -16,9 +16,19 @@ interface CaseDetailContentProps {
 }
 
 export default function CaseDetailContent({ tratamiento, caso }: CaseDetailContentProps) {
+  const shouldReduceMotion = useReducedMotion();
   const whatsappNumber = '5491137854198';
   const getWhatsAppLink = (message: string) => 
     `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const caseImages = caso.imagenes
+    ? caso.imagenes.map((src, index) => ({ src, label: caso.etiquetasImagenes?.[index] }))
+    : [
+        caso.imagenAntes ? { src: caso.imagenAntes, label: 'Antes' } : null,
+        caso.imagenDespues ? { src: caso.imagenDespues, label: 'Después' } : null,
+      ].filter((image): image is { src: string; label: string } => image !== null);
+  const hasCaseContext = Boolean(caso.desafio || caso.diagnostico || caso.duracion);
+  const hasApproach = Boolean(caso.solucion || caso.solucionFeatures?.length);
+  const hasDetails = hasCaseContext || hasApproach;
 
   return (
     <div className="case-detail">
@@ -37,148 +47,103 @@ export default function CaseDetailContent({ tratamiento, caso }: CaseDetailConte
       <section className="case-detail__hero">
         <div className="case-detail__hero-inner">
           <motion.span 
-            initial={{ opacity: 0, y: 10 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="case-detail__hero-badge"
           >
-            Caso de Éxito: {tratamiento.tituloHero}
+            Caso clínico: {tratamiento.tituloHero}
           </motion.span>
           <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="case-detail__hero-title"
           >
-            Caso Clínico: <span className="case-detail__hero-title-accent">{caso.titulo}</span>
+            Caso clínico: <span className="case-detail__hero-title-accent">{caso.titulo}</span>
           </motion.h1>
           <motion.p 
-            initial={{ opacity: 0 }}
+            initial={shouldReduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
             className="case-detail__hero-description"
           >
-            Un viaje desde el malestar crónico hasta la sonrisa definitiva mediante tecnología de precisión.
+            {caso.descripcion}
           </motion.p>
         </div>
       </section>
 
       {/* Comparison Section */}
-      <section className="case-detail__comparison">
+      {caseImages.length > 0 && <section className="case-detail__comparison" aria-label="Registros del caso">
         <div className="case-detail__comparison-inner">
           <div className="case-detail__comparison-grid">
-            {caso.imagenes ? (
-              caso.imagenes.map((img: string, idx: number) => (
+            {caseImages.map((image, idx) => (
                 <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
+                  key={image.src}
+                  initial={shouldReduceMotion ? false : { opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   className="case-detail__comparison-card"
                 >
                   <div className="case-detail__comparison-image-wrap">
                     <Image 
-                      src={img} 
-                      alt={`Imagen ${idx + 1}`}
+                      src={image.src}
+                      alt={image.label ? `${image.label} del caso ${caso.titulo}` : `Registro ${idx + 1} del caso ${caso.titulo}`}
                       fill
                       className="case-detail__comparison-image"
                     />
                   </div>
-                  {caso.etiquetasImagenes && caso.etiquetasImagenes[idx] && (
-                    <div className={`case-detail__comparison-label ${caso.etiquetasImagenes[idx].toUpperCase() === 'ANTES' ? 'case-detail__comparison-label--before' : ''}`}>
-                      {caso.etiquetasImagenes[idx]}
+                  {image.label && (
+                    <div className={`case-detail__comparison-label ${image.label.toUpperCase() === 'ANTES' ? 'case-detail__comparison-label--before' : ''}`}>
+                      {image.label}
                     </div>
                   )}
                 </motion.div>
-              ))
-            ) : (
-              <>
-                {caso.imagenAntes && (
-                  <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    className="case-detail__comparison-card"
-                  >
-                    <div className="case-detail__comparison-image-wrap">
-                      <Image 
-                        src={caso.imagenAntes} 
-                        alt="Antes"
-                        fill
-                        className="case-detail__comparison-image"
-                      />
-                    </div>
-                    <div className="case-detail__comparison-label case-detail__comparison-label--before">ANTES</div>
-                  </motion.div>
-                )}
-                {caso.imagenDespues && (
-                  <motion.div 
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    className="case-detail__comparison-card"
-                  >
-                    <div className="case-detail__comparison-image-wrap case-detail__comparison-image-wrap--after">
-                      <Image 
-                        src={caso.imagenDespues} 
-                        alt="Después"
-                        fill
-                        className="case-detail__comparison-image"
-                      />
-                    </div>
-                    <div className="case-detail__comparison-label">DESPUÉS</div>
-                  </motion.div>
-                )}
-              </>
-            )}
+              ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* Details Section */}
-      <section className="case-detail__details">
-        <div className="case-detail__details-inner">
+      {hasDetails && <section className="case-detail__details">
+        <div className={`case-detail__details-inner${hasCaseContext && hasApproach ? '' : ' case-detail__details-inner--single'}`}>
           {/* Challenge */}
-          <div className="case-detail__challenge">
+          {hasCaseContext && <div className="case-detail__challenge">
             <div>
               <div className="case-detail__challenge-heading">
-                <AlertCircle className="case-detail__challenge-icon" />
-                <h2 className="case-detail__challenge-title">El Desafío</h2>
+                <AlertCircle className="case-detail__challenge-icon" aria-hidden="true" />
+                <h2 className="case-detail__challenge-title">El caso</h2>
               </div>
-              <p className="case-detail__challenge-text">
-                {caso.desafio || 'El paciente presentaba una situación clínica compleja que afectaba tanto su salud bucodental como su bienestar emocional.'}
-              </p>
-              <div className="case-detail__info-cards">
-                <div className="case-detail__info-card">
+              {caso.desafio && <p className="case-detail__challenge-text">{caso.desafio}</p>}
+              {(caso.diagnostico || caso.duracion) && <div className="case-detail__info-cards">
+                {caso.diagnostico && <div className="case-detail__info-card">
                   <h4 className="case-detail__info-card-title">Diagnóstico</h4>
-                  <p className="case-detail__info-card-text">{caso.diagnostico || 'Evaluación pendiente de detalle.'}</p>
-                </div>
-                <div className="case-detail__info-card">
+                  <p className="case-detail__info-card-text">{caso.diagnostico}</p>
+                </div>}
+                {caso.duracion && <div className="case-detail__info-card">
                   <h4 className="case-detail__info-card-title">Duración</h4>
-                  <p className="case-detail__info-card-text">{caso.duracion || 'Variable según evolución.'}</p>
-                </div>
-              </div>
+                  <p className="case-detail__info-card-text">{caso.duracion}</p>
+                </div>}
+              </div>}
             </div>
-          </div>
+          </div>}
 
           {/* Solution */}
-          <div className="case-detail__solution">
-            <h2 className="case-detail__solution-title">Nuestra Solución</h2>
-            <p className="case-detail__solution-text">
-              {caso.solucion || 'Implementamos un abordaje integral basado en tecnología digital para garantizar resultados óptimos y duraderos.'}
-            </p>
-            <ul className="case-detail__solution-list">
-              {(caso.solucionFeatures || ['Planificación 3D', 'Materiales Premium', 'Seguimiento Personalizado']).map((f: string, i: number) => (
-                <li key={i} className="case-detail__solution-item">
+          {hasApproach && <div className="case-detail__solution">
+            <h2 className="case-detail__solution-title">Abordaje documentado</h2>
+            {caso.solucion && <p className="case-detail__solution-text">{caso.solucion}</p>}
+            {caso.solucionFeatures && caso.solucionFeatures.length > 0 && <ul className="case-detail__solution-list">
+              {caso.solucionFeatures.map((feature) => (
+                <li key={feature} className="case-detail__solution-item">
                   <div className="case-detail__solution-icon-wrap">
-                    <CheckCircle2 className="case-detail__solution-icon" />
+                    <CheckCircle2 className="case-detail__solution-icon" aria-hidden="true" />
                   </div>
-                  <span className="case-detail__solution-item-text">{f}</span>
+                  <span className="case-detail__solution-item-text">{feature}</span>
                 </li>
               ))}
-            </ul>
-          </div>
+            </ul>}
+          </div>}
         </div>
-      </section>
+      </section>}
 
 
       {/* CTA Footer */}
@@ -190,19 +155,19 @@ export default function CaseDetailContent({ tratamiento, caso }: CaseDetailConte
             </div>
             
             <h2 className="case-detail__cta-title">
-              ¿Querés lograr un resultado similar?
+              ¿Querés consultar por este tratamiento?
             </h2>
             <p className="case-detail__cta-description">
-              Agendá tu consulta hoy mismo y comenzá tu propia transformación.
+              Cada situación requiere una evaluación individual. Podés escribirnos para coordinar una consulta.
             </p>
             <div className="case-detail__cta-actions">
               <a 
-                href={getWhatsAppLink(`Vi el caso de ${tratamiento.tituloHero} y me gustaría lograr un resultado similar`)}
+                href={getWhatsAppLink(`Hola, vi el caso de ${tratamiento.tituloHero} y quiero coordinar una evaluación`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="case-detail__cta-button case-detail__cta-button--primary"
               >
-                Agendar Consulta <ArrowRight className="case-detail__cta-button-icon" />
+                Solicitar evaluación <ArrowRight className="case-detail__cta-button-icon" />
               </a>
               <Link 
                 href={`/tratamientos/${tratamiento.id}`}

@@ -1,0 +1,73 @@
+{
+  "type": "Articulo",
+  "id": "pediatria-caso-01",
+  "slug": "atencion-odontologica-pediatrica",
+  "category": "pediatria",
+  "categoryLabel": "Odontología Pediátrica",
+  "serviceIds": [
+    "pediatria"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Atención pediátrica",
+  "title": "Una experiencia tranquila y cuidada para los más chicos",
+  "excerpt": "Odontología pediátrica basada en el juego, la empatía y la confianza para que ir al dentista sea un momento lindo.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-04T23:05:33.898Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "updatedAt": "2026-08-07T10:39:18.356Z",
+  "readTime": "1 min de lectura",
+  "tags": [
+    "odontología pediátrica",
+    "atención infantil",
+    "salud bucal infantil"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/atencion-odontologica-pediatrica/atencion-pediatrica.webp",
+    "alt": "Profesional del equipo junto a una paciente pediátrica en una consulta amigable y cuidada",
+    "width": 1400,
+    "height": 883,
+    "caption": "Acompañar a cada chico con calidez para que la consulta sea un momento de tranquilidad."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Construir confianza desde la infancia",
+      "paragraphs": [
+        "Queremos que la visita al odontólogo sea una experiencia positiva y sin temores. Por eso, recibimos a cada niño con paciencia, explicándoles todo en su lenguaje y respetando sus tiempos.",
+        "Crear un vínculo amigable desde las primeras consultas ayuda a que los chicos incorporen el cuidado de su boca con total naturalidad y alegría."
+      ],
+      "facts": [
+        {
+          "label": "Enfoque",
+          "value": "Odontología empática y adaptación"
+        },
+        {
+          "label": "Público",
+          "value": "Niños y familias"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/articulos/atencion-odontologica-pediatrica/atencion-pediatrica.webp",
+          "alt": "Profesional del equipo junto a una paciente pediátrica en una consulta amigable y cuidada",
+          "width": 1400,
+          "height": 883,
+          "caption": "Cada pequeño paso en el sillón se acompaña con empatía y contención."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Consulta para familias",
+      "title": "¿Querés agendar la primera consulta de tu hijo/a?",
+      "text": "Escribinos por WhatsApp para planificar un encuentro tranquilo y adaptado a las necesidades de tu familia.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20odontolog%C3%ADa%20pedi%C3%A1trica",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}
