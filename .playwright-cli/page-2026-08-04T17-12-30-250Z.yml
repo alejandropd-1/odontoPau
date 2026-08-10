@@ -1,0 +1,90 @@
+- generic [active] [ref=f2e1]:
+  - main [ref=f2e2]:
+    - navigation [ref=f2e3]:
+      - generic [ref=f2e4]:
+        - link "Paula Gualtieri" [ref=f2e5] [cursor=pointer]:
+          - /url: /
+        - link "Agendar Turno" [ref=f2e7] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f2e9]:
+      - list [ref=f2e10]:
+        - listitem [ref=f2e11]:
+          - link "Inicio" [ref=f2e12] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f2e15]:
+          - link "Instrucciones" [ref=f2e17] [cursor=pointer]:
+            - /url: /instrucciones
+        - listitem [ref=f2e18]:
+          - generic [ref=f2e21]: Indicaciones post extracción
+    - article [ref=f2e22]:
+      - generic [ref=f2e23]:
+        - link "Volver a instrucciones" [ref=f2e24] [cursor=pointer]:
+          - /url: /instrucciones
+        - status [ref=f2e27]: "Vista previa editorial · Estado: approved · No indexada"
+        - generic [ref=f2e28]:
+          - generic [ref=f2e29]: Indicaciones para pacientes
+          - 'heading "Guía: Indicaciones post extracción" [level=1] [ref=f2e30]'
+          - paragraph [ref=f2e31]: Guía de cuidados generales para repasar después de una extracción dental.
+          - generic [ref=f2e32]:
+            - generic [ref=f2e33]: Actualizada el 4 de agosto de 2026
+            - generic [ref=f2e36]: 4 min de lectura
+            - generic [ref=f2e40]: Revisada por Paula Gualtieri
+            - button "Compartir" [ref=f2e46] [cursor=pointer]
+        - generic [ref=f2e53]:
+          - generic [ref=f2e54]:
+            - complementary [ref=f2e55]:
+              - generic [ref=f2e58]:
+                - heading "Una guía general" [level=2] [ref=f2e59]
+                - paragraph [ref=f2e60]: Si recibiste una indicación diferente durante la consulta, seguí la pauta personalizada del profesional tratante.
+            - region [ref=f2e61]:
+              - heading "Cuidados después de la extracción" [level=2] [ref=f2e62]
+              - list [ref=f2e63]:
+                - listitem [ref=f2e64]: Mantener una gasa estéril durante 45 minutos a 1 hora y retirarla.
+                - listitem [ref=f2e65]: Es aconsejable no fumar, no mascar chicles, no escupir con fuerza, no tomar mate ni nada con bombilla durante las primeras 24 horas.
+                - listitem [ref=f2e66]: No realizar actividades físicas ni trabajos forzados (no agacharse o levantar peso) durante 1 o 2 días después de la extracción.
+                - listitem [ref=f2e67]: Dieta blanda, beber líquido abundantemente (no caliente). Almorzar o cenar utilizando las piezas dentales del lado contrario de la extracción durante 2 días.
+                - listitem [ref=f2e68]: En caso de hemorragia (salida profusa de sangre), consultar con el odontólogo. No confundir con salivar con tinte rosado, es normal.
+                - listitem [ref=f2e69]: Si se le han aplicado puntos de sutura, el hilo es no reabsorbible, por lo que deberá concurrir a la semana para el retiro y control postoperatorio.
+                - listitem [ref=f2e70]: En caso de edema (notar la cara hinchada) pero sin dolor, colocar compresas frías, 10 minutos cada 1 o 2 horas durante el día.
+                - listitem [ref=f2e71]: En caso de dolor, infección o retardo del cierre de la herida, consultar con el odontólogo enseguida.
+                - listitem [ref=f2e72]: Los hematomas ocasionales en la piel o mucosa no revisten gravedad y se eliminan solos en pocos días.
+                - listitem [ref=f2e73]: La boca debe higienizarse de acuerdo a las indicaciones del profesional.
+                - listitem [ref=f2e74]: Evitar enjuagues bucales, salvo indicación del odontólogo.
+            - complementary [ref=f2e75]:
+              - generic [ref=f2e78]:
+                - heading "Cuándo consultar" [level=2] [ref=f2e79]
+                - paragraph [ref=f2e80]: En caso de hemorragia, dolor, infección o retardo del cierre de la herida, consultá con el odontólogo según las indicaciones de esta guía.
+          - complementary [ref=f2e81]:
+            - generic [ref=f2e82]:
+              - text: Recurso para guardar
+              - heading "Guía visual post extracción" [level=2] [ref=f2e83]
+              - paragraph [ref=f2e84]: La misma información está disponible en el contenido de esta página para facilitar su lectura.
+            - 'link "Abrir imagen completa: Guía visual post extracción" [ref=f2e85] [cursor=pointer]':
+              - /url: /images/instrucciones/post-extraccion/indicaciones-post-extraccion.jpg
+              - img "Infografía con once indicaciones de cuidado posterior a una extracción dental" [ref=f2e86]
+            - generic [ref=f2e87]:
+              - link "Ver imagen completa" [ref=f2e88] [cursor=pointer]:
+                - /url: /images/instrucciones/post-extraccion/indicaciones-post-extraccion.jpg
+              - link "Descargar indicaciones post extracción" [ref=f2e93] [cursor=pointer]:
+                - /url: /images/instrucciones/post-extraccion/indicaciones-post-extraccion.jpg
+        - generic [ref=f2e97]:
+          - paragraph [ref=f2e98]:
+            - strong [ref=f2e99]: "Importante:"
+            - text: esta guía acompaña la atención profesional y no reemplaza una evaluación ni las indicaciones personalizadas.
+          - generic "Temas de la instrucción" [ref=f2e100]:
+            - generic [ref=f2e101]: Extracción dental
+            - generic [ref=f2e102]: Cuidados
+            - generic [ref=f2e103]: Postoperatorio
+    - generic [ref=f2e105]:
+      - generic [ref=f2e106]: Paula Gualtieri
+      - generic [ref=f2e107]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f2e108]:
+        - link "Instagram" [ref=f2e109] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f2e110] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f2e111] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f2e112]
+  - alert [ref=f2e113]

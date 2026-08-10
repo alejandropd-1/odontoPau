@@ -1,0 +1,97 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - link "Inicio" [ref=e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link "Inicio" [ref=e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e22]:
+          - generic [ref=e25]: Odontología Pediátrica
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]: Atención odontológica
+        - heading "Odontología Pediátrica" [level=1] [ref=e30]
+        - paragraph [ref=e31]: Atención odontológica infantil con un enfoque cercano, paciente y respetuoso, adaptado a cada etapa y a las necesidades de cada familia.
+        - link "Solicitar evaluación" [ref=e32] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20solicitar%20una%20evaluaci%C3%B3n%20para%20Odontolog%C3%ADa%20Pedi%C3%A1trica
+      - generic [ref=e35]:
+        - img "Odontología Pediátrica" [ref=e37]
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - img "Retrato de la Dra. Paula Gualtieri" [ref=e42]
+            - img "Retrato de la Dra. María Emilia Omastott" [ref=e44]
+          - list "Profesionales del tratamiento" [ref=e45]:
+            - listitem [ref=e46]:
+              - paragraph [ref=e47]: Dra. Paula Gualtieri
+              - paragraph [ref=e48]: Dirección clínica
+            - listitem [ref=e49]:
+              - paragraph [ref=e50]: Dra. María Emilia Omastott
+              - paragraph [ref=e51]: Atención odontológica infantil
+    - generic [ref=e53]:
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - heading "Casos Clínicos" [level=2] [ref=e56]
+          - paragraph [ref=e57]: Registros clínicos autorizados que documentan distintos abordajes del equipo.
+        - generic [ref=e58]:
+          - button "Anterior caso" [ref=e59] [cursor=pointer]
+          - button "Siguiente caso" [ref=e62] [cursor=pointer]
+      - generic [ref=e66]:
+        - img "Atención odontológica pediátrica" [ref=e68]
+        - generic [ref=e69]:
+          - heading "Atención odontológica pediátrica" [level=3] [ref=e70]
+          - link "Ver Caso Completo" [ref=e72] [cursor=pointer]:
+            - /url: /tratamientos/pediatria/casos/1
+    - region [ref=e73]:
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - text: Para entender mejor el tratamiento
+          - heading "Artículos relacionados" [level=2] [ref=e76]
+        - article [ref=e78]:
+          - generic [ref=e79]: 1 min de lectura
+          - heading "Atención odontológica pediátrica con paciencia y respeto" [level=3] [ref=e80]
+          - paragraph [ref=e81]: Un registro de atención infantil basado en la paciencia y el respeto que los más chicos se merecen.
+          - link "Leer artículo" [ref=e82] [cursor=pointer]:
+            - /url: /articulos/atencion-odontologica-pediatrica
+    - generic [ref=e88]:
+      - heading "Aspectos de odontología pediátrica" [level=2] [ref=e89]
+      - generic [ref=e90]:
+        - generic [ref=e91]: Controles para acompañar el desarrollo dental y el recambio dentario.
+        - generic [ref=e97]: Atención gradual, paciente y respetuosa, adaptada a cada chico.
+        - generic [ref=e103]: Orientación a las familias sobre higiene y hábitos de cuidado.
+        - generic [ref=e109]: Seguimiento definido de acuerdo con la edad y las necesidades individuales.
+    - generic [ref=e118]:
+      - heading "¿Querés consultar por este tratamiento?" [level=2] [ref=e119]
+      - paragraph [ref=e120]: Escribinos para coordinar una evaluación y conversar sobre las opciones adecuadas para tu caso.
+      - link "Solicitar evaluación" [ref=e122] [cursor=pointer]:
+        - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20solicitar%20una%20evaluaci%C3%B3n%20para%20Odontolog%C3%ADa%20Pedi%C3%A1trica
+    - contentinfo [ref=e126]:
+      - generic [ref=e127]:
+        - generic [ref=e128]: Paula Gualtieri
+        - generic [ref=e129]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+        - generic [ref=e130]:
+          - link "Instagram" [ref=e131] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=e132] [cursor=pointer]:
+            - /url: "#"
+          - link "Aviso Legal" [ref=e133] [cursor=pointer]:
+            - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=e134]
+  - alert [ref=e135]

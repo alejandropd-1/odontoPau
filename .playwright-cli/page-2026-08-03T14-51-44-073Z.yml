@@ -1,0 +1,44 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - link "Inicio" [ref=e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - region [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: Informacion para pacientes
+          - heading "Odontologia explicada con claridad" [level=1] [ref=e18]
+          - paragraph [ref=e19]: Casos, tratamientos y respuestas del equipo profesional para entender mejor cada opcion de cuidado.
+        - generic [ref=e20]:
+          - heading "Estamos preparando los primeros articulos" [level=2] [ref=e21]
+          - paragraph [ref=e22]: Cada contenido pasa por revision clinica antes de publicarse.
+          - link "Conocer los tratamientos" [ref=e23] [cursor=pointer]:
+            - /url: /tratamientos
+    - generic [ref=e25]:
+      - generic [ref=e26]: Paula Gualtieri
+      - generic [ref=e27]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=e28]:
+        - link "Instagram" [ref=e29] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=e30] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=e31] [cursor=pointer]:
+          - /url: "#"
+  - scrollbar "Progreso de desplazamiento" [ref=e32]
+  - iframe [ref=e34]:
+    - alert [ref=f1e1]
+  - alert [ref=e35]

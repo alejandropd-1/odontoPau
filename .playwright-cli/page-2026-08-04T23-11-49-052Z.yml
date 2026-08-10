@@ -1,0 +1,110 @@
+- generic [active] [ref=f3e1]:
+  - main [ref=f3e2]:
+    - navigation [ref=f3e3]:
+      - generic [ref=f3e4]:
+        - link "Paula Gualtieri" [ref=f3e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f3e7]:
+          - link "Inicio" [ref=f3e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=f3e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=f3e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=f3e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=f3e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=f3e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f3e15]:
+      - list [ref=f3e16]:
+        - listitem [ref=f3e17]:
+          - link "Inicio" [ref=f3e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f3e22]:
+          - link "Rehabilitación" [ref=f3e25] [cursor=pointer]:
+            - /url: /tratamientos/rehabilitacion
+        - listitem [ref=f3e26]:
+          - generic [ref=f3e29]: "Caso: Rehabilitación anterosuperior"
+    - article [ref=f3e30]:
+      - generic [ref=f3e31]:
+        - link "Volver a articulos" [ref=f3e32] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=f3e35]: "Vista previa editorial · Estado: technical_review · No indexada"
+        - generic [ref=f3e37]:
+          - generic [ref=f3e38]: Rehabilitación
+          - 'heading "Caso clínico: Rehabilitación del sector anterosuperior" [level=1] [ref=f3e39]':
+            - generic [ref=f3e40]: "Caso clínico:"
+            - text: Rehabilitación del sector anterosuperior
+          - paragraph [ref=f3e41]: Remoción de coronas anteriores y opacificación de pernos metálicos para la colocación final de coronas libres de metal.
+          - generic [ref=f3e42]:
+            - generic [ref=f3e43]: 4 de agosto de 2026
+            - generic [ref=f3e46]: 2 min de lectura
+            - generic [ref=f3e50]: Por Equipo de Paula Gualtieri Odontología
+            - button "Compartir" [ref=f3e52] [cursor=pointer]
+        - region "Imágenes del caso" [ref=f3e59]:
+          - generic [ref=f3e60]:
+            - figure "Registro 1 de 5." [ref=f3e61]:
+              - img "Primer registro clínico de la rehabilitación anterosuperior" [ref=f3e63]
+            - figure "Registro 2 de 5." [ref=f3e65]:
+              - img "Segundo registro clínico de la rehabilitación anterosuperior" [ref=f3e67]
+            - figure "Registro 3 de 5." [ref=f3e69]:
+              - img "Tercer registro clínico de la rehabilitación anterosuperior" [ref=f3e71]
+            - figure "Registro 4 de 5." [ref=f3e73]:
+              - img "Cuarto registro clínico de la rehabilitación anterosuperior" [ref=f3e75]
+            - figure "Registro 5 de 5." [ref=f3e77]:
+              - img "Quinto registro clínico de la rehabilitación anterosuperior" [ref=f3e79]
+        - generic [ref=f3e81]:
+          - region [ref=f3e82]:
+            - generic [ref=f3e83]:
+              - heading "El caso" [level=2] [ref=f3e87]
+              - paragraph [ref=f3e89]: El caso corresponde a una rehabilitación del sector anterosuperior con coronas anteriores y pernos metálicos preexistentes.
+              - generic [ref=f3e90]:
+                - generic [ref=f3e91]:
+                  - term [ref=f3e92]: Sector tratado
+                  - definition [ref=f3e93]: Anterosuperior
+                - generic [ref=f3e94]:
+                  - term [ref=f3e95]: Resultado informado
+                  - definition [ref=f3e96]: Coronas libres de metal
+            - generic [ref=f3e97]:
+              - heading "Abordaje documentado" [level=3] [ref=f3e98]
+              - paragraph [ref=f3e99]: Paula informó la remoción de las coronas anteriores y la opacificación de los pernos metálicos antes de colocar las coronas finales.
+              - list [ref=f3e100]:
+                - listitem [ref=f3e101]: Remoción de coronas anteriores
+                - listitem [ref=f3e106]: Opacificación de pernos metálicos
+                - listitem [ref=f3e111]: Colocación de coronas libres de metal
+          - generic [ref=f3e116]:
+            - generic [ref=f3e117]:
+              - text: Evaluación profesional
+              - heading "¿Querés consultar por una rehabilitación oral?" [level=2] [ref=f3e118]
+              - paragraph [ref=f3e119]: Podés escribirnos para coordinar una evaluación. La indicación, las etapas y los materiales se definen de manera individual.
+            - link "Consultar por WhatsApp" [ref=f3e120] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20rehabilitaci%C3%B3n%20oral
+        - generic [ref=f3e123]:
+          - generic [ref=f3e124]:
+            - heading "Temas del artículo" [level=2] [ref=f3e125]
+            - generic "Temas del artículo" [ref=f3e129]:
+              - generic [ref=f3e130]: rehabilitación oral
+              - generic [ref=f3e131]: sector anterosuperior
+              - generic [ref=f3e132]: coronas libres de metal
+          - complementary [ref=f3e134]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=f3e135]
+            - link [ref=f3e137] [cursor=pointer]:
+              - /url: /tratamientos/rehabilitacion
+              - strong [ref=f3e138]: Rehabilitación
+              - generic [ref=f3e139]: Ver tratamiento
+    - generic [ref=f3e143]:
+      - generic [ref=f3e144]: Paula Gualtieri
+      - generic [ref=f3e145]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f3e146]:
+        - link "Instagram" [ref=f3e147] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f3e148] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f3e149] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f3e150]
+  - alert [ref=f3e151]

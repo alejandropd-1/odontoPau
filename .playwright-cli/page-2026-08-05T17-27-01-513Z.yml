@@ -1,0 +1,120 @@
+- generic [active] [ref=f5e1]:
+  - main [ref=f5e2]:
+    - navigation [ref=f5e3]:
+      - generic [ref=f5e4]:
+        - link "Paula Gualtieri" [ref=f5e5] [cursor=pointer]:
+          - /url: /
+        - link "Agendar Turno" [ref=f5e7] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - generic [ref=f5e8]:
+      - img "Consultorio de Paula Gualtieri" [ref=f5e10]
+      - generic [ref=f5e13]:
+        - generic [ref=f5e14]:
+          - img "Isologo Paula Gualtieri" [ref=f5e16]
+          - generic [ref=f5e17]: Paula Gualtieri Odontología
+        - heading "Excelencia Clínica & Calidez Humana" [level=1] [ref=f5e18]
+        - paragraph [ref=f5e19]: Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.
+        - generic [ref=f5e20]:
+          - button "Conoce a la Dra. Gualtieri" [ref=f5e21] [cursor=pointer]
+          - button "Ver Especialidades" [ref=f5e22] [cursor=pointer]
+      - button "Descubrir" [ref=f5e23] [cursor=pointer]
+    - generic [ref=f5e28]:
+      - generic [ref=f5e29]:
+        - heading "Tratamientos de Vanguardia" [level=2] [ref=f5e30]
+        - paragraph [ref=f5e31]: Soluciones dentales precisas diseñadas con tecnología de última generación para resultados duraderos y estéticos.
+      - generic [ref=f5e32]:
+        - generic [ref=f5e33]:
+          - heading "Rehabilitación" [level=3] [ref=f5e41]
+          - paragraph [ref=f5e42]: Planificación personalizada para recuperar función y armonía mediante alternativas restauradoras y protésicas definidas después de una evaluación clínica.
+          - link "Saber más" [ref=f5e43] [cursor=pointer]:
+            - /url: /tratamientos/rehabilitacion
+        - generic [ref=f5e46]:
+          - heading "Ortodoncia Invisible" [level=3] [ref=f5e51]
+          - paragraph [ref=f5e52]: Planificación con alineadores transparentes y controles periódicos para acompañar movimientos dentarios definidos de manera individual.
+          - link "Saber más" [ref=f5e53] [cursor=pointer]:
+            - /url: /tratamientos/ortodoncia-invisible
+        - generic [ref=f5e56]:
+          - heading "Estética Dental" [level=3] [ref=f5e61]
+          - paragraph [ref=f5e62]: Alternativas personalizadas para trabajar color, forma y armonía de la sonrisa después de una evaluación clínica individual.
+          - link "Saber más" [ref=f5e63] [cursor=pointer]:
+            - /url: /tratamientos/estetica-dental
+        - generic [ref=f5e66]:
+          - heading "Ortopedia" [level=3] [ref=f5e71]
+          - paragraph [ref=f5e72]: Evaluación y acompañamiento del crecimiento y de las funciones orales durante etapas tempranas del desarrollo.
+          - link "Saber más" [ref=f5e73] [cursor=pointer]:
+            - /url: /tratamientos/ortopedia
+        - generic [ref=f5e76]:
+          - heading "Odontología Pediátrica" [level=3] [ref=f5e81]
+          - paragraph [ref=f5e82]: Atención odontológica infantil con un enfoque cercano, paciente y respetuoso, adaptado a cada etapa y a las necesidades de cada familia.
+          - link "Saber más" [ref=f5e83] [cursor=pointer]:
+            - /url: /tratamientos/pediatria
+        - generic [ref=f5e86]:
+          - heading "Endodoncia" [level=3] [ref=f5e94]
+          - paragraph [ref=f5e95]: Evaluación y tratamiento del sistema de conductos para abordar lesiones pulpares y buscar conservar la pieza dental cuando la situación clínica lo permite.
+          - link "Saber más" [ref=f5e96] [cursor=pointer]:
+            - /url: /tratamientos/endodoncia
+    - generic [ref=f5e100]:
+      - generic [ref=f5e101]:
+        - generic [ref=f5e102]: Conocé a los especialistas
+        - heading "Equipo de trabajo" [level=2] [ref=f5e103]
+        - paragraph [ref=f5e104]: Contamos con un equipo de profesionales altamente capacitados para brindarte la mejor atención en cada especialidad odontológica.
+      - generic [ref=f5e105]:
+        - generic [ref=f5e106]:
+          - img "Retrato de la Dra. Paula Gualtieri" [ref=f5e108]
+          - generic [ref=f5e109]:
+            - heading "Dra. Paula Gualtieri" [level=3] [ref=f5e110]
+            - paragraph [ref=f5e111]: MN
+            - paragraph [ref=f5e112]: Especialista en alineadores dentales y ortopedia.
+        - generic [ref=f5e113]:
+          - generic [ref=f5e114]:
+            - img "Retrato del Dr. Roberto Dominguez" [ref=f5e116]
+            - generic [ref=f5e117]:
+              - heading "Dr. Roberto Dominguez" [level=3] [ref=f5e118]
+              - generic [ref=f5e119]: MN
+              - paragraph [ref=f5e120]: Especialista en rehabilitación oral (Implantes y prótesis).
+          - generic [ref=f5e121]:
+            - img "Retrato de la Dra. Emilia Omastott" [ref=f5e123]
+            - generic [ref=f5e124]:
+              - heading "Dra. Emilia Omastott" [level=3] [ref=f5e125]
+              - generic [ref=f5e126]: MN
+              - paragraph [ref=f5e127]: Atención niños, Maestría en cirugía dental.
+          - generic [ref=f5e128]:
+            - img "Retrato del Dr. Pablo Martinez" [ref=f5e130]
+            - generic [ref=f5e131]:
+              - heading "Dr. Pablo Martinez" [level=3] [ref=f5e132]
+              - generic [ref=f5e133]: MN
+              - paragraph [ref=f5e134]: Especialista en Endodoncia.
+    - generic [ref=f5e137]:
+      - generic [ref=f5e138]:
+        - heading "Visítanos en nuestro consultorio" [level=2] [ref=f5e139]
+        - paragraph [ref=f5e140]: Un espacio diseñado para tu tranquilidad y confort, equipado con la mejor tecnología para tu cuidado dental.
+        - generic [ref=f5e141]:
+          - generic [ref=f5e147]:
+            - heading "Dirección" [level=4] [ref=f5e148]
+            - paragraph [ref=f5e149]: Ramón Falcón 2401, Piso 1 Dpto. BCiudad Autónoma de Buenos Aires - Flores
+          - generic [ref=f5e155]:
+            - heading "Horarios para solicitar turnos o consultas" [level=4] [ref=f5e156]
+            - paragraph [ref=f5e157]: Lunes de 9 a 15hsMartes de 9 a 18hsMiércoles y jueves de 13 a 18hsViernes de 9 a 15hs
+        - link "Contactar por WhatsApp" [ref=f5e159] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+      - generic [ref=f5e162]:
+        - iframe [ref=f5e163]
+        - generic:
+          - generic:
+            - generic:
+              - heading "Paula Gualtieri" [level=5]
+              - text: Ramón Falcón 2401
+          - link "Cómo llegar" [ref=f5e164] [cursor=pointer]:
+            - /url: https://www.google.com/maps/dir/?api=1&destination=Cnel.+Ramón+L.+Falcón+2401,+C1406+CABA
+    - generic [ref=f5e166]:
+      - generic [ref=f5e167]: Paula Gualtieri
+      - generic [ref=f5e168]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f5e169]:
+        - link "Instagram" [ref=f5e170] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f5e171] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f5e172] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f5e173]

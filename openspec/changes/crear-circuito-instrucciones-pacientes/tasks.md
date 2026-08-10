@@ -38,4 +38,4 @@
 - [x] 6.2 Ejecutar `pnpm exec tsc --noEmit` y `pnpm run lint`.
 - [x] 6.3 Ejecutar `pnpm run build` para producción y confirmar que los borradores no generan rutas ni sitemap.
 - [x] 6.4 Ejecutar un build con `CONTEXT=deploy-preview` y comprobar ambas instrucciones en desktop y mobile.
-- [ ] 6.5 Obtener aprobación explícita antes de commit, push, merge o publicación en `main`.
+- [x] 6.5 Obtener aprobación explícita antes de commit, push, merge o publicación en `main`.

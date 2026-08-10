@@ -1,0 +1,139 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - link "Agendar Turno" [ref=e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link "Inicio" [ref=e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e22]:
+          - link "Instrucciones" [ref=e25] [cursor=pointer]:
+            - /url: /instrucciones
+        - listitem [ref=e26]:
+          - generic [ref=e29]: Indicaciones y uso diario de alineadores KeepSmiling
+    - article [ref=e30]:
+      - generic [ref=e31]:
+        - link "Volver a instrucciones" [ref=e32] [cursor=pointer]:
+          - /url: /instrucciones
+        - status [ref=e35]: "Vista previa editorial · Estado: revisión técnica · No indexada"
+        - generic [ref=e36]:
+          - generic [ref=e37]: Ortodoncia
+          - 'heading "Guía: Indicaciones y uso diario de alineadores KeepSmiling" [level=1] [ref=e38]'
+          - paragraph [ref=e39]: Guía práctica e indicaciones paso a paso para la colocación, remoción, limpieza y mantenimiento diario de tus alineadores KeepSmiling.
+          - generic [ref=e40]:
+            - generic [ref=e41]: Actualizada el 9 de agosto de 2026
+            - generic [ref=e44]: 3 min de lectura
+            - button "Compartir" [ref=e49] [cursor=pointer]
+        - generic [ref=e57]:
+          - region [ref=e58]:
+            - heading "Pautas principales de uso" [level=2] [ref=e59]
+            - list [ref=e60]:
+              - listitem [ref=e61]: Utilizá tus alineadores KeepSmiling un mínimo de 22 horas al día para asegurar el movimiento continuo planificado.
+              - listitem [ref=e62]: Retiralos únicamente para comer, beber líquidos calientes o azucarados, y para realizar tu higiene bucal.
+              - listitem [ref=e63]: Al colocar cada placa, presioná suavemente en el frente y luego sobre los molares hasta sentir que calza con precisión.
+              - listitem [ref=e64]: Para retirarlos, desenganchá suavemente con la yema del dedo desde la parte interna de las muelas traseras hacia adelante.
+              - listitem [ref=e65]: Guardá siempre tus alineadores dentro de su estuche rígido protector cuando no los estés usando.
+              - listitem [ref=e66]: Higienizalos todos los días con agua fría o templada y un cepillo de cerdas suaves. Evitá el agua caliente porque puede deformar el material.
+              - listitem [ref=e67]: Cepillate los dientes y pasá hilo dental antes de volver a colocártelos tras cada comida.
+              - listitem [ref=e68]: Ante cualquier desprendimiento de atache o molestia persistente al cambiar de placa, escribinos para asesorarte.
+          - generic [ref=e69]:
+            - region [ref=e70]:
+              - heading "Cuidado y conservación de las placas" [level=2] [ref=e71]
+              - region [ref=e73]:
+                - heading "Hábitos durante el tratamiento" [level=3] [ref=e74]
+                - generic [ref=e75]:
+                  - generic [ref=e76]:
+                    - heading "Sí" [level=4] [ref=e77]
+                    - list [ref=e81]:
+                      - listitem [ref=e82]: Usar 22 h al día
+                      - listitem [ref=e83]: Limpiar con agua templada y cepillo suave
+                      - listitem [ref=e84]: Guardar siempre en su estuche
+                  - generic [ref=e85]:
+                    - heading "Precaución" [level=4] [ref=e86]
+                    - list [ref=e89]:
+                      - listitem [ref=e90]: Mate, café o infusiones calientes (retirar placa)
+                      - listitem [ref=e91]: Enjuagues bucales con colorantes intensos
+                  - generic [ref=e92]:
+                    - heading "No" [level=4] [ref=e93]
+                    - list [ref=e98]:
+                      - listitem [ref=e99]: Usar agua hirviendo o caliente
+                      - listitem [ref=e100]: Comer con las placas colocadas
+                      - listitem [ref=e101]: Envolver en servilletas o guardar en bolsillos
+            - region [ref=e102]:
+              - generic [ref=e103]:
+                - generic [ref=e104]:
+                  - text: Guía visual para guardar
+                  - heading "Cómo limpiar tus alineadores KeepSmiling" [level=2] [ref=e105]
+                - paragraph [ref=e106]: Consultá cada imagen en orden. La primera y la última tarjeta incluyen sus respectivos videos para descargar.
+              - list [ref=e107]:
+                - listitem [ref=e108]:
+                  - 'link "Abrir imagen completa: Guía de lavado · Portada" [ref=e109] [cursor=pointer]':
+                    - /url: /images/instrucciones/cuidados-alineadores-keepsmiling/registro-01.webp
+                    - generic [ref=e110]: "01"
+                    - img "Portada de la guía sobre cómo lavar los alineadores KeepSmiling" [ref=e111]
+                  - generic [ref=e112]:
+                    - heading "Guía de lavado · Portada" [level=3] [ref=e113]
+                    - link "Descargar video paso a paso" [ref=e115] [cursor=pointer]:
+                      - /url: /videos/instrucciones/cuidados-alineadores-keepsmiling/paso-a-paso-video.mp4
+                - listitem [ref=e119]:
+                  - 'link "Abrir imagen completa: Paso 1 · Preparar la solución" [ref=e120] [cursor=pointer]':
+                    - /url: /images/instrucciones/cuidados-alineadores-keepsmiling/registro-05.webp
+                    - generic [ref=e121]: "02"
+                    - 'img "Paso 1: llenar el vaso plegable con agua y colocar una tableta limpiadora" [ref=e122]'
+                  - heading "Paso 1 · Preparar la solución" [level=3] [ref=e124]
+                - listitem [ref=e125]:
+                  - 'link "Abrir imagen completa: Paso 2 · Dejar actuar" [ref=e126] [cursor=pointer]':
+                    - /url: /images/instrucciones/cuidados-alineadores-keepsmiling/registro-06.webp
+                    - generic [ref=e127]: "03"
+                    - 'img "Paso 2: sumergir los alineadores en el vaso y dejarlos reposar" [ref=e128]'
+                  - heading "Paso 2 · Dejar actuar" [level=3] [ref=e130]
+                - listitem [ref=e131]:
+                  - 'link "Abrir imagen completa: Paso 3 · Cepillar suavemente" [ref=e132] [cursor=pointer]':
+                    - /url: /images/instrucciones/cuidados-alineadores-keepsmiling/registro-07.webp
+                    - generic [ref=e133]: "04"
+                    - 'img "Paso 3: retirar los alineadores del vaso y cepillarlos suavemente" [ref=e134]'
+                  - heading "Paso 3 · Cepillar suavemente" [level=3] [ref=e136]
+                - listitem [ref=e137]:
+                  - 'link "Abrir imagen completa: Paso 4 · Enjuagar" [ref=e138] [cursor=pointer]':
+                    - /url: /images/instrucciones/cuidados-alineadores-keepsmiling/registro-08.webp
+                    - generic [ref=e139]: "05"
+                    - 'img "Paso 4: enjuagar los alineadores luego de la limpieza" [ref=e140]'
+                  - heading "Paso 4 · Enjuagar" [level=3] [ref=e142]
+                - listitem [ref=e143]:
+                  - 'link "Abrir imagen completa: Videos KeepSmiling · Portada" [ref=e144] [cursor=pointer]':
+                    - /url: /images/instrucciones/cuidados-alineadores-keepsmiling/registro-09.webp
+                    - generic [ref=e145]: "06"
+                    - img "Portada del video brochure sobre limpieza de alineadores KeepSmiling" [ref=e146]
+                  - generic [ref=e147]:
+                    - heading "Videos KeepSmiling · Portada" [level=3] [ref=e148]
+                    - link "Descargar video brochure" [active] [ref=e150] [cursor=pointer]:
+                      - /url: /videos/instrucciones/cuidados-alineadores-keepsmiling/video-brochute.mp4
+          - complementary [ref=e154]:
+            - generic [ref=e157]:
+              - heading "Acompañamiento en cada etapa" [level=2] [ref=e158]
+              - paragraph [ref=e159]: El cambio de placa se realiza según el esquema planificado. Conservá el par de alineadores anterior en su sobre numerado como respaldo.
+        - generic [ref=e160]:
+          - paragraph [ref=e161]:
+            - strong [ref=e162]: "Importante:"
+            - text: esta guía acompaña la atención profesional y no reemplaza una evaluación ni las indicaciones personalizadas.
+          - generic "Temas de la instrucción" [ref=e163]:
+            - generic [ref=e164]: Ortodoncia
+            - generic [ref=e165]: KeepSmiling
+            - generic [ref=e166]: Alineadores
+            - generic [ref=e167]: Indicaciones
+    - generic [ref=e169]:
+      - generic [ref=e170]: Paula Gualtieri
+      - generic [ref=e171]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=e172]:
+        - link "Instagram" [ref=e173] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=e174] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=e175] [cursor=pointer]:
+          - /url: "#"
+  - alert [ref=e176]

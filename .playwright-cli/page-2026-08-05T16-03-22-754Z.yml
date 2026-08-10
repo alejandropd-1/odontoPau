@@ -1,0 +1,83 @@
+- generic [active] [ref=f5e1]:
+  - main [ref=f5e2]:
+    - navigation [ref=f5e3]:
+      - generic [ref=f5e4]:
+        - link "Paula Gualtieri" [ref=f5e5] [cursor=pointer]:
+          - /url: /
+        - link "Agendar Turno" [ref=f5e7] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f5e9]:
+      - list [ref=f5e10]:
+        - listitem [ref=f5e11]:
+          - link "Inicio" [ref=f5e12] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f5e15]:
+          - link "Estética Dental" [ref=f5e18] [cursor=pointer]:
+            - /url: /tratamientos/estetica-dental
+        - listitem [ref=f5e19]:
+          - generic [ref=f5e22]: "Caso: Registro de Estética Dental"
+    - article [ref=f5e23]:
+      - generic [ref=f5e24]:
+        - link "Volver a articulos" [ref=f5e25] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=f5e28]: "Vista previa editorial · Estado: technical_review · No indexada"
+        - generic [ref=f5e30]:
+          - generic [ref=f5e31]: Estética Dental
+          - 'heading "Caso clínico: Registro clínico en Estética Dental" [level=1] [ref=f5e32]':
+            - generic [ref=f5e33]: "Caso clínico:"
+            - text: Registro clínico en Estética Dental
+          - paragraph [ref=f5e34]: Tres imágenes clínicas aportadas para documentar un caso de Estética Dental, sin atribuir una secuencia no confirmada.
+          - generic [ref=f5e35]:
+            - generic [ref=f5e36]: 5 de agosto de 2026
+            - generic [ref=f5e39]: 1 min de lectura
+            - generic [ref=f5e43]: Por Equipo clínico
+            - button "Compartir" [ref=f5e45] [cursor=pointer]
+        - region "Imágenes del caso" [ref=f5e52]:
+          - generic [ref=f5e53]:
+            - figure "Registro clínico aportado para el caso." [ref=f5e54]:
+              - img "Vista clínica de piezas dentarias aisladas durante un procedimiento" [ref=f5e56]
+            - figure "Registro complementario del mismo caso." [ref=f5e58]:
+              - img "Vista cercana de piezas dentarias aisladas durante el mismo procedimiento" [ref=f5e60]
+            - figure "Registro complementario del mismo caso." [ref=f5e62]:
+              - img "Vista extraoral de piezas dentarias sobre un dispositivo de aislamiento" [ref=f5e64]
+        - generic [ref=f5e66]:
+          - region [ref=f5e67]:
+            - generic [ref=f5e68]:
+              - heading "El registro" [level=2] [ref=f5e72]
+              - generic [ref=f5e73]:
+                - paragraph [ref=f5e74]: Las tres imágenes pertenecen al mismo registro clínico dentro del servicio de Estética Dental.
+                - paragraph [ref=f5e75]: Al no contar todavía con una descripción clínica ni una secuencia confirmada, se presentan sin etiquetas temporales y sin atribuir un diagnóstico, una técnica o un resultado.
+          - generic [ref=f5e76]:
+            - generic [ref=f5e77]:
+              - text: Evaluación profesional
+              - heading "¿Querés hacer una consulta sobre Estética Dental?" [level=2] [ref=f5e78]
+              - paragraph [ref=f5e79]: Podés escribirnos para coordinar una evaluación. Las alternativas se definen de manera individual según cada situación clínica.
+            - link "Consultar por WhatsApp" [ref=f5e80] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20est%C3%A9tica%20dental
+        - generic [ref=f5e82]:
+          - generic [ref=f5e83]:
+            - heading "Temas del artículo" [level=2] [ref=f5e84]
+            - generic "Temas del artículo" [ref=f5e88]:
+              - generic [ref=f5e89]: estética dental
+              - generic [ref=f5e90]: registro clínico
+              - generic [ref=f5e91]: caso clínico
+          - complementary [ref=f5e93]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=f5e94]
+            - link [ref=f5e96] [cursor=pointer]:
+              - /url: /tratamientos/estetica-dental
+              - strong [ref=f5e97]: Estética Dental
+              - generic [ref=f5e98]: Ver tratamiento
+    - generic [ref=f5e102]:
+      - generic [ref=f5e103]: Paula Gualtieri
+      - generic [ref=f5e104]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f5e105]:
+        - link "Instagram" [ref=f5e106] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f5e107] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f5e108] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f5e109]
+  - alert [ref=f5e110]

@@ -1,0 +1,76 @@
+- generic [active] [ref=f1e1]:
+  - main [ref=f1e2]:
+    - navigation [ref=f1e3]:
+      - generic [ref=f1e4]:
+        - link "Paula Gualtieri" [ref=f1e5] [cursor=pointer]:
+          - /url: /
+        - link "Agendar Turno" [ref=f1e7] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f1e9]:
+      - list [ref=f1e10]:
+        - listitem [ref=f1e11]:
+          - link "Inicio" [ref=f1e12] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f1e16]:
+          - link "Estética Dental" [ref=f1e19] [cursor=pointer]:
+            - /url: /tratamientos/estetica-dental
+        - listitem [ref=f1e20]:
+          - generic [ref=f1e23]: "Caso: Resina en pieza 11"
+    - article [ref=f1e24]:
+      - generic [ref=f1e25]:
+        - link "Volver a articulos" [ref=f1e26] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=f1e29]: "Vista previa editorial · Estado: draft · No indexada"
+        - generic [ref=f1e31]:
+          - generic [ref=f1e32]: Estética Dental
+          - 'heading "Caso clínico: Reconstrucción con resina a mano alzada en pieza 11" [level=1] [ref=f1e33]':
+            - generic [ref=f1e34]: "Caso clínico:"
+            - text: Reconstrucción con resina a mano alzada en pieza 11
+          - paragraph [ref=f1e35]: Registro de una reconstrucción con resina a mano alzada después de un traumatismo en la pieza 11.
+          - generic [ref=f1e36]:
+            - generic [ref=f1e37]: 3 de agosto de 2026
+            - generic [ref=f1e40]: 1 min de lectura
+            - generic [ref=f1e44]: Por Equipo de Paula Gualtieri Odontología
+            - button "Compartir" [ref=f1e46] [cursor=pointer]
+        - region "Imágenes del caso" [ref=f1e53]:
+          - figure "Registro comparativo aportado para el caso." [ref=f1e55]:
+            - img "Registro comparativo de una reconstrucción con resina en la pieza 11" [ref=f1e57]
+        - generic [ref=f1e59]:
+          - region [ref=f1e60]:
+            - generic [ref=f1e61]:
+              - heading "El caso" [level=2] [ref=f1e65]
+              - paragraph [ref=f1e67]: Paula informó que la pieza 11 había sufrido un traumatismo y fue reconstruida con resina a mano alzada.
+          - generic [ref=f1e68]:
+            - generic [ref=f1e69]:
+              - text: Evaluación profesional
+              - heading "¿Tenés una consulta sobre una pieza traumatizada?" [level=2] [ref=f1e70]
+              - paragraph [ref=f1e71]: Podés escribirnos para coordinar una evaluación. Las opciones de reconstrucción dependen de cada situación clínica.
+            - link "Consultar por WhatsApp" [ref=f1e72] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20una%20reconstrucci%C3%B3n%20dental
+        - generic [ref=f1e74]:
+          - generic [ref=f1e75]:
+            - heading "Temas del artículo" [level=2] [ref=f1e76]
+            - generic "Temas del artículo" [ref=f1e80]:
+              - generic [ref=f1e81]: estética dental
+              - generic [ref=f1e82]: resina
+              - generic [ref=f1e83]: pieza 11
+          - complementary [ref=f1e85]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=f1e86]
+            - link [ref=f1e88] [cursor=pointer]:
+              - /url: /tratamientos/estetica-dental
+              - strong [ref=f1e89]: Estética Dental
+              - generic [ref=f1e90]: Ver tratamiento
+    - generic [ref=f1e94]:
+      - generic [ref=f1e95]: Paula Gualtieri
+      - generic [ref=f1e96]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f1e97]:
+        - link "Instagram" [ref=f1e98] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f1e99] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f1e100] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f1e101]
+  - alert [ref=f1e102]

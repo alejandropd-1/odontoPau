@@ -1,0 +1,124 @@
+## Context
+
+El sitio ya carga tratamientos e instrucciones desde JSON recursivos, genera rutas estaticas con Next.js App Router y expone esos documentos en Netlify Visual Editor mediante Stackbit y una fuente Git. Netlify despliega `main` a produccion. No existe una coleccion editorial general. El paquete de AutoClaw propone un blog funcional en concepto, pero usa rutas en ingles, estilos ajenos al sistema, no integra listado/sitemap/tratamientos y mezcla borradores humanos con contenido marcado como publicado.
+
+Los actores son Paula como autoridad clinica y proveedora de imagenes, el responsable del sitio como aprobador de publicacion y Codex como estratega, redactor y mantenedor tecnico. El repositorio publico no es una historia clinica ni un archivo de consentimientos.
+
+## Goals / Non-Goals
+
+**Goals:**
+
+- Incorporar articulos sin cambiar el stack ni agregar un CMS nuevo.
+- Hacer visible la relacion entre cada articulo y uno o mas tratamientos.
+- Impedir que un borrador aparezca en rutas, listados o sitemap.
+- Mantener una fuente editorial unica para cada artículo publicado.
+- Integrar controles clinicos, de privacidad, tecnicos y visuales al flujo normal.
+- Dejar cada cambio funcional y editorial relevante documentado en OpenSpec y Git.
+
+**Non-Goals:**
+
+- Automatizar la publicacion en Instagram, Facebook u otras cuentas en esta fase.
+- Interpretar radiografias o confirmar diagnosticos por IA sin validacion profesional.
+- Guardar nombres, fichas clinicas, consentimientos firmados o metadatos sensibles.
+- Reemplazar Stackbit, introducir MDX o agregar una base de datos de contenido.
+
+## Decisions
+
+### Ruta y nomenclatura en espanol
+
+Se usaran `/articulos` y `/articulos/[slug]`. Mantiene coherencia con `/tratamientos` e `/instrucciones` y evita introducir `/blog` como excepcion idiomatica.
+
+Alternativa descartada: anidar cada articulo bajo `/tratamientos/[id]/articulos`. Un articulo puede vincularse con mas de un servicio y necesita una URL canonica estable.
+
+### JSON como fuente publica canonica
+
+Los documentos viviran en `src/data/articulos/<categoria>/<slug>.json` y se cargaran recursivamente con un modulo tipado. Los Markdown de trabajo o textos recibidos seran insumos editoriales, no contenido publicado.
+
+Alternativa descartada: MDX. Agregaria otro pipeline y otra experiencia CMS sin necesidad demostrada.
+
+### Estados editoriales explicitos
+
+El modelo usara un estado editorial y solo `published` sera visible publicamente. Los estados previstos son `draft`, `clinical_review`, `technical_review`, `approved` y `published`. Las fechas y marcas de aprobacion seran no sensibles; los documentos de consentimiento permaneceran fuera del repositorio.
+
+### Modelo de secciones estructurado
+
+El articulo admitira bloques tipados para introduccion, texto, lista, comparacion, cifras, galeria antes/despues, preguntas frecuentes, cita y CTA. El renderizador no interpretara Markdown embebido dentro de strings. Stackbit y TypeScript compartiran la misma forma de datos, incluidas las filas de tablas.
+
+### Imagenes y privacidad
+
+Las imagenes aprobadas se copiaran a `public/images/articulos/<slug>/` con nombres semanticos, dimensiones conocidas y texto alternativo. Se eliminaran metadatos innecesarios antes de incorporarlas. El registro publico solo afirmara que el uso fue aprobado; no incluira identidad ni evidencia privada del consentimiento.
+
+Las etiquetas visuales como `Antes` y `Despues` seran opcionales por imagen. Una imagen unica no mostrara etiqueta, y una secuencia numerada conservara su orden sin que el sistema infiera etapas clinicas. Los nombres recibidos (`antes`, `despues` o una secuencia numerica) sirven para asociar los archivos durante el ingreso; antes de versionarlos se copiaran con nombres semanticos.
+
+### Integracion y presentacion
+
+Se reutilizaran Navbar, Footer, Breadcrumb, ShareArticleMenu, `next/image`, metadata de Next, sitemap, anotaciones Stackbit y SASS BEM con tokens existentes. Los tratamientos mostraran articulos relacionados mediante `serviceIds`.
+
+El CMS existente no se reemplazara. Los modelos nuevos se incorporaran a `stackbit.config.ts` y sus documentos seguiran siendo archivos JSON versionados por Git y editables desde Netlify Visual Editor.
+
+El detalle usara una composicion editorial adaptable y conservara el lenguaje visual de los casos clinicos existentes: breadcrumb jerarquico, prefijo de titulo negro, titulo en acento, entrada animada y contenedores neutros con CTA naranja. El encabezado sera tipografico y centrado; inmediatamente despues se mostrara una unica galeria principal capaz de resolver una, dos o tres imagenes sin duplicarlas. Las secciones de texto compartiran una unica superficie visual: el contenedor y los medios usaran el ancho disponible, mientras los parrafos conservaran una medida maxima legible.
+
+La URL canonica seguira apuntando a produccion. En un Deploy Preview, la URL de compartir y la imagen OpenGraph usaran el dominio publico del propio deploy para que revisores y plataformas puedan descargar assets que aun no existen en `main`, manteniendo el documento como `noindex` mientras no este publicado.
+
+El cierre del articulo reunira temas, fuentes consultadas y tratamientos relacionados en una unica composicion editorial. Los temas funcionaran como contexto del bloque; las fuentes mantendran mayor jerarquia y trazabilidad, y los tratamientos se presentaran como una accion compacta para continuar navegando, evitando contenedores vacios o desproporcionados cuando solo exista una relacion.
+
+La plantilla sera unica y modular, no una coleccion de maquetas independientes. Un bloque opcional de resumen de caso recuperara los recursos mas utiles de la plantilla clinica original: icono y contexto, tarjetas de datos confirmados y un panel naranja de abordaje. Cada submodulo se renderizara solo si su contenido existe. De esta manera la identidad, jerarquia y orden general permanecen estables, mientras el mismo contrato resuelve casos minimos, intermedios y completos sin placeholders, espacios reservados ni afirmaciones inventadas.
+
+Las tres densidades de referencia seran:
+
+- minima: resumen confirmado, una imagen y CTA;
+- intermedia: resumen, uno o mas datos confirmados, una o dos imagenes y CTA;
+- completa: resumen, datos, panel de abordaje, contenido educativo, FAQ y/o fuentes.
+
+La densidad no se almacenara como una variante visual manual: surgira de los campos realmente completados. Esto evita que el editor tenga que elegir una maqueta y permite que un articulo crezca con informacion validada sin migrarlo a otra plantilla.
+
+### Acumulacion, archivos y paginacion
+
+El archivo general mostrara nueve articulos por pagina, ordenados del mas reciente al mas antiguo. La primera pagina conservara `/articulos`; las siguientes usaran URLs estaticas y enlazables como `/articulos/pagina/2`. Cada pagina tendra canonical propio y un paginador semantico con enlaces anterior, siguiente y numerados, estado actual perceptible y navegacion completa por teclado.
+
+Cada tratamiento mostrara como maximo tres articulos relacionados. Si existen mas, ofrecera una unica accion `Ver todos los articulos de [Tratamiento]` hacia un archivo estable en `/articulos/tratamiento/[serviceId]`. Ese archivo reutilizara la misma regla de nueve elementos y agregara `/pagina/[numero]` cuando sea necesario. No se usara scroll infinito: las URLs reales facilitan compartir, volver atras, rastrear e indexar correctamente el contenido.
+
+En produccion solo `published` participara de listados y relaciones. En Deploy Preview, los estados de revision distintos de `draft` podran aparecer en los archivos editoriales para facilitar su evaluacion conjunta, siempre con `noindex` y fuera del sitemap; un `draft` puro permanecera disponible unicamente por su URL directa. Esta distincion evita promocionar material rechazado o incompleto dentro del propio preview.
+
+### Alcance social transferido
+
+La producción, aprobación, calendario, medición y entrega de derivados sociales se realizará en el cambio independiente `preparar-redes-sociales-editoriales`. Este cambio conserva únicamente la infraestructura web y las puertas editoriales necesarias para publicar artículos seguros.
+
+### Trazabilidad con OpenSpec y Git
+
+Cada cambio OpenSpec se trabajara en una rama `codex/` propia. Los cambios estructurales tendran una propuesta independiente; las publicaciones simples relacionadas podran agruparse en un OpenSpec editorial por lote. Ninguna rama se mezclara, publicara o desplegara sin el checkpoint y la aprobacion correspondientes.
+
+El flujo de salida sera: rama OpenSpec -> commit/push autorizado -> Deploy Preview de Netlify -> revision clinica, editorial, tecnica y visual -> merge autorizado a `main` -> deploy de produccion -> verificacion posterior. Un cambio del CMS que escriba en Git debera respetar las mismas puertas y estados editoriales.
+
+### Decisiones editoriales iniciales confirmadas
+
+- Aprobaciones: Paula valida hechos, tecnica e imagenes; el responsable del sitio da la aprobacion final de Git/preview/publicacion.
+- Conversion primaria del sitio: clics y consultas a WhatsApp atribuibles al articulo.
+- `Ortodoncia Invisible` conserva su nombre. El caso recibido no usara la palabra `convencional` en el contenido.
+- `Implantes Dentales` pasara a llamarse `Rehabilitacion` mediante un OpenSpec estructural separado que incluya rutas y redireccion.
+- Endodoncia/caso-01 es el piloto inicial. La autorizacion de uso esta confirmada y el contenido se limitara a necrosis pulpar y tecnica mecanizada hasta recibir o validar otros datos.
+- Rehabilitacion/caso-02 corresponde a una rehabilitacion del sector anterosuperior: remocion de coronas viejas, opacificacion de pernos metalicos y colocacion final de coronas libres de metal.
+
+## Risks / Trade-offs
+
+- [La IA infiere un diagnostico desde una imagen] -> Tratar el analisis visual como orientacion y bloquear publicacion hasta la validacion escrita de Paula.
+- [Una imagen identifica a un paciente] -> Revisar encuadre, metadatos y consentimiento antes de copiarla al repositorio.
+- [Una promesa absoluta genera riesgo clinico o reputacional] -> Prohibir garantias y exigir revision de cifras, duraciones y testimonios.
+- [El estado editorial se cambia por error] -> `draft` por defecto, preview obligatorio y aprobacion explicita antes de pasar a `published`.
+- [JSON estructurado ofrece menos libertad que Markdown] -> Mantener bloques suficientes y agregar nuevos tipos solo mediante cambios versionados.
+
+## Migration Plan
+
+1. Crear loader, modelos y rutas sin incorporar articulos publicados.
+2. Integrar estilos, SEO, sitemap, Stackbit y enlaces desde tratamientos.
+3. Adaptar un articulo piloto de AutoClaw con `draft` y nuevas imagenes aprobadas.
+4. Ejecutar chequeos estaticos, build y preview responsive/social.
+5. Obtener aprobacion clinica y editorial; corregir hasta aprobar.
+6. Publicar el piloto y observar enlaces, indexacion y conversion a WhatsApp.
+7. Migrar los restantes borradores uno por uno, nunca en bloque sin revision.
+
+Rollback: revertir la publicacion cambiando el estado del articulo y redesplegando. Si la infraestructura falla, retirar enlaces de navegacion/listados conservando los JSON como borradores.
+
+## Open Questions
+
+No quedan preguntas abiertas para seleccionar el piloto. Los detalles no informados de Endodoncia, como pieza dentaria, sintomas, tiempos, materiales, evolucion o testimonio, se omitiran del borrador y solo se agregaran si Paula los confirma durante la revision clinica.

@@ -1,0 +1,89 @@
+- generic [active] [ref=f2e1]:
+  - main [ref=f2e2]:
+    - navigation [ref=f2e3]:
+      - generic [ref=f2e4]:
+        - link "Paula Gualtieri" [ref=f2e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f2e7]:
+          - link "Inicio" [ref=f2e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=f2e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=f2e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=f2e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=f2e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=f2e13] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=f2e15]:
+      - list [ref=f2e16]:
+        - listitem [ref=f2e17]:
+          - link "Inicio" [ref=f2e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f2e22]:
+          - link "Ortodoncia Invisible" [ref=f2e25] [cursor=pointer]:
+            - /url: /tratamientos/ortodoncia-invisible
+        - listitem [ref=f2e26]:
+          - generic [ref=f2e29]: "Caso: Ortodoncia Invisible"
+    - article [ref=f2e30]:
+      - generic [ref=f2e31]:
+        - link "Volver a articulos" [ref=f2e32] [cursor=pointer]:
+          - /url: /articulos
+        - status [ref=f2e35]: "Vista previa editorial · Estado: technical_review · No indexada"
+        - generic [ref=f2e37]:
+          - generic [ref=f2e38]: Ortodoncia Invisible
+          - 'heading "Caso clínico: Registro clínico de Ortodoncia Invisible" [level=1] [ref=f2e39]':
+            - generic [ref=f2e40]: "Caso clínico:"
+            - text: Registro clínico de Ortodoncia Invisible
+          - paragraph [ref=f2e41]: Una imagen clínica incorporada para documentar un caso dentro del servicio de Ortodoncia Invisible.
+          - generic [ref=f2e42]:
+            - generic [ref=f2e43]: 5 de agosto de 2026
+            - generic [ref=f2e46]: 1 min de lectura
+            - generic [ref=f2e50]: Por Equipo clínico
+            - button "Compartir" [ref=f2e52] [cursor=pointer]
+        - region "Imágenes del caso" [ref=f2e59]:
+          - figure "Registro clínico aportado para el caso." [ref=f2e61]:
+            - img "Sonrisa con un dispositivo transparente colocado sobre las piezas dentarias" [ref=f2e63]
+        - generic [ref=f2e65]:
+          - region [ref=f2e66]:
+            - generic [ref=f2e67]:
+              - heading "El registro" [level=2] [ref=f2e71]
+              - generic [ref=f2e72]:
+                - paragraph [ref=f2e73]: Este material aporta un único registro visual de un caso dentro del servicio de Ortodoncia Invisible.
+                - paragraph [ref=f2e74]: La imagen no establece por sí sola una etapa, una evolución ni un resultado, por lo que se presenta sin etiqueta temporal ni otras afirmaciones clínicas.
+          - generic [ref=f2e75]:
+            - generic [ref=f2e76]:
+              - text: Evaluación profesional
+              - heading "¿Querés consultar por Ortodoncia Invisible?" [level=2] [ref=f2e77]
+              - paragraph [ref=f2e78]: Podés escribirnos para coordinar una evaluación. La indicación y la planificación dependen de cada situación clínica.
+            - link "Consultar por WhatsApp" [ref=f2e79] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20ortodoncia%20invisible
+        - generic [ref=f2e82]:
+          - generic [ref=f2e83]:
+            - heading "Temas del artículo" [level=2] [ref=f2e84]
+            - generic "Temas del artículo" [ref=f2e88]:
+              - generic [ref=f2e89]: ortodoncia invisible
+              - generic [ref=f2e90]: registro clínico
+              - generic [ref=f2e91]: caso clínico
+          - complementary [ref=f2e93]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=f2e94]
+            - link [ref=f2e96] [cursor=pointer]:
+              - /url: /tratamientos/ortodoncia-invisible
+              - strong [ref=f2e97]: Ortodoncia Invisible
+              - generic [ref=f2e98]: Ver tratamiento
+    - generic [ref=f2e102]:
+      - generic [ref=f2e103]: Paula Gualtieri
+      - generic [ref=f2e104]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+      - generic [ref=f2e105]:
+        - link "Instagram" [ref=f2e106] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=f2e107] [cursor=pointer]:
+          - /url: "#"
+        - link "Aviso Legal" [ref=f2e108] [cursor=pointer]:
+          - /url: "#"
+  - complementary "Control de desplazamiento":
+    - scrollbar "Progreso de desplazamiento" [ref=f2e109]
+  - alert [ref=f2e110]
