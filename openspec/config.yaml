@@ -30,3 +30,9 @@ rules:
     - Separar infraestructura, contenido, QA, publicacion y mantenimiento.
     - Mantener puertas explicitas de aprobacion antes de publicar o desplegar.
     - Incluir pnpm exec tsc --noEmit, pnpm run lint y pnpm run build.
+    - Trabajar cada OpenSpec implementable en una rama exclusiva `change/<id-exacto-del-openspec>` creada desde `main` sincronizada.
+    - Dejar como ultimo item una validacion manual de Alejandro sobre el Deploy Preview o evidencia equivalente; ningun agente puede marcarla.
+    - Exigir aprobacion previa de Paula cuando el alcance incluya contenido clinico o imagenes de pacientes.
+    - No incluir como tareas el archive, el merge ni la verificacion postproduccion; ocurren despues del 100% siguiendo el cierre documentado.
+    - Tras la validacion manual, hacer commit de cierre, OpenSpec Archive y un segundo commit de archive en la misma rama y el mismo PR.
+    - Mezclar a `main` solo con autorizacion explicita y registrar la verificacion postproduccion en el PR o reporte de release.

@@ -45,3 +45,8 @@
 - [ ] 6.2 Registrar por separado cualquier autorización posterior de programación o publicación
 - [ ] 6.3 Registrar métricas disponibles por pieza sin completar datos faltantes
 - [ ] 6.4 Revisar resultados y priorizar el siguiente lote con aprendizajes documentados
+
+## 7. Cierre por OpenSpec
+
+- [ ] 7.1 Preparar commit y push selectivos en `change/preparar-redes-sociales-editoriales`, abrir un Draft PR y verificar el diff y los previews finales sin publicar en cuentas externas, hacer merge ni archivar.
+- [ ] 7.2 Alejandro revisa el paquete, las aprobaciones de Paula, el calendario y la evidencia final, y autoriza el commit de cierre y el OpenSpec Archive. Esta tarea es exclusivamente manual y ningún agente puede marcarla; tampoco autoriza por sí sola la publicación en redes.

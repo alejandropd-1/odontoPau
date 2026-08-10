@@ -6,8 +6,6 @@ coverage/
 .env*
 !.env.example
 odontoPau.code-workspace
-pnpm-lock.yaml
-pnpm-workspace.yaml
 .codegraph/.gitignore
 .codegraph/config.json
 
