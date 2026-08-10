@@ -144,6 +144,7 @@ export default defineStackbitConfig({
           fields: [
             { name: 'name', type: 'string', required: true, label: 'Nombre' },
             { name: 'role', type: 'string', required: true, label: 'Rol confirmado' },
+            { name: 'mobileRole', type: 'string', label: 'Rol breve para mobile' },
             { name: 'image', type: 'image', required: true, label: 'Retrato' },
             { name: 'imageAlt', type: 'string', required: true, label: 'Texto alternativo' }
           ]

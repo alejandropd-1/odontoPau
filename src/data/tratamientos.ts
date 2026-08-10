@@ -25,6 +25,7 @@ export interface CasoClinico {
 export interface TratamientoProfessional {
   name: string;
   role: string;
+  mobileRole?: string;
   image: string;
   imageAlt: string;
 }
@@ -61,7 +62,7 @@ function getTreatmentFiles(directory: string): string[] {
     });
 }
 
-function loadTreatment(filePath: string): Tratamiento {
+export function loadTreatment(filePath: string): Tratamiento {
   const rawTreatment = JSON.parse(fs.readFileSync(filePath, 'utf8')) as Omit<Tratamiento, 'sourcePath'>;
   const sourcePath = path.relative(process.cwd(), filePath).replace(/\\/g, '/');
 
@@ -85,6 +86,15 @@ function loadTreatment(filePath: string): Tratamiento {
           );
         }
       });
+
+      if (
+        professional.mobileRole !== undefined
+        && (typeof professional.mobileRole !== 'string' || professional.mobileRole.trim() === '')
+      ) {
+        throw new Error(
+          `Tratamiento invalido en ${sourcePath}: professionals[${index}].mobileRole debe ser un texto no vacio.`,
+        );
+      }
 
       if (!professional.image.startsWith('/images/')) {
         throw new Error(

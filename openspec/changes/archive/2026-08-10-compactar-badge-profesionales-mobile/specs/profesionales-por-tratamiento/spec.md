@@ -1,8 +1,5 @@
-# profesionales-por-tratamiento Specification
+## MODIFIED Requirements
 
-## Purpose
-TBD - created by archiving change integrar-lote-clinico-y-rehabilitacion. Update Purpose after archive.
-## Requirements
 ### Requirement: Profesionales definidos por contenido
 Cada tratamiento SHALL poder declarar cero, uno o varios profesionales con nombre, rol, rol mobile breve opcional, retrato y texto alternativo, y el componente del hero SHALL renderizar esos datos sin condicionales por identificador ni especialidades inferidas.
 
@@ -26,26 +23,7 @@ Cada tratamiento SHALL poder declarar cero, uno o varios profesionales con nombr
 - **WHEN** un profesional no posee `mobileRole`
 - **THEN** el hero reutiliza su rol completo sin generar, truncar ni inferir otro texto
 
-### Requirement: Retratos reales y accesibles
-Los retratos MUST ser activos locales optimizados, mantener el rostro visible en los recortes responsive y contar con texto alternativo que identifique a la persona sin describir atributos irrelevantes.
-
-#### Scenario: Render responsive
-- **WHEN** el hero se visualiza entre 320 px y desktop
-- **THEN** los retratos conservan proporción, foco y contraste suficientes, el badge mantiene separación simétrica respecto de los bordes y ningún nombre o rol se desborda fuera del contenedor
-
-### Requirement: Edición desde el CMS
-El modelo `Tratamiento` del CMS SHALL exponer la lista de profesionales y todos sus campos sin requerir cambios de código para actualizar un nombre, rol o retrato.
-
-#### Scenario: Edición de un profesional
-- **WHEN** una persona autorizada modifica un profesional desde Netlify Create
-- **THEN** el cambio se persiste en el JSON del tratamiento y se refleja en el hero correspondiente
-
-### Requirement: Afirmaciones profesionales verificables
-El sistema MUST mostrar únicamente roles proporcionados o ya confirmados y MUST NOT generar automáticamente “Especialista en <tratamiento>” a partir del título de la página.
-
-#### Scenario: Tratamiento con nombre comercial
-- **WHEN** el tratamiento se llama Ortodoncia Invisible
-- **THEN** el rol del profesional no se deriva del nombre comercial y conserva sólo la descripción confirmada
+## ADDED Requirements
 
 ### Requirement: Jerarquia compacta del badge en mobile
 El hero SHALL presentar entre 320 px y el breakpoint `md` un badge compacto que conserve nombres, retratos y rol esencial, MUST permitir wrapping sin overflow horizontal y MUST reducir la cobertura de la imagen respecto de la composicion desktop.
@@ -83,4 +61,3 @@ El badge SHALL usar una superficie glassmorphism coherente con el design system 
 #### Scenario: Navegador compatible con backdrop filter
 - **WHEN** el navegador soporta `backdrop-filter` o su variante WebKit
 - **THEN** el badge aplica blur y saturacion sin alterar la estructura, el foco ni la semantica del contenido
-
