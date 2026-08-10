@@ -5,25 +5,64 @@
   "categoryLabel": "Estética Dental",
   "order": 3,
   "tituloHero": "Estética Dental",
-  "descripcionHero": "Diseño de sonrisa personalizado mediante carillas de diferentes materiales y blanqueamiento avanzado. Resultados armónicos que potencian tu belleza natural.",
+  "descripcionHero": "Alternativas personalizadas para trabajar color, forma y armonía de la sonrisa después de una evaluación clínica individual.",
   "icon": "Sparkles",
-  "heroImage": "/images/estetica-hero.jpg",
+  "heroImage": "/images/estetica-dental-hero.webp",
+  "professionals": [
+    {
+      "name": "Dra. Paula Gualtieri",
+      "role": "Dirección clínica",
+      "image": "/images/profesionales/paula-gualtieri-estudio.webp",
+      "imageAlt": "Retrato de la Dra. Paula Gualtieri"
+    },
+    {
+      "name": "Dr. Roberto Domínguez",
+      "role": "Especialista en Rehabilitación Oral (Implantes y Prótesis) y Estética Dental",
+      "image": "/images/profesionales/roberto-dominguez-estudio.webp",
+      "imageAlt": "Retrato del Dr. Roberto Domínguez"
+    }
+  ],
   "features": [
-    "Carillas Ultrafinas: Mínimo tallado dental para un resultado natural y duradero.",
-    "Blanqueamiento ambulatorio: aclara varios tonos con mínima sensibilidad.",
-    "Diseño Digital DSD: Visualiza tu nueva sonrisa en el ordenador antes de iniciar.",
-    "Materiales Premium: Cerámicas de alta gama que imitan el esmalte natural."
+    "Blanqueamiento con modalidad y seguimiento definidos para cada persona.",
+    "Reconstrucciones con resina para situaciones que requieren recuperar forma dentaria.",
+    "Alternativas restauradoras seleccionadas según la necesidad clínica.",
+    "Planificación orientada a integrar estética, función y salud bucal."
   ],
   "casosClinicos": [
     {
       "id": 1,
+      "articleSlug": "blanqueamiento-dentario-tecnica-ambulatoria",
       "paciente": "Paciente",
-      "fecha": "Noviembre 2023",
-      "titulo": "Cambio de Look",
-      "descripcion": "Transformación total mediante 6 carillas de porcelana superiores.",
-      "imagenAntes": "/images/casos/julia-antes.jpg",
-      "imagenDespues": "/images/casos/julia-despues.jpg",
-      "testimonio": "Mi cara se ve mucho más joven. El cambio en las proporciones fue la clave."
+      "titulo": "Blanqueamiento en casa: una sonrisa más luminosa a tu ritmo",
+      "descripcion": "Registro de un blanqueamiento dentario con técnica ambulatoria, elegida por su menor sensibilidad informada.",
+      "imagenes": [
+        "/images/articulos/blanqueamiento-dentario-tecnica-ambulatoria/registro-comparativo-frontal.webp",
+        "/images/articulos/blanqueamiento-dentario-tecnica-ambulatoria/registro-comparativo-lateral.webp"
+      ]
+    },
+    {
+      "id": 2,
+      "articleSlug": "resina-mano-alzada-pieza-11",
+      "paciente": "Paciente",
+      "titulo": "Reconstrucción estética con resina tras un traumatismo en un diente anterior",
+      "descripcion": "Reconstrucción con resina a mano alzada después de un traumatismo en la pieza 11.",
+      "imagenes": [
+        "/images/articulos/resina-mano-alzada-pieza-11/registro-frontal.webp",
+        "/images/articulos/resina-mano-alzada-pieza-11/registro-cercano.webp"
+      ],
+      "solucion": "La pieza 11 fue reconstruida con resina a mano alzada después de un traumatismo."
+    },
+    {
+      "id": 4,
+      "articleSlug": "registro-clinico-estetica-dental-caso-04",
+      "paciente": "Paciente",
+      "titulo": "Un abordaje personalizado en Estética Dental",
+      "descripcion": "Cada sonrisa tiene su propia historia y merece una mirada atenta, cuidada y personalizada.",
+      "imagenes": [
+        "/images/articulos/registro-clinico-estetica-dental-caso-04/registro-01.webp",
+        "/images/articulos/registro-clinico-estetica-dental-caso-04/registro-02.webp",
+        "/images/articulos/registro-clinico-estetica-dental-caso-04/registro-03.webp"
+      ]
     }
   ]
 }

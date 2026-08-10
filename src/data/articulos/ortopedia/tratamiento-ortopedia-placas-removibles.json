@@ -1,0 +1,96 @@
+{
+  "type": "Articulo",
+  "id": "ortopedia-caso-01",
+  "slug": "tratamiento-ortopedia-placas-removibles",
+  "category": "ortopedia",
+  "categoryLabel": "Ortopedia",
+  "serviceIds": [
+    "ortopedia"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Placas removibles",
+  "title": "Tratamiento de ortopedia con placas removibles",
+  "excerpt": "Luego de un exhaustivo diagnóstico, se colocaron placas activas superior e inferior logrando cambios favorables en un año de tratamiento.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-08T12:00:00.000Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "updatedAt": "2026-08-08T12:00:00.000Z",
+  "readTime": "2 min de lectura",
+  "tags": [
+    "ortopedia",
+    "placas removibles",
+    "diagnóstico cefalométrico"
+  ],
+  "heroImage": {
+    "src": "/images/casos/ortopedia/caso-01/foto-03.webp",
+    "alt": "Resultado intraoral luego del tratamiento de ortopedia",
+    "width": 1280,
+    "height": 960,
+    "caption": "Resultado intraoral luego del tratamiento de ortopedia."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Diagnóstico y planificación",
+      "paragraphs": [
+        "Luego de realizar un exhaustivo diagnóstico cefalométrico, fotográfico y de modelos, se decidió comenzar un tratamiento de ortopedia. Se colocaron dos placas, superior e inferior, con tornillo medio.",
+        "Luego de un año de tratamiento se puede observar los cambios intraorales y en el perfil de la paciente generando un terreno óseo propicio para la dentición definitiva.",
+        "En el caso de aparatos removibles, para lograr el éxito del tratamiento en plazos cortos es fundamental la colaboración del paciente, siguiendo las indicaciones de las horas de uso de la aparatología."
+      ],
+      "facts": [
+        {
+          "label": "Tratamiento",
+          "value": "Ortopedia con placas removibles"
+        },
+        {
+          "label": "Tiempo",
+          "value": "1 año"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Registros clínicos del caso",
+      "images": [
+        {
+          "src": "/images/casos/ortopedia/caso-01/foto-01.webp",
+          "alt": "Intraoral inicial previo al tratamiento de ortopedia",
+          "width": 1280,
+          "height": 960,
+          "caption": "Intraoral inicial previo al tratamiento de ortopedia."
+        },
+        {
+          "src": "/images/casos/ortopedia/caso-01/foto-02.webp",
+          "alt": "Perfil de paciente previo al tratamiento",
+          "width": 1280,
+          "height": 960,
+          "caption": "Perfil de paciente previo al tratamiento."
+        },
+        {
+          "src": "/images/casos/ortopedia/caso-01/foto-03.webp",
+          "alt": "Resultado intraoral luego del tratamiento de ortopedia",
+          "width": 1280,
+          "height": 960,
+          "caption": "Resultado intraoral luego del tratamiento de ortopedia."
+        },
+        {
+          "src": "/images/casos/ortopedia/caso-01/foto-04.webp",
+          "alt": "Perfil luego del tratamiento de ortopedia",
+          "width": 1280,
+          "height": 960,
+          "caption": "Perfil luego del tratamiento de ortopedia."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Consulta odontopediátrica",
+      "title": "¿Notás alguna alteración en la mordida de tu hijo/a?",
+      "text": "Escribinos por WhatsApp para coordinar un diagnóstico oportuno.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20ortopedia",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

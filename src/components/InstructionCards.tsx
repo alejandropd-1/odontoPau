@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Clock, FileText } from 'lucide-react';
-import type { Instruccion } from '@/data/instrucciones';
+import { formatInstructionDate, instructionStatusLabels, type Instruccion } from '@/data/instrucciones';
 import { getTratamientos } from '@/data/tratamientos';
 
 interface InstructionCardsProps {
@@ -18,23 +18,29 @@ export default function InstructionCards({ instructions, headingLevel = 'h2' }: 
     <div className="instructions-index__grid">
       {instructions.map((instruction) => {
         const service = tratamientos.find((item) => item.id === instruction.serviceId);
+        const cardImage = instruction.resourceImage || instruction.socialImage;
 
         return (
           <article key={instruction.id} className="instructions-index__card">
-            {service?.heroImage && (
+            {(cardImage || service?.heroImage) && (
               <div className="instructions-index__card-media">
                 <Image
-                  src={instruction.shareImage || service.heroImage}
+                  src={cardImage?.src || service?.heroImage || '/images/isologo.png'}
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="instructions-index__card-image"
+                  className={`instructions-index__card-image${cardImage ? ' instructions-index__card-image--resource' : ''}`}
                 />
               </div>
             )}
 
             <div className="instructions-index__card-content">
-              <span className="instructions-index__date">{instruction.date}</span>
+              <div className="instructions-index__card-kicker">
+                <span className="instructions-index__date">Actualizada el {formatInstructionDate(instruction.updatedAt)}</span>
+                {instruction.status !== 'published' && (
+                  <span className="instructions-index__status">Preview · {instructionStatusLabels[instruction.status]}</span>
+                )}
+              </div>
               <Heading className="instructions-index__card-title">
                 <Link href={`/instrucciones/${instruction.category}/${instruction.slug}`}>
                   {instruction.title}

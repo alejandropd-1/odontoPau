@@ -1,251 +1,225 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+# Paula Gualtieri Odontología
 
-# 🦷 Paula Gualtieri | Clinical Excellence & Digital Precision
-### High-End Dental Clinic Portfolio & Management Platform
-</div>
+Sitio institucional y circuito editorial para tratamientos, casos clínicos, artículos e instrucciones para pacientes.
 
----
+El proyecto usa una arquitectura de contenido basada en JSON y Git. Los contenidos clínicos se preparan como borradores, se revisan en un deploy draft de Netlify y sólo pasan a producción después de una aprobación clínica, visual y técnica explícita.
 
-## 🚀 Tech Stack & Core Architecture
+> Estado al 5 de agosto de 2026: el lote editorial se encuentra en revisión mediante un draft de Netlify. No está integrado en `main` ni publicado en producción.
 
-This project is built with the latest web technologies to ensure performance, SEO, and a premium user experience.
+## Documentación para continuar el trabajo
 
-- **Core**: [Next.js 15+](https://nextjs.org/) (App Router) & [React 19](https://react.dev/)
-- **Styling**: SASS/SCSS modular with design tokens, functions, mixins, and BEM naming convention (Modern Glassmorphism design system)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/) (Smooth transitions and micro-interactions)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Content**: Dynamic JSON-driven architecture (`src/data/`) integrated with Stackbit CMS for visual editing, using categorized folders for treatments and patient instructions.
+- [Handoff editorial y operativo](docs/HANDOFF-EDITORIAL-2026-08-05.md): estado exacto, cambios realizados, validaciones, despliegue en Netlify y punto de reanudación para otra IA.
+- [Changelog](CHANGELOG.md): historial funcional y editorial.
+- [OpenSpec del lote clínico](openspec/changes/integrar-lote-clinico-y-rehabilitacion/): alcance, decisiones, especificaciones y gates pendientes.
+- [OpenSpec del runner con LM Studio Link](openspec/changes/preparar-runner-editorial-lm-studio-link/): investigación futura; todavía no implementada.
+- [Contexto de producto y tono](.agents/product-marketing.md): público, posicionamiento, voz y límites de redacción.
 
----
+## Stack real
 
-## 📁 File Structure Reference
+- Next.js 15 con App Router.
+- React 19 y TypeScript.
+- SASS/SCSS modular, tokens propios y clases BEM.
+- Motion para transiciones y microinteracciones.
+- Lucide React para iconografía.
+- JSON dentro de `src/data/` como fuente de contenido.
+- Stackbit / Netlify Create como CMS visual conectado a Git.
+- Netlify para deploys de preview y producción.
+- OpenSpec para registrar decisiones, alcance, tareas y gates.
+
+No se usa Astro, Markdown como fuente pública, Tailwind ni un CMS con base de datos.
+
+## Estructura relevante
 
 ```text
 odontoPau/
-├── src/
-│   ├── app/                # Next.js App Router (Pages, Layouts, Metadata)
-│   │   ├── tratamientos/   # Treatment index, detail pages, and clinical cases
-│   │   └── instrucciones/  # Patient instruction index and shareable detail pages
-│   ├── components/         # Reusable UI Components (Hero, Navbar, Footer, etc.)
-│   ├── styles/             # Visual architecture (SASS)
-│   │   ├── abstracts/      # Tokens, functions, mixins, breakpoints
-│   │   ├── base/           # Reset, root (CSS custom props), global styles
-│   │   ├── utilities/      # Reusable utility classes (glass-panel, no-scrollbar)
-│   │   ├── components/     # BEM component styles
-│   │   ├── pages/          # Page-specific styles
-│   │   └── main.scss       # Entry point
-│   ├── data/               # 💡 MAIN CONTENT SOURCE (Home, Treatments, Instructions, Cases)
-│   │   ├── tratamientos/   # Categorized treatment JSON files
-│   │   └── instrucciones/  # Categorized patient instruction JSON files
-│   ├── hooks/              # Custom React hooks
-│   ├── lib/                # Utility functions and shared logic
-│   └── assets/             # Images and local media (via public folder)
-├── public/                 # Static assets (Images, Icons, Favicon)
-├── DESIGN.md               # Detailed Design System & Brand Identity
-└── package.json            # Dependencies and scripts
+├── docs/
+│   └── HANDOFF-EDITORIAL-2026-08-05.md
+├── openspec/changes/
+│   ├── crear-circuito-editorial-articulos-redes/
+│   ├── crear-circuito-instrucciones-pacientes/
+│   ├── integrar-lote-clinico-y-rehabilitacion/
+│   └── preparar-runner-editorial-lm-studio-link/
+├── public/images/
+│   ├── articulos/<slug>/
+│   ├── instrucciones/<slug>/
+│   └── profesionales/
+├── src/app/
+│   ├── articulos/
+│   ├── instrucciones/
+│   └── tratamientos/
+├── src/components/
+│   ├── ArticleArchive.tsx
+│   ├── ArticleContent.tsx
+│   ├── ArticlePagination.tsx
+│   ├── InstructionContent.tsx
+│   └── TreatmentDetailContent.tsx
+├── src/data/
+│   ├── articulos/<categoria>/<slug>.json
+│   ├── instrucciones/<categoria>/<slug>.json
+│   └── tratamientos/<categoria>/<slug>.json
+├── src/styles/
+├── stackbit.config.ts
+└── netlify.toml
 ```
 
----
+## Modelo editorial
 
-## 🛠️ Content Management (CMS)
+### Artículos
 
-The project has been migrated to a fully dynamic data architecture integrated with **Stackbit / Netlify Create** for visual, in-situ editing.
+Los artículos viven en `src/data/articulos/<categoria>/<slug>.json`. El cargador recursivo y sus validaciones están en `src/data/articulos.ts`.
 
-### 1. Stackbit Visual Editing
-- The site uses `data-sb-object-id` and `data-sb-field-path` annotations across components.
-- Content editors can click directly on text, images, and sections within the Netlify Create visual editor to modify them in real-time.
+Estados permitidos:
 
-### 2. Data Sources (JSON)
-All content is managed via JSON files located in the `src/data/` directory, which act as the single source of truth:
-- `src/data/home.json`: Controls all sections of the landing page (Hero, Services, Team, Testimonials, Location).
-- `src/data/settings.json`: Centralizes global configuration like contact info (WhatsApp), social media links, and footer text.
-- `src/data/tratamientos/<categoria>/`: Contains one `.json` file per treatment, including its category metadata and clinical cases. The treatment index, detail pages, case pages, static params, and sitemap are generated from these files.
-- `src/data/instrucciones/<categoria>/`: Contains one `.json` file per patient instruction, designed for direct links that can be sent after a consultation. Instruction pages include metadata for OpenGraph/Twitter previews and native/share fallback actions.
+1. `draft`: preparación interna; no aparece en el archivo de preview.
+2. `clinical_review`: pendiente de revisión clínica.
+3. `technical_review`: listo para revisar estructura, imágenes y responsive en preview.
+4. `approved`: aprobado, pero todavía no publicado.
+5. `published`: visible en producción; requiere `publishedAt`.
 
-### 3. CMS Configuration
-The content models and editing rules are defined in `stackbit.config.ts` located at the root of the project.
+En producción sólo se generan rutas, listados, relaciones y sitemap para artículos `published`. En desarrollo, branch deploy o deploy preview también se exponen los contenidos de revisión, siempre como no indexables.
 
-- `Tratamiento` uses nested matching (`tratamientos/**/*.json`) so files can live inside category folders.
-- `Instruccion` uses nested matching (`instrucciones/**/*.json`) so new patient instructions can also be organized by category.
-- The CMS/Git workflow can add, edit, or remove JSON documents as long as they keep the expected schema and category folder structure.
+La plantilla es única y modular. Cada JSON completa solamente los bloques respaldados por la información disponible: resumen, texto, lista, comparación, estadísticas verificadas, galería, FAQ, cita o CTA. No se crean plantillas separadas para artículos cortos y largos.
 
-### 4. Adding or Removing Content
-- **Add a treatment**: Create `src/data/tratamientos/<categoria>/<slug>.json`, set a unique `id`, and fill `category`, `categoryLabel`, `order`, hero content, features, and optional `casos`.
-- **Remove a treatment**: Delete its JSON file. The treatment index, detail route, case routes, and sitemap update on the next build.
-- **Add an instruction**: Create `src/data/instrucciones/<categoria>/<slug>.json`, set `slug`, `category`, `categoryLabel`, optional `serviceId`, share metadata, tags, and `sections`.
-- **Remove an instruction**: Delete its JSON file. The instruction index, detail route, and sitemap update on the next build.
+El archivo general usa nueve artículos por página y también ofrece archivos filtrados por tratamiento:
 
----
+- `/articulos`
+- `/articulos/pagina/<n>`
+- `/articulos/tratamiento/<serviceId>`
+- `/articulos/tratamiento/<serviceId>/pagina/<n>`
 
-## 🎨 Visual Architecture
+### Tratamientos y casos
 
-The project uses **SASS/SCSS** as its sole styling architecture, organized in a modular, tokenized system with BEM naming convention.
+Los tratamientos viven en `src/data/tratamientos/<categoria>/<slug>.json` y se cargan desde `src/data/tratamientos.ts`.
 
-- **SASS is the single source of truth** for all visual styles. No utility-first frameworks are used.
-- **Components use BEM classes** (e.g., `.hero`, `.hero__title`, `.hero__button--primary`).
-- **Component styles live in** `src/styles/components/` (one `_component-name.scss` per component).
-- **Tokens and functions** are defined in `src/styles/abstracts/` and consumed via `@use "../abstracts" as *;`.
+Cada tratamiento puede declarar:
 
-### Available SASS Functions
+- `id`, categoría, orden, título, descripción, icono y `heroImage`;
+- una lista opcional `professionals` con nombre, rol, retrato y texto alternativo;
+- características informativas verificadas;
+- casos clínicos, que pueden enlazar a un artículo mediante `articleSlug`.
 
-| Function | Purpose | Example |
-|---|---|---|
-| `clr($family, $shade)` | Color tokens | `clr("primary", "600")` |
-| `size($step)` | Spacing/sizing scale | `size(8)` → 2rem |
-| `fs($step)` | Font-size scale (responsive) | `fs("750")` |
-| `ff($family)` | Font-family | `ff(sans)` |
-| `radius($size)` | Border-radius tokens | `radius("2xl")` |
-| `shadow($level)` | Box-shadow tokens | `shadow(xl)` |
-| `transition($speed)` | Transition presets | `transition(base)` |
-| `container($type)` | Container widths | `container(max)` |
-| `spacing($type)` | Semantic spacing | `spacing(section)` |
-| `glass($prop)` | Glassmorphism tokens | `glass(bg)` |
+La portada de cada tarjeta en `/tratamientos` reutiliza el mismo `heroImage` del servicio. No debe mantenerse un segundo mapa de imágenes.
 
-### Responsive Design
+El servicio antes llamado Implantes Dentales ahora es canónicamente `rehabilitacion`. Las rutas anteriores bajo `/tratamientos/implantes` se conservan sólo como redirecciones permanentes.
 
-Use `@include mq($breakpoint)` for responsive styles (mobile-first):
+### Instrucciones para pacientes
 
-```scss
-.hero__title {
-  font-size: fs("750");
+Las instrucciones viven en `src/data/instrucciones/<categoria>/<slug>.json`. Admiten contenido estructurado, recursos descargables, imagen para compartir y relación opcional con un tratamiento.
 
-  @include mq(md) {
-    font-size: fs("800");
-  }
-}
+Rutas principales:
+
+- `/instrucciones`
+- `/instrucciones/<categoria>/<slug>`
+
+El mismo circuito de estados y aprobación evita que una indicación en revisión aparezca en producción.
+
+## Reglas clínicas, de privacidad y redacción
+
+- No inferir diagnósticos, materiales, técnicas, tiempos, resultados ni secuencias a partir de una fotografía.
+- No usar porcentajes, promesas de éxito, ausencia de dolor o resultados universales sin respaldo verificable.
+- No publicar imágenes clínicas sin asociación de carpeta confirmada, consentimiento y revisión visual.
+- En imágenes de menores, usar únicamente la variante anonimizada autorizada.
+- Las etiquetas `Antes`, `Después` o equivalentes son opcionales y sólo se agregan cuando la secuencia fue confirmada.
+- Una imagen aislada no recibe una etiqueta temporal por defecto.
+- La copia pública usa la voz institucional `Equipo clínico`; no muestra “Paula dijo”, “según Paula” ni referencias al proceso interno de preparación.
+- El tono debe ser claro, cálido y cercano. No describir mecánicamente que “se aportó una imagen” ni rellenar el artículo cuando falta información.
+- Los textos alternativos describen lo necesario para comprender la imagen sin identificar pacientes ni inferir datos clínicos.
+
+## Rutina para incorporar un artículo
+
+1. Relevar los archivos recibidos sin modificar el repositorio.
+2. Confirmar servicio, caso, orden de imágenes, autorización, texto clínico y si existe una secuencia temporal.
+3. Abrir o actualizar un cambio de OpenSpec.
+4. Normalizar nombres y optimizar imágenes en `public/images/articulos/<slug>/`.
+5. Crear el JSON en `src/data/articulos/<categoria>/<slug>.json` con estado de revisión.
+6. Completar sólo los módulos respaldados por la información recibida.
+7. Vincular el caso desde el tratamiento mediante `articleSlug` cuando corresponda.
+8. Ejecutar validaciones técnicas y visuales.
+9. Crear un draft de Netlify y compartir sus enlaces con Paula y Alejandro.
+10. Registrar las aprobaciones. Recién después se cambia el estado a `published`, se agrega `publishedAt` y se inicia un release autorizado.
+
+El artículo aprobado funciona como contenido madre. Las piezas para redes sociales se derivan después y no reemplazan la revisión del artículo.
+
+## Desarrollo local
+
+Requisitos: Node.js 22 y pnpm 11.
+
+```powershell
+pnpm install
+pnpm run dev
 ```
 
-Available breakpoints: `sm` (40em), `md` (48em), `lg` (64em), `xl` (80em).
+El servidor local queda disponible normalmente en `http://localhost:3000`.
 
----
+### Build de producción
 
-## 🤖 AI Agent Guidelines
+El build normal debe excluir borradores y contenidos en revisión:
 
-If you are an AI assistant working on this project:
-1. **Design Consistency**: Always refer to `DESIGN.md` before creating new components. Follow the "Vital Precision" (Modern Glassmorphism) aesthetic.
-2. **Data Structure**: Treatments and instructions are loaded recursively from category folders. Keep treatment files in `src/data/tratamientos/<categoria>/` and instruction files in `src/data/instrucciones/<categoria>/`. Do not import server-side data loaders into client components; pass resolved data through page props.
-3. **Styling Convention**: Use BEM classes for components. Styles go in `src/styles/components/_component-name.scss` with `@use "../abstracts" as *;`. Use SASS tokens/functions (`clr()`, `size()`, `fs()`, etc.) instead of hardcoded values. Use `@include mq(...)` for responsive design. **Do not add utility-first CSS classes; the project does not use any utility-first framework.**
-4. **Stackbit Preservation**: Preserve all `data-sb-object-id` and `data-sb-field-path` attributes when modifying components. These are required for the Netlify Create visual editor.
-5. **Icons**: Always use `lucide-react` icons.
+```powershell
+pnpm run build
+```
 
----
+### Build editorial de preview
 
-## 🧹 Code Quality & Maintenance
+```powershell
+$env:CONTEXT='deploy-preview'
+$env:NETLIFY_PREVIEW_SERVER='true'
+pnpm run build
+```
 
-This project uses **Fallow** for static analysis, dead code elimination, and code deduplication. 
-- **Orphaned code**: Fallow is used to detect and eliminate unused files, exports, and dependencies to keep the project lightweight.
-- **Code Duplication**: Fallow's duplication analysis ensures adherence to DRY principles.
-- **Ignored Files**: Files like `stackbit.config.ts` are explicitly ignored by Fallow using inline comments (`// fallow-ignore-file`), as they are required externally by the CMS platform.
+## Validación obligatoria
 
----
+```powershell
+openspec validate --all --strict
+pnpm exec tsc --noEmit
+pnpm run lint
+pnpm run build
+```
 
-## 🏁 Getting Started
+Para cambios editoriales también se repite el build con contexto de preview y una revisión real en navegador:
 
-1. **Prerequisites**: Node.js 20+ and pnpm 11+ installed.
-2. **Install Dependencies**:
-   ```bash
-   pnpm install
-   ```
-3. **Run Development Server**:
-   ```bash
-   pnpm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) to see the result.
+- desktop y 375/390 px;
+- navegación por teclado y foco visible;
+- textos alternativos;
+- contraste y `prefers-reduced-motion`;
+- consola sin errores ni advertencias;
+- ausencia de scroll horizontal;
+- metadata, OpenGraph, sitemap y redirecciones;
+- confirmación de que producción no expone borradores.
 
----
+## Drafts de Netlify
 
-<div align="center">
-Built with ❤️ for Paula Gualtieri.
-</div>
+El sitio enlazado es `paulagualtieri`, con site ID `b2b9d5a8-e87f-4b22-8452-53e726025db8`. La carpeta `.netlify/` es local y está ignorada por Git.
 
----
+Un draft manual se crea con `netlify deploy` sin `--prod`. En este equipo el build desde Windows puede fallar por enlaces simbólicos de Next.js; el procedimiento probado usa una copia temporal dentro de WSL. Los comandos exactos, el diagnóstico y el acceso al panel están documentados en el [handoff](docs/HANDOFF-EDITORIAL-2026-08-05.md).
 
-## 📊 Data Structure Templates (For Excel / CMS Content Management)
+Nunca usar `--prod`, `Publish deploy`, push a `main` ni merge como parte de la preparación editorial. El deploy de producción toma la rama `main` y requiere autorización explícita.
 
-These tables define the schema for our dynamic content, ideal for exporting to Excel for clients to fill in, or for mapping to the visual CMS.
+## Stackbit / Netlify Create
 
-### 1. Configuración General y Contacto
-*(Basado en `settings.json` / `Hero.tsx` / `Location.tsx`)*
+Los modelos se definen en `stackbit.config.ts`. Al modificar componentes o datos:
 
-| Propiedad / Campo | Descripción | Ejemplo |
-| :--- | :--- | :--- |
-| **Titulo_Hero_Completo** | Título que se divide por el símbolo "&". | Excelencia Clínica & Calidez Humana |
-| **Descripcion_Hero** | Párrafo principal del inicio. | Odontología avanzada en un entorno de transparencia, luz y confort... |
-| **Texto_Boton_Primario** | Texto del botón de acción principal. | Conoce a la Dra. Gualtieri |
-| **Texto_Boton_Secundario** | Texto del botón de acción secundario. | Ver Especialidades |
-| **Badge_Top_Hero** | Texto de marca arriba del título. | Paula Gualtieri Odontología |
-| **Direccion_Fisica** | Dirección del consultorio. | Ramón Falcón 2401, Piso 1 Dpto. B, CABA |
-| **Horarios** | Días y horarios detallados. | Lunes/Viernes 9-15hs, Martes 9-18hs, Mié/Jue 13-18hs |
-| **WhatsApp_Numero** | Número de contacto. | 5491137854198 |
-| **WhatsApp_Mensaje** | Mensaje pre-escrito para el cliente. | Hola, quiero sacar un turno |
-| **Google_Maps_Iframe** | Link `src` para el mapa visual. | https://www.google.com/maps/embed?pb=... |
+- preservar `data-sb-object-id` y `data-sb-field-path`;
+- mantener la estructura JSON esperada por los modelos;
+- conservar los datos de profesionales editables, sin condicionales hardcodeados por tratamiento;
+- no importar cargadores de filesystem desde componentes cliente: resolver los datos en servidor y pasarlos por props.
 
-### 2. Tratamientos
-*(Basado en `src/data/tratamientos/<categoria>/<slug>.json`)*
+## Convenciones visuales
 
-| Campo (Propiedad) | Descripción | Ejemplo (Json: Implantes) |
-| :--- | :--- | :--- |
-| **id** | ID único usado para rutas, relaciones y búsquedas internas. | implantes |
-| **category** | Slug de la categoría/carpeta donde vive el tratamiento. | implantes |
-| **categoryLabel** | Nombre visible de la categoría. | Implantología |
-| **order** | Orden de aparición en listados. | 1 |
-| **tituloHero** | Nombre del tratamiento. | Implantes Dentales |
-| **descripcionHero** | Párrafo descriptivo. | Recupera la funcionalidad total y la estética natural... |
-| **icon** | Nombre del icono (Opciones: `Drill`, `Smile`, `Sparkles`). | Drill |
-| **heroImage** | Ruta de la imagen principal. | /images/implantes-hero.jpg |
-| **features** (Lista) | Beneficios clave (puedes poner varios). | Materiales Bio-compatibles, 98% Tasa de éxito, etc. |
+- SASS es la única fuente de estilos.
+- Usar BEM y los archivos de `src/styles/components/` o `src/styles/pages/`.
+- Consumir tokens mediante `clr()`, `size()`, `fs()`, `ff()`, `radius()`, `shadow()`, `transition()` y `container()`.
+- Usar `@include mq(...)` para responsive.
+- No agregar Tailwind ni valores aislados si existe un token equivalente.
+- Respetar movimiento reducido y foco visible.
 
-### 3. Instrucciones para Pacientes
-*(Basado en `src/data/instrucciones/<categoria>/<slug>.json`)*
+## Reglas para agentes de IA
 
-| Campo (Propiedad) | Descripción | Ejemplo |
-| :--- | :--- | :--- |
-| **id** | ID único interno. | dieta-blanca |
-| **slug** | Segmento final de la URL pública. | dieta-blanca |
-| **category** | Slug de la categoría/carpeta. | blanqueamiento |
-| **categoryLabel** | Nombre visible de la categoría. | Blanqueamiento |
-| **serviceId** | ID del tratamiento relacionado, si aplica. | estetica-dental |
-| **title** | Título principal de la instrucción. | Cuidados después del blanqueamiento: dieta blanca |
-| **excerpt** | Resumen para cards y metadatos. | Indicaciones simples para las primeras 48 horas... |
-| **date** | Fecha editorial en formato ISO. | 2026-06-19 |
-| **readTime** | Tiempo estimado de lectura. | 3 min de lectura |
-| **published** | Control de publicación. | true |
-| **heroLabel** | Etiqueta visible sobre la imagen hero. | Estética Dental |
-| **shareImage** | Imagen para compartir/OpenGraph. | /images/instrucciones/dieta-blanca.jpg |
-| **whatsappMessage** | Mensaje sugerido para WhatsApp. | Te comparto las indicaciones para cuidar tu blanqueamiento... |
-| **tags** (Lista) | Etiquetas visibles y de clasificación. | Blanqueamiento, Dieta blanca, Cuidados |
-| **sections** (Lista) | Bloques de contenido numerados con título, introducción, items y nota opcional. | Durante las primeras 48 horas... |
-
-### 4. Casos Clínicos
-*(Mapeo de la interface `CasoClinico` en JSON)*
-
-| Campo (Propiedad) | Descripción | Ejemplo |
-| :--- | :--- | :--- |
-| **id** | Número identificador del caso. | 1 |
-| **paciente** | Nombre/Seudónimo del paciente. | Ana |
-| **titulo** | Título de la intervención. | Rehabilitación Superior |
-| **descripcion** | Resumen del resultado. | Ana recuperó su seguridad al hablar y sonreír... |
-| **imagenAntes** | Foto previa al tratamiento. | /images/casos/ana-antes.jpg |
-| **imagenDespues** | Foto posterior al tratamiento. | /images/casos/ana-despues.jpg |
-| **etiquetasImagenes** | Si hay más fotos, etiquetas (Ej: ANTES, PROGRESO, DESPUES). | ANTES, DESPUÉS |
-| **testimonio** | Cita textual del paciente. | "No imaginé que el cambio sería tan radical..." |
-| **desafio** | Problema inicial del paciente. | Ana llegó con una pérdida significativa de piezas... |
-| **diagnostico** | Diagnóstico médico profesional. | Atrofia alveolar y colapso oclusal. |
-| **duracion** | Tiempo total del proceso. | 3 meses de tratamiento. |
-| **solucion** | Abordaje técnico realizado. | Implementamos un protocolo de implantes de carga inmediata... |
-| **solucionFeatures** | Lista de técnicas usadas. | Cirugía Guiada, Prótesis Cerámica, Ajuste Oclusal. |
-| **stats_label** | Nombre de la métrica (Ej: Éxito). | Recuperación Funcional |
-| **stats_value** | Resultado de la métrica (Ej: 100%). | 100% |
-
-### 5. Testimonios
-*(Basado en `Testimonials.tsx`)*
-
-| Campo (Propiedad) | Descripción | Ejemplo |
-| :--- | :--- | :--- |
-| **name** | Nombre del paciente. | Martina R. |
-| **content** | Texto de la reseña. | "El tratamiento de ortodoncia invisible fue tal como la Dra..." |
-| **source** | Origen (Instagram, Facebook, WhatsApp, Google). | Instagram |
-| **rating** | Estrellas (1 al 5). | 5 |
-| **img** | Foto del paciente (URL). | https://picsum.photos/seed/patient1/100/100 |
+1. Leer este README, el handoff, `.agents/product-marketing.md` y el OpenSpec activo antes de editar.
+2. Ejecutar `git status --short` y no limpiar ni sobrescribir un working tree sucio.
+3. No copiar directamente salidas de otro generador: convertirlas al modelo Next.js/JSON real.
+4. No inventar información clínica ni completar módulos para ocupar espacio.
+5. Mantener contenidos nuevos fuera de producción hasta completar los gates humanos.
+6. No hacer commit, push, merge, deploy de producción ni cambiar `main` sin autorización explícita.
+7. Excluir de cualquier staging accidental `.playwright-cli/`, `output/`, `.codegraph/`, `.netlify/`, `.next/` y otros artefactos locales.
+8. Si se trabaja con LM Studio Link, tratar el OpenSpec correspondiente como investigación pendiente: no existe todavía un runner habilitado.

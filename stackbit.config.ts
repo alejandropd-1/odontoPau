@@ -58,6 +58,19 @@ export default defineStackbitConfig({
               : `/instrucciones/${document.id}`;
             break;
           }
+          case 'Articulo': {
+            const candidate = document as typeof document & {
+              fields?: Record<string, unknown>;
+              slug?: string;
+            };
+            const slug =
+              typeof candidate.fields?.slug === 'string'
+                ? candidate.fields.slug
+                : candidate.slug;
+
+            urlPath = slug ? `/articulos/${slug}` : `/articulos/${document.id}`;
+            break;
+          }
           case 'HomePage':
             urlPath = '/';
             break;
@@ -113,12 +126,26 @@ export default defineStackbitConfig({
             { name: 'id', type: 'string', required: true },
             { name: 'category', type: 'string', required: true, label: 'Categoría' },
             { name: 'categoryLabel', type: 'string', required: true, label: 'Nombre visible de categoría' },
+            { name: 'order', type: 'number', label: 'Orden en listados' },
             { name: 'tituloHero', type: 'string', required: true, label: 'Título Hero' },
             { name: 'descripcionHero', type: 'text', required: true, label: 'Descripción Hero' },
             { name: 'icon', type: 'string', label: 'Ícono (Lucide)' },
             { name: 'heroImage', type: 'image', label: 'Imagen Hero' },
+            { name: 'professionals', type: 'list', label: 'Profesionales del tratamiento', items: { type: 'model', models: ['TreatmentProfessional'] } },
             { name: 'features', type: 'list', items: { type: 'string' }, label: 'Características' },
             { name: 'casosClinicos', type: 'list', label: 'Casos Clínicos', items: { type: 'model', models: ['CasoClinico'] } }
+          ]
+        },
+        {
+          name: 'TreatmentProfessional',
+          type: 'object',
+          label: 'Profesional del tratamiento',
+          labelField: 'name',
+          fields: [
+            { name: 'name', type: 'string', required: true, label: 'Nombre' },
+            { name: 'role', type: 'string', required: true, label: 'Rol confirmado' },
+            { name: 'image', type: 'image', required: true, label: 'Retrato' },
+            { name: 'imageAlt', type: 'string', required: true, label: 'Texto alternativo' }
           ]
         },
         {
@@ -127,6 +154,8 @@ export default defineStackbitConfig({
           label: 'Caso Clínico',
           labelField: 'titulo',
           fields: [
+            { name: 'id', type: 'number', required: true, label: 'ID del caso' },
+            { name: 'articleSlug', type: 'string', label: 'Slug del artículo relacionado' },
             { name: 'paciente', type: 'string', required: true },
             { name: 'titulo', type: 'string', required: true },
             { name: 'descripcion', type: 'text', required: true },
@@ -152,26 +181,356 @@ export default defineStackbitConfig({
             { name: 'serviceId', type: 'string', label: 'Tratamiento vinculado' },
             { name: 'title', type: 'string', required: true, label: 'Título' },
             { name: 'excerpt', type: 'text', required: true, label: 'Resumen' },
-            { name: 'date', type: 'string', required: true, label: 'Fecha' },
+            { name: 'status', type: 'string', required: true, label: 'Estado editorial' },
+            { name: 'publishedAt', type: 'string', label: 'Fecha de publicación' },
+            { name: 'updatedAt', type: 'string', required: true, label: 'Última actualización' },
+            { name: 'clinicalReviewer', type: 'string', label: 'Responsable de revisión clínica' },
             { name: 'tags', type: 'list', items: { type: 'string' }, label: 'Etiquetas' },
             { name: 'readTime', type: 'string', required: true, label: 'Tiempo de lectura' },
-            { name: 'published', type: 'boolean', label: 'Publicado' },
             { name: 'heroLabel', type: 'string', label: 'Etiqueta superior' },
-            { name: 'shareImage', type: 'image', label: 'Imagen para compartir' },
-            { name: 'whatsappMessage', type: 'text', label: 'Mensaje sugerido para WhatsApp' },
-            { name: 'sections', type: 'list', label: 'Secciones', items: { type: 'model', models: ['InstructionSection'] } }
+            { name: 'resourceImage', type: 'model', models: ['InstructionImage'], label: 'Infografía o recurso descargable' },
+            { name: 'resourceGallery', type: 'model', models: ['InstructionResourceGallery'], label: 'Galería de recursos descargables' },
+            { name: 'socialImage', type: 'model', models: ['InstructionImage'], label: 'Imagen social opcional' },
+            {
+              name: 'sections',
+              type: 'list',
+              required: true,
+              label: 'Módulos',
+              items: {
+                type: 'model',
+                models: [
+                  'InstructionStepsSection',
+                  'InstructionMatrixSection',
+                  'InstructionNoticeSection',
+                  'InstructionTextSection'
+                ]
+              }
+            }
           ]
         },
         {
-          name: 'InstructionSection',
+          name: 'InstructionResourceGallery',
           type: 'object',
-          label: 'Sección de Instrucción',
+          label: 'Galería de recursos descargables',
           labelField: 'title',
           fields: [
             { name: 'title', type: 'string', required: true, label: 'Título' },
             { name: 'intro', type: 'text', label: 'Introducción' },
-            { name: 'items', type: 'list', items: { type: 'string' }, label: 'Puntos' },
-            { name: 'note', type: 'text', label: 'Nota' }
+            {
+              name: 'images',
+              type: 'list',
+              required: true,
+              label: 'Imágenes descargables',
+              items: { type: 'model', models: ['InstructionImage'] }
+            }
+          ]
+        },
+        {
+          name: 'InstructionImage',
+          type: 'object',
+          label: 'Imagen de instrucción',
+          labelField: 'alt',
+          fields: [
+            { name: 'src', type: 'image', required: true, label: 'Archivo' },
+            { name: 'alt', type: 'string', required: true, label: 'Texto alternativo' },
+            { name: 'width', type: 'number', required: true, label: 'Ancho' },
+            { name: 'height', type: 'number', required: true, label: 'Alto' },
+            { name: 'label', type: 'string', label: 'Título del recurso' },
+            { name: 'downloadLabel', type: 'string', label: 'Texto de descarga' },
+            { name: 'downloadSrc', type: 'string', label: 'Archivo alternativo para descargar' }
+          ]
+        },
+        {
+          name: 'InstructionStepsSection',
+          type: 'object',
+          label: 'Pasos ordenados',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'steps', hidden: true },
+            { name: 'title', type: 'string', label: 'Título' },
+            { name: 'intro', type: 'text', label: 'Introducción' },
+            { name: 'items', type: 'list', required: true, items: { type: 'text' }, label: 'Pasos' }
+          ]
+        },
+        {
+          name: 'InstructionMatrixSection',
+          type: 'object',
+          label: 'Matriz de recomendaciones',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'matrix', hidden: true },
+            { name: 'title', type: 'string', label: 'Título' },
+            { name: 'intro', type: 'text', label: 'Introducción' },
+            { name: 'groups', type: 'list', required: true, items: { type: 'model', models: ['InstructionMatrixGroup'] }, label: 'Categorías' }
+          ]
+        },
+        {
+          name: 'InstructionMatrixGroup',
+          type: 'object',
+          label: 'Categoría de recomendaciones',
+          labelField: 'title',
+          fields: [
+            { name: 'title', type: 'string', required: true, label: 'Categoría' },
+            { name: 'yes', type: 'list', items: { type: 'string' }, label: 'Sí' },
+            { name: 'caution', type: 'list', items: { type: 'string' }, label: 'Precaución' },
+            { name: 'no', type: 'list', items: { type: 'string' }, label: 'No' }
+          ]
+        },
+        {
+          name: 'InstructionNoticeSection',
+          type: 'object',
+          label: 'Aviso destacado',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'notice', hidden: true },
+            { name: 'tone', type: 'string', required: true, label: 'Tono: info, important o contact' },
+            { name: 'title', type: 'string', required: true, label: 'Título' },
+            { name: 'text', type: 'text', required: true, label: 'Texto' }
+          ]
+        },
+        {
+          name: 'InstructionTextSection',
+          type: 'object',
+          label: 'Texto de instrucción',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'text', hidden: true },
+            { name: 'title', type: 'string', label: 'Título' },
+            { name: 'paragraphs', type: 'list', required: true, items: { type: 'text' }, label: 'Párrafos' }
+          ]
+        },
+        {
+          name: 'Articulo',
+          type: 'page',
+          label: 'Artículo de odontología',
+          labelField: 'title',
+          folder: 'articulos',
+          match: 'articulos/**/*.json',
+          urlPath: '/articulos/{slug}',
+          fields: [
+            { name: 'type', type: 'string', const: 'Articulo', hidden: true },
+            { name: 'id', type: 'string', required: true, label: 'ID interno' },
+            { name: 'slug', type: 'string', required: true, label: 'Slug' },
+            { name: 'category', type: 'string', required: true, label: 'Categoría' },
+            { name: 'categoryLabel', type: 'string', required: true, label: 'Nombre visible de categoría' },
+            { name: 'serviceIds', type: 'list', required: true, items: { type: 'string' }, label: 'Tratamientos vinculados' },
+            { name: 'titlePrefix', type: 'string', label: 'Prefijo visual del título' },
+            { name: 'breadcrumbLabel', type: 'string', label: 'Texto breve del breadcrumb' },
+            { name: 'title', type: 'string', required: true, label: 'Título' },
+            { name: 'excerpt', type: 'text', required: true, label: 'Resumen' },
+            { name: 'author', type: 'string', required: true, label: 'Autor' },
+            { name: 'clinicalReviewer', type: 'string', label: 'Responsable de revisión clínica' },
+            { name: 'status', type: 'string', required: true, label: 'Estado editorial' },
+            { name: 'publishedAt', type: 'string', label: 'Fecha de publicación' },
+            { name: 'updatedAt', type: 'string', required: true, label: 'Última actualización' },
+            { name: 'readTime', type: 'string', required: true, label: 'Tiempo de lectura' },
+            { name: 'tags', type: 'list', items: { type: 'string' }, label: 'Etiquetas' },
+            { name: 'heroImage', type: 'model', models: ['ArticleImage'], required: true, label: 'Imagen principal' },
+            { name: 'sources', type: 'list', items: { type: 'model', models: ['ArticleSource'] }, label: 'Fuentes generales' },
+            {
+              name: 'sections',
+              type: 'list',
+              required: true,
+              label: 'Secciones',
+              items: {
+                type: 'model',
+                models: [
+                  'ArticleCaseSummarySection',
+                  'ArticleTextSection',
+                  'ArticleListSection',
+                  'ArticleComparisonSection',
+                  'ArticleStatsSection',
+                  'ArticleGallerySection',
+                  'ArticleFaqSection',
+                  'ArticleQuoteSection',
+                  'ArticleCtaSection'
+                ]
+              }
+            }
+          ]
+        },
+        {
+          name: 'ArticleImage',
+          type: 'object',
+          label: 'Imagen de artículo',
+          labelField: 'alt',
+          fields: [
+            { name: 'src', type: 'image', required: true, label: 'Archivo' },
+            { name: 'alt', type: 'string', required: true, label: 'Texto alternativo' },
+            { name: 'width', type: 'number', required: true, label: 'Ancho' },
+            { name: 'height', type: 'number', required: true, label: 'Alto' },
+            { name: 'label', type: 'string', label: 'Etiqueta opcional' },
+            { name: 'caption', type: 'text', label: 'Epígrafe opcional' }
+          ]
+        },
+        {
+          name: 'ArticleSource',
+          type: 'object',
+          label: 'Fuente de artículo',
+          labelField: 'title',
+          fields: [
+            { name: 'title', type: 'string', required: true, label: 'Título' },
+            { name: 'publisher', type: 'string', required: true, label: 'Institución o publicación' },
+            { name: 'url', type: 'string', required: true, label: 'URL' }
+          ]
+        },
+        {
+          name: 'ArticleCaseSummarySection',
+          type: 'object',
+          label: 'Resumen de caso clínico',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'case_summary', hidden: true },
+            { name: 'title', type: 'string', required: true, label: 'Título del contexto' },
+            { name: 'paragraphs', type: 'list', required: true, items: { type: 'text' }, label: 'Contexto confirmado' },
+            { name: 'facts', type: 'list', items: { type: 'model', models: ['ArticleCaseFact'] }, label: 'Datos confirmados' },
+            { name: 'approach', type: 'model', models: ['ArticleCaseApproach'], label: 'Abordaje opcional' }
+          ]
+        },
+        {
+          name: 'ArticleCaseFact',
+          type: 'object',
+          label: 'Dato confirmado del caso',
+          labelField: 'label',
+          fields: [
+            { name: 'label', type: 'string', required: true, label: 'Etiqueta' },
+            { name: 'value', type: 'text', required: true, label: 'Valor' }
+          ]
+        },
+        {
+          name: 'ArticleCaseApproach',
+          type: 'object',
+          label: 'Abordaje del caso',
+          labelField: 'title',
+          fields: [
+            { name: 'title', type: 'string', required: true, label: 'Título' },
+            { name: 'text', type: 'text', required: true, label: 'Descripción confirmada' },
+            { name: 'items', type: 'list', items: { type: 'text' }, label: 'Puntos confirmados' }
+          ]
+        },
+        {
+          name: 'ArticleTextSection',
+          type: 'object',
+          label: 'Texto',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'text', hidden: true },
+            { name: 'title', type: 'string', label: 'Título opcional' },
+            { name: 'paragraphs', type: 'list', required: true, items: { type: 'text' }, label: 'Párrafos' }
+          ]
+        },
+        {
+          name: 'ArticleListSection',
+          type: 'object',
+          label: 'Lista',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'list', hidden: true },
+            { name: 'title', type: 'string', required: true, label: 'Título' },
+            { name: 'intro', type: 'text', label: 'Introducción' },
+            { name: 'items', type: 'list', required: true, items: { type: 'text' }, label: 'Puntos' }
+          ]
+        },
+        {
+          name: 'ArticleComparisonSection',
+          type: 'object',
+          label: 'Comparación',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'comparison', hidden: true },
+            { name: 'title', type: 'string', required: true, label: 'Título' },
+            { name: 'intro', type: 'text', label: 'Introducción' },
+            { name: 'columns', type: 'list', required: true, items: { type: 'string' }, label: 'Columnas' },
+            { name: 'rows', type: 'list', required: true, items: { type: 'model', models: ['ArticleComparisonRow'] }, label: 'Filas' }
+          ]
+        },
+        {
+          name: 'ArticleComparisonRow',
+          type: 'object',
+          label: 'Fila de comparación',
+          labelField: 'label',
+          fields: [
+            { name: 'label', type: 'string', required: true, label: 'Aspecto' },
+            { name: 'values', type: 'list', required: true, items: { type: 'text' }, label: 'Valores' }
+          ]
+        },
+        {
+          name: 'ArticleStatsSection',
+          type: 'object',
+          label: 'Cifras',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'stats', hidden: true },
+            { name: 'title', type: 'string', label: 'Título opcional' },
+            { name: 'items', type: 'list', required: true, items: { type: 'model', models: ['ArticleStat'] }, label: 'Cifras' }
+          ]
+        },
+        {
+          name: 'ArticleStat',
+          type: 'object',
+          label: 'Cifra',
+          labelField: 'label',
+          fields: [
+            { name: 'value', type: 'string', required: true, label: 'Valor' },
+            { name: 'label', type: 'string', required: true, label: 'Etiqueta' },
+            { name: 'description', type: 'text', label: 'Descripción' }
+          ]
+        },
+        {
+          name: 'ArticleGallerySection',
+          type: 'object',
+          label: 'Galería',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'gallery', hidden: true },
+            { name: 'title', type: 'string', label: 'Título opcional' },
+            { name: 'intro', type: 'text', label: 'Introducción' },
+            { name: 'images', type: 'list', required: true, items: { type: 'model', models: ['ArticleImage'] }, label: 'Imágenes' }
+          ]
+        },
+        {
+          name: 'ArticleFaqSection',
+          type: 'object',
+          label: 'Preguntas frecuentes',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'faq', hidden: true },
+            { name: 'title', type: 'string', required: true, label: 'Título' },
+            { name: 'items', type: 'list', required: true, items: { type: 'model', models: ['ArticleFaqItem'] }, label: 'Preguntas' }
+          ]
+        },
+        {
+          name: 'ArticleFaqItem',
+          type: 'object',
+          label: 'Pregunta frecuente',
+          labelField: 'question',
+          fields: [
+            { name: 'question', type: 'string', required: true, label: 'Pregunta' },
+            { name: 'answer', type: 'text', required: true, label: 'Respuesta' }
+          ]
+        },
+        {
+          name: 'ArticleQuoteSection',
+          type: 'object',
+          label: 'Cita',
+          fields: [
+            { name: 'type', type: 'string', const: 'quote', hidden: true },
+            { name: 'quote', type: 'text', required: true, label: 'Cita' },
+            { name: 'attribution', type: 'string', label: 'Atribución' }
+          ]
+        },
+        {
+          name: 'ArticleCtaSection',
+          type: 'object',
+          label: 'Llamado a la acción',
+          labelField: 'title',
+          fields: [
+            { name: 'type', type: 'string', const: 'cta', hidden: true },
+            { name: 'label', type: 'string', label: 'Etiqueta' },
+            { name: 'title', type: 'string', required: true, label: 'Título' },
+            { name: 'text', type: 'text', required: true, label: 'Texto' },
+            { name: 'href', type: 'string', required: true, label: 'Enlace' },
+            { name: 'buttonLabel', type: 'string', required: true, label: 'Texto del botón' }
           ]
         }
       ]

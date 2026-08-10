@@ -5,25 +5,66 @@
   "categoryLabel": "Ortodoncia",
   "order": 2,
   "tituloHero": "Ortodoncia Invisible",
-  "descripcionHero": "Alinea tus dientes de forma discreta y cómoda con alineadores transparentes de última generación. La solución perfecta para adultos que buscan estética y resultados rápidos.",
+  "descripcionHero": "Tratamiento con alineadores invisibles realizando los ajustes necesarios que requiere cada etapa.",
   "icon": "Smile",
   "heroImage": "/images/ortodoncia-hero.jpg",
+  "professionals": [
+    {
+      "name": "Dra. Paula Gualtieri",
+      "role": "Alineadores dentales y ortopedia",
+      "image": "/images/profesionales/paula-gualtieri-estudio.webp",
+      "imageAlt": "Retrato de la Dra. Paula Gualtieri"
+    }
+  ],
   "features": [
-    "Removibles y Cómodos: Puedes quitártelos para comer y cepillarte, manteniendo una higiene perfecta.",
-    "Prácticamente Invisibles: Nadie notará que estás bajo tratamiento de ortodoncia.",
-    "Experiencia: Màs de de 15 años avala nuestro trabajo.",
-    "Menos Visitas: Sistema eficiente que requiere menos ajustes manuales en clínica."
+    "Alineadores removibles para comer y realizar la higiene indicada.",
+    "Plan de tratamiento definido después del estudio de cada caso.",
+    "Controles periódicos para evaluar la evolución y realizar ajustes.",
+    "Indicaciones de uso personalizadas por el equipo tratante."
   ],
   "casosClinicos": [
     {
       "id": 1,
+      "articleSlug": "evolucion-tratamiento-ortodoncia",
       "paciente": "Paciente",
-      "fecha": "Febrero 2024",
-      "titulo": "Alineación de Arcada",
-      "descripcion": "Elena logró la sonrisa que siempre quiso en solo 12 meses sin usar brackets.",
-      "imagenAntes": "/images/casos/elena-antes.jpg",
-      "imagenDespues": "/images/casos/elena-despues.jpg",
-      "testimonio": "Lo mejor fue que nadie se dio cuenta. Muy cómodo para mi trabajo cara al público."
+      "titulo": "Evolución y alineación: el progreso de una sonrisa",
+      "descripcion": "Registro anterior y posterior de un caso de ortodoncia, presentado según la secuencia documentada.",
+      "imagenes": [
+        "/images/articulos/evolucion-tratamiento-ortodoncia/registro-inicial.webp",
+        "/images/articulos/evolucion-tratamiento-ortodoncia/registro-posterior.webp"
+      ],
+      "etiquetasImagenes": ["Antes", "Después"]
+    },
+    {
+      "id": 2,
+      "articleSlug": "registro-clinico-ortodoncia-invisible",
+      "paciente": "Paciente",
+      "titulo": "Acompañar cada etapa del tratamiento de ortodoncia",
+      "descripcion": "Controles periódicos para seguir el tratamiento de cerca y acompañar cada cambio con tranquilidad.",
+      "imagenes": [
+        "/images/articulos/registro-clinico-ortodoncia-invisible/registro-unico.webp"
+      ]
+    },
+    {
+      "id": 3,
+      "articleSlug": "inicio-tratamiento-alineadores-keepsmiling",
+      "paciente": "Paciente",
+      "titulo": "Inicio de tratamiento con alineadores invisibles KeepSmiling",
+      "descripcion": "Primeras etapas de alineamiento con placas transparentes KeepSmiling a medida.",
+      "imagenes": [
+        "/images/articulos/inicio-tratamiento-alineadores-keepsmiling/registro-01.webp",
+        "/images/articulos/inicio-tratamiento-alineadores-keepsmiling/registro-02.webp"
+      ]
+    },
+    {
+      "id": 4,
+      "articleSlug": "evolucion-alineadores-etapa-inicial",
+      "paciente": "Paciente",
+      "titulo": "Avance y evolución a los 8 meses de alineadores invisibles",
+      "descripcion": "Evolución observada al completar los primeros 8 meses de alineación dental.",
+      "imagenes": [
+        "/images/articulos/evolucion-alineadores-etapa-inicial/registro-01.webp"
+      ]
     }
   ]
 }

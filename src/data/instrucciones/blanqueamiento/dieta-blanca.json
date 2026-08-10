@@ -5,42 +5,180 @@
   "category": "blanqueamiento",
   "categoryLabel": "Blanqueamiento",
   "serviceId": "estetica-dental",
-  "title": "Cuidados posteriores al blanqueamiento: dieta blanca",
-  "excerpt": "Indicaciones simples para las primeras 48 horas despues de un blanqueamiento dental y para sostener el resultado con buenos habitos.",
-  "date": "19 Jun, 2026",
-  "tags": ["Blanqueamiento", "Dieta blanca", "Cuidados"],
-  "readTime": "3 min de lectura",
-  "published": true,
+  "title": "Dieta blanca",
+  "excerpt": "Guía práctica de alimentos, bebidas y productos indicados, a evitar o a consumir con precaución.",
+  "status": "published",
+  "updatedAt": "2026-08-04T23:43:27.666Z",
+  "clinicalReviewer": "Paula Gualtieri",
+  "tags": [
+    "Blanqueamiento",
+    "Dieta blanca",
+    "Cuidados"
+  ],
+  "readTime": "4 min de lectura",
   "heroLabel": "Indicaciones para pacientes",
-  "whatsappMessage": "Hola, te comparto las indicaciones de cuidados posteriores al blanqueamiento y dieta blanca.",
+  "resourceImage": {
+    "src": "/images/instrucciones/dieta-blanca/guia-dieta-blanca.jpg",
+    "alt": "Infografía de dieta blanca con alimentos y productos clasificados como sí, precaución y no",
+    "width": 4960,
+    "height": 9208,
+    "label": "Guía visual de dieta blanca",
+    "downloadLabel": "Descargar guía de dieta blanca"
+  },
   "sections": [
     {
-      "title": "Durante las primeras 48 horas",
-      "intro": "Despues del blanqueamiento, el esmalte queda mas sensible a pigmentos externos. En este periodo conviene elegir alimentos claros y evitar todo lo que pueda manchar.",
-      "items": [
-        "Evita cafe, mate, te negro, vino tinto, gaseosas oscuras y jugos con colorantes.",
-        "No consumas salsa de tomate, soja, curry, remolacha, frutos rojos ni chocolate.",
-        "Elegir agua, leche, yogur natural, arroz, pastas claras, pollo, pescado, papa, banana o manzana pelada."
-      ]
+      "type": "notice",
+      "tone": "info",
+      "title": "Antes de empezar",
+      "text": "Estas son indicaciones generales. Si recibiste una pauta diferente durante la consulta, seguí la indicación personalizada del profesional tratante."
     },
     {
-      "title": "Higiene y sensibilidad",
-      "intro": "La higiene ayuda a conservar el color logrado y a reducir molestias temporales.",
-      "items": [
-        "Cepillate con suavidad despues de cada comida.",
-        "Si notas sensibilidad, evita alimentos muy frios o muy calientes durante ese dia.",
-        "No uses pastas abrasivas ni productos blanqueadores adicionales sin indicacion profesional."
+      "type": "matrix",
+      "title": "Qué elegir y qué evitar",
+      "intro": "La clasificación reproduce la guía clínica disponible para esta indicación.",
+      "groups": [
+        {
+          "title": "Vegetales",
+          "yes": [
+            "Legumbres claras bien cocidas",
+            "Repollo blanco",
+            "Lechugas en cualquier variedad",
+            "Cebolla",
+            "Papas",
+            "Endivias",
+            "Palmitos",
+            "Arroz",
+            "Mandioca"
+          ],
+          "caution": [
+            "Tomate crudo",
+            "Zanahoria cruda",
+            "Berenjena"
+          ],
+          "no": [
+            "Tomates con conserva",
+            "Verduras de hoja color verde intenso (acelga, espinaca, berro, etc.)",
+            "Zanahorias",
+            "Remolachas",
+            "Zapallo"
+          ]
+        },
+        {
+          "title": "Carnes",
+          "yes": [
+            "Carnes blancas",
+            "Aves",
+            "Pescados"
+          ],
+          "caution": [
+            "Carnes rojas",
+            "Fiambres sin colorantes"
+          ]
+        },
+        {
+          "title": "Frutas",
+          "yes": [
+            "Peras",
+            "Bananas",
+            "Duraznos blancos",
+            "Ananá"
+          ],
+          "caution": [
+            "Uvas",
+            "Kiwis",
+            "Frutas disecadas",
+            "Manzanas",
+            "Duraznos en almíbar"
+          ],
+          "no": [
+            "Frutillas",
+            "Cítricos",
+            "Moras",
+            "Uvas coloradas",
+            "Mango",
+            "Kaki"
+          ]
+        },
+        {
+          "title": "Lápiz labial",
+          "yes": [
+            "Incoloros"
+          ],
+          "no": [
+            "De cualquier coloración"
+          ]
+        },
+        {
+          "title": "Colutorios orales",
+          "yes": [
+            "Incoloros"
+          ],
+          "no": [
+            "Con colorantes pigmentarios en sí mismo",
+            "Clorhexidina"
+          ]
+        },
+        {
+          "title": "Aderezos y salsas",
+          "yes": [
+            "Crema de leche",
+            "Salsa blanca",
+            "Quesos blancos"
+          ],
+          "caution": [
+            "Mayonesa no hecha con huevo"
+          ],
+          "no": [
+            "Salsas rojas a base de tomate",
+            "Ketchup",
+            "Salsa de soja"
+          ]
+        },
+        {
+          "title": "Bebidas",
+          "yes": [
+            "Agua mineral",
+            "Gaseosas incoloras",
+            "Vino blanco",
+            "Champagne",
+            "Yogurt sin colorantes",
+            "Leche"
+          ],
+          "no": [
+            "Café",
+            "Té",
+            "Mate",
+            "Vinos rosados y tintos",
+            "Gaseosas con colorantes",
+            "Jugos de frutas o verduras (preparados o para preparar)"
+          ]
+        },
+        {
+          "title": "Dentífricos",
+          "yes": [
+            "Incoloros o blancos"
+          ],
+          "no": [
+            "Con colorantes"
+          ]
+        },
+        {
+          "title": "Condimentos",
+          "no": [
+            "Mostaza",
+            "Pimentón",
+            "Azafrán"
+          ]
+        },
+        {
+          "title": "Tabaco",
+          "no": [
+            "De cualquier tipo y cualquier forma"
+          ]
+        }
       ]
-    },
-    {
-      "title": "Habitos que ayudan a mantener el resultado",
-      "intro": "El resultado dura mas cuando se reduce la exposicion frecuente a pigmentos y se sostienen controles periodicos.",
-      "items": [
-        "Si tomas cafe, mate o bebidas con pigmento despues de las primeras 48 horas, enjuagate con agua al terminar.",
-        "Evita fumar, especialmente durante los primeros dias.",
-        "Mantene tus controles y limpiezas profesionales segun la indicacion de Paula."
-      ],
-      "note": "Si aparece dolor intenso, sensibilidad persistente o alguna molestia que no cede, escribinos para revisar el caso."
     }
-  ]
+  ],
+  "createdAt": "2026-06-19T17:26:50.137Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z"
 }

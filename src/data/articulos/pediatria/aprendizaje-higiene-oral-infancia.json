@@ -1,0 +1,78 @@
+{
+  "type": "Articulo",
+  "id": "pediatria-caso-02",
+  "slug": "aprendizaje-higiene-oral-infancia",
+  "category": "pediatria",
+  "categoryLabel": "Odontología Pediátrica",
+  "serviceIds": [
+    "pediatria"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Cuidado bucal en la infancia",
+  "title": "Aprender a cuidar la sonrisa desde chicos",
+  "excerpt": "Una consulta pensada para acercar el cuidado bucal con paciencia, juego y mucha confianza.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-05T15:58:59.380Z",
+  "updatedAt": "2026-08-07T10:39:59.199Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "readTime": "1 min de lectura",
+  "tags": [
+    "odontología pediátrica",
+    "higiene oral",
+    "infancia"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/aprendizaje-higiene-oral-infancia/registro-02.webp",
+    "alt": "Paciente pediátrica con protección visual sosteniendo un elemento de higiene oral",
+    "width": 1200,
+    "height": 1600,
+    "caption": "Un momento para aprender y ganar confianza."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Cuidar también se aprende",
+      "paragraphs": [
+        "Los primeros encuentros con el odontólogo pueden ser una linda oportunidad para incorporar hábitos que acompañen toda la vida.",
+        "Con tiempo, palabras simples y recursos adaptados a su edad, cada chico puede acercarse al cepillado y vivir la consulta con mayor tranquilidad."
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Un encuentro a su medida",
+      "images": [
+        {
+          "src": "/images/articulos/aprendizaje-higiene-oral-infancia/registro-01.webp",
+          "alt": "Paciente pediátrica con protección visual sonriendo durante una consulta",
+          "width": 1200,
+          "height": 1600,
+          "caption": "Un momento para conocernos y ganar confianza."
+        },
+        {
+          "src": "/images/articulos/aprendizaje-higiene-oral-infancia/registro-02.webp",
+          "alt": "Paciente pediátrica con protección visual sosteniendo un elemento de higiene oral",
+          "width": 1200,
+          "height": 1600,
+          "caption": "Aprender jugando también forma parte del cuidado."
+        },
+        {
+          "src": "/images/articulos/aprendizaje-higiene-oral-infancia/registro-03.webp",
+          "alt": "Paciente pediátrica con protección visual junto a recursos educativos de salud bucal",
+          "width": 1200,
+          "height": 1600,
+          "caption": "Cada pequeño avance merece ser celebrado."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Para las familias",
+      "title": "¿Querés acompañar sus primeros cuidados?",
+      "text": "Escribinos para coordinar una consulta tranquila y adaptada a la edad y las necesidades de cada chico.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20odontolog%C3%ADa%20pedi%C3%A1trica",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

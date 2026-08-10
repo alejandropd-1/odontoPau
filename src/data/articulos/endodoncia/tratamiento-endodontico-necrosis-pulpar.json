@@ -1,0 +1,104 @@
+{
+  "type": "Articulo",
+  "id": "endodoncia-necrosis-pulpar-caso-01",
+  "slug": "tratamiento-endodontico-necrosis-pulpar",
+  "category": "endodoncia",
+  "categoryLabel": "Endodoncia",
+  "serviceIds": [
+    "endodoncia"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Tratamiento de conducto",
+  "title": "Tratamiento de conducto: devolverle la salud al diente",
+  "excerpt": "Un caso clínico donde recuperamos la pieza dental con tecnología mecanizada, eliminando molestias y cuidando la sonrisa.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-02T22:40:22.631Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "updatedAt": "2026-08-07T10:41:49.784Z",
+  "readTime": "2 min de lectura",
+  "tags": [
+    "endodoncia",
+    "tratamiento de conducto",
+    "endodoncia mecanizada"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/endodoncia-necrosis-pulpar/radiografia-despues.webp",
+    "alt": "Radiografía de control posterior al tratamiento de conducto",
+    "width": 1162,
+    "height": 1600,
+    "label": "Después",
+    "caption": "Radiografía de control con el conducto sellado y listo para su restauración."
+  },
+
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Salvar la pieza propia",
+      "paragraphs": [
+        "Cuando la parte interna del diente sufre una infección o inflamación importante (generando dolor y/o hinchazon), el tratamiento de conducto nos permite limpiar a fondo la zona y sellarla para que no vuelva a doler y poder así devolverle forma y función.",
+        "Al trabajar con tecnología mecanizada, el proceso se vuelve mucho más ágil, preciso y cómodo para el paciente durante toda la sesión."
+      ],
+      "facts": [
+        {
+          "label": "Tratamiento",
+          "value": "Endodoncia mecanizada"
+        },
+        {
+          "label": "Objetivo",
+          "value": "Salvar la pieza dental"
+        }
+      ],
+      "approach": {
+        "title": "Cómo lo trabajamos",
+        "text": "Limpiamos y desinfectamos el sistema de conductos con instrumental mecanizado de precisión, logrando un sellado seguro que le devuelve la tranquilidad al diente.",
+        "items": [
+          "Limpieza precisa del conducto",
+          "Uso de instrumental mecanizado",
+          "Sellado final y control radiográfico"
+        ]
+      }
+    },
+    {
+      "type": "gallery",
+      "title": "Radiografías de control",
+      "intro": "El control radiográfico nos ayuda a seguir la evolución antes y después del sellado.",
+      "images": [
+        {
+          "src": "/images/articulos/endodoncia-necrosis-pulpar/radiografia-antes.webp",
+          "alt": "Radiografía de control previa al tratamiento de conducto",
+          "width": 1172,
+          "height": 1600,
+          "label": "Antes",
+          "caption": "Radiografía inicial antes de comenzar el tratamiento."
+        },
+        {
+          "src": "/images/articulos/endodoncia-necrosis-pulpar/radiografia-despues.webp",
+          "alt": "Radiografía de control posterior al tratamiento de conducto",
+          "width": 1162,
+          "height": 1600,
+          "label": "Después",
+          "caption": "Radiografía de control con el conducto sellado."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "title": "¿Qué ventajas tiene la endodoncia mecanizada?",
+      "paragraphs": [
+        "A diferencia de las técnicas tradicionales, el sistema mecanizado utiliza instrumental accionado por motor que se adapta a las curvas de cada raíz. Esto reduce los tiempos de trabajo y hace que la consulta sea más relajada.",
+        "Cada diente tiene una anatomía única. Por eso, evaluamos cada caso de forma personalizada antes de definir la restauración que completará el tratamiento."
+      ]
+    },
+
+    {
+      "type": "cta",
+      "label": "Atención personalizada",
+      "title": "¿Tenés molestias o querés evaluar tu caso?",
+      "text": "Escribinos por WhatsApp para coordinar una evaluación y sacarte todas las dudas en un ambiente cercano y tranquilo.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20endodoncia",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

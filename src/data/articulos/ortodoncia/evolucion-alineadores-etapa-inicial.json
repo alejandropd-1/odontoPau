@@ -1,0 +1,74 @@
+{
+  "type": "Articulo",
+  "id": "ortodoncia-caso-04",
+  "slug": "evolucion-alineadores-etapa-inicial",
+  "category": "ortodoncia-invisible",
+  "categoryLabel": "Ortodoncia",
+  "serviceIds": [
+    "ortodoncia-invisible"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: 1ra etapa de alineadores",
+  "title": "Avance y evolución a los 8 meses de alineadores invisibles",
+  "excerpt": "Un registro que muestra los cambios logrados tras 8 meses de tratamiento con alineadores invisibles (KeepSmiling) en su primera etapa.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-06T13:55:39.321Z",
+  "updatedAt": "2026-08-07T10:38:14.193Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "readTime": "2 min de lectura",
+  "tags": [
+    "ortodoncia invisible",
+    "alineadores",
+    "evolución clínica"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/evolucion-alineadores-etapa-inicial/registro-01.webp",
+    "alt": "Evolución de alineación dental tras 8 meses de tratamiento",
+    "width": 1200,
+    "height": 1200,
+    "caption": "Avances observados al completar los primeros 8 meses de alineación."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Progreso continuo y confortable",
+      "paragraphs": [
+        "La ortodoncia invisible permite observar cambios progresivos en la postura y alineación de los dientes sin alterar la estética ni la rutina diaria.",
+        "A los 8 meses de iniciar el plan con alineadores, se aprecia la alineación de la arcada en esta primera etapa del tratamiento."
+      ],
+      "facts": [
+        {
+          "label": "Tratamiento",
+          "value": "Alineadores invisibles"
+        },
+        {
+          "label": "Tiempo transcurrido",
+          "value": "8 meses (1ra etapa)"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Registro del avance",
+      "images": [
+        {
+          "src": "/images/articulos/evolucion-alineadores-etapa-inicial/registro-01.webp",
+          "alt": "Evolución de la alineación dental a los 8 meses",
+          "width": 1200,
+          "height": 1200,
+          "caption": "Registro comparativo del cambio en la alineación dental."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Ortodoncia invisible",
+      "title": "¿Querés comenzar tu plan de alineación?",
+      "text": "Escribinos por WhatsApp para coordinar un escaneo y evaluación personalizada.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20ortodoncia%20invisible",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

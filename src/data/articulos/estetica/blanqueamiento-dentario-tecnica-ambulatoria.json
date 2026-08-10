@@ -1,0 +1,90 @@
+{
+  "type": "Articulo",
+  "id": "estetica-blanqueamiento-ambulatorio-caso-01",
+  "slug": "blanqueamiento-dentario-tecnica-ambulatoria",
+  "category": "estetica-dental",
+  "categoryLabel": "Estética Dental",
+  "serviceIds": [
+    "estetica-dental"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Blanqueamiento ambulatorio",
+  "title": "Blanqueamiento en casa: una sonrisa más luminosa a tu ritmo",
+  "excerpt": "Un tratamiento ambulatorio diseñado para aclarar el tono dental de forma progresiva, cuidando la sensibilidad.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-03T17:23:47.946Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "updatedAt": "2026-08-07T10:40:33.146Z",
+  "readTime": "2 min de lectura",
+  "tags": [
+    "estética dental",
+    "blanqueamiento dental",
+    "blanqueamiento ambulatorio"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/blanqueamiento-dentario-tecnica-ambulatoria/registro-comparativo-frontal.webp",
+    "alt": "Vista frontal comparativa del blanqueamiento dental ambulatorio",
+    "width": 1080,
+    "height": 1080,
+    "caption": "Tono logrado tras el proceso de blanqueamiento."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Un cambio gradual y cuidado",
+      "paragraphs": [
+        "El blanqueamiento ambulatorio es una excelente opción para quienes buscan aclarar el tono de sus dientes de manera cuidada, usando placas personalizadas desde la comodidad de su casa.",
+        "Al realizarse en sesiones progresivas y supervisadas por el equipo, nos permite ir evaluando el color deseado mientras protegemos el esmalte y minimizamos cualquier molestia o sensibilidad."
+      ],
+      "facts": [
+        {
+          "label": "Tratamiento",
+          "value": "Blanqueamiento dental"
+        },
+        {
+          "label": "Modalidad",
+          "value": "Técnica ambulatoria con placas"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Registros del caso",
+      "intro": "Imágenes comparativas que muestran la iluminación del tono dental obtenida durante el proceso.",
+      "images": [
+        {
+          "src": "/images/articulos/blanqueamiento-dentario-tecnica-ambulatoria/registro-comparativo-frontal.webp",
+          "alt": "Vista frontal comparativa del blanqueamiento dental ambulatorio",
+          "width": 1080,
+          "height": 1080,
+          "caption": ""
+        },
+        {
+          "src": "/images/articulos/blanqueamiento-dentario-tecnica-ambulatoria/registro-comparativo-lateral.webp",
+          "alt": "Vista lateral comparativa del blanqueamiento dental ambulatorio",
+          "width": 1080,
+          "height": 1080,
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "title": "¿Cómo funciona el blanqueamiento con placas?",
+      "paragraphs": [
+        "Tomamos una impresión de tu boca para confeccionar placas flexibles a tu medida. En ellas aplicás un gel blanqueador de concentración controlada durante las horas indicadas.",
+        "El seguimiento profesional asegura que el proceso avance con seguridad, adaptando los días de uso a la respuesta de tus dientes para que disfrutes de los resultados sin incomodidades."
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Estética dental",
+      "title": "¿Te gustaría iluminar tu sonrisa?",
+      "text": "Escribinos por WhatsApp para coordinar una consulta y evaluar qué opción de blanqueamiento se ajusta mejor a vos.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20blanqueamiento%20dentario",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

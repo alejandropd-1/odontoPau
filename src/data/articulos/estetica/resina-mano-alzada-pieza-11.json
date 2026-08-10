@@ -1,0 +1,81 @@
+{
+  "type": "Articulo",
+  "id": "estetica-resina-mano-alzada-caso-02",
+  "slug": "resina-mano-alzada-pieza-11",
+  "category": "estetica-dental",
+  "categoryLabel": "Estética Dental",
+  "serviceIds": [
+    "estetica-dental"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Reconstrucción dental con resina",
+  "title": "Reconstrucción estética con resina tras un traumatismo en un diente anterior",
+  "excerpt": "Restauramos la forma y el color natural de una pieza dental afectada por un traumatismo mediante resinas de alta estética.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-03T17:23:47.947Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "updatedAt": "2026-08-07T10:41:03.776Z",
+  "readTime": "1 min de lectura",
+  "tags": [
+    "estética dental",
+    "resina estética",
+    "reconstrucción dental"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/resina-mano-alzada-pieza-11/registro-frontal.webp",
+    "alt": "Vista frontal de la reconstrucción con resina estética en diente frontal",
+    "width": 1280,
+    "height": 1280,
+    "caption": "Resultado de la restauración frontal con resina."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Recuperar la sonrisa en el frente",
+      "paragraphs": [
+        "Un golpe o fractura en un diente incisivo suele generar mucha preocupación, tanto por la salud del diente como por la armonía al sonreír.",
+        "En este caso, devolvimos la forma, el borde y la translucidez natural del diente mediante una reconstrucción directa con resina estética, mimetizando el color con el resto de los dientes."
+      ],
+      "facts": [
+        {
+          "label": "Tratamiento",
+          "value": "Restauración directa con resina"
+        },
+        {
+          "label": "Zona",
+          "value": "Incisivo central superior"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Registros del caso",
+      "images": [
+        {
+          "src": "/images/articulos/resina-mano-alzada-pieza-11/registro-frontal.webp",
+          "alt": "Vista frontal de la reconstrucción con resina estética en diente frontal",
+          "width": 1280,
+          "height": 1280,
+          "caption": "Vista frontal donde se observa la integración de forma y brillo."
+        },
+        {
+          "src": "/images/articulos/resina-mano-alzada-pieza-11/registro-cercano.webp",
+          "alt": "Vista detallada de cerca de la pieza dental restaurada",
+          "width": 1280,
+          "height": 1280,
+          "caption": "Vista de cerca apreciando el detalle estético logrado."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Estética y restauración",
+      "title": "¿Tuviste un accidente o querés reparar un diente golpeado?",
+      "text": "Escribinos por WhatsApp para evaluar tu caso y buscar la solución estética que mejor se adapte a vos.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20una%20reconstrucci%C3%B3n%20dental",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

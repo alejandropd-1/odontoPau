@@ -1,0 +1,82 @@
+{
+  "type": "Articulo",
+  "id": "pediatria-caso-03",
+  "slug": "adaptacion-y-cuidado-pediatrico",
+  "category": "pediatria",
+  "categoryLabel": "Odontología Pediátrica",
+  "serviceIds": [
+    "pediatria"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Adaptación pediátrica",
+  "title": "Acompañamiento y prevención en la consulta infantil",
+  "excerpt": "Un encuentro enfocado en brindar seguridad a los más chicos, fomentando la prevención y el hábito del cuidado dental desde temprano.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-06T13:55:19.668Z",
+  "updatedAt": "2026-08-07T10:39:02.997Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "readTime": "2 min de lectura",
+  "tags": [
+    "odontología pediátrica",
+    "prevención infantil",
+    "cuidado bucal"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/adaptacion-y-cuidado-pediatrico/registro-01.webp",
+    "alt": "Paciente pediátrico en una consulta de prevención y cuidado bucal",
+    "width": 1200,
+    "height": 1600,
+    "caption": "Espacios diseñados para generar confianza y tranquilidad en cada visita."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "La prevención se construye con confianza",
+      "paragraphs": [
+        "Las consultas de revisión pediátrica permiten detectar a tiempo cualquier necesidad y afianzar hábitos de higiene que acompañarán a los chicos en su crecimiento.",
+        "Con explicaciones sencillas, paciencia y un ambiente cálido, acompañamos a las familias en cada paso del cuidado de la sonrisa infantil."
+      ],
+      "facts": [
+        {
+          "label": "Enfoque",
+          "value": "Odontología pediátrica preventiva"
+        },
+        {
+          "label": "Público",
+          "value": "Niños y familias"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Registros de la consulta",
+      "intro": "Momentos dedicados al aprendizaje y la salud bucal en un entorno cuidado.",
+      "images": [
+        {
+          "src": "/images/articulos/adaptacion-y-cuidado-pediatrico/registro-01.webp",
+          "alt": "Paciente pediátrico recibiendo atención preventiva",
+          "width": 1200,
+          "height": 1600,
+          "caption": "Generar un ambiente amigable es clave en las primeras etapas."
+        },
+        {
+          "src": "/images/articulos/adaptacion-y-cuidado-pediatrico/registro-02.webp",
+          "alt": "Revisión cuidada y contención durante la atención pediátrica",
+          "width": 1200,
+          "height": 1600,
+          "caption": "Cada consulta se adapta al ritmo de cada niño."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Consulta para familias",
+      "title": "¿Querés coordinar la consulta de tu hijo/a?",
+      "text": "Escribinos por WhatsApp para agendar una visita tranquila y pensada a la medida de tu familia.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20odontolog%C3%ADa%20pedi%C3%A1trica",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

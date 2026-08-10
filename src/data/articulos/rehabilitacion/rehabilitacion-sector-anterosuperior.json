@@ -1,0 +1,113 @@
+{
+  "type": "Articulo",
+  "id": "rehabilitacion-caso-02",
+  "slug": "rehabilitacion-sector-anterosuperior",
+  "category": "rehabilitacion",
+  "categoryLabel": "Rehabilitación",
+  "serviceIds": [
+    "rehabilitacion"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Rehabilitación anterosuperior",
+  "title": "Renovación estética del sector anterior: armonía y naturalidad",
+  "excerpt": "Reemplazo de coronas antiguas por piezas libres de metal para devolver luz y naturalidad a los dientes del frente.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-04T23:05:33.901Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "updatedAt": "2026-08-07T10:42:23.267Z",
+  "readTime": "2 min de lectura",
+  "tags": [
+    "rehabilitación oral",
+    "estética dental",
+    "coronas libres de metal"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/rehabilitacion-sector-anterosuperior/registro-05.webp",
+    "alt": "Resultado final de la renovación con coronas libres de metal en el sector frontal",
+    "width": 1280,
+    "height": 566,
+    "label": "Resultado final",
+    "caption": "Resultado final con las nuevas coronas cerámicas integradas."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Recuperar la confianza al sonreír",
+      "paragraphs": [
+        "Con el tiempo, las coronas antiguas o con estructuras metálicas internas pueden perder brillo o generar bordes oscuros cerca de la encía.",
+        "En este caso, renovamos el sector anterosuperior sustituyendo las viejas restauraciones por coronas cerámicas libres de metal, logrando una apariencia totalmente luminosa y natural."
+      ],
+      "facts": [
+        {
+          "label": "Tratamiento",
+          "value": "Rehabilitación estética frontal"
+        },
+        {
+          "label": "Material",
+          "value": "Coronas libres de metal (cerámica)"
+        }
+      ],
+      "approach": {
+        "title": "Pasos del tratamiento",
+        "text": "Retiramos las coronas anteriores, preparamos los muñones de los dientes y colocamos piezas cerámicas diseñadas para mimetizarse perfectamente con el resto de la boca.",
+        "items": [
+          "Retiro de coronas previas",
+          "Preparación y opacificación de muñones",
+          "Colocación de coronas libres de metal"
+        ]
+      }
+    },
+    {
+      "type": "gallery",
+      "title": "Secuencia del caso paso a paso",
+      "intro": "Recorrido por las etapas del tratamiento desde la preparación hasta el resultado final.",
+      "images": [
+        {
+          "src": "/images/articulos/rehabilitacion-sector-anterosuperior/registro-01.webp",
+          "alt": "Estado inicial del sector anterosuperior previo al recambio",
+          "width": 1280,
+          "height": 825,
+          "caption": "Estado inicial del sector anterosuperior."
+        },
+        {
+          "src": "/images/articulos/rehabilitacion-sector-anterosuperior/registro-02.webp",
+          "alt": "Retiro de restauraciones anteriores y acondicionamiento",
+          "width": 1280,
+          "height": 809,
+          "caption": "Retiro de coronas antiguas y acondicionamiento para luego opacificar muñones metálicos."
+        },
+        {
+          "src": "/images/articulos/rehabilitacion-sector-anterosuperior/registro-03.webp",
+          "alt": "Preparación de la superficie para la nueva estructura",
+          "width": 1280,
+          "height": 728,
+          "caption": "Coronas ya instaladas libre de metal."
+        },
+        {
+          "src": "/images/articulos/rehabilitacion-sector-anterosuperior/registro-04.webp",
+          "alt": "Prueba de las coronas cerámicas y ajuste de forma",
+          "width": 1280,
+          "height": 948,
+          "caption": "Naturalidad."
+        },
+        {
+          "src": "/images/articulos/rehabilitacion-sector-anterosuperior/registro-05.webp",
+          "alt": "Resultado final con las nuevas coronas libres de metal",
+          "width": 1280,
+          "height": 566,
+          "caption": "Armonía."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Rehabilitación estética",
+      "title": "¿Querés renovar tus coronas o mejorar tu sonrisa frontal?",
+      "text": "Escribinos por WhatsApp para evaluar tu caso y planificar una rehabilitación acorde a tus necesidades.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20rehabilitaci%C3%B3n%20oral",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

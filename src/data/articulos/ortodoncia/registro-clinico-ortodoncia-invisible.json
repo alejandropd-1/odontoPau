@@ -1,0 +1,63 @@
+{
+  "type": "Articulo",
+  "id": "ortodoncia-caso-02",
+  "slug": "registro-clinico-ortodoncia-invisible",
+  "category": "ortodoncia-invisible",
+  "categoryLabel": "Ortodoncia Invisible",
+  "serviceIds": [
+    "ortodoncia-invisible"
+  ],
+  "titlePrefix": "Caso clínico",
+  "breadcrumbLabel": "Caso: Seguimiento de ortodoncia",
+  "title": "Acompañar cada etapa del tratamiento de ortodoncia",
+  "excerpt": "Controles periódicos para seguir el tratamiento de cerca y acompañar cada cambio con tranquilidad.",
+  "author": "Equipo clínico",
+  "clinicalReviewer": "Paula Gualtieri",
+  "status": "published",
+  "createdAt": "2026-08-05T15:58:59.383Z",
+  "publishedAt": "2026-08-10T01:16:26.782Z",
+  "updatedAt": "2026-08-07T10:38:48.887Z",
+  "readTime": "1 min de lectura",
+  "tags": [
+    "ortodoncia invisible",
+    "registro clínico",
+    "caso clínico"
+  ],
+  "heroImage": {
+    "src": "/images/articulos/registro-clinico-ortodoncia-invisible/registro-unico.webp",
+    "alt": "Sonrisa con un dispositivo transparente colocado sobre las piezas dentarias",
+    "width": 1600,
+    "height": 689,
+    "caption": "Cada control es una oportunidad para revisar cómo viene el tratamiento."
+  },
+  "sections": [
+    {
+      "type": "case_summary",
+      "title": "Un tratamiento que se construye paso a paso",
+      "paragraphs": [
+        "La ortodoncia necesita constancia y controles periódicos para acompañar la evolución de cada sonrisa.",
+        "En cada consulta revisamos cómo viene el tratamiento, conversamos sobre el cuidado diario y hacemos los ajustes que cada persona necesita."
+      ]
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/articulos/registro-clinico-ortodoncia-invisible/registro-unico.webp",
+          "alt": "Sonrisa con un dispositivo transparente colocado sobre las piezas dentarias",
+          "width": 1600,
+          "height": 689,
+          "caption": "El seguimiento personalizado forma parte de todo el proceso."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "label": "Evaluación profesional",
+      "title": "¿Querés conocer las alternativas para tu sonrisa?",
+      "text": "Escribinos para coordinar una evaluación y conversar con tranquilidad sobre las opciones para tu caso.",
+      "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20ortodoncia%20invisible",
+      "buttonLabel": "Consultar por WhatsApp"
+    }
+  ]
+}

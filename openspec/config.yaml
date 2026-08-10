@@ -1,0 +1,32 @@
+schema: spec-driven
+
+context: |
+  Sitio profesional de la Dra. Paula Gualtieri, orientado a pacientes de odontologia.
+  Stack: Next.js 15 App Router, React 19, TypeScript, SASS modular, Lucide React,
+  Motion, contenido JSON versionado y Stackbit/Netlify Create como CMS Git-based.
+  El contenido vive en src/data, las imagenes publicas en public/images y las rutas
+  publicas estan en espanol.
+  Mantener BEM y los tokens/funciones SASS existentes; no introducir Tailwind ni
+  estilos hardcodeados cuando exista un token del proyecto.
+  Los articulos deben relacionarse con tratamientos existentes, incluir metadata,
+  sitemap, imagen social, enlaces internos y funcionar en mobile.
+  Todo contenido clinico y toda imagen de pacientes requiere validacion de Paula y
+  consentimiento verificable antes de publicarse. No guardar datos sensibles ni
+  documentos de consentimiento en el repositorio publico.
+  Los borradores deben permanecer no publicados hasta completar revision clinica,
+  editorial, tecnica y visual.
+
+rules:
+  proposal:
+    - Escribir en espanol.
+    - Incluir alcance, fuera de alcance, riesgos clinicos y criterio de exito.
+  design:
+    - Reutilizar patrones existentes de datos, rutas, componentes, SEO y Stackbit.
+    - Separar fuente editorial, contenido publicado y derivados para redes.
+  specs:
+    - Expresar requisitos verificables con escenarios claros.
+    - Incluir controles de publicacion, privacidad, accesibilidad y trazabilidad.
+  tasks:
+    - Separar infraestructura, contenido, QA, publicacion y mantenimiento.
+    - Mantener puertas explicitas de aprobacion antes de publicar o desplegar.
+    - Incluir pnpm exec tsc --noEmit, pnpm run lint y pnpm run build.

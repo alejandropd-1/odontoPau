@@ -1,0 +1,48 @@
+{
+  "type": "Tratamiento",
+  "id": "rehabilitacion",
+  "category": "rehabilitacion",
+  "categoryLabel": "Rehabilitación",
+  "order": 1,
+  "tituloHero": "Rehabilitación",
+  "descripcionHero": "Planificación personalizada para recuperar función y armonía mediante alternativas restauradoras y protésicas definidas después de una evaluación clínica.",
+  "icon": "Drill",
+  "heroImage": "/images/rehabilitacion-hero.webp",
+  "professionals": [
+    {
+      "name": "Dr. Roberto Domínguez",
+      "role": "Especialista en Rehabilitación Oral (Implantes y Prótesis) y Estética Dental",
+      "image": "/images/profesionales/roberto-dominguez-estudio.webp",
+      "imageAlt": "Retrato del Dr. Roberto Domínguez"
+    }
+  ],
+  "features": [
+    "Evaluación integral de la función, la estructura dentaria y las necesidades de cada persona.",
+    "Planificación de alternativas restauradoras y protésicas según el caso clínico.",
+    "Selección individual de técnicas y materiales por parte del equipo tratante.",
+    "Controles y seguimiento definidos de acuerdo con la evolución del tratamiento."
+  ],
+  "casosClinicos": [
+    {
+      "id": 2,
+      "articleSlug": "rehabilitacion-sector-anterosuperior",
+      "paciente": "Paciente",
+      "titulo": "Renovación estética del sector anterior: armonía y naturalidad",
+      "descripcion": "Remoción de coronas anteriores y opacificación de pernos metálicos para la colocación final de coronas libres de metal.",
+      "imagenes": [
+        "/images/articulos/rehabilitacion-sector-anterosuperior/registro-01.webp",
+        "/images/articulos/rehabilitacion-sector-anterosuperior/registro-02.webp",
+        "/images/articulos/rehabilitacion-sector-anterosuperior/registro-03.webp",
+        "/images/articulos/rehabilitacion-sector-anterosuperior/registro-04.webp",
+        "/images/articulos/rehabilitacion-sector-anterosuperior/registro-05.webp"
+      ],
+      "desafio": "El caso corresponde a una rehabilitación del sector anterosuperior con coronas anteriores y pernos metálicos preexistentes.",
+      "solucion": "Se removieron las coronas anteriores, se opacificaron los pernos metálicos y se colocaron coronas libres de metal como resultado final.",
+      "solucionFeatures": [
+        "Remoción de coronas anteriores",
+        "Opacificación de pernos metálicos",
+        "Coronas libres de metal"
+      ]
+    }
+  ]
+}
