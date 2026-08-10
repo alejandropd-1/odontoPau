@@ -58,6 +58,14 @@ Aplicar desde Settings > Branches o Rulesets una vez que el check remoto exista:
 
 Verificacion: intentar actualizar un PR con un fallo controlado en una rama descartable y confirmar que GitHub impide el merge. Retirar el fallo y comprobar que el check vuelve a habilitarlo.
 
+Configuracion verificada el 10 de agosto de 2026:
+
+- `main` quedo protegida y requiere un pull request antes del merge.
+- El required check es `quality-gates`, restringido a GitHub Actions (`app_id` 15368), con rama actualizada (`strict: true`).
+- Las conversaciones deben estar resueltas y no se permiten force-push ni borrado de `main`.
+- El repositorio tiene un unico colaborador directo con escritura; por eso no se exige una segunda aprobacion. El Owner conserva recuperacion controlada mediante `enforce_admins: false`.
+- El rollback se comprobo sin desproteger la rama: la sesion Owner tiene permiso administrativo, la regla bloqueante se puede aislar en `required_status_checks` y la configuracion completa fue leida de vuelta despues de aplicarla. Ante una incidencia real, desactivar solo esa regla y restaurar este mismo conjunto de valores.
+
 ## Netlify Visual Editor: publicacion mediante PR
 
 1. Confirmar que la working branch es `editorial-preview`, creada desde el `main` vigente y distinta de la rama de produccion.
@@ -84,6 +92,13 @@ Despues de validar Deploy Previews y el PR editorial:
 2. Habilitar el flujo que permite publicar produccion solo mediante Git.
 3. Confirmar que Deploy Previews y branch deploys continuan disponibles.
 4. Confirmar que una promocion directa o un deploy CLI de produccion queda rechazado sin ejecutar una publicacion real.
+
+Configuracion verificada el 10 de agosto de 2026:
+
+- El proyecto `paulagualtieri` esta conectado a `alejandropd-1/odontoPau` y su rama de produccion es `main`.
+- `prevent_non_git_prod_deploys` quedo activo, por lo que la produccion solo admite el flujo Git.
+- El Deploy Preview del PR #2 continuo operativo con HTTP 200 despues de activar la restriccion.
+- No se intento un deploy productivo de prueba: la comprobacion segura consistio en leer nuevamente la configuracion activa y verificar el preview, evitando el riesgo de publicar si la proteccion no se hubiera aplicado.
 
 ## Rollback
 
