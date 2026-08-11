@@ -216,6 +216,8 @@
     visibility: hidden;
     opacity: 0;
     background: rgba(clr("neutral", "900"), 0.24);
+    -webkit-backdrop-filter: glass(blur);
+    backdrop-filter: glass(blur);
     cursor: pointer;
     pointer-events: none;
     transition: opacity transition(fast), visibility 0s linear 150ms;
@@ -243,18 +245,15 @@
     gap: size(5);
     overflow-y: auto;
     padding: size(6);
-    border: 1px solid rgba(clr("neutral", "000"), 0.72);
+    border: glass(border);
     border-top: 0;
     border-radius: 0 0 0 radius("2xl");
     visibility: hidden;
     opacity: 0;
-    background: linear-gradient(
-      145deg,
-      rgba(clr("neutral", "000"), 0.88),
-      rgba(clr("neutral", "000"), 0.68)
-    );
-    backdrop-filter: blur(20px) saturate(1.15);
-    box-shadow: shadow("2xl"), inset 0 1px 0 rgba(clr("neutral", "000"), 0.8);
+    background-color: glass(bg);
+    -webkit-backdrop-filter: glass(blur);
+    backdrop-filter: glass(blur);
+    box-shadow: glass(shadow), shadow("2xl");
     pointer-events: none;
     transform: translateY(calc(#{size(2)} * -1));
     transition: opacity transition(fast), transform transition(base),
