@@ -7,10 +7,19 @@
   right: 0;
   left: 0;
   width: 100%;
-  border-bottom: glass(border);
-  background-color: glass(bg);
-  backdrop-filter: glass(blur);
-  box-shadow: 0 1px 2px 0 rgba(clr("accent", "600"), 0.05);
+
+  &::before {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    border-bottom: glass(border);
+    background-color: glass(bg);
+    -webkit-backdrop-filter: glass(blur);
+    backdrop-filter: glass(blur);
+    box-shadow: 0 1px 2px 0 rgba(clr("accent", "600"), 0.05);
+    content: "";
+    pointer-events: none;
+  }
 
   &__inner {
     position: relative;
