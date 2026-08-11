@@ -53,4 +53,3 @@ La navegación mobile SHALL reutilizar únicamente rutas públicas o capacidades
 #### Scenario: Contenido en revisión
 - **WHEN** el sitio contiene artículos o instrucciones que aún no están publicados
 - **THEN** el menú sólo enlaza a los archivos públicos generales y no revela slugs privados ni rutas locales
-
