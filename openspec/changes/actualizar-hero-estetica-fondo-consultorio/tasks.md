@@ -20,8 +20,10 @@
 
 ## 4. Preview y publicación controlada
 
-- [ ] 4.1 Publicar la rama en un Draft PR y obtener un Deploy Preview sin mezclar a `main`.
-- [ ] 4.2 Registrar las URLs o capturas que permitan comparar la portada y el detalle en desktop/mobile.
+- [x] 4.1 Publicar la rama en el Draft PR `#9` y obtener el Deploy Preview sin mezclar a `main`.
+- [x] 4.2 Registrar las URLs que permiten comparar la portada y el detalle en desktop/mobile:
+  - `https://deploy-preview-9--paulagualtieri.netlify.app/tratamientos`
+  - `https://deploy-preview-9--paulagualtieri.netlify.app/tratamientos/estetica-dental`
 
 ## 5. Aprobaciones humanas
 
