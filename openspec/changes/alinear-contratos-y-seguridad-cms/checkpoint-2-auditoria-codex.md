@@ -1,10 +1,10 @@
-## Auditoria Codex - QA local previo a Draft PR
+## Auditoria Codex - QA local y Draft PR
 
 Fecha: 2026-08-11
 
 ### Resultado
 
-QA local aprobada. Las tareas 5.1 y 5.2 quedan completas. No se realizo commit, push, Draft PR, archive, merge ni despliegue.
+QA local y entrega del Draft PR aprobadas. Las tareas 5.1, 5.2 y 5.3 quedan completas. No se realizo archive, merge ni despliegue a produccion.
 
 ### Evidencia contractual
 
@@ -23,7 +23,16 @@ QA local aprobada. Las tareas 5.1 y 5.2 quedan completas. No se realizo commit, 
 
 ### Limites y pendientes
 
-- Esta evidencia valida el contrato y el sitio localmente; no sustituye CI, Deploy Preview ni una sesion real de Netlify Visual Editor.
+- Esta evidencia valida el contrato local, CI y el sitio desplegado; no sustituye una sesion autenticada real de Netlify Visual Editor ni la revision humana final.
 - `.codegraph/daemon.pid` es un cambio incidental ajeno al OpenSpec y debe permanecer fuera del staging.
-- 5.3, 5.4 y 6.1 permanecen pendientes.
-- El siguiente paso requiere autorizacion para preparar selectivamente el primer commit, publicar la rama y abrir el Draft PR; no implica merge ni produccion.
+- 5.4 y 6.1 permanecen pendientes.
+- No se habilito nueva autoria, no se modifico `src/data` y no se publico produccion.
+
+### Evidencia remota del Draft PR
+
+- Commit de implementacion selectivo: `ae38c00` (`feat(cms): blindar contratos editoriales`).
+- Draft PR: `https://github.com/alejandropd-1/odontoPau/pull/8`, base `main`, rama `change/alinear-contratos-y-seguridad-cms`.
+- GitHub Actions `quality-gates`: `SUCCESS`.
+- Netlify Deploy Preview: `https://deploy-preview-8--paulagualtieri.netlify.app`, estado `SUCCESS`.
+- Rutas comprobadas por HTTP con estado 200 y titulo esperado: `/`, `/tratamientos`, `/articulos` e `/instrucciones`.
+- Los controles normalizados 29/29 de Stackbit y el build del preview verifican que la extraccion conserve la configuracion modelada; la sesion autenticada del Visual Editor permanece dentro de la validacion humana y de los slices funcionales posteriores.
