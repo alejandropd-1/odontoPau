@@ -11,3 +11,4 @@ odontoPau.code-workspace
 
 # Local Netlify folder
 .netlify
+.codegraph/daemon.pid

@@ -1,3 +1,5 @@
+> **Estado: RETIRADO / NO IMPLEMENTADO (2026-08-12).** Este cambio fue reemplazado por `adoptar-tina-y-completar-cms-articulos-instrucciones` y los slices Tina posteriores. Sus delta specs de Stackbit/Netlify Visual Editor no se sincronizaron. Ver `retirement.md` para el registro de la decision.
+
 ## Why
 
 El sitio ya usa contenido JSON y Netlify Visual Editor, pero la cobertura del CMS es desigual: articulos e instrucciones estan mayormente modelados, mientras tratamientos, casos clinicos y contenidos institucionales conservan campos ausentes, contratos desactualizados o textos hardcodeados. Se necesita completar una experiencia autoadministrable para que una persona autorizada pueda crear, ampliar y mantener el contenido cotidiano sin tocar codigo y sin debilitar las puertas clinicas, tecnicas y de publicacion existentes.

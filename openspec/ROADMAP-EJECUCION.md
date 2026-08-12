@@ -27,7 +27,7 @@
 
 ## Descomposicion del programa CMS
 
-`hacer-sitio-autoadministrable-desde-cms` queda como referencia histórica del programa, pero sus decisiones específicas de Stackbit/Netlify Visual Editor son reemplazadas por la adopción incremental de TinaCMS y no se aplicará como un único cambio de 96 tareas. Antes de cada etapa se creará un OpenSpec acotado que tome solo el delta necesario:
+`hacer-sitio-autoadministrable-desde-cms` fue retirado sin implementar el 2026-08-12 y archivado como referencia histórica del programa. Sus 96 tareas quedaron deliberadamente sin marcar y sus delta specs no se sincronizaron, porque sus decisiones específicas de Stackbit/Netlify Visual Editor fueron reemplazadas por la adopción incremental de TinaCMS. Antes de cada etapa se creará un OpenSpec acotado que tome solo el delta necesario:
 
 1. `alinear-contratos-y-seguridad-cms`.
 2. `adoptar-tina-y-completar-cms-articulos-instrucciones`.

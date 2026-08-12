@@ -1,3 +1,5 @@
+> **Cambio retirado sin implementar el 2026-08-12.** Las 96 tareas se conservan sin marcar como evidencia historica; no representan trabajo pendiente vigente. El reemplazo y la justificacion estan documentados en `retirement.md`.
+
 ## 1. Relevamiento, decisiones y linea base
 
 - [ ] 1.1 Registrar la rama, revision Git, estado de Netlify Visual Editor y lista de cambios OpenSpec activos antes de implementar.

@@ -26,6 +26,13 @@ Estas instrucciones son obligatorias para cualquier agente que trabaje en este r
 12. Mezclar a `main` unicamente con autorizacion explicita de Alejandro.
 13. Verificar produccion despues del merge y registrar la evidencia en el PR o reporte de release, sin reabrir el OpenSpec archivado solo para ese registro.
 
+### Retiro excepcional de cambios obsoletos
+
+- Un cambio activo no implementado que haya quedado obsoleto, duplicado o reemplazado no debe archivarse como si estuviera completado ni sincronizar sus delta specs.
+- El retiro requiere autorizacion explicita de Alejandro, las tareas pendientes deben conservarse sin marcar y el cambio debe incluir un `retirement.md` con motivo, estado de implementacion, reemplazo y consecuencias.
+- En ese caso excepcional se usa `openspec archive <id> --yes --skip-specs`. El historial debe distinguirlo permanentemente de un cambio completado.
+- Este retiro no autoriza commit, push, merge, deploy, borrado de ramas ni cambios de producto. Esas acciones conservan sus autorizaciones habituales.
+
 ## Seguridad Git y publicacion
 
 - Preparar archivos de manera selectiva. Nunca usar `git add .` ni `git add -A`.
