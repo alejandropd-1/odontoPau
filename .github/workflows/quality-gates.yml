@@ -50,6 +50,9 @@ jobs:
       - name: Validate OpenSpec
         run: pnpm run validate:openspec
 
+      - name: Validate CMS contracts
+        run: pnpm run validate:cms-contracts
+
       - name: Validate pull request diff
         if: github.event_name == 'pull_request'
         run: git diff --check "${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}"

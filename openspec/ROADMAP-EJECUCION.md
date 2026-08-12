@@ -14,9 +14,9 @@
 
 | Orden | Cambio | Estado operativo | Gate de salida o entrada |
 |---|---|---|---|
-| 0 | `blindar-ci-y-publicacion-protegida` | IN PROGRESS | Workflow remoto exitoso, PR obligatorio, `main` protegida y Netlify Git-only verificado |
-| 1 | `crear-menu-movil-topbar` | READY | Navegacion accesible 320-767 px, preview aprobado y produccion verificada |
-| 2 | CMS slice A: contratos y seguridad | PLANNED | Paridad JSON/TypeScript/CMS, round-trip sin perdida y defaults seguros |
+| 0 | `blindar-ci-y-publicacion-protegida` | DONE | Publicado y archivado el 2026-08-10 |
+| 1 | `crear-menu-movil-topbar` | DONE | Publicado y archivado el 2026-08-11 |
+| 2 | `alinear-contratos-y-seguridad-cms` | READY FOR IMPLEMENTATION | Paridad JSON/TypeScript/CMS, round-trip sin perdida y defaults seguros |
 | 3 | CMS slice B: articulos e instrucciones | PLANNED | Crear, editar y ampliar ambos tipos desde Visual Editor sin huecos |
 | 4 | CMS slice C: tratamientos y casos | PLANNED | Tratamientos, profesionales y casos completos editables sin perdida |
 | 5 | CMS slice D: portada e institucionales | PLANNED | Contenido cotidiano fuera del JSX y CMS probado por una persona autorizada |

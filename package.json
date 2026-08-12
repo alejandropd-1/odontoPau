@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit --incremental false",
+    "test:cms-equivalence": "tsx src/cms/equivalence-test.ts",
+    "validate:cms-contracts": "tsx src/cms/validate-cms-contracts.ts",
     "validate:openspec": "openspec validate --all --strict --no-interactive",
     "clean": "next clean"
   },
@@ -31,6 +33,7 @@
     "eslint": "9.39.1",
     "eslint-config-next": "16.0.8",
     "sass": "^1.100.0",
+    "tsx": "4.19.3",
     "typescript": "5.9.3"
   }
 }
