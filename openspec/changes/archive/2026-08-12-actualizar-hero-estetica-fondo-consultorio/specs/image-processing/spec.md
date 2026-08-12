@@ -1,8 +1,5 @@
-# image-processing Specification
+## MODIFIED Requirements
 
-## Purpose
-TBD - created by archiving change content-updates-and-ortopedia-case. Update Purpose after archive.
-## Requirements
 ### Requirement: Imágenes Hero adaptadas
 El sistema SHALL servir una imagen Hero de Estética Dental que preserve la identidad y los rasgos visibles de la paciente de la fotografía fuente, sustituya únicamente su entorno por el consultorio real provisto en `main/1.jpeg` con integración visual y desenfoque suave, y SHALL mantener la imagen vigente de “niña con anteojos” para Odontología Pediátrica.
 
@@ -22,12 +19,7 @@ El sistema SHALL servir una imagen Hero de Estética Dental que preserve la iden
 - **WHEN** un usuario ingresa a la página de Odontología Pediátrica
 - **THEN** la imagen principal mantiene la composición vigente de una niña con anteojos
 
-### Requirement: Ocultamiento de identidad en caso clínico
-La Foto 3 del caso clínico "Un abordaje personalizado en Estética Dental" SHALL estar recortada o enmascarada para evitar exponer el rostro superior del paciente.
-
-#### Scenario: Carga de imagen clínica sensible
-- **WHEN** la imagen se renderiza en pantalla
-- **THEN** se recorta la porción superior garantizando la privacidad del paciente.
+## ADDED Requirements
 
 ### Requirement: Control humano y accesibilidad del hero clínico
 El hero de Estética Dental MUST conservar un texto alternativo descriptivo, MUST NOT incluir documentación privada de consentimiento en el repositorio y SHALL permanecer fuera de producción hasta contar con consentimiento verificable, aprobación de Paula sobre la imagen y validación visual final de Alejandro.
