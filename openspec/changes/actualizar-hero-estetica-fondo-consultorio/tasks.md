@@ -27,5 +27,5 @@
 
 ## 5. Aprobaciones humanas
 
-- [ ] 5.1 Paula confirma consentimiento verificable y aprueba la composición clínica antes de publicar.
-- [ ] 5.2 Alejandro valida manualmente el Deploy Preview y marca este checkbox; ningún agente puede completarlo.
+- [x] 5.1 Paula confirma consentimiento verificable y aprueba la composición clínica antes de publicar.
+- [x] 5.2 Alejandro valida manualmente el Deploy Preview y marca este checkbox; ningún agente puede completarlo.
