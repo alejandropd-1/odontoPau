@@ -31,7 +31,7 @@
 - [x] 5.1 Ejecutar las pruebas especificas y `openspec validate alinear-contratos-y-seguridad-cms --strict`, conservando evidencia de comandos, cobertura y casos negativos.
 - [x] 5.2 Ejecutar `pnpm exec tsc --noEmit --incremental false`, `pnpm run lint`, `pnpm run build` y `git diff --check`, confirmando que `src/data` no tenga cambios.
 - [x] 5.3 Tras la auditoria de Codex, preparar commit y push selectivos, Draft PR y Deploy Preview para verificar que sitio y Visual Editor conserven comportamiento sin ampliar autoria ni publicar produccion.
-- [ ] 5.4 Resolver observaciones de auditoria, CI y preview, y repetir paridad, round-trip, no mutacion, OpenSpec, TypeScript, lint, build y diff antes de solicitar validacion humana.
+- [x] 5.4 Resolver observaciones de auditoria, CI y preview, y repetir paridad, round-trip, no mutacion, OpenSpec, TypeScript, lint, build y diff antes de solicitar validacion humana.
 
 ## 6. Validacion final de Alejandro
 
