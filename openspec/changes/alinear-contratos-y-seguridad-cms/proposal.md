@@ -4,9 +4,9 @@ Netlify Visual Editor puede abrir documentos cuyo modelo no representa todos los
 
 ## What Changes
 
-- Inventariar los contratos efectivos de `HomePage`, `Articulo`, `Instruccion`, `Tratamiento`, `CasoClinico` y sus objetos reutilizables en JSON, TypeScript, validadores, Stackbit y renderizadores.
+- Inventariar los contratos efectivos de `HomePage`, `GlobalSettings`, `Articulo`, `Instruccion`, `Tratamiento`, `CasoClinico` y sus objetos reutilizables en JSON, TypeScript, validadores, Stackbit y renderizadores.
 - Definir una matriz versionada de paridad que identifique campos requeridos, opcionales, constantes, controlados, derivados y aun no editables.
-- Separar los modelos CMS en una estructura inspeccionable y reutilizable sin cambiar todavia la forma ni el contenido publico de las paginas.
+- Separar el contrato editorial neutral y el adaptador Stackbit vigente en estructuras inspeccionables y reutilizables, sin cambiar todavia la forma ni el contenido publico de las paginas ni incorporar otro proveedor CMS.
 - Incorporar una validacion automatizada que falle con mensajes accionables cuando un campo persistido o soportado no tenga representacion segura en el CMS, o cuando el CMS admita datos que el runtime no comprenda.
 - Incorporar pruebas de round-trip sobre copias en memoria de documentos reales y fixtures representativos, verificando conservacion semantica y ausencia de mutaciones sobre `src/data`.
 - Establecer defaults editoriales seguros para futuras altas: `draft`, sin fecha de publicacion ni aprobacion implicita, sin habilitar todavia los flujos de creacion de los slices posteriores.
@@ -27,6 +27,7 @@ Netlify Visual Editor puede abrir documentos cuyo modelo no representa todos los
 - Modificar componentes, maquetacion, responsive, SEO visible o design system.
 - Probar una sesion real de autoria en Netlify Visual Editor; corresponde a los slices funcionales y al piloto editorial.
 - Implementar Supabase, redes sociales, el runner de LM Studio o automatizacion de merge y deploy.
+- Implementar TinaCMS o migrar la autoria fuera de Stackbit; este cambio solo debe dejar una frontera neutral que permita evaluar adaptadores posteriores.
 - Hacer archive, merge o publicar sin la validacion manual final de Alejandro.
 
 ### Riesgos clinicos y operativos
@@ -45,7 +46,7 @@ El repositorio dispone de un inventario verificable y comandos deterministas que
 
 ### New Capabilities
 
-- `paridad-contratos-cms`: Inventario, comparacion automatizada y pruebas de round-trip que impiden habilitar escritura CMS cuando JSON, runtime y Stackbit no conservan el mismo contrato semantico.
+- `paridad-contratos-cms`: Inventario neutral, comparacion automatizada y pruebas de round-trip que impiden habilitar escritura cuando JSON, runtime y el adaptador CMS vigente no conservan el mismo contrato semantico; Stackbit es el adaptador medido en este cambio.
 
 ### Modified Capabilities
 
@@ -54,7 +55,7 @@ El repositorio dispone de un inventario verificable y comandos deterministas que
 
 ## Impact
 
-- **CMS:** reorganizacion acotada de `stackbit.config.ts` y/o extraccion de definiciones de modelos sin ampliar aun la superficie editable.
+- **CMS:** contrato neutral bajo `src/cms`, adaptador Stackbit importable y reorganizacion acotada de `stackbit.config.ts` sin ampliar aun la superficie editable ni agregar TinaCMS.
 - **Contratos:** `src/data/articulos.ts`, `src/data/instrucciones.ts`, `src/data/tratamientos.ts`, `src/data/home.json`, `src/data/settings.json` y documentos JSON vigentes como entradas de validacion, no como contenido a reescribir.
 - **Pruebas y herramientas:** nuevos manifests, fixtures, scripts o tests bajo rutas versionadas del repositorio.
 - **CI:** `package.json` y `.github/workflows/quality-gates.yml` para ejecutar el nuevo gate con versiones fijadas y sin red.

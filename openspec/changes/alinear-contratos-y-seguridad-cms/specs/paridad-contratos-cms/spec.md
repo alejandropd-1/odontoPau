@@ -12,7 +12,7 @@ El sistema SHALL mantener un inventario inspeccionable de cada modelo y objeto e
 - **THEN** el inventario lo clasifica como derivado y no exige un control CMS para almacenarlo
 
 ### Requirement: Paridad estructural entre capas
-Cada modelo habilitable para escritura CMS MUST representar sin perdida los campos soportados por los JSON vigentes, el contrato o validador runtime y el registro de modelos Stackbit. La comparacion MUST incluir objetos anidados, listas, uniones discriminadas, constantes, tipos y obligatoriedad, no solamente nombres de primer nivel.
+Cada modelo habilitable para escritura CMS MUST representar sin perdida los campos soportados por los JSON vigentes, el contrato o validador runtime neutral y el adaptador CMS evaluado. Stackbit SHALL ser el adaptador vigente medido en este cambio. La comparacion MUST incluir las 188 rutas inventariadas (31 modelos neutrales, 29 modelos Stackbit), objetos anidados, listas, uniones discriminadas, constantes, tipos y obligatoriedad, no solamente nombres de primer nivel o modelos raiz.
 
 #### Scenario: Campo JSON ausente en CMS
 - **WHEN** un campo persistido o admitido por el runtime no tiene representacion compatible en el modelo Stackbit
@@ -41,8 +41,8 @@ El sistema MUST probar documentos reales y fixtures mediante carga, proyeccion p
 - **WHEN** un campo opcional valido no aparece en los documentos reales pero si en un fixture contractual
 - **THEN** la prueba verifica su conservacion sin incorporar contenido sintetico al sitio publico
 
-### Requirement: Registro CMS importable y equivalente
-Las definiciones entregadas a `GitContentSource` SHALL provenir de un registro TypeScript importable por las pruebas. La reorganizacion MUST conservar la configuracion y representacion normalizada de los modelos existentes hasta que un slice funcional autorice cambios de autoria.
+### Requirement: Contrato neutral y adaptador CMS importable y equivalente
+El manifest contractual SHALL ser ejecutable y no depender de tipos de un proveedor CMS. Las definiciones entregadas a `GitContentSource` SHALL provenir de un adaptador Stackbit TypeScript importable por las pruebas. La reorganizacion MUST conservar la configuracion y representacion normalizada de los modelos existentes hasta que un slice funcional autorice cambios de autoria.
 
 #### Scenario: Extraccion sin cambio funcional
 - **WHEN** los modelos se extraen desde `stackbit.config.ts` a modulos reutilizables
@@ -51,6 +51,10 @@ Las definiciones entregadas a `GitContentSource` SHALL provenir de un registro T
 #### Scenario: Cambio incidental del formulario
 - **WHEN** la salida normalizada antes y despues de la extraccion difiere fuera del alcance aprobado
 - **THEN** la prueba falla y exige revertir o justificar el cambio mediante el OpenSpec correspondiente
+
+#### Scenario: Evaluacion de un proveedor futuro
+- **WHEN** un cambio posterior incorpore un adaptador como TinaCMS
+- **THEN** reutiliza el manifest neutral y debe demostrar su propia paridad sin reemplazar silenciosamente la evidencia Stackbit de esta revision
 
 ### Requirement: Defaults editoriales seguros
 Todo default preparado para altas futuras MUST usar estado `draft` y MUST dejar ausentes las fechas de publicacion, revision clinica y aprobaciones. Este slice MUST NOT habilitar nuevas rutas de creacion, presets de publicacion ni escritura de modelos incompletos.

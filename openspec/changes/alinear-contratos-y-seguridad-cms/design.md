@@ -8,7 +8,7 @@ Este cambio es el slice A del programa `hacer-sitio-autoadministrable-desde-cms`
 
 **Goals:**
 
-- Disponer de un contrato declarativo inspeccionable para comparar persistencia JSON, validacion runtime y modelos CMS.
+- Disponer de un contrato declarativo neutral e inspeccionable para comparar persistencia JSON, validacion runtime y adaptadores CMS.
 - Detectar campos ausentes, extras incompatibles, discriminantes, constantes, listas, objetos y diferencias de obligatoriedad con errores accionables.
 - Demostrar mediante una proyeccion de ida y vuelta que los documentos vigentes no pierden informacion en el limite modelado del CMS.
 - Mantener `stackbit.config.ts` funcionalmente equivalente al reorganizar definiciones para poder probarlas.
@@ -21,13 +21,14 @@ Este cambio es el slice A del programa `hacer-sitio-autoadministrable-desde-cms`
 - Completar los campos faltantes de cada familia editorial; los slices B, C y D resolveran esos contratos.
 - Crear paginas, cambiar contenido, migrar JSON, modificar renderizado o alterar rutas publicas.
 - Agregar Supabase, autenticacion nueva, dependencias remotas o automatizacion de publicacion.
+- Implementar TinaCMS o certificar portabilidad hacia un proveedor no probado en este cambio.
 - Reemplazar las validaciones clinicas, visuales o manuales por el resultado de una prueba.
 
 ## Decisions
 
-### Registro de modelos CMS importable y configuracion delgada
+### Contrato neutral, adaptador Stackbit importable y configuracion delgada
 
-Las definiciones de modelos se extraeran de `stackbit.config.ts` a modulos TypeScript importables bajo una ruta CMS explicita. `stackbit.config.ts` conservara `stackbitConfig`, `GitContentSource`, `contentDirs`, assets, version y opciones actuales, pero consumira el mismo registro que usan las pruebas.
+Las definiciones de modelos Stackbit se extraeran de `stackbit.config.ts` a un adaptador TypeScript importable bajo una ruta CMS explicita. El manifest contractual no importara tipos de Stackbit ni de otro proveedor y describira solamente semantica persistida, validacion y estado editorial. `stackbit.config.ts` conservara `stackbitConfig`, `GitContentSource`, `contentDirs`, assets, version y opciones actuales, pero consumira el adaptador que usan las pruebas de equivalencia.
 
 La extraccion MUST preservar nombres, tipos, orden, labels, constantes, campos requeridos, rutas y comportamiento existentes. No se aprovechará el refactor para completar modelos de articulos, instrucciones, tratamientos o institucionales.
 
@@ -41,7 +42,7 @@ La validacion combinara tres evidencias:
 
 1. campos observados en todos los JSON vigentes y fixtures;
 2. campos admitidos por el contrato/validador runtime declarado;
-3. campos y objetos expuestos por el registro de modelos Stackbit.
+3. campos y objetos expuestos por el adaptador CMS vigente, Stackbit en este cambio.
 
 Un campo derivado por codigo se marcara como tal y no se exigira como persistido. Un campo persistido sin representacion CMS segura bloqueara el modelo. Un campo CMS desconocido para el runtime tambien bloqueara el modelo.
 
@@ -49,7 +50,7 @@ Alternativa descartada: afirmar paridad leyendo solo interfaces TypeScript media
 
 ### Comparacion estructural recursiva
 
-El comparador recorrera modelos y objetos anidados, listas y uniones discriminadas. No se limitara a comparar nombres de primer nivel. Para cada diferencia informara como minimo: modelo, ruta, capa faltante o incompatible, forma esperada, forma observada y clasificacion bloqueante.
+El comparador recorrerá las 188 rutas inventariadas (31 modelos neutrales, 29 modelos Stackbit), modelos y objetos anidados, listas y uniones discriminadas. No se limitará a modelos raíz ni a comparar nombres de primer nivel. Para cada diferencia informará como mínimo: modelo, ruta, capa faltante o incompatible, forma esperada, forma observada, adaptador evaluado y clasificación bloqueante.
 
 Los estados `safe`, `blocked` y `pending` se calcularan de forma determinista. `safe` exige cobertura completa dentro del alcance medido; `blocked` indica perdida o dato incompatible; `pending` identifica una capacidad deliberadamente reservada a otro slice sin habilitar escritura.
 
@@ -86,7 +87,7 @@ El ejecutor no hara commit, push, archive ni merge. Codex auditara alcance, diff
 
 ## Risks / Trade-offs
 
-- [El manifest se convierte en una cuarta fuente manual] → Mantenerlo ejecutable, exigir que JSON y modelos CMS lo satisfagan y documentar claramente que describe persistencia, no contenido.
+- [El manifest se convierte en una cuarta fuente manual] → Mantenerlo ejecutable, neutral respecto del proveedor, exigir que JSON y adaptadores CMS lo satisfagan y documentar claramente que describe persistencia, no contenido.
 - [La extraccion cambia Stackbit sin que TypeScript lo detecte] → Comparar antes/despues una representacion normalizada del registro y ejecutar build y preview sin completar campos nuevos.
 - [Round-trip local no reproduce Netlify] → Nombrarlo como prueba del limite modelado y conservar una prueba real del proveedor en slices posteriores.
 - [Los JSON reales no cubren campos opcionales] → Agregar fixtures sinteticos no clinicos para formas minimas, completas y uniones, sin inventar contenido medico.
