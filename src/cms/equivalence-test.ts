@@ -24,6 +24,41 @@ export function normalizeOptionalString(val: string | undefined | null): string 
  */
 export const EXPECTED_MODEL_NAMES = Object.keys(CONTRACT_BASELINE_MODELS);
 
+const CONTRACTS_CHANGE_NAME = 'alinear-contratos-y-seguridad-cms';
+
+/**
+ * Resuelve el reporte contractual tanto mientras el OpenSpec esta activo como
+ * despues de archivarlo. Si existieran varios archives historicos, usa el mas
+ * reciente por el prefijo de fecha del directorio.
+ */
+export function resolveInventoryReportPath(rootPath = process.cwd()): string {
+  const activeReportPath = path.join(
+    rootPath,
+    'openspec',
+    'changes',
+    CONTRACTS_CHANGE_NAME,
+    'reporte-inventario.md'
+  );
+
+  if (fs.existsSync(activeReportPath)) {
+    return activeReportPath;
+  }
+
+  const archiveRoot = path.join(rootPath, 'openspec', 'changes', 'archive');
+  if (!fs.existsSync(archiveRoot)) {
+    return activeReportPath;
+  }
+
+  const archivedReports = fs
+    .readdirSync(archiveRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && entry.name.endsWith(`-${CONTRACTS_CHANGE_NAME}`))
+    .map((entry) => path.join(archiveRoot, entry.name, 'reporte-inventario.md'))
+    .filter((reportPath) => fs.existsSync(reportPath))
+    .sort();
+
+  return archivedReports.at(-1) ?? activeReportPath;
+}
+
 /**
  * Validador estricto de manifest neutral y metadatos de modelos contra la línea base contractual.
  * Recibe un manifest en memoria para probar mutaciones sintéticas sin escribir a disco.
@@ -468,13 +503,7 @@ export function runNegativeTestsSuite(): { success: boolean; passedCases: number
   }
 
   // 23. Caso negativo: Matriz de markdown con ruta duplicada y ruta faltante
-  const reportPath = path.join(
-    process.cwd(),
-    'openspec',
-    'changes',
-    'alinear-contratos-y-seguridad-cms',
-    'reporte-inventario.md'
-  );
+  const reportPath = resolveInventoryReportPath();
   if (fs.existsSync(reportPath)) {
     const realReportContent = fs.readFileSync(reportPath, 'utf8');
     // Duplicar HomePage.type reemplazando la fila de HomePage.title
@@ -665,9 +694,7 @@ export function validateReporteInventarioMatrixVsBaseline(
   let content = customContent;
 
   if (content === undefined) {
-    const targetPath =
-      reportFilePath ||
-      path.join(process.cwd(), 'openspec', 'changes', 'alinear-contratos-y-seguridad-cms', 'reporte-inventario.md');
+    const targetPath = reportFilePath || resolveInventoryReportPath();
 
     if (!fs.existsSync(targetPath)) {
       return {
