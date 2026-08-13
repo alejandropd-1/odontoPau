@@ -41,6 +41,21 @@ export interface Tratamiento {
   icon: string;
   heroImage: string;
   professionals?: TratamientoProfessional[];
+  pageCopy: {
+    heroEyebrow: string;
+    heroCtaLabel: string;
+    casesTitle: string;
+    casesDescription: string;
+    caseLinkLabel: string;
+    articlesEyebrow: string;
+    articlesTitle: string;
+    articleLinkLabel: string;
+    allArticlesPrefix: string;
+    featuresTitlePrefix: string;
+    ctaTitle: string;
+    ctaDescription: string;
+    ctaButtonLabel: string;
+  };
   features: string[];
   casosClinicos: CasoClinico[];
   sourcePath: string;
@@ -65,6 +80,52 @@ function getTreatmentFiles(directory: string): string[] {
 export function loadTreatment(filePath: string): Tratamiento {
   const rawTreatment = JSON.parse(fs.readFileSync(filePath, 'utf8')) as Omit<Tratamiento, 'sourcePath'>;
   const sourcePath = path.relative(process.cwd(), filePath).replace(/\\/g, '/');
+
+  const requiredRootFields: Array<keyof Pick<Tratamiento, 'id' | 'category' | 'categoryLabel' | 'tituloHero' | 'descripcionHero' | 'icon' | 'heroImage'>> = [
+    'id',
+    'category',
+    'categoryLabel',
+    'tituloHero',
+    'descripcionHero',
+    'icon',
+    'heroImage',
+  ];
+  requiredRootFields.forEach((field) => {
+    if (typeof rawTreatment[field] !== 'string' || rawTreatment[field].trim() === '') {
+      throw new Error(`Tratamiento invalido en ${sourcePath}: ${field} debe ser un texto no vacio.`);
+    }
+  });
+
+  const pageCopyFields: Array<keyof Tratamiento['pageCopy']> = [
+    'heroEyebrow',
+    'heroCtaLabel',
+    'casesTitle',
+    'casesDescription',
+    'caseLinkLabel',
+    'articlesEyebrow',
+    'articlesTitle',
+    'articleLinkLabel',
+    'allArticlesPrefix',
+    'featuresTitlePrefix',
+    'ctaTitle',
+    'ctaDescription',
+    'ctaButtonLabel',
+  ];
+  if (!rawTreatment.pageCopy || typeof rawTreatment.pageCopy !== 'object') {
+    throw new Error(`Tratamiento invalido en ${sourcePath}: pageCopy debe ser un objeto.`);
+  }
+  pageCopyFields.forEach((field) => {
+    if (typeof rawTreatment.pageCopy[field] !== 'string' || rawTreatment.pageCopy[field].trim() === '') {
+      throw new Error(`Tratamiento invalido en ${sourcePath}: pageCopy.${field} debe ser un texto no vacio.`);
+    }
+  });
+
+  if (!Array.isArray(rawTreatment.features) || !rawTreatment.features.every((feature) => typeof feature === 'string' && feature.trim() !== '')) {
+    throw new Error(`Tratamiento invalido en ${sourcePath}: features debe ser una lista de textos no vacios.`);
+  }
+  if (!Array.isArray(rawTreatment.casosClinicos)) {
+    throw new Error(`Tratamiento invalido en ${sourcePath}: casosClinicos debe ser una lista.`);
+  }
 
   if (rawTreatment.professionals !== undefined) {
     if (!Array.isArray(rawTreatment.professionals)) {

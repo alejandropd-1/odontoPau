@@ -89,7 +89,7 @@
     box-shadow: shadow(xl);
     border: 4px solid clr("neutral", "000");
     flex: 1;
-    min-width: 300px;
+    min-width: min(300px, 100%);
     // max-width: 500px;
   }
 
@@ -138,6 +138,10 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: size(16);
+
+    > * {
+      min-width: 0;
+    }
 
     @include mq(lg) {
       grid-template-columns: repeat(2, 1fr);
@@ -323,6 +327,7 @@
     margin-bottom: size(6);
     position: relative;
     z-index: 10;
+    overflow-wrap: anywhere;
 
     @include mq(md) {
       font-size: fs("800");
@@ -346,6 +351,7 @@
     gap: size(6);
     position: relative;
     z-index: 10;
+    min-width: 0;
   }
 
   &__cta-button {
@@ -358,6 +364,9 @@
     font-weight: 700;
     font-size: fs("400");
     transition: all transition(base);
+    max-width: 100%;
+    justify-content: center;
+    overflow-wrap: anywhere;
 
     &--primary {
       background-color: clr("accent", "600");

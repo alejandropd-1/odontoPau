@@ -44,6 +44,41 @@ El panel SHALL presentar Artículos e Instrucciones con labels y ayudas en espa�
 - **WHEN** una persona no completa un bloque opcional
 - **THEN** el JSON no recibe placeholders y el sitio no reserva título, contenedor ni espacio para ese bloque
 
+#### Scenario: Sistema visual coherente
+- **WHEN** una persona recorre campos simples, selectores, fechas, imágenes, listas y objetos anidados
+- **THEN** reconoce la misma jerarquía de label, ayuda, foco, error y espaciado, mientras cada control conserva la interacción apropiada para su tipo
+
+#### Scenario: Campo de texto
+- **WHEN** un campo simple recibe foco o contiene un valor
+- **THEN** el label se mantiene visible en posición flotante, el control conserva una altura base de 56 px y el foco se distingue por teclado sin depender solo del color
+
+#### Scenario: Lista breve repetible
+- **WHEN** el editor confirma un ítem breve mediante coma o Enter
+- **THEN** el valor se representa como chip individual, puede eliminarse sin reescribir los demás y se persiste como elemento separado del array
+
+#### Scenario: Texto largo repetible
+- **WHEN** el editor agrega párrafos, pasos o recomendaciones extensas
+- **THEN** cada elemento mantiene su propio control y orden, sin serializar la lista como un textarea separado por comas
+
+#### Scenario: Personalización mantenible
+- **WHEN** se actualiza TinaCMS
+- **THEN** la experiencia editorial depende de componentes registrados por APIs públicas y no de selectores o estilos internos sobrescritos
+
+### Requirement: Visual Editing reactivo y desacoplado de produccion
+El admin SHALL mostrar la ruta pública real de Inicio, índice de Tratamientos, cada Tratamiento, cada Artículo y cada Instrucción junto al formulario y SHALL actualizarla en vivo mediante `useTina` y marcas `tinaField`. La página fuera del iframe editorial MUST conservar el JSON local como dato inicial y MUST NOT consultar TinaCloud en runtime.
+
+#### Scenario: Seleccion visual de un campo
+- **WHEN** un editor abre cualquier documento del alcance desde Tina y selecciona su título, imagen, objeto anidado o un campo de módulo en la preview
+- **THEN** el panel enfoca el campo correspondiente y la vista refleja los cambios sin alterar la plantilla pública
+
+#### Scenario: Visita publica fuera del editor
+- **WHEN** una persona visita la misma URL sin estar dentro del iframe de Tina
+- **THEN** recibe el contenido generado desde JSON local sin request de contenido a Tina ni exposición de credenciales
+
+#### Scenario: Primer guardado de un borrador
+- **WHEN** un editor crea un documento nuevo que todavía no posee una ruta materializada
+- **THEN** el formulario explica que la vista visual estará disponible después del primer guardado y la ruta resultante permanece no indexable y fuera de producción
+
 ### Requirement: Activos y privacidad controlados
 Tina SHALL limitar imágenes, descargas y referencias de video a rutas y formatos admitidos por el contrato. Toda imagen informativa MUST tener alt; ningún flujo MUST almacenar historias clínicas, consentimientos privados, secretos o datos identificatorios innecesarios.
 

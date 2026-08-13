@@ -2,17 +2,18 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Clock, FileText } from 'lucide-react';
-import { formatInstructionDate, instructionStatusLabels, type Instruccion } from '@/data/instrucciones';
-import { getTratamientos } from '@/data/tratamientos';
+import type { Instruccion } from '@/data/instrucciones';
+import type { Tratamiento } from '@/data/tratamientos';
+import { formatInstructionDate, instructionStatusLabels } from '@/lib/instruction-display';
 
 interface InstructionCardsProps {
   instructions: Instruccion[];
   headingLevel?: 'h2' | 'h3';
+  tratamientos: Tratamiento[];
 }
 
-export default function InstructionCards({ instructions, headingLevel = 'h2' }: InstructionCardsProps) {
+export default function InstructionCards({ instructions, tratamientos, headingLevel = 'h2' }: InstructionCardsProps) {
   const Heading = headingLevel;
-  const tratamientos = getTratamientos();
 
   return (
     <div className="instructions-index__grid">

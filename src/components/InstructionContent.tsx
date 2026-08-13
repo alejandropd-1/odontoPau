@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { tinaField, useTina } from 'tinacms/dist/react';
 import {
   AlertCircle,
   ArrowLeft,
@@ -20,18 +23,25 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import ShareArticleMenu from '@/components/ShareArticleMenu';
 import {
-  formatInstructionDate,
-  instructionStatusLabels,
   type Instruccion,
   type InstructionMatrixGroup,
   type InstructionNoticeTone,
   type InstructionResourceGallery,
   type InstructionSection,
 } from '@/data/instrucciones';
+import { formatInstructionDate, instructionStatusLabels } from '@/lib/instruction-display';
+import {
+  instructionFromVisualData,
+  tinaTemplateField,
+  type TinaVisualPayload,
+} from '@/cms/tina/visual-data';
+
+type VisualRecord = Record<string, unknown>;
 
 interface InstructionContentProps {
   instruction: Instruccion;
   shareUrl: string;
+  visual: TinaVisualPayload<{ instruccion: VisualRecord }>;
 }
 
 const matrixStates = [
@@ -46,15 +56,24 @@ const noticeIcons: Record<InstructionNoticeTone, typeof Info> = {
   contact: AlertCircle,
 };
 
-function renderMatrixGroup(group: InstructionMatrixGroup, groupIndex: number) {
+function renderMatrixGroup(
+  group: InstructionMatrixGroup,
+  groupIndex: number,
+  editorGroup?: VisualRecord,
+) {
   return (
     <section
       key={group.title}
       className="instruction-detail__matrix-group"
-      data-sb-field-path={`groups.${groupIndex}`}
+      data-tina-field={editorGroup ? tinaField(editorGroup) : undefined}
       aria-labelledby={`instruction-matrix-group-${groupIndex}`}
     >
-      <h3 id={`instruction-matrix-group-${groupIndex}`}>{group.title}</h3>
+      <h3
+        id={`instruction-matrix-group-${groupIndex}`}
+        data-tina-field={editorGroup ? tinaField(editorGroup, 'title') : undefined}
+      >
+        {group.title}
+      </h3>
       <div className="instruction-detail__matrix-states">
         {matrixStates.map(({ key, label, icon: Icon }) => {
           const items = group[key];
@@ -79,48 +98,59 @@ function renderMatrixGroup(group: InstructionMatrixGroup, groupIndex: number) {
   );
 }
 
-function renderSection(section: InstructionSection, index: number) {
+function renderSection(
+  section: InstructionSection,
+  editorSection: VisualRecord | undefined,
+  index: number,
+) {
   const key = `${section.type}-${index}`;
   const titleId = `instruction-section-${index}`;
+  const field = (name: string) => editorSection
+    ? tinaField(editorSection, tinaTemplateField(section.type, name))
+    : undefined;
 
   switch (section.type) {
     case 'steps':
       return (
-        <section key={key} className="instruction-detail__section" data-sb-field-path={`sections.${index}`} aria-labelledby={section.title ? titleId : undefined}>
-          {section.title && <h2 id={titleId}>{section.title}</h2>}
-          {section.intro && <p className="instruction-detail__section-intro">{section.intro}</p>}
-          <ol className="instruction-detail__steps">
+        <section key={key} className="instruction-detail__section" data-tina-field={editorSection ? tinaField(editorSection) : undefined} aria-labelledby={section.title ? titleId : undefined}>
+          {section.title && <h2 id={titleId} data-tina-field={field('title')}>{section.title}</h2>}
+          {section.intro && <p className="instruction-detail__section-intro" data-tina-field={field('intro')}>{section.intro}</p>}
+          <ol className="instruction-detail__steps" data-tina-field={field('items')}>
             {section.items.map((item) => <li key={item}>{item}</li>)}
           </ol>
         </section>
       );
     case 'matrix':
       return (
-        <section key={key} className="instruction-detail__section instruction-detail__section--matrix" data-sb-field-path={`sections.${index}`} aria-labelledby={section.title ? titleId : undefined}>
-          {section.title && <h2 id={titleId}>{section.title}</h2>}
-          {section.intro && <p className="instruction-detail__section-intro">{section.intro}</p>}
+        <section key={key} className="instruction-detail__section instruction-detail__section--matrix" data-tina-field={editorSection ? tinaField(editorSection) : undefined} aria-labelledby={section.title ? titleId : undefined}>
+          {section.title && <h2 id={titleId} data-tina-field={field('title')}>{section.title}</h2>}
+          {section.intro && <p className="instruction-detail__section-intro" data-tina-field={field('intro')}>{section.intro}</p>}
           <div className="instruction-detail__matrix">
-            {section.groups.map(renderMatrixGroup)}
+            {section.groups.map((group, groupIndex) => renderMatrixGroup(
+              group,
+              groupIndex,
+              (editorSection?.matrix_groups as VisualRecord[] | undefined)?.[groupIndex],
+            ))}
           </div>
         </section>
       );
     case 'notice': {
       const Icon = noticeIcons[section.tone];
       return (
-        <aside key={key} className={`instruction-detail__notice instruction-detail__notice--${section.tone}`} data-sb-field-path={`sections.${index}`} aria-labelledby={titleId}>
+        <aside key={key} className={`instruction-detail__notice instruction-detail__notice--${section.tone}`} data-tina-field={editorSection ? tinaField(editorSection) : undefined} aria-labelledby={titleId}>
           <Icon aria-hidden="true" />
           <div>
-            <h2 id={titleId}>{section.title}</h2>
-            <p>{section.text}</p>
+            <h2 id={titleId} data-tina-field={field('title')}>{section.title}</h2>
+            <p data-tina-field={field('text')}>{section.text}</p>
           </div>
         </aside>
       );
     }
     case 'text':
       return (
-        <section key={key} className="instruction-detail__section" data-sb-field-path={`sections.${index}`} aria-labelledby={section.title ? titleId : undefined}>
-          {section.title && <h2 id={titleId}>{section.title}</h2>}
-          <div className="instruction-detail__prose">
+        <section key={key} className="instruction-detail__section" data-tina-field={editorSection ? tinaField(editorSection) : undefined} aria-labelledby={section.title ? titleId : undefined}>
+          {section.title && <h2 id={titleId} data-tina-field={field('title')}>{section.title}</h2>}
+          <div className="instruction-detail__prose" data-tina-field={field('paragraphs')}>
             {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </section>
@@ -128,17 +158,20 @@ function renderSection(section: InstructionSection, index: number) {
   }
 }
 
-function renderResourceGallery(resourceGallery: InstructionResourceGallery) {
+function renderResourceGallery(
+  resourceGallery: InstructionResourceGallery,
+  editorGallery?: VisualRecord,
+) {
   return (
     <section
       className="instruction-detail__resource-gallery"
       aria-labelledby="instruction-resource-gallery-title"
-      data-sb-field-path="resourceGallery"
+      data-tina-field={editorGallery ? tinaField(editorGallery) : undefined}
     >
       <div className="instruction-detail__resource-gallery-heading">
         <div>
           <span>Guía visual para guardar</span>
-          <h2 id="instruction-resource-gallery-title">{resourceGallery.title}</h2>
+          <h2 id="instruction-resource-gallery-title" data-tina-field={editorGallery ? tinaField(editorGallery, 'title') : undefined}>{resourceGallery.title}</h2>
         </div>
         {resourceGallery.intro && <p>{resourceGallery.intro}</p>}
       </div>
@@ -148,7 +181,13 @@ function renderResourceGallery(resourceGallery: InstructionResourceGallery) {
           const resourceNumber = String(index + 1).padStart(2, '0');
 
           return (
-            <li className="instruction-detail__resource-card" key={resource.src} data-sb-field-path={`images.${index}`}>
+            <li
+              className="instruction-detail__resource-card"
+              key={resource.src}
+              data-tina-field={(editorGallery?.images as VisualRecord[] | undefined)?.[index]
+                ? tinaField((editorGallery?.images as VisualRecord[])[index])
+                : undefined}
+            >
               <div className="instruction-detail__resource-card-media">
                 <a
                   className="instruction-detail__resource-card-preview"
@@ -200,7 +239,17 @@ function renderResourceGallery(resourceGallery: InstructionResourceGallery) {
   );
 }
 
-export default function InstructionContent({ instruction, shareUrl }: InstructionContentProps) {
+export default function InstructionContent({
+  instruction: initialInstruction,
+  shareUrl,
+  visual,
+}: InstructionContentProps) {
+  const { data } = useTina(visual);
+  const editorInstruction = data.instruccion;
+  const instruction = instructionFromVisualData(editorInstruction, initialInstruction);
+  const editorSections = Array.isArray(editorInstruction.sections)
+    ? editorInstruction.sections as VisualRecord[]
+    : [];
   const resourceImage = instruction.resourceImage;
   const resourceGallery = instruction.resourceGallery;
   const showSingleResource = Boolean(resourceImage && !resourceGallery);
@@ -209,7 +258,7 @@ export default function InstructionContent({ instruction, shareUrl }: Instructio
     : -1;
 
   return (
-    <main className="instruction-detail" data-sb-object-id={instruction.sourcePath}>
+    <main className="instruction-detail" data-tina-field={tinaField(editorInstruction)}>
       <Navbar />
 
       <div className="instruction-detail__breadcrumb-spacer">
@@ -233,13 +282,13 @@ export default function InstructionContent({ instruction, shareUrl }: Instructio
           )}
 
           <header className="instruction-detail__hero">
-            <span className="instruction-detail__eyebrow" data-sb-field-path="heroLabel">
+            <span className="instruction-detail__eyebrow" data-tina-field={tinaField(editorInstruction, 'heroLabel')}>
               {instruction.heroLabel || instruction.categoryLabel}
             </span>
-            <h1 className="instruction-detail__title" data-sb-field-path="title">
+            <h1 className="instruction-detail__title" data-tina-field={tinaField(editorInstruction, 'title')}>
               <span>Guía:</span> {instruction.title}
             </h1>
-            <p className="instruction-detail__excerpt" data-sb-field-path="excerpt">{instruction.excerpt}</p>
+            <p className="instruction-detail__excerpt" data-tina-field={tinaField(editorInstruction, 'excerpt')}>{instruction.excerpt}</p>
 
             <div className="instruction-detail__meta">
               <span className="instruction-detail__meta-item">
@@ -263,13 +312,16 @@ export default function InstructionContent({ instruction, shareUrl }: Instructio
           <div className={`instruction-detail__layout${showSingleResource ? ' instruction-detail__layout--with-resource' : ''}`}>
             <div className="instruction-detail__body">
               {instruction.sections.map((section, index) => {
-                const renderedSection = renderSection(section, index);
+                const renderedSection = renderSection(section, editorSections[index], index);
 
                 if (resourceGallery && index === galleryAnchorIndex) {
                   return (
                     <div className="instruction-detail__care-layout" key={`care-layout-${index}`}>
                       {renderedSection}
-                      {renderResourceGallery(resourceGallery)}
+                      {renderResourceGallery(
+                        resourceGallery,
+                        editorInstruction.resourceGallery as VisualRecord | undefined,
+                      )}
                     </div>
                   );
                 }
@@ -279,7 +331,7 @@ export default function InstructionContent({ instruction, shareUrl }: Instructio
             </div>
 
             {showSingleResource && resourceImage && (
-              <aside className="instruction-detail__resource" aria-labelledby="instruction-resource-title" data-sb-field-path="resourceImage">
+              <aside className="instruction-detail__resource" aria-labelledby="instruction-resource-title" data-tina-field={editorInstruction.resourceImage ? tinaField(editorInstruction.resourceImage as VisualRecord) : undefined}>
                 <div className="instruction-detail__resource-heading">
                   <span>Recurso para guardar</span>
                   <h2 id="instruction-resource-title">{resourceImage.label || 'Guía visual'}</h2>

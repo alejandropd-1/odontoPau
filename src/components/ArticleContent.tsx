@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { tinaField, useTina } from 'tinacms/dist/react';
 import {
   AlertCircle,
   ArrowLeft,
@@ -19,11 +22,19 @@ import Navbar from '@/components/Navbar';
 import ShareArticleMenu from '@/components/ShareArticleMenu';
 import type { Article, ArticleGallerySection, ArticleImage, ArticleSection } from '@/data/articulos';
 import type { Tratamiento } from '@/data/tratamientos';
+import {
+  articleFromVisualData,
+  tinaTemplateField,
+  type TinaVisualPayload,
+} from '@/cms/tina/visual-data';
+
+type VisualRecord = Record<string, unknown>;
 
 interface ArticleContentProps {
   article: Article;
-  services: Tratamiento[];
+  availableServices: Tratamiento[];
   shareUrl: string;
+  visual: TinaVisualPayload<{ articulo: VisualRecord }>;
 }
 
 const dateFormatter = new Intl.DateTimeFormat('es-AR', {
@@ -40,13 +51,17 @@ function formatDate(date: string) {
 
 function renderGallery(
   images: ArticleImage[],
-  fieldPath: string,
+  editorImages?: VisualRecord[],
   className = 'article-detail__gallery',
 ) {
   return (
     <div className={className} data-image-count={Math.min(images.length, 3)}>
       {images.map((image, imageIndex) => (
-        <figure key={image.src} className="article-detail__gallery-item" data-sb-field-path={`${fieldPath}.${imageIndex}`}>
+        <figure
+          key={image.src}
+          className="article-detail__gallery-item"
+          data-tina-field={editorImages?.[imageIndex] ? tinaField(editorImages[imageIndex]) : undefined}
+        >
           <div className="article-detail__gallery-media">
             <Image
               src={image.src}
@@ -55,18 +70,45 @@ function renderGallery(
               height={image.height}
               sizes="(min-width: 1024px) 34vw, (min-width: 768px) 48vw, 100vw"
               className="article-detail__gallery-image"
+              data-tina-field={editorImages?.[imageIndex]
+                ? tinaField(editorImages[imageIndex], 'src')
+                : undefined}
             />
-            {image.label && <span className="article-detail__image-label">{image.label}</span>}
+            {image.label && (
+              <span
+                className="article-detail__image-label"
+                data-tina-field={editorImages?.[imageIndex]
+                  ? tinaField(editorImages[imageIndex], 'label')
+                  : undefined}
+              >
+                {image.label}
+              </span>
+            )}
           </div>
-          {image.caption && <figcaption>{image.caption}</figcaption>}
+          {image.caption && (
+            <figcaption data-tina-field={editorImages?.[imageIndex]
+              ? tinaField(editorImages[imageIndex], 'caption')
+              : undefined}
+            >
+              {image.caption}
+            </figcaption>
+          )}
         </figure>
       ))}
     </div>
   );
 }
 
-function renderSection(section: ArticleSection, index: number, hiddenGalleryIndex: number) {
+function renderSection(
+  section: ArticleSection,
+  editorSection: VisualRecord | undefined,
+  index: number,
+  hiddenGalleryIndex: number,
+) {
   const key = `${section.type}-${index}`;
+  const field = (name: string) => editorSection
+    ? tinaField(editorSection, tinaTemplateField(section.type, name))
+    : undefined;
 
   switch (section.type) {
     case 'case_summary': {
@@ -83,22 +125,22 @@ function renderSection(section: ArticleSection, index: number, hiddenGalleryInde
         <section
           key={key}
           className={summaryClassName}
-          data-sb-field-path={`sections.${index}`}
+          data-tina-field={editorSection ? tinaField(editorSection) : undefined}
           aria-labelledby={titleId}
         >
           <div className="article-detail__case-context">
             <div className="article-detail__case-heading">
               <AlertCircle aria-hidden="true" />
-              <h2 id={titleId} data-sb-field-path="title">{section.title}</h2>
+              <h2 id={titleId} data-tina-field={field('title')}>{section.title}</h2>
             </div>
-            <div className="article-detail__case-copy" data-sb-field-path="paragraphs">
+            <div className="article-detail__case-copy" data-tina-field={field('paragraphs')}>
               {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </div>
 
             {section.facts && section.facts.length > 0 && (
-              <dl className="article-detail__case-facts" data-sb-field-path="facts">
+              <dl className="article-detail__case-facts" data-tina-field={field('facts')}>
                 {section.facts.map((fact, factIndex) => (
-                  <div key={`${fact.label}-${fact.value}`} className="article-detail__case-fact" data-sb-field-path={`.${factIndex}`}>
+                  <div key={`${fact.label}-${fact.value}`} className="article-detail__case-fact">
                     <dt>{fact.label}</dt>
                     <dd>{fact.value}</dd>
                   </div>
@@ -108,7 +150,7 @@ function renderSection(section: ArticleSection, index: number, hiddenGalleryInde
           </div>
 
           {section.approach && (
-            <div className="article-detail__case-approach" data-sb-field-path="approach">
+            <div className="article-detail__case-approach" data-tina-field={field('approach')}>
               <h3>{section.approach.title}</h3>
               <p>{section.approach.text}</p>
               {section.approach.items && section.approach.items.length > 0 && (
@@ -128,28 +170,28 @@ function renderSection(section: ArticleSection, index: number, hiddenGalleryInde
     }
     case 'text':
       return (
-        <section key={key} className="article-detail__section" data-sb-field-path={`sections.${index}`}>
-          {section.title && <h2 className="article-detail__section-title">{section.title}</h2>}
-          <div className="article-detail__prose">
+        <section key={key} className="article-detail__section" data-tina-field={editorSection ? tinaField(editorSection) : undefined}>
+          {section.title && <h2 className="article-detail__section-title" data-tina-field={field('title')}>{section.title}</h2>}
+          <div className="article-detail__prose" data-tina-field={field('paragraphs')}>
             {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </section>
       );
     case 'list':
       return (
-        <section key={key} className="article-detail__section" data-sb-field-path={`sections.${index}`}>
-          <h2 className="article-detail__section-title">{section.title}</h2>
-          {section.intro && <p className="article-detail__section-intro">{section.intro}</p>}
-          <ul className="article-detail__list">
+        <section key={key} className="article-detail__section" data-tina-field={editorSection ? tinaField(editorSection) : undefined}>
+          <h2 className="article-detail__section-title" data-tina-field={field('title')}>{section.title}</h2>
+          {section.intro && <p className="article-detail__section-intro" data-tina-field={field('intro')}>{section.intro}</p>}
+          <ul className="article-detail__list" data-tina-field={field('items')}>
             {section.items.map((item) => <li key={item}>{item}</li>)}
           </ul>
         </section>
       );
     case 'comparison':
       return (
-        <section key={key} className="article-detail__section" data-sb-field-path={`sections.${index}`}>
-          <h2 className="article-detail__section-title">{section.title}</h2>
-          {section.intro && <p className="article-detail__section-intro">{section.intro}</p>}
+        <section key={key} className="article-detail__section" data-tina-field={editorSection ? tinaField(editorSection) : undefined}>
+          <h2 className="article-detail__section-title" data-tina-field={field('title')}>{section.title}</h2>
+          {section.intro && <p className="article-detail__section-intro" data-tina-field={field('intro')}>{section.intro}</p>}
           <div className="article-detail__table-wrap" tabIndex={0} aria-label={`Tabla: ${section.title}`}>
             <table className="article-detail__table">
               <thead>
@@ -172,8 +214,8 @@ function renderSection(section: ArticleSection, index: number, hiddenGalleryInde
       );
     case 'stats':
       return (
-        <section key={key} className="article-detail__section" data-sb-field-path={`sections.${index}`}>
-          {section.title && <h2 className="article-detail__section-title">{section.title}</h2>}
+        <section key={key} className="article-detail__section" data-tina-field={editorSection ? tinaField(editorSection) : undefined}>
+          {section.title && <h2 className="article-detail__section-title" data-tina-field={field('title')}>{section.title}</h2>}
           <div className="article-detail__stats">
             {section.items.map((item) => (
               <div key={`${item.value}-${item.label}`} className="article-detail__stat">
@@ -191,16 +233,19 @@ function renderSection(section: ArticleSection, index: number, hiddenGalleryInde
       }
 
       return (
-        <section key={key} className="article-detail__section" data-sb-field-path={`sections.${index}`}>
-          {section.title && <h2 className="article-detail__section-title">{section.title}</h2>}
-          {section.intro && <p className="article-detail__section-intro">{section.intro}</p>}
-          {renderGallery(section.images, 'images')}
+        <section key={key} className="article-detail__section" data-tina-field={editorSection ? tinaField(editorSection) : undefined}>
+          {section.title && <h2 className="article-detail__section-title" data-tina-field={field('title')}>{section.title}</h2>}
+          {section.intro && <p className="article-detail__section-intro" data-tina-field={field('intro')}>{section.intro}</p>}
+          {renderGallery(
+            section.images,
+            editorSection?.[tinaTemplateField(section.type, 'images')] as VisualRecord[] | undefined,
+          )}
         </section>
       );
     case 'faq':
       return (
-        <section key={key} className="article-detail__section" data-sb-field-path={`sections.${index}`}>
-          <h2 className="article-detail__section-title">{section.title}</h2>
+        <section key={key} className="article-detail__section" data-tina-field={editorSection ? tinaField(editorSection) : undefined}>
+          <h2 className="article-detail__section-title" data-tina-field={field('title')}>{section.title}</h2>
           <div className="article-detail__faq">
             {section.items.map((item) => (
               <details key={item.question} className="article-detail__faq-item">
@@ -213,18 +258,18 @@ function renderSection(section: ArticleSection, index: number, hiddenGalleryInde
       );
     case 'quote':
       return (
-        <blockquote key={key} className="article-detail__quote" data-sb-field-path={`sections.${index}`}>
-          <p>{section.quote}</p>
-          {section.attribution && <footer>{section.attribution}</footer>}
+        <blockquote key={key} className="article-detail__quote" data-tina-field={editorSection ? tinaField(editorSection) : undefined}>
+          <p data-tina-field={field('quote')}>{section.quote}</p>
+          {section.attribution && <footer data-tina-field={field('attribution')}>{section.attribution}</footer>}
         </blockquote>
       );
     case 'cta':
       return (
-        <section key={key} className="article-detail__cta" data-sb-field-path={`sections.${index}`}>
+        <section key={key} className="article-detail__cta" data-tina-field={editorSection ? tinaField(editorSection) : undefined}>
           <div>
-            {section.label && <span className="article-detail__cta-label">{section.label}</span>}
-            <h2 className="article-detail__cta-title">{section.title}</h2>
-            <p className="article-detail__cta-text">{section.text}</p>
+            {section.label && <span className="article-detail__cta-label" data-tina-field={field('label')}>{section.label}</span>}
+            <h2 className="article-detail__cta-title" data-tina-field={field('title')}>{section.title}</h2>
+            <p className="article-detail__cta-text" data-tina-field={field('text')}>{section.text}</p>
           </div>
           <a className="article-detail__cta-button" href={section.href} target="_blank" rel="noopener noreferrer">
             {section.buttonLabel}
@@ -235,7 +280,19 @@ function renderSection(section: ArticleSection, index: number, hiddenGalleryInde
   }
 }
 
-export default function ArticleContent({ article, services, shareUrl }: ArticleContentProps) {
+export default function ArticleContent({
+  article: initialArticle,
+  availableServices,
+  shareUrl,
+  visual,
+}: ArticleContentProps) {
+  const { data } = useTina(visual);
+  const editorArticle = data.articulo;
+  const article = articleFromVisualData(editorArticle, initialArticle);
+  const services = availableServices.filter((service) => article.serviceIds.includes(service.id));
+  const editorSections = Array.isArray(editorArticle.sections)
+    ? editorArticle.sections as VisualRecord[]
+    : [];
   const editorialDate = article.publishedAt || article.updatedAt;
   const primaryGalleryIndex = article.sections.findIndex((section) => section.type === 'gallery');
   const primaryGallerySection = primaryGalleryIndex >= 0
@@ -260,7 +317,7 @@ export default function ArticleContent({ article, services, shareUrl }: ArticleC
       ];
 
   return (
-    <main className="article-detail" data-sb-object-id={article.sourcePath}>
+    <main className="article-detail" data-tina-field={tinaField(editorArticle)}>
       <Navbar />
 
       <div className="article-detail__breadcrumb-spacer">
@@ -282,8 +339,8 @@ export default function ArticleContent({ article, services, shareUrl }: ArticleC
 
           <header className="article-detail__hero">
             <div className="article-detail__hero-content">
-              <span className="article-detail__eyebrow" data-sb-field-path="categoryLabel">{article.categoryLabel}</span>
-              <h1 className="article-detail__title" data-sb-field-path="title">
+              <span className="article-detail__eyebrow" data-tina-field={tinaField(editorArticle, 'categoryLabel')}>{article.categoryLabel}</span>
+              <h1 className="article-detail__title" data-tina-field={tinaField(editorArticle, 'title')}>
                 {article.titlePrefix ? (
                   <>
                     <span className="article-detail__title-prefix">{article.titlePrefix}:</span>{' '}
@@ -291,7 +348,7 @@ export default function ArticleContent({ article, services, shareUrl }: ArticleC
                   </>
                 ) : article.title}
               </h1>
-              <p className="article-detail__excerpt" data-sb-field-path="excerpt">{article.excerpt}</p>
+              <p className="article-detail__excerpt" data-tina-field={tinaField(editorArticle, 'excerpt')}>{article.excerpt}</p>
 
               <div className="article-detail__meta">
                 <span className="article-detail__meta-item">
@@ -308,16 +365,31 @@ export default function ArticleContent({ article, services, shareUrl }: ArticleC
             </div>
           </header>
 
-          <section className="article-detail__lead-media" aria-label="Imágenes del caso">
+          <section
+            className="article-detail__lead-media"
+            aria-label="Imágenes del caso"
+            data-tina-field={primaryGalleryIndex >= 0 && editorSections[primaryGalleryIndex]
+              ? tinaField(editorSections[primaryGalleryIndex])
+              : undefined}
+          >
             {renderGallery(
               leadImages,
-              primaryGallerySection ? `sections.${primaryGalleryIndex}.images` : 'heroImage',
+              primaryGallerySection
+                ? editorSections[primaryGalleryIndex]?.gallery_images as VisualRecord[] | undefined
+                : editorArticle.heroImage
+                  ? [editorArticle.heroImage as VisualRecord]
+                  : undefined,
               'article-detail__gallery article-detail__gallery--lead',
             )}
           </section>
 
           <div className="article-detail__body">
-            {article.sections.map((section, index) => renderSection(section, index, primaryGalleryIndex))}
+            {article.sections.map((section, index) => renderSection(
+              section,
+              editorSections[index],
+              index,
+              primaryGalleryIndex,
+            ))}
           </div>
 
           <footer className="article-detail__footer">

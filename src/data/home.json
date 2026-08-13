@@ -5,6 +5,74 @@
     "title": "Excelencia Clínica & Calidez Humana",
     "description": "Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.",
     "buttonPrimary": "Conoce a la Dra. Gualtieri",
-    "buttonSecondary": "Ver Especialidades"
+    "buttonSecondary": "Ver Especialidades",
+    "backgroundImage": "/images/hero-bg.png",
+    "backgroundAlt": "Consultorio de Paula Gualtieri",
+    "eyebrow": "Paula Gualtieri Odontología",
+    "scrollLabel": "Descubrir"
+  },
+  "services": {
+    "title": "Tratamientos de Vanguardia",
+    "description": "Soluciones dentales precisas diseñadas con tecnología de última generación para resultados duraderos y estéticos.",
+    "linkLabel": "Saber más"
+  },
+  "team": {
+    "eyebrow": "Conocé a los especialistas",
+    "title": "Equipo de trabajo",
+    "description": "Contamos con un equipo de profesionales altamente capacitados para brindarte la mejor atención en cada especialidad odontológica.",
+    "featured": {
+      "name": "Dra. Paula Gualtieri",
+      "license": "MN 31757",
+      "role": "Especialista en ortodoncia y ortopedia.",
+      "image": "/images/profesionales/paula-gualtieri-estudio.webp",
+      "imageAlt": "Retrato de la Dra. Paula Gualtieri"
+    },
+    "members": [
+      {
+        "name": "Dr. Roberto Dominguez",
+        "license": "MN 32457",
+        "role": "Especialista en rehabilitación oral (Implantes y prótesis).",
+        "image": "/images/profesionales/roberto-dominguez-estudio.webp",
+        "imageAlt": "Retrato del Dr. Roberto Dominguez"
+      },
+      {
+        "name": "Dra. Emilia Omastott",
+        "license": "MN 40113",
+        "role": "Atención niños, Maestría en cirugía dental.",
+        "image": "/images/profesionales/maria-emilia-omastott-estudio.webp",
+        "imageAlt": "Retrato de la Dra. Emilia Omastott"
+      },
+      {
+        "name": "Dr. Pablo Martinez",
+        "license": "MN 33337",
+        "role": "Especialista en Endodoncia.",
+        "image": "/images/profesionales/pablo-alejandro-martinez-estudio.webp",
+        "imageAlt": "Retrato del Dr. Pablo Martinez"
+      }
+    ]
+  },
+  "location": {
+    "title": "Visítanos en nuestro consultorio",
+    "description": "Un espacio diseñado para tu tranquilidad y confort, equipado con la mejor tecnología para tu cuidado dental.",
+    "addressTitle": "Dirección",
+    "addressLines": [
+      "Ramón Falcón 2401, Piso 1 Dpto. B",
+      "Ciudad Autónoma de Buenos Aires - Flores"
+    ],
+    "hoursTitle": "Horarios para solicitar turnos o consultas",
+    "hours": [
+      "Lunes de 9 a 15hs",
+      "Martes de 9 a 18hs",
+      "Miércoles y jueves de 13 a 18hs",
+      "Viernes de 9 a 15hs"
+    ],
+    "whatsappLabel": "Contactar por WhatsApp",
+    "whatsappHref": "https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.976372899936!2d-58.46496512431464!3d-34.630037358888586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca27fa9eee21%3A0x985e9d7976637b48!2sCnel.%20Ram%C3%B3n%20L.%20Falc%C3%B3n%202401%2C%20C1406%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1776957558537!5m2!1ses-419!2sar",
+    "mapTitle": "Mapa de ubicación del consultorio de la Dra. Paula Gualtieri",
+    "placeName": "Paula Gualtieri",
+    "placeAddress": "Ramón Falcón 2401",
+    "directionsLabel": "Cómo llegar",
+    "directionsHref": "https://www.google.com/maps/dir/?api=1&destination=Cnel.+Ramón+L.+Falcón+2401,+C1406+CABA"
   }
 }

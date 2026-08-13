@@ -4,6 +4,8 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import { tinaField } from 'tinacms/dist/react';
+import type { VisualRecord } from '@/cms/tina/visual-data';
 
 interface HeroProps {
   data?: {
@@ -11,15 +13,24 @@ interface HeroProps {
     description: string;
     buttonPrimary: string;
     buttonSecondary: string;
+    backgroundImage: string;
+    backgroundAlt: string;
+    eyebrow: string;
+    scrollLabel: string;
   };
+  editorData?: VisualRecord;
 }
 
-export default function Hero({ data }: HeroProps) {
+export default function Hero({ data, editorData }: HeroProps) {
   const content = data || {
     title: "Excelencia Clínica & Calidez Humana",
     description: "Odontología avanzada en un entorno de transparencia, luz y confort. Tu sonrisa iluminada con tecnología de vanguardia y un trato personal inigualable.",
     buttonPrimary: "Conoce a la Dra. Gualtieri",
-    buttonSecondary: "Ver Especialidades"
+    buttonSecondary: "Ver Especialidades",
+    backgroundImage: "/images/hero-bg.png",
+    backgroundAlt: "Consultorio de Paula Gualtieri",
+    eyebrow: "Paula Gualtieri Odontología",
+    scrollLabel: "Descubrir"
   };
 
   // Lógica para recuperar el degradado naranja automáticamente
@@ -28,12 +39,12 @@ export default function Hero({ data }: HeroProps) {
   const secondPart = titleParts.length > 1 ? `& ${titleParts[1]}` : '';
 
   return (
-    <section className="hero" id="inicio">
+    <section className="hero" id="inicio" data-tina-field={editorData ? tinaField(editorData) : undefined}>
       {/* Background Image fading to white */}
       <div className="hero__background">
         <Image
-          src="/images/hero-bg.png"
-          alt="Consultorio de Paula Gualtieri"
+          src={content.backgroundImage}
+          alt={content.backgroundAlt}
           fill
           className="hero__background-image"
           referrerPolicy="no-referrer"
@@ -59,13 +70,13 @@ export default function Hero({ data }: HeroProps) {
               />
             </div>
             <span className="hero__eyebrow">
-              Paula Gualtieri Odontología
+              {content.eyebrow}
             </span>
           </div>
           
           <h1 
             className="hero__title"
-            data-sb-field-path="hero.title"
+            data-tina-field={editorData ? tinaField(editorData, 'title') : undefined}
           >
             {firstPart}
             {secondPart && (
@@ -80,7 +91,7 @@ export default function Hero({ data }: HeroProps) {
           
           <p 
             className="hero__description"
-            data-sb-field-path="hero.description"
+            data-tina-field={editorData ? tinaField(editorData, 'description') : undefined}
           >
             {content.description}
           </p>
@@ -89,14 +100,14 @@ export default function Hero({ data }: HeroProps) {
             <button 
               onClick={() => document.getElementById('equipo')?.scrollIntoView({ behavior: 'smooth' })}
               className="hero__button hero__button--primary"
-              data-sb-field-path="hero.buttonPrimary"
+              data-tina-field={editorData ? tinaField(editorData, 'buttonPrimary') : undefined}
             >
               {content.buttonPrimary}
             </button>
             <button 
               onClick={() => document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })}
               className="hero__button hero__button--secondary"
-              data-sb-field-path="hero.buttonSecondary"
+              data-tina-field={editorData ? tinaField(editorData, 'buttonSecondary') : undefined}
             >
               {content.buttonSecondary}
             </button>
@@ -113,7 +124,7 @@ export default function Hero({ data }: HeroProps) {
         transition={{ repeat: Infinity, duration: 2 }}
         className="hero__scroll"
       >
-        <span className="hero__scroll-label">Descubrir</span>
+        <span className="hero__scroll-label" data-tina-field={editorData ? tinaField(editorData, 'scrollLabel') : undefined}>{content.scrollLabel}</span>
         <ChevronDown className="hero__scroll-icon" />
       </motion.button>
     </section>

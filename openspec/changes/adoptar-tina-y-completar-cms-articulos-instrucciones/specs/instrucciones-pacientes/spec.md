@@ -31,3 +31,7 @@ El sistema SHALL exponer en Tina todos los campos y módulos de Instrucciones, i
 - **WHEN** una tarjeta de recurso representa un video público admitido
 - **THEN** Tina exige portada/alt y valida la ruta de reproducción o descarga sin almacenar material privado
 
+#### Scenario: Edicion visual de una instruccion
+- **WHEN** un editor modifica el título, un paso, una matriz, un aviso o un recurso desde la vista visual
+- **THEN** la página reacciona en vivo, el panel identifica el campo correspondiente y el guardado conserva orden, discriminantes y referencias accesibles
+

@@ -196,6 +196,20 @@ function requireStringList(value: unknown, field: string, sourcePath: string): a
   }
 }
 
+function validateOptionalString(value: unknown, field: string, sourcePath: string): void {
+  if (value !== undefined && typeof value !== 'string') {
+    throw new Error(`Articulo invalido en ${sourcePath}: ${field} debe ser un texto.`);
+  }
+}
+
+function validateOptionalIsoDate(value: unknown, field: string, sourcePath: string): void {
+  if (value === undefined) return;
+  requireString(value, field, sourcePath);
+  if (!value.endsWith('Z') || Number.isNaN(Date.parse(value))) {
+    throw new Error(`Articulo invalido en ${sourcePath}: ${field} debe ser una fecha ISO UTC.`);
+  }
+}
+
 function validateImage(image: ArticleImage, field: string, sourcePath: string) {
   if (!image || typeof image !== 'object') {
     throw new Error(`Articulo invalido en ${sourcePath}: ${field} debe ser una imagen.`);
@@ -203,6 +217,8 @@ function validateImage(image: ArticleImage, field: string, sourcePath: string) {
 
   requireString(image.src, `${field}.src`, sourcePath);
   requireString(image.alt, `${field}.alt`, sourcePath);
+  validateOptionalString(image.label, `${field}.label`, sourcePath);
+  validateOptionalString(image.caption, `${field}.caption`, sourcePath);
 
   if (!Number.isFinite(image.width) || image.width <= 0 || !Number.isFinite(image.height) || image.height <= 0) {
     throw new Error(`Articulo invalido en ${sourcePath}: ${field} necesita dimensiones positivas.`);
@@ -247,14 +263,17 @@ function validateSection(section: ArticleSection, index: number, sourcePath: str
       }
       break;
     case 'text':
+      validateOptionalString(section.title, `${field}.title`, sourcePath);
       requireStringList(section.paragraphs, `${field}.paragraphs`, sourcePath);
       break;
     case 'list':
       requireString(section.title, `${field}.title`, sourcePath);
+      validateOptionalString(section.intro, `${field}.intro`, sourcePath);
       requireStringList(section.items, `${field}.items`, sourcePath);
       break;
     case 'comparison':
       requireString(section.title, `${field}.title`, sourcePath);
+      validateOptionalString(section.intro, `${field}.intro`, sourcePath);
       requireStringList(section.columns, `${field}.columns`, sourcePath);
       if (!Array.isArray(section.rows) || section.rows.length === 0) {
         throw new Error(`Articulo invalido en ${sourcePath}: ${field}.rows no puede estar vacio.`);
@@ -268,11 +287,23 @@ function validateSection(section: ArticleSection, index: number, sourcePath: str
       });
       break;
     case 'stats':
+      validateOptionalString(section.title, `${field}.title`, sourcePath);
       if (!Array.isArray(section.items) || section.items.length === 0) {
         throw new Error(`Articulo invalido en ${sourcePath}: ${field}.items no puede estar vacio.`);
       }
+      section.items.forEach((item, itemIndex) => {
+        requireString(item.value, `${field}.items[${itemIndex}].value`, sourcePath);
+        requireString(item.label, `${field}.items[${itemIndex}].label`, sourcePath);
+        validateOptionalString(
+          item.description,
+          `${field}.items[${itemIndex}].description`,
+          sourcePath
+        );
+      });
       break;
     case 'gallery':
+      validateOptionalString(section.title, `${field}.title`, sourcePath);
+      validateOptionalString(section.intro, `${field}.intro`, sourcePath);
       if (!Array.isArray(section.images) || section.images.length === 0) {
         throw new Error(`Articulo invalido en ${sourcePath}: ${field}.images no puede estar vacio.`);
       }
@@ -283,14 +314,23 @@ function validateSection(section: ArticleSection, index: number, sourcePath: str
       if (!Array.isArray(section.items) || section.items.length === 0) {
         throw new Error(`Articulo invalido en ${sourcePath}: ${field}.items no puede estar vacio.`);
       }
+      section.items.forEach((item, itemIndex) => {
+        requireString(item.question, `${field}.items[${itemIndex}].question`, sourcePath);
+        requireString(item.answer, `${field}.items[${itemIndex}].answer`, sourcePath);
+      });
       break;
     case 'quote':
       requireString(section.quote, `${field}.quote`, sourcePath);
+      validateOptionalString(section.attribution, `${field}.attribution`, sourcePath);
       break;
     case 'cta':
+      validateOptionalString(section.label, `${field}.label`, sourcePath);
       requireString(section.title, `${field}.title`, sourcePath);
       requireString(section.text, `${field}.text`, sourcePath);
       requireString(section.href, `${field}.href`, sourcePath);
+      if (!section.href.startsWith('https://') && !section.href.startsWith('/')) {
+        throw new Error(`Articulo invalido en ${sourcePath}: ${field}.href debe ser HTTPS o una ruta interna.`);
+      }
       requireString(section.buttonLabel, `${field}.buttonLabel`, sourcePath);
       break;
     default: {
@@ -300,19 +340,29 @@ function validateSection(section: ArticleSection, index: number, sourcePath: str
   }
 }
 
-function loadArticle(filePath: string): Article {
-  const sourcePath = path.relative(process.cwd(), filePath).replace(/\\/g, '/');
-  const article = JSON.parse(fs.readFileSync(filePath, 'utf8')) as Omit<Article, 'sourcePath'>;
-
+export function validateArticleDocument(
+  article: Omit<Article, 'sourcePath'>,
+  sourcePath = 'documento-en-memoria'
+): void {
   requireString(article.id, 'id', sourcePath);
   requireString(article.slug, 'slug', sourcePath);
+  requireString(article.category, 'category', sourcePath);
+  requireString(article.categoryLabel, 'categoryLabel', sourcePath);
   requireString(article.title, 'title', sourcePath);
   requireString(article.excerpt, 'excerpt', sourcePath);
   requireString(article.author, 'author', sourcePath);
   requireString(article.updatedAt, 'updatedAt', sourcePath);
+  validateOptionalIsoDate(article.updatedAt, 'updatedAt', sourcePath);
   requireString(article.readTime, 'readTime', sourcePath);
   requireStringList(article.serviceIds, 'serviceIds', sourcePath);
   requireStringList(article.tags, 'tags', sourcePath);
+  if (article.serviceIds.length === 0 || article.tags.length === 0) {
+    throw new Error(`Articulo invalido en ${sourcePath}: serviceIds y tags no pueden estar vacios.`);
+  }
+
+  validateOptionalString(article.clinicalReviewer, 'clinicalReviewer', sourcePath);
+  validateOptionalIsoDate(article.createdAt, 'createdAt', sourcePath);
+  validateOptionalIsoDate(article.publishedAt, 'publishedAt', sourcePath);
 
   if (article.titlePrefix !== undefined) {
     requireString(article.titlePrefix, 'titlePrefix', sourcePath);
@@ -343,6 +393,11 @@ function loadArticle(filePath: string): Article {
     article.downloads.forEach((download, index) => {
       requireString(download.name, `downloads[${index}].name`, sourcePath);
       requireString(download.url, `downloads[${index}].url`, sourcePath);
+      if (!/^\/(?:downloads|images|videos)\//.test(download.url) || download.url.includes('..')) {
+        throw new Error(
+          `Articulo invalido en ${sourcePath}: downloads[${index}].url debe ser una ruta publica controlada.`
+        );
+      }
     });
   }
 
@@ -358,8 +413,10 @@ function loadArticle(filePath: string): Article {
     throw new Error(`Articulo invalido en ${sourcePath}: estado editorial desconocido.`);
   }
 
-  if (article.status === 'published' && !article.publishedAt) {
-    throw new Error(`Articulo invalido en ${sourcePath}: un articulo publicado necesita publishedAt.`);
+  if (article.status === 'published' && (!article.publishedAt || !article.clinicalReviewer)) {
+    throw new Error(
+      `Articulo invalido en ${sourcePath}: un articulo publicado necesita publishedAt y clinicalReviewer.`
+    );
   }
 
   validateImage(article.heroImage, 'heroImage', sourcePath);
@@ -369,6 +426,12 @@ function loadArticle(filePath: string): Article {
   }
   article.sections.forEach((section, index) => validateSection(section, index, sourcePath));
 
+}
+
+function loadArticle(filePath: string): Article {
+  const sourcePath = path.relative(process.cwd(), filePath).replace(/\\/g, '/');
+  const article = JSON.parse(fs.readFileSync(filePath, 'utf8')) as Omit<Article, 'sourcePath'>;
+  validateArticleDocument(article, sourcePath);
   return { ...article, sourcePath };
 }
 

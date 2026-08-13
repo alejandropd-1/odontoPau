@@ -9,13 +9,30 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Breadcrumb from '@/components/Breadcrumb';
 import type { CasoClinico, Tratamiento } from '@/data/tratamientos';
+import { tinaField, useTina } from 'tinacms/dist/react';
+import type { TinaVisualPayload, VisualRecord } from '@/cms/tina/visual-data';
+import { treatmentFromVisualData } from '@/cms/tina/visual-data';
 
 interface CaseDetailContentProps {
   tratamiento: Tratamiento;
   caso: CasoClinico;
+  linkedArticle?: { slug: string; title: string };
+  visual: TinaVisualPayload<{ tratamiento: VisualRecord }>;
 }
 
-export default function CaseDetailContent({ tratamiento, caso }: CaseDetailContentProps) {
+export default function CaseDetailContent({
+  tratamiento: fallbackTreatment,
+  caso: fallbackCase,
+  linkedArticle,
+  visual,
+}: CaseDetailContentProps) {
+  const { data } = useTina(visual);
+  const editorTreatment = data.tratamiento as VisualRecord;
+  const tratamiento = treatmentFromVisualData(editorTreatment, fallbackTreatment);
+  const caseIndex = tratamiento.casosClinicos.findIndex((item) => item.id === fallbackCase.id);
+  const caso = caseIndex >= 0 ? tratamiento.casosClinicos[caseIndex] : fallbackCase;
+  const editorCase = (editorTreatment.casosClinicos as VisualRecord[] | undefined)?.[caseIndex];
+  const caseMarker = (field: string) => editorCase ? tinaField(editorCase, field) : undefined;
   const shouldReduceMotion = useReducedMotion();
   const whatsappNumber = '5491137854198';
   const getWhatsAppLink = (message: string) => 
@@ -31,7 +48,7 @@ export default function CaseDetailContent({ tratamiento, caso }: CaseDetailConte
   const hasDetails = hasCaseContext || hasApproach;
 
   return (
-    <div className="case-detail">
+    <div className="case-detail" data-tina-field={editorCase ? tinaField(editorCase) : undefined}>
       <Navbar />
       
       <div className="case-detail__breadcrumb-spacer">
@@ -50,6 +67,7 @@ export default function CaseDetailContent({ tratamiento, caso }: CaseDetailConte
             initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="case-detail__hero-badge"
+            data-tina-field={tinaField(editorTreatment, 'tituloHero')}
           >
             Caso clínico: {tratamiento.tituloHero}
           </motion.span>
@@ -58,6 +76,7 @@ export default function CaseDetailContent({ tratamiento, caso }: CaseDetailConte
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="case-detail__hero-title"
+            data-tina-field={caseMarker('titulo')}
           >
             Caso clínico: <span className="case-detail__hero-title-accent">{caso.titulo}</span>
           </motion.h1>
@@ -66,6 +85,7 @@ export default function CaseDetailContent({ tratamiento, caso }: CaseDetailConte
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
             className="case-detail__hero-description"
+            data-tina-field={caseMarker('descripcion')}
           >
             {caso.descripcion}
           </motion.p>
@@ -83,6 +103,7 @@ export default function CaseDetailContent({ tratamiento, caso }: CaseDetailConte
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   className="case-detail__comparison-card"
+                  data-tina-field={caseMarker(caso.imagenes?.length ? 'imagenes' : idx === 0 ? 'imagenAntes' : 'imagenDespues')}
                 >
                   <div className="case-detail__comparison-image-wrap">
                     <Image 
@@ -113,15 +134,15 @@ export default function CaseDetailContent({ tratamiento, caso }: CaseDetailConte
                 <AlertCircle className="case-detail__challenge-icon" aria-hidden="true" />
                 <h2 className="case-detail__challenge-title">El caso</h2>
               </div>
-              {caso.desafio && <p className="case-detail__challenge-text">{caso.desafio}</p>}
+              {caso.desafio && <p className="case-detail__challenge-text" data-tina-field={caseMarker('desafio')}>{caso.desafio}</p>}
               {(caso.diagnostico || caso.duracion) && <div className="case-detail__info-cards">
                 {caso.diagnostico && <div className="case-detail__info-card">
                   <h4 className="case-detail__info-card-title">Diagnóstico</h4>
-                  <p className="case-detail__info-card-text">{caso.diagnostico}</p>
+                  <p className="case-detail__info-card-text" data-tina-field={caseMarker('diagnostico')}>{caso.diagnostico}</p>
                 </div>}
                 {caso.duracion && <div className="case-detail__info-card">
                   <h4 className="case-detail__info-card-title">Duración</h4>
-                  <p className="case-detail__info-card-text">{caso.duracion}</p>
+                  <p className="case-detail__info-card-text" data-tina-field={caseMarker('duracion')}>{caso.duracion}</p>
                 </div>}
               </div>}
             </div>
@@ -130,8 +151,8 @@ export default function CaseDetailContent({ tratamiento, caso }: CaseDetailConte
           {/* Solution */}
           {hasApproach && <div className="case-detail__solution">
             <h2 className="case-detail__solution-title">Abordaje documentado</h2>
-            {caso.solucion && <p className="case-detail__solution-text">{caso.solucion}</p>}
-            {caso.solucionFeatures && caso.solucionFeatures.length > 0 && <ul className="case-detail__solution-list">
+            {caso.solucion && <p className="case-detail__solution-text" data-tina-field={caseMarker('solucion')}>{caso.solucion}</p>}
+            {caso.solucionFeatures && caso.solucionFeatures.length > 0 && <ul className="case-detail__solution-list" data-tina-field={caseMarker('solucionFeatures')}>
               {caso.solucionFeatures.map((feature) => (
                 <li key={feature} className="case-detail__solution-item">
                   <div className="case-detail__solution-icon-wrap">
@@ -175,6 +196,15 @@ export default function CaseDetailContent({ tratamiento, caso }: CaseDetailConte
               >
                 Ver otros casos
               </Link>
+              {linkedArticle && caso.articleSlug === linkedArticle.slug ? (
+                <Link
+                  href={`/articulos/${linkedArticle.slug}`}
+                  className="case-detail__cta-button case-detail__cta-button--secondary"
+                  data-tina-field={caseMarker('articleSlug')}
+                >
+                  Leer artículo relacionado: {linkedArticle.title}
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>

@@ -12,3 +12,7 @@ odontoPau.code-workspace
 # Local Netlify folder
 .netlify
 .codegraph/daemon.pid
+
+# Tina genera el cliente y el admin; tina-lock.json sí se versiona por separado.
+tina/__generated__/
+public/admin/

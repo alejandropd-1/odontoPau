@@ -1,9 +1,10 @@
 import React from 'react';
-import { notFound, permanentRedirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { getTratamientoById, getTratamientos } from '@/data/tratamientos';
 import { getRoutableArticleBySlug } from '@/data/articulos';
 import CaseDetailContent from '@/components/CaseDetailContent';
 import { Metadata } from 'next';
+import { createTreatmentVisualPayload } from '@/cms/tina/visual-data';
 
 type Props = {
   params: Promise<{ id: string, casoId: string }>
@@ -59,9 +60,12 @@ export default async function CaseDetailPage({ params }: Props) {
     ? getRoutableArticleBySlug(caso.articleSlug)
     : undefined;
 
-  if (linkedArticle) {
-    permanentRedirect(`/articulos/${linkedArticle.slug}`);
-  }
-
-  return <CaseDetailContent tratamiento={tratamiento} caso={caso} />;
+  return (
+    <CaseDetailContent
+      tratamiento={tratamiento}
+      caso={caso}
+      linkedArticle={linkedArticle ? { slug: linkedArticle.slug, title: linkedArticle.title } : undefined}
+      visual={createTreatmentVisualPayload(tratamiento)}
+    />
+  );
 }

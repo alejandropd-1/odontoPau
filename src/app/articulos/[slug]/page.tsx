@@ -8,7 +8,8 @@ import {
   getRoutableArticleBySlug,
   getRoutableArticles,
 } from '@/data/articulos';
-import { getTratamientoById } from '@/data/tratamientos';
+import { getTratamientos } from '@/data/tratamientos';
+import { createArticleVisualPayload } from '@/cms/tina/visual-data';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -71,9 +72,7 @@ export default async function ArticlePage({ params }: Props) {
     notFound();
   }
 
-  const services = article.serviceIds
-    .map(getTratamientoById)
-    .filter((service) => service !== undefined);
+  const availableServices = getTratamientos();
   const canonicalUrl = getArticleCanonicalUrl(article.slug);
   const shareUrl = getArticleShareUrl(article.slug);
   const jsonLd = {
@@ -101,7 +100,12 @@ export default async function ArticlePage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
         />
       )}
-      <ArticleContent article={article} services={services} shareUrl={shareUrl} />
+      <ArticleContent
+        article={article}
+        availableServices={availableServices}
+        shareUrl={shareUrl}
+        visual={createArticleVisualPayload(article)}
+      />
     </>
   );
 }

@@ -4,3 +4,17 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# El piloto Tina se publica solamente en previews de ramas no productivas.
+# Produccion conserva el sitio publico actual hasta que exista y se audite una
+# rama editorial permanente independiente de `main`.
+[context.deploy-preview]
+  command = "pnpm run build:cms && pnpm run build"
+
+[context.branch-deploy]
+  command = "pnpm run build:cms && pnpm run build"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"

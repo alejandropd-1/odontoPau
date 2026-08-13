@@ -31,3 +31,11 @@ Los modelos Tina MUST reflejar el contrato runtime de Artículos, incluidos imá
 - **WHEN** un Artículo no define descargas o fuentes
 - **THEN** Tina no genera listas vacías y la página no renderiza sus encabezados ni superficies
 
+#### Scenario: Edicion visual de un modulo
+- **WHEN** un editor modifica un campo raíz o un módulo discriminado del Artículo desde la vista visual
+- **THEN** la página reacciona en vivo, el campo seleccionado se vincula al control correcto y el normalizador conserva la forma JSON original
+
+#### Scenario: Edición de una imagen compuesta
+- **WHEN** el editor abre una imagen del artículo o de una galería
+- **THEN** identifica archivo, alt, dimensiones, etiqueta y epígrafe como una unidad, recibe ayuda contextual y puede regresar claramente al formulario que la contiene sin perder cambios
+
