@@ -8,6 +8,7 @@ import {
   getTreatmentArticlesArchivePath,
   RELATED_ARTICLES_LIMIT,
 } from '@/data/articulos';
+import { createTreatmentVisualPayload } from '@/cms/tina/visual-data';
 
 type Props = {
   params: Promise<{ id: string }>
@@ -61,25 +62,16 @@ export default async function TreatmentPage({ params }: Props) {
     excerpt: article.excerpt,
     readTime: article.readTime,
   }));
-  const availableArticleSlugs = new Set(allRelatedArticles.map((article) => article.slug));
-  const caseArticleHrefs = Object.fromEntries(
-    tratamiento.casosClinicos.flatMap((caso) =>
-      caso.articleSlug && availableArticleSlugs.has(caso.articleSlug)
-        ? [[String(caso.id), `/articulos/${caso.articleSlug}`]]
-        : [],
-    ),
-  );
-
   return (
     <TreatmentDetailContent
       tratamiento={tratamiento}
       relatedArticles={relatedArticles}
-      caseArticleHrefs={caseArticleHrefs}
       relatedArticlesHref={
         allRelatedArticles.length > RELATED_ARTICLES_LIMIT
           ? getTreatmentArticlesArchivePath(tratamiento.id)
           : undefined
       }
+      visual={createTreatmentVisualPayload(tratamiento)}
     />
   );
 }

@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import InstructionCards from '@/components/InstructionCards';
 import { getRoutableInstructions, isInstructionPreviewBuild } from '@/data/instrucciones';
+import { getTratamientos } from '@/data/tratamientos';
 
 export const metadata: Metadata = {
   title: 'Instrucciones para pacientes',
@@ -38,7 +39,7 @@ export default function InstruccionesPage() {
           </div>
 
           {instructions.length > 0 ? (
-            <InstructionCards instructions={instructions} />
+            <InstructionCards instructions={instructions} tratamientos={getTratamientos()} />
           ) : (
             <p className="instructions-index__empty">Las instrucciones se encuentran en revisión editorial.</p>
           )}

@@ -140,6 +140,20 @@ function requireStringList(value: unknown, field: string, sourcePath: string): a
   }
 }
 
+function validateOptionalString(value: unknown, field: string, sourcePath: string): void {
+  if (value !== undefined && typeof value !== 'string') {
+    throw new Error(`Instruccion invalida en ${sourcePath}: ${field} debe ser un texto.`);
+  }
+}
+
+function validateOptionalIsoDate(value: unknown, field: string, sourcePath: string): void {
+  if (value === undefined) return;
+  requireString(value, field, sourcePath);
+  if (!value.endsWith('Z') || Number.isNaN(Date.parse(value))) {
+    throw new Error(`Instruccion invalida en ${sourcePath}: ${field} debe ser una fecha ISO UTC.`);
+  }
+}
+
 function validateImage(image: InstructionImage, field: string, sourcePath: string) {
   if (!image || typeof image !== 'object') {
     throw new Error(`Instruccion invalida en ${sourcePath}: ${field} debe ser una imagen.`);
@@ -147,6 +161,8 @@ function validateImage(image: InstructionImage, field: string, sourcePath: strin
 
   requireString(image.src, `${field}.src`, sourcePath);
   requireString(image.alt, `${field}.alt`, sourcePath);
+  validateOptionalString(image.label, `${field}.label`, sourcePath);
+  validateOptionalString(image.downloadLabel, `${field}.downloadLabel`, sourcePath);
 
   if (!Number.isFinite(image.width) || image.width <= 0 || !Number.isFinite(image.height) || image.height <= 0) {
     throw new Error(`Instruccion invalida en ${sourcePath}: ${field} necesita dimensiones positivas.`);
@@ -172,6 +188,10 @@ function validateImage(image: InstructionImage, field: string, sourcePath: strin
       throw new Error(`Instruccion invalida en ${sourcePath}: no existe ${image.downloadSrc}.`);
     }
   }
+
+  if (image.downloadSrc !== undefined) {
+    requireString(image.downloadLabel, `${field}.downloadLabel`, sourcePath);
+  }
 }
 
 function validateSection(section: InstructionSection, index: number, sourcePath: string) {
@@ -180,9 +200,13 @@ function validateSection(section: InstructionSection, index: number, sourcePath:
 
   switch (section.type) {
     case 'steps':
+      validateOptionalString(section.title, `${field}.title`, sourcePath);
+      validateOptionalString(section.intro, `${field}.intro`, sourcePath);
       requireStringList(section.items, `${field}.items`, sourcePath);
       break;
     case 'matrix':
+      validateOptionalString(section.title, `${field}.title`, sourcePath);
+      validateOptionalString(section.intro, `${field}.intro`, sourcePath);
       if (!Array.isArray(section.groups) || section.groups.length === 0) {
         throw new Error(`Instruccion invalida en ${sourcePath}: ${field}.groups no puede estar vacio.`);
       }
@@ -204,6 +228,7 @@ function validateSection(section: InstructionSection, index: number, sourcePath:
       }
       break;
     case 'text':
+      validateOptionalString(section.title, `${field}.title`, sourcePath);
       requireStringList(section.paragraphs, `${field}.paragraphs`, sourcePath);
       break;
     default: {
@@ -213,10 +238,10 @@ function validateSection(section: InstructionSection, index: number, sourcePath:
   }
 }
 
-function loadInstruction(filePath: string): Instruccion {
-  const sourcePath = path.relative(process.cwd(), filePath).replace(/\\/g, '/');
-  const instruction = JSON.parse(fs.readFileSync(filePath, 'utf8')) as Omit<Instruccion, 'sourcePath'>;
-
+export function validateInstructionDocument(
+  instruction: Omit<Instruccion, 'sourcePath'>,
+  sourcePath = 'documento-en-memoria'
+): void {
   requireString(instruction.id, 'id', sourcePath);
   requireString(instruction.slug, 'slug', sourcePath);
   requireString(instruction.category, 'category', sourcePath);
@@ -224,8 +249,14 @@ function loadInstruction(filePath: string): Instruccion {
   requireString(instruction.title, 'title', sourcePath);
   requireString(instruction.excerpt, 'excerpt', sourcePath);
   requireString(instruction.updatedAt, 'updatedAt', sourcePath);
+  validateOptionalIsoDate(instruction.updatedAt, 'updatedAt', sourcePath);
   requireString(instruction.readTime, 'readTime', sourcePath);
   requireStringList(instruction.tags, 'tags', sourcePath);
+  validateOptionalString(instruction.serviceId, 'serviceId', sourcePath);
+  validateOptionalString(instruction.clinicalReviewer, 'clinicalReviewer', sourcePath);
+  validateOptionalString(instruction.heroLabel, 'heroLabel', sourcePath);
+  validateOptionalIsoDate(instruction.createdAt, 'createdAt', sourcePath);
+  validateOptionalIsoDate(instruction.publishedAt, 'publishedAt', sourcePath);
 
   if (instruction.type !== 'Instruccion') {
     throw new Error(`Instruccion invalida en ${sourcePath}: type debe ser Instruccion.`);
@@ -263,6 +294,12 @@ function loadInstruction(filePath: string): Instruccion {
   }
   instruction.sections.forEach((section, index) => validateSection(section, index, sourcePath));
 
+}
+
+function loadInstruction(filePath: string): Instruccion {
+  const sourcePath = path.relative(process.cwd(), filePath).replace(/\\/g, '/');
+  const instruction = JSON.parse(fs.readFileSync(filePath, 'utf8')) as Omit<Instruccion, 'sourcePath'>;
+  validateInstructionDocument(instruction, sourcePath);
   return { ...instruction, sourcePath };
 }
 

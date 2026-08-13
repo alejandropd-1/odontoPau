@@ -11,10 +11,12 @@ import Breadcrumb from '@/components/Breadcrumb';
 import TreatmentIcon from '@/components/TreatmentIcon';
 import type { Tratamiento } from '@/data/tratamientos';
 import { getTreatmentProfessionalMobileRole } from '@/lib/treatment-professionals';
+import { tinaField, useTina } from 'tinacms/dist/react';
+import type { TinaVisualPayload, VisualRecord } from '@/cms/tina/visual-data';
+import { treatmentFromVisualData } from '@/cms/tina/visual-data';
 
 interface TreatmentDetailContentProps {
   tratamiento: Tratamiento;
-  caseArticleHrefs: Record<string, string>;
   relatedArticles: {
     slug: string;
     title: string;
@@ -22,14 +24,21 @@ interface TreatmentDetailContentProps {
     readTime: string;
   }[];
   relatedArticlesHref?: string;
+  visual: TinaVisualPayload<{ tratamiento: VisualRecord }>;
 }
 
 export default function TreatmentDetailContent({
-  tratamiento,
-  caseArticleHrefs,
+  tratamiento: fallback,
   relatedArticles,
   relatedArticlesHref,
+  visual,
 }: TreatmentDetailContentProps) {
+  const { data } = useTina(visual);
+  const editorTreatment = data.tratamiento as VisualRecord;
+  const tratamiento = treatmentFromVisualData(editorTreatment, fallback);
+  const editorProfessionals = editorTreatment.professionals as VisualRecord[] | undefined;
+  const editorCases = editorTreatment.casosClinicos as VisualRecord[] | undefined;
+  const editorPageCopy = editorTreatment.pageCopy as VisualRecord | undefined;
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -47,7 +56,7 @@ export default function TreatmentDetailContent({
     `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
   return (
-    <div className="treatment-detail" data-sb-object-id={tratamiento.sourcePath}>
+    <div className="treatment-detail" data-tina-field={tinaField(editorTreatment)}>
       <Navbar />
       
       <div className="treatment-detail__breadcrumb-spacer">
@@ -62,14 +71,14 @@ export default function TreatmentDetailContent({
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
           >
-            <span className="treatment-detail__hero-eyebrow">
-              Atención odontológica
+            <span className="treatment-detail__hero-eyebrow" data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'heroEyebrow') : undefined}>
+              {tratamiento.pageCopy.heroEyebrow}
             </span>
             
             {/* Etiqueta de título para el lápiz */}
             <h1 
               className="treatment-detail__hero-title"
-              data-sb-field-path="tituloHero"
+              data-tina-field={tinaField(editorTreatment, 'tituloHero')}
             >
               {tratamiento.tituloHero}
             </h1>
@@ -77,7 +86,7 @@ export default function TreatmentDetailContent({
             {/* Etiqueta de descripción para el lápiz */}
             <p 
               className="treatment-detail__hero-description"
-              data-sb-field-path="descripcionHero"
+              data-tina-field={tinaField(editorTreatment, 'descripcionHero')}
             >
               {tratamiento.descripcionHero}
             </p>
@@ -87,8 +96,9 @@ export default function TreatmentDetailContent({
               target="_blank"
               rel="noopener noreferrer"
               className="treatment-detail__hero-cta"
+              data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'heroCtaLabel') : undefined}
             >
-              Solicitar evaluación <ArrowRight className="treatment-detail__hero-cta-icon" />
+              {tratamiento.pageCopy.heroCtaLabel} <ArrowRight className="treatment-detail__hero-cta-icon" />
             </a>
           </motion.div>
 
@@ -104,15 +114,15 @@ export default function TreatmentDetailContent({
                 alt={tratamiento.tituloHero}
                 fill
                 className="treatment-detail__hero-image"
-                data-sb-field-path="heroImage"
+                data-tina-field={tinaField(editorTreatment, 'heroImage')}
               />
               <div className="treatment-detail__hero-image-overlay"></div>
             </div>
             {tratamiento.professionals && tratamiento.professionals.length > 0 && (
               <div className="treatment-detail__doctor-badge">
                 <div className="treatment-detail__doctor-badge-avatars">
-                  {tratamiento.professionals.map((professional) => (
-                    <div className="treatment-detail__doctor-badge-avatar" key={professional.name}>
+                  {tratamiento.professionals.map((professional, index) => (
+                    <div className="treatment-detail__doctor-badge-avatar" key={professional.name} data-tina-field={editorProfessionals?.[index] ? tinaField(editorProfessionals[index]) : undefined}>
                       <Image
                         src={professional.image}
                         alt={professional.imageAlt}
@@ -124,8 +134,8 @@ export default function TreatmentDetailContent({
                   ))}
                 </div>
                 <ul className="treatment-detail__doctor-badge-info" aria-label="Profesionales del tratamiento">
-                  {tratamiento.professionals.map((professional) => (
-                    <li key={professional.name}>
+                  {tratamiento.professionals.map((professional, index) => (
+                    <li key={professional.name} data-tina-field={editorProfessionals?.[index] ? tinaField(editorProfessionals[index]) : undefined}>
                       <p className="treatment-detail__doctor-badge-name">{professional.name}</p>
                       <p className="treatment-detail__doctor-badge-role">
                         <span className="treatment-detail__doctor-badge-role-mobile">
@@ -150,8 +160,8 @@ export default function TreatmentDetailContent({
           <div className="treatment-detail__cases-inner">
             <div className="treatment-detail__cases-header">
               <div>
-                <h2 className="treatment-detail__cases-title">Casos Clínicos</h2>
-                <p className="treatment-detail__cases-description">Registros clínicos que documentan distintos abordajes del equipo.</p>
+                <h2 className="treatment-detail__cases-title" data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'casesTitle') : undefined}>{tratamiento.pageCopy.casesTitle}</h2>
+                <p className="treatment-detail__cases-description" data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'casesDescription') : undefined}>{tratamiento.pageCopy.casesDescription}</p>
               </div>
               <div className="treatment-detail__cases-controls">
                 <button 
@@ -190,24 +200,25 @@ export default function TreatmentDetailContent({
                       alt={caso.titulo}
                       fill
                       className="treatment-detail__case-card-image"
+                      data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], caso.imagenDespues ? 'imagenDespues' : caso.imagenAntes ? 'imagenAntes' : 'imagenes') : undefined}
                     />
                     {caso.estado && (
-                      <div className="treatment-detail__case-card-status">
+                      <div className="treatment-detail__case-card-status" data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], 'estado') : undefined}>
                         {caso.estado}
                       </div>
                     )}
                   </div>
                   <div className="treatment-detail__case-card-content">
-                    <h3 className="treatment-detail__case-card-title">{caso.titulo}</h3>
+                    <h3 className="treatment-detail__case-card-title" data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], 'titulo') : undefined}>{caso.titulo}</h3>
                     <div className="treatment-detail__case-card-footer">
                       {caso.fecha && (
-                        <span className="treatment-detail__case-card-date">{caso.fecha}</span>
+                        <span className="treatment-detail__case-card-date" data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], 'fecha') : undefined}>{caso.fecha}</span>
                       )}
                       <Link
-                        href={caseArticleHrefs[String(caso.id)] ?? `/tratamientos/${tratamiento.id}/casos/${caso.id}`}
+                        href={`/tratamientos/${tratamiento.id}/casos/${caso.id}`}
                         className="treatment-detail__case-card-link"
                       >
-                        Ver caso completo
+                        {tratamiento.pageCopy.caseLinkLabel}
                       </Link>
                     </div>
                   </div>
@@ -222,8 +233,8 @@ export default function TreatmentDetailContent({
         <section className="treatment-detail__articles" aria-labelledby="related-articles-title">
           <div className="treatment-detail__articles-inner">
             <div className="treatment-detail__articles-header">
-              <span>Para entender mejor el tratamiento</span>
-              <h2 id="related-articles-title">Artículos relacionados</h2>
+              <span data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'articlesEyebrow') : undefined}>{tratamiento.pageCopy.articlesEyebrow}</span>
+              <h2 id="related-articles-title" data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'articlesTitle') : undefined}>{tratamiento.pageCopy.articlesTitle}</h2>
             </div>
             <div className="treatment-detail__articles-grid">
               {relatedArticles.map((article) => (
@@ -231,16 +242,16 @@ export default function TreatmentDetailContent({
                   <span>{article.readTime}</span>
                   <h3>{article.title}</h3>
                   <p>{article.excerpt}</p>
-                  <Link href={`/articulos/${article.slug}`}>
-                    Leer artículo <ArrowRight aria-hidden="true" />
+                  <Link href={`/articulos/${article.slug}`} data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'articleLinkLabel') : undefined}>
+                    {tratamiento.pageCopy.articleLinkLabel} <ArrowRight aria-hidden="true" />
                   </Link>
                 </article>
               ))}
             </div>
             {relatedArticlesHref && (
               <div className="treatment-detail__articles-more">
-                <Link href={relatedArticlesHref}>
-                  Ver todos los artículos de {tratamiento.tituloHero}
+                <Link href={relatedArticlesHref} data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'allArticlesPrefix') : undefined}>
+                  {tratamiento.pageCopy.allArticlesPrefix} {tratamiento.tituloHero}
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </div>
@@ -259,10 +270,10 @@ export default function TreatmentDetailContent({
               </div>
 
              <div className="treatment-detail__features-content">
-               <h2 className="treatment-detail__features-title">Aspectos de {tratamiento.tituloHero.toLowerCase()}</h2>
-               <div className="treatment-detail__features-grid" data-sb-field-path="features">
+               <h2 className="treatment-detail__features-title" data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'featuresTitlePrefix') : undefined}>{tratamiento.pageCopy.featuresTitlePrefix} {tratamiento.tituloHero.toLowerCase()}</h2>
+               <div className="treatment-detail__features-grid" data-tina-field={tinaField(editorTreatment, 'features')}>
                  {tratamiento.features.map((feature: string, i: number) => (
-                   <div key={i} className="treatment-detail__feature-item" data-sb-field-path={`.${i}`}>
+                   <div key={i} className="treatment-detail__feature-item">
                      <div className="treatment-detail__feature-icon-wrap">
                        <CheckCircle2 className="treatment-detail__feature-icon" />
                      </div>
@@ -283,16 +294,17 @@ export default function TreatmentDetailContent({
             <div className="treatment-detail__cta-bg-glow"></div>
             
             <div className="treatment-detail__cta-content">
-              <h2 className="treatment-detail__cta-title">¿Querés consultar por este tratamiento?</h2>
-              <p className="treatment-detail__cta-description">Escribinos para coordinar una evaluación y conversar sobre las opciones adecuadas para tu caso.</p>
+              <h2 className="treatment-detail__cta-title" data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'ctaTitle') : undefined}>{tratamiento.pageCopy.ctaTitle}</h2>
+              <p className="treatment-detail__cta-description" data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'ctaDescription') : undefined}>{tratamiento.pageCopy.ctaDescription}</p>
               <div className="treatment-detail__cta-actions">
                 <a 
                   href={getWhatsAppLink(`Hola, quiero solicitar una evaluación para ${tratamiento.tituloHero}`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="treatment-detail__cta-button"
+                  data-tina-field={editorPageCopy ? tinaField(editorPageCopy, 'ctaButtonLabel') : undefined}
                 >
-                  Solicitar evaluación <CheckCircle2 className="treatment-detail__cta-button-icon" />
+                  {tratamiento.pageCopy.ctaButtonLabel} <CheckCircle2 className="treatment-detail__cta-button-icon" />
                 </a>
               </div>
             </div>

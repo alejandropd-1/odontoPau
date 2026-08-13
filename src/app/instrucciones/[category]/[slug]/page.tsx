@@ -8,6 +8,7 @@ import {
   getRoutableInstruction,
   getRoutableInstructions,
 } from '@/data/instrucciones';
+import { createInstructionVisualPayload } from '@/cms/tina/visual-data';
 
 type Props = {
   params: Promise<{
@@ -104,7 +105,11 @@ export default async function InstructionDetailPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
         />
       )}
-      <InstructionContent instruction={instruction} shareUrl={shareUrl} />
+      <InstructionContent
+        instruction={instruction}
+        shareUrl={shareUrl}
+        visual={createInstructionVisualPayload(instruction)}
+      />
     </>
   );
 }

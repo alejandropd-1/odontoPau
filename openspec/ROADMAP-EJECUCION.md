@@ -17,9 +17,9 @@
 | 0 | `blindar-ci-y-publicacion-protegida` | DONE | Publicado y archivado el 2026-08-10 |
 | 1 | `crear-menu-movil-topbar` | DONE | Publicado y archivado el 2026-08-11 |
 | 2 | `alinear-contratos-y-seguridad-cms` | DONE | Archivado y publicado el 2026-08-11; contrato neutral de 188 rutas y gates reproducibles |
-| 3 | `adoptar-tina-y-completar-cms-articulos-instrucciones` | READY FOR IMPLEMENTATION | Tina operativa en rama no productiva; Artículos e Instrucciones editables sin pérdida y sin depender del workflow pago |
-| 4 | CMS Tina slice C: tratamientos y casos | PLANNED | Tratamientos, profesionales y casos completos editables sin pérdida |
-| 5 | CMS Tina slice D: portada e institucionales | PLANNED | Contenido cotidiano fuera del JSX y CMS probado por una persona autorizada |
+| 3 | `adoptar-tina-y-completar-cms-articulos-instrucciones` | IN IMPLEMENTATION | Tina operativa en rama no productiva; Inicio, índice/detalle de Tratamientos, casos, Artículos e Instrucciones editables sin pérdida y sin depender del workflow pago |
+| 4 | CMS Tina slice C: tratamientos y casos | ABSORBED BY 3 | Incorporado explícitamente al cambio activo mediante tareas 4.5–4.13; no crear un change duplicado |
+| 5 | CMS Tina slice D: portada e institucionales | ABSORBED BY 3 | Inicio e índice de Tratamientos incorporados al cambio activo; la configuración global del sitio seguirá en un OpenSpec posterior |
 | 6 | Piloto editorial de 2-3 ciclos | PLANNED | Flujo editar -> preview -> aprobar -> publicar medido y documentado |
 | 7 | `preparar-redes-sociales-editoriales` | PARKED | CMS estable y articulos fuente publicados/aprobados |
 | 8 | `dinamizar-dashboard-editorial-con-supabase` | PARKED / DECISION GATE | Implementar solo si el piloto demuestra necesidad de asignaciones, KPIs o auditoria operativa |
@@ -31,8 +31,8 @@
 
 1. `alinear-contratos-y-seguridad-cms`.
 2. `adoptar-tina-y-completar-cms-articulos-instrucciones`.
-3. Futuro slice Tina de tratamientos y casos.
-4. Futuro slice Tina de contenido institucional.
+3. Tratamientos, casos, Inicio e índice absorbidos de forma explícita por `adoptar-tina-y-completar-cms-articulos-instrucciones`.
+4. Futuro slice acotado de configuración global del sitio: navegación, contacto, mapa y relaciones automáticas entre contenidos.
 
 Cada slice reutilizara las specs del programa y evitara duplicar requisitos. El programa se cerrara cuando los cuatro slices y el piloto editorial esten terminados.
 

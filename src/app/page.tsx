@@ -1,14 +1,9 @@
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import Services from '@/components/Services';
-import Testimonials from '@/components/Testimonials';
-import Team from '@/components/Team';
-import Location from '@/components/Location';
-import Footer from '@/components/Footer';
+import HomeContent from '@/components/HomeContent';
 import { Metadata } from 'next';
 import homeData from '@/data/home.json';
 import { getTratamientos } from '@/data/tratamientos';
-import { siteFeatures } from '@/config/site-features';
+import { validateHomePageData } from '@/data/site-pages';
+import { createHomeVisualPayload } from '@/cms/tina/visual-data';
 
 export const metadata: Metadata = {
   title: { absolute: 'Dra. Paula Gualtieri | Odontóloga en Flores' },
@@ -47,6 +42,7 @@ const localBusinessJsonLd = {
 
 export default function Home() {
   const tratamientos = getTratamientos();
+  const home = validateHomePageData(homeData);
 
   return (
     <>
@@ -54,15 +50,11 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd).replace(/</g, '\\u003c') }}
       />
-      <main className="home-page" data-sb-object-id="src/data/home.json">
-        <Navbar />
-        <Hero data={homeData.hero} />
-        <Services tratamientos={tratamientos} />
-        {siteFeatures.testimonials && <Testimonials />}
-        <Team />
-        <Location />
-        <Footer />
-      </main>
+      <HomeContent
+        home={home}
+        tratamientos={tratamientos}
+        visual={createHomeVisualPayload(home)}
+      />
     </>
   );
 }

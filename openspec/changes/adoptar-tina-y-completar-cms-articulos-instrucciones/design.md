@@ -2,7 +2,7 @@
 
 OdontoPau publica desde Next.js 15 en Netlify y obtiene el contenido público desde JSON versionado bajo `src/data`. El cambio archivado `alinear-contratos-y-seguridad-cms` dejó un manifest neutral de 188 rutas, validadores, fixtures, comparadores estructurales y una fotografía del adaptador Stackbit. Esa base permite cambiar el editor sin migrar el contenido a una base propietaria.
 
-El programa activo `hacer-sitio-autoadministrable-desde-cms` fue redactado para Stackbit/Netlify Visual Editor y agrupa 96 tareas. No se aplicará como un bloque: este cambio reemplaza su decisión de proveedor y entrega el primer slice funcional para `Articulo` e `Instruccion`. Los slices de tratamientos/casos y portada/institucionales permanecen posteriores.
+El programa activo `hacer-sitio-autoadministrable-desde-cms` fue redactado para Stackbit/Netlify Visual Editor y agrupa 96 tareas. No se aplicará como un bloque: este cambio reemplaza su decisión de proveedor y, por decisión posterior de Alejandro, reúne la autoría y edición visual de Inicio, índice/detalle de Tratamientos, `Articulo` e `Instruccion`. El identificador histórico del change se conserva para no romper rama, PR ni trazabilidad, pero ya no limita el alcance a Slice B.
 
 La referencia local `Portfolio_2026_astro` demuestra que Tina admite colecciones, campos agrupados, labels, opciones, validaciones, rutas editoriales y una pantalla custom. Se reutiliza el patrón conceptual, no su schema MDX ni su integración Astro. En OdontoPau, Tina será una capa de autoría sobre los JSON existentes y el sitio público seguirá leyendo los archivos locales mediante sus loaders actuales.
 
@@ -13,7 +13,7 @@ Intervienen Alejandro como administrador, auditor visual y autoridad de merge; P
 **Goals:**
 
 - Adoptar TinaCMS sin cambiar URLs, diseño, loaders públicos ni contenido aprobado.
-- Habilitar creación, edición y ampliación sin pérdida de Artículos e Instrucciones y todos sus módulos admitidos.
+- Habilitar edición sin pérdida de Inicio, índice/detalle de Tratamientos, Artículos e Instrucciones; las altas nuevas permanecen limitadas a Artículos e Instrucciones.
 - Reutilizar el contrato neutral y exigir paridad/round-trip específicos de Tina antes de permitir escritura.
 - Entregar un `/admin` protegido, en español y orientado a personas no técnicas.
 - Mantener toda edición fuera de `main` hasta Draft PR, CI, preview y aprobaciones humanas.
@@ -22,7 +22,6 @@ Intervienen Alejandro como administrador, auditor visual y autoridad de merge; P
 
 **Non-Goals:**
 
-- Editar tratamientos, profesionales, casos, portada o institucionales en este slice.
 - Reemplazar Git por TinaCloud como fuente canónica o hacer que el sitio público dependa en runtime de la API de Tina.
 - Incorporar un page builder, permitir cambios de diseño desde el CMS o exponer constantes técnicas innecesarias.
 - Automatizar redes sociales, Supabase, LM Studio o publicación sin aprobación.
@@ -52,13 +51,19 @@ GitCron/GitHub continuará creando o mostrando el Draft PR, ejecutando CI, recib
 
 Las 188 rutas neutrales seguirán siendo el baseline global. El adaptador Tina declarará cobertura para todas las rutas de Slice B y marcará fuera de alcance las de C/D sin presentarlas como seguras. Una prueba normalizará el schema Tina y lo comparará con el manifest, tipos runtime y fixtures. El round-trip operará sobre copias y verificará valores, discriminantes, orden, listas y ausencia real de opcionales.
 
+La ampliación posterior a Inicio y Tratamientos no reescribe retroactivamente esa fotografía de 188 rutas. El gate legado proyecta copias en memoria de los documentos actuales a la forma histórica para demostrar que los campos preexistentes conservan paridad y round-trip. El contrato incremental institucional se valida con el schema y audit de Tina, validadores runtime y `test:tina-visual`; la proyección nunca modifica `src/data` ni permite omitir un campo del schema vigente.
+
 La fotografía Stackbit no se elimina: queda como evidencia histórica de la capa reemplazada. Los tests vigentes podrán reorganizarse, pero el gate resultante debe seguir siendo determinista, offline y sin mutar `src/data`.
 
-### 5. Una única plantilla pública y formularios editoriales condicionales
+### 5. Una única plantilla pública, formularios condicionales y Visual Editing
 
-Tina expondrá `Articulo` e `Instruccion` con objetos/templates para sus uniones discriminadas. Los campos técnicos `type`, rutas derivadas y constantes se ocultarán o derivarán. Los campos opcionales usarán controles que permitan ausencia verdadera; no se guardarán strings vacíos, objetos vacíos ni placeholders para simular contenido.
+Tina expondrá Inicio, página índice, `Tratamiento`, `Articulo` e `Instruccion`. Artículos e Instrucciones conservarán objetos/templates para sus uniones discriminadas; Tratamientos incluirán profesionales y casos clínicos completos. Los campos técnicos `type`, rutas derivadas y constantes se ocultarán o derivarán. Los campos opcionales usarán controles que permitan ausencia verdadera; no se guardarán strings vacíos, objetos vacíos ni placeholders para simular contenido.
 
-La interfaz usará labels, ayudas y agrupaciones en español, títulos útiles para listas, selectores para estados y relaciones, y validación cercana al campo para slug, alt, fechas, estado, activos y módulos. Podrá incluir una pantalla custom inspirada en el portfolio, limitada a resumen y accesos de Artículos/Instrucciones.
+La interfaz usará labels, ayudas y agrupaciones en español, títulos útiles para listas, selectores para estados y relaciones, y validación cercana al campo para slug, alt, fechas, estado, activos y módulos. La pantalla custom inspirada en el portfolio funcionará como acceso compacto a todas las colecciones, sin reemplazar el futuro dashboard Supabase de trazabilidad.
+
+Las colecciones resolverán cada documento a su ruta pública y cada superficie editable tendrá una frontera cliente acotada con `useTina` y `tinaField`. El dato inicial seguirá proviniendo de los loaders JSON del servidor; `useTina` solo lo vuelve reactivo cuando la página está embebida por el admin. Fuera del editor no habrá consulta remota, token ni dependencia de disponibilidad de TinaCloud. Los datos GraphQL del editor se normalizarán de vuelta al contrato público antes de reutilizar los renderizadores actuales. Los textos que hoy están hardcodeados en Inicio o en el índice se migrarán una sola vez a JSON sin cambiar su contenido ni diseño.
+
+En desarrollo y Deploy Preview, los loaders ya permiten rutas no publicadas y las páginas mantienen `noindex`. Producción seguirá generando únicamente documentos `published`. Un documento nuevo sin guardar no promete preview; después del primer guardado `draft`, su ruta queda disponible en el entorno editorial sin incorporarse a índices ni producción.
 
 ### 6. Defaults seguros y publicación contractual
 
@@ -72,6 +77,18 @@ Las imágenes autorizadas se almacenarán en rutas públicas admitidas y se edit
 
 Primero se instalará Tina junto al adaptador anterior, luego se demostrará paridad y se probará el flujo real. Solo después del preview aprobado podrán retirarse dependencias/configuración operativa de Stackbit que no sostengan evidencia o tests. Las specs canónicas cambiarán el proveedor vigente a Tina; el cambio amplio anterior quedará marcado como programa reemplazado y no aplicable en bloque.
 
+### 9. Sistema visual editorial coherente sobre APIs públicas de Tina
+
+Los campos simples usarán componentes propios registrados mediante `ui.component`: altura base de 56 px, label flotante, foco visible, ayuda persistente, error cercano y espaciado compartido. Esta estética no convertirá todos los datos en un mismo control. Selectores, fechas, imágenes, chips, listas y objetos anidados conservarán su interacción especializada y se integrarán mediante la misma jerarquía de labels, ayudas, estados y superficies.
+
+No se modificarán selectores internos, clases privadas ni archivos generados de Tina. La personalización se limitará a APIs públicas y componentes versionados por el repositorio, con foco accesible, teclado, contraste y movimiento reducido. Los textos breves repetibles usarán chips; párrafos, pasos y matrices mantendrán ítems separados para evitar serializaciones ambiguas por comas.
+
+### 10. Caso clínico y artículo relacionado son recursos distintos
+
+Cada caso clínico conservará su URL `/tratamientos/{id}/casos/{casoId}`, su metadata y un renderizador reactivo con marcas granulares sobre el mismo formulario del Tratamiento. `articleSlug` se interpreta únicamente como relación editorial opcional: cuando el artículo exista y sea enrutable, la ficha del caso ofrecerá un CTA secundario hacia él. Las tarjetas de casos siempre enlazarán primero a la ficha clínica y nunca redirigirán automáticamente al artículo.
+
+Tina 3.11 permite un único `ui.router` por documento y el modo click-to-edit intercepta la navegación dentro del iframe. Como los casos están anidados en el JSON de su Tratamiento, la entrada estándar del documento abre `/tratamientos/{id}`. No se duplicará la colección ni se manipulará el iframe con APIs privadas. Convertir cada caso en documento independiente será una decisión de modelado futura si el piloto demuestra que el cambio de preview por caso aporta suficiente valor.
+
 ## Risks / Trade-offs
 
 - **[El plan gratuito no automatiza PR y merge]** → Tina solo escribe una rama; GitCron/GitHub conserva el flujo de PR, CI y aprobación.
@@ -79,20 +96,25 @@ Primero se instalará Tina junto al adaptador anterior, luego se demostrará par
 - **[El schema Tina podría serializar JSON de forma distinta]** → comparador estructural y round-trip sobre fixtures mínimos, completos y documentos reales copiados.
 - **[Campos opcionales podrían transformarse en vacíos]** → `format/parse` o saneamiento probado y comparación semántica que distinga ausencia de placeholder.
 - **[El admin aumenta dependencias y tiempo de build]** → el sitio público no usa Tina en runtime; se mide build y se evita versionar salidas generadas innecesarias.
+- **[Visual Editing podría acoplar el sitio público a Tina]** → el servidor entrega JSON local como dato inicial; la consulta reactiva solo se activa dentro del iframe editorial y se prueba que producción no efectúa requests de contenido a Tina.
+- **[Los aliases de uniones podrían apuntar al campo equivocado]** → las consultas conservan la forma GraphQL de Tina, un normalizador puro recompone el contrato público y las marcas `tinaField` se prueban en campos raíz, listas y módulos discriminados.
 - **[TinaCloud o GitHub no disponibles]** → se pausa la edición; producción continúa desde los JSON de `main` y se puede editar localmente de forma controlada.
 - **[Activos clínicos o secretos expuestos]** → media solo autorizada, alt obligatorio, revisión humana y secretos exclusivos de entorno.
 - **[Doble infraestructura durante la migración]** → convivencia breve y documentada; retiro selectivo de Stackbit solo con tests Tina aprobados.
+- **[Personalizar el shell interno de Tina haría frágil el mantenimiento]** → componentes editoriales propios solo mediante APIs públicas; no se sobrescribe CSS interno del CMS.
+- **[Una relación caso-artículo podría ocultar la ficha clínica]** → URL de caso estable, artículo como CTA secundario y pruebas de routing/Visual Editing para ambos recursos.
 
 ## Migration Plan
 
 1. Registrar versiones, rama, variables requeridas, proyecto Tina y baseline contractual sin incluir secretos.
 2. Instalar versiones compatibles y fijadas de Tina; agregar configuración Next.js, `/admin` y build reproducible.
-3. Implementar y medir el adaptador Tina de Artículos/Instrucciones contra manifest, runtime y fixtures.
-4. Configurar UX editorial, defaults, activos, relaciones y campos opcionales sin modificar contenido aprobado.
+3. Implementar y medir el adaptador Tina para Inicio, índice/detalle de Tratamientos, Artículos e Instrucciones contra manifest, runtime y fixtures.
+4. Migrar textos institucionales hardcodeados a JSON y configurar UX editorial, defaults, activos, relaciones y campos opcionales sin modificar contenido aprobado.
 5. Probar localmente crear/editar documentos sintéticos y round-trip de copias de documentos reales.
-6. Publicar Draft PR, ejecutar CI y verificar que Tina escribe la rama exacta y genera Deploy Preview no indexable.
-7. Realizar un piloto supervisado de Artículo e Instrucción; Paula revisa lo clínico y Alejandro la UX/diff/preview.
-8. Tras aprobación humana, cerrar y archivar el OpenSpec en la misma rama; merge solo con autorización.
+6. Conectar Visual Editing a todas las rutas del alcance, probar reactividad y selección de campos y confirmar que borradores permanecen confinados al entorno editorial.
+7. Publicar Draft PR, ejecutar CI y verificar que Tina escribe la rama exacta y genera Deploy Preview no indexable.
+8. Realizar un piloto supervisado de Artículo e Instrucción; Paula revisa lo clínico y Alejandro la UX/diff/preview.
+9. Tras aprobación humana, cerrar y archivar el OpenSpec en la misma rama; merge solo con autorización.
 
 **Rollback:** deshabilitar o retirar `/admin` y la configuración Tina, revertir sus commits y conservar los JSON/loaders públicos. Si un modelo pierde información, se bloquea su escritura y se restaura el documento desde Git. El retiro del adaptador Stackbit no se ejecutará hasta que Tina supere la evidencia equivalente.
 

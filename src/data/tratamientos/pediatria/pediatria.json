@@ -8,6 +8,21 @@
   "descripcionHero": "Atención odontológica infantil con un enfoque cercano, paciente y respetuoso, adaptado a cada etapa y a las necesidades de cada familia.",
   "icon": "Smile",
   "heroImage": "/images/pediatria-hero.webp",
+  "pageCopy": {
+    "heroEyebrow": "Atención odontológica",
+    "heroCtaLabel": "Solicitar evaluación",
+    "casesTitle": "Casos Clínicos",
+    "casesDescription": "Registros clínicos que documentan distintos abordajes del equipo.",
+    "caseLinkLabel": "Ver caso completo",
+    "articlesEyebrow": "Para entender mejor el tratamiento",
+    "articlesTitle": "Artículos relacionados",
+    "articleLinkLabel": "Leer artículo",
+    "allArticlesPrefix": "Ver todos los artículos de",
+    "featuresTitlePrefix": "Aspectos de",
+    "ctaTitle": "¿Querés consultar por este tratamiento?",
+    "ctaDescription": "Escribinos para coordinar una evaluación y conversar sobre las opciones adecuadas para tu caso.",
+    "ctaButtonLabel": "Solicitar evaluación"
+  },
   "professionals": [
     {
       "name": "Dra. Paula Gualtieri",

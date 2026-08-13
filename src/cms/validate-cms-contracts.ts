@@ -8,6 +8,7 @@ import {
 } from './roundtrip';
 import { runPhase3NegativeTests } from './phase3-negative-tests';
 import { generateContractsReport } from './reporter';
+import { projectFixturesToHistoricalBaseline } from './historical-fixture-projection';
 
 export function runFullCmsContractsValidation(): void {
   // 1. Ejecutar prueba de equivalencia, coherencia y casos negativos de Checkpoint 2
@@ -23,12 +24,13 @@ export function runFullCmsContractsValidation(): void {
   const realDocs = loadRealJsonDocuments();
   const syntheticFixtures = getSyntheticFixtures();
   const allFixtures = [...realDocs, ...syntheticFixtures];
+  const historicalFixtures = projectFixturesToHistoricalBaseline(allFixtures);
 
   // 5. Ejecutar comparación estructural recursiva
-  const structuralResult = compareStructuralContracts(allFixtures);
+  const structuralResult = compareStructuralContracts(historicalFixtures);
 
   // 6. Ejecutar prueba de round-trip semántico en memoria
-  const roundTripResults = executeInMemRoundTrip(allFixtures);
+  const roundTripResults = executeInMemRoundTrip(historicalFixtures);
 
   // 7. Verificar guardia de no mutación sobre src/data
   const nonMutationStatus = verifySrcDataNonMutation(beforeHashes);
