@@ -5,9 +5,13 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# El piloto Tina se publica solamente en previews de ramas no productivas.
-# Produccion conserva el sitio publico actual hasta que exista y se audite una
-# rama editorial permanente independiente de `main`.
+# El admin de produccion apunta siempre a la rama editorial permanente
+# configurada mediante NEXT_PUBLIC_TINA_BRANCH; la guarda de seguridad de Tina
+# rechaza main/master. El sitio publico continua publicandose solamente desde
+# main mediante el flujo Git de Netlify.
+[context.production]
+  command = "pnpm run build:cms && pnpm run build"
+
 [context.deploy-preview]
   command = "pnpm run build:cms && pnpm run build"
 
