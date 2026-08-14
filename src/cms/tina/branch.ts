@@ -72,9 +72,10 @@ export function assertTinaCloudConfiguration(
     return;
   }
 
-  const missing = ['NEXT_PUBLIC_TINA_CLIENT_ID', 'TINA_TOKEN'].filter(
-    (name) => !environment[name]?.trim()
-  );
+  // Esta funcion tambien se ejecuta dentro del bundle del admin. El token de
+  // solo lectura es deliberadamente server-only y Tina CLI lo valida durante
+  // `tinacms build`; exigirlo aqui impediria iniciar el CMS en el navegador.
+  const missing = ['NEXT_PUBLIC_TINA_CLIENT_ID'].filter((name) => !environment[name]?.trim());
 
   if (missing.length > 0) {
     throw new Error(`Configuracion TinaCloud incompleta: faltan ${missing.join(', ')}.`);

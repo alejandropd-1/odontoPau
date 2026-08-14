@@ -48,7 +48,6 @@ assert.doesNotThrow(() =>
     TINA_PUBLIC_IS_LOCAL: 'false',
     NEXT_PUBLIC_TINA_BRANCH: 'change/editorial-piloto',
     NEXT_PUBLIC_TINA_CLIENT_ID: 'public-client-id-de-prueba',
-    TINA_TOKEN: 'token-de-prueba-no-real',
   })
 );
 
@@ -58,7 +57,9 @@ assert.throws(
       TINA_PUBLIC_IS_LOCAL: 'false',
       NEXT_PUBLIC_TINA_BRANCH: 'change/editorial-piloto',
     }),
-  /NEXT_PUBLIC_TINA_CLIENT_ID, TINA_TOKEN/
+  /NEXT_PUBLIC_TINA_CLIENT_ID/
 );
 
-console.log('Tina branch guard: 8 escenarios validos, main/master bloqueadas y sin fallback remoto.');
+console.log(
+  'Tina branch guard: configuracion publica valida, token server-only, main/master bloqueadas y sin fallback remoto.'
+);
