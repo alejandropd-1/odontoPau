@@ -11,7 +11,6 @@ import {
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://paulagualtieri.com';
   const tratamientos = getTratamientos();
-  const publishedArticleSlugs = new Set(publishedArticles.map((article) => article.slug));
 
   const treatmentUrls = tratamientos.map((t) => ({
     url: `${baseUrl}/tratamientos/${t.id}`,
@@ -58,15 +57,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
   });
 
-  const caseUrls = tratamientos.flatMap((t) =>
-    t.casosClinicos.filter((c) => !c.articleSlug || !publishedArticleSlugs.has(c.articleSlug)).map((c) => ({
-      url: `${baseUrl}/tratamientos/${t.id}/casos/${c.id}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    }))
-  );
-
   return [
     {
       url: baseUrl,
@@ -97,6 +87,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...articleUrls,
     ...generalArticleArchiveUrls,
     ...treatmentArticleArchiveUrls,
-    ...caseUrls,
   ];
 }

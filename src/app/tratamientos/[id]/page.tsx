@@ -5,6 +5,7 @@ import TreatmentDetailContent from '@/components/TreatmentDetailContent';
 import { Metadata } from 'next';
 import {
   getListableArticlesByServiceId,
+  getRoutableArticleBySlug,
   getTreatmentArticlesArchivePath,
   RELATED_ARTICLES_LIMIT,
 } from '@/data/articulos';
@@ -56,6 +57,13 @@ export default async function TreatmentPage({ params }: Props) {
   }
 
   const allRelatedArticles = getListableArticlesByServiceId(tratamiento.id);
+  const caseArticlesById = Object.fromEntries(
+    tratamiento.casosClinicos.flatMap((caso) => {
+      const article = caso.articleSlug ? getRoutableArticleBySlug(caso.articleSlug) : undefined;
+
+      return article ? [[String(caso.id), { slug: article.slug }]] : [];
+    })
+  );
   const relatedArticles = allRelatedArticles.slice(0, RELATED_ARTICLES_LIMIT).map((article) => ({
     slug: article.slug,
     title: article.title,
@@ -65,6 +73,7 @@ export default async function TreatmentPage({ params }: Props) {
   return (
     <TreatmentDetailContent
       tratamiento={tratamiento}
+      caseArticlesById={caseArticlesById}
       relatedArticles={relatedArticles}
       relatedArticlesHref={
         allRelatedArticles.length > RELATED_ARTICLES_LIMIT

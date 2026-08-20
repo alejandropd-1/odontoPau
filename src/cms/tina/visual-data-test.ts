@@ -43,6 +43,33 @@ const treatment = getTratamientos()[0];
 const article = articles[0];
 const instruction = instrucciones[0];
 
+const articlesBySlug = new Map(articles.map((item) => [item.slug, item]));
+const clinicalCases = getTratamientos().flatMap((item) =>
+  item.casosClinicos.map((clinicalCase) => ({ treatment: item, clinicalCase }))
+);
+assert.ok(clinicalCases.length > 0, 'Debe existir al menos un caso clínico para auditar.');
+for (const { treatment: caseTreatment, clinicalCase } of clinicalCases) {
+  assert.ok(
+    clinicalCase.articleSlug,
+    `El caso ${caseTreatment.id}/${clinicalCase.id} necesita un articleSlug canónico.`
+  );
+  const canonicalArticle = articlesBySlug.get(clinicalCase.articleSlug);
+  assert.ok(
+    canonicalArticle,
+    `El caso ${caseTreatment.id}/${clinicalCase.id} referencia un artículo inexistente.`
+  );
+  assert.equal(
+    canonicalArticle.status,
+    'published',
+    `El caso ${caseTreatment.id}/${clinicalCase.id} debe resolver un artículo publicado.`
+  );
+  assert.equal(
+    clinicalCase.titulo,
+    canonicalArticle.title,
+    `El título del caso ${caseTreatment.id}/${clinicalCase.id} debe coincidir con su artículo.`
+  );
+}
+
 const homePayload = createHomeVisualPayload(home);
 const treatmentsPagePayload = createTreatmentsPageVisualPayload(treatmentsPage);
 const treatmentPayload = createTreatmentVisualPayload(treatment);
@@ -107,23 +134,21 @@ const casePageSource = fs.readFileSync(
   path.join(process.cwd(), 'src', 'app', 'tratamientos', '[id]', 'casos', '[casoId]', 'page.tsx'),
   'utf8'
 );
-const caseContentSource = fs.readFileSync(
-  path.join(process.cwd(), 'src', 'components', 'CaseDetailContent.tsx'),
+const sitemapSource = fs.readFileSync(
+  path.join(process.cwd(), 'src', 'app', 'sitemap.ts'),
   'utf8'
 );
-assert.match(treatmentSource, /href=\{`\/tratamientos\/\$\{tratamiento\.id\}\/casos\/\$\{caso\.id\}`\}/);
-assert.doesNotMatch(casePageSource, /permanentRedirect/);
-assert.match(casePageSource, /linkedArticle=/);
-assert.match(caseContentSource, /useTina\(visual\)/);
-for (const field of ['titulo', 'descripcion', 'desafio', 'diagnostico', 'duracion', 'solucion']) {
-  assert.match(caseContentSource, new RegExp(`caseMarker\\('${field}'\\)`));
-}
-assert.match(caseContentSource, /caso\.imagenes\?\.length \? 'imagenes'/);
+assert.doesNotMatch(treatmentSource, /href=\{`\/tratamientos\/\$\{tratamiento\.id\}\/casos\/\$\{caso\.id\}`\}/);
+assert.match(treatmentSource, /href=\{`\/articulos\/\$\{caseArticle\.slug\}`\}/);
+assert.match(casePageSource, /permanentRedirect\(`\/articulos\/\$\{linkedArticle\.slug\}`\)/);
+assert.doesNotMatch(casePageSource, /CaseDetailContent/);
+assert.doesNotMatch(sitemapSource, /caseUrls|\/tratamientos\/\$\{t\.id\}\/casos/);
+assert.equal(fs.existsSync(path.join(process.cwd(), 'src', 'components', 'CaseDetailContent.tsx')), false);
 
 console.log('--- Tina Visual Editing contract ---');
 console.log('- Superficies: Inicio, Servicios, detalle de servicio, Artículo e Instrucción.');
 console.log('- Normalización inicial/editor: round-trip semántico sin pérdida.');
 console.log('- Routers: 5/5 resuelven una preview local no productiva.');
-console.log('- Casos: ficha propia sin redirect, artículo secundario y marcadores visuales granulares.');
+console.log(`- Casos: ${clinicalCases.length}/${clinicalCases.length} resuelven un artículo publicado; sin fichas ni enlaces legacy.`);
 console.log('- Consultas: versionadas y dirigidas por relativePath.');
 console.log('- Baseline histórica: preservada; contrato institucional Tina validado por separado.');

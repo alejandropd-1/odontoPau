@@ -1,0 +1,101 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation "Navegación principal" [ref=e4]:
+      - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e7]:
+        - link "Inicio" [ref=e8] [cursor=pointer]:
+          - /url: /#inicio
+        - link "Servicios" [ref=e9] [cursor=pointer]:
+          - /url: /tratamientos
+        - link "Artículos" [ref=e10] [cursor=pointer]:
+          - /url: /articulos
+        - link "Instrucciones" [ref=e11] [cursor=pointer]:
+          - /url: /instrucciones
+        - link "Ubicación" [ref=e12] [cursor=pointer]:
+          - /url: /#ubicacion
+      - link "Agendar Turno" [ref=e14] [cursor=pointer]:
+        - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=e17]:
+      - list [ref=e18]:
+        - listitem [ref=e19]:
+          - link "Inicio" [ref=e20] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e24]:
+          - link "Rehabilitación" [ref=e27] [cursor=pointer]:
+            - /url: /tratamientos/rehabilitacion
+        - listitem [ref=e28]:
+          - generic [ref=e31]: "Caso: Rehabilitación anterosuperior"
+    - article [ref=e32]:
+      - generic [ref=e33]:
+        - link "Volver a articulos" [ref=e34] [cursor=pointer]:
+          - /url: /articulos
+        - generic [ref=e38]:
+          - generic [ref=e39]: Rehabilitación
+          - 'heading "Caso clínico: Renovación estética del sector anterior: armonía y naturalidad" [level=1] [ref=e40]':
+            - generic [ref=e41]: "Caso clínico:"
+            - text: "Renovación estética del sector anterior: armonía y naturalidad"
+          - paragraph [ref=e42]: Reemplazo de coronas antiguas por piezas libres de metal para devolver luz y naturalidad a los dientes del frente.
+          - generic [ref=e43]:
+            - generic [ref=e44]: 10 de agosto de 2026
+            - generic [ref=e47]: 2 min de lectura
+            - generic [ref=e51]: Por Equipo clínico
+            - button "Compartir" [ref=e53] [cursor=pointer]
+        - region "Imágenes del caso" [ref=e60]:
+          - generic [ref=e61]:
+            - figure "Estado inicial del sector anterosuperior." [ref=e62]:
+              - img "Estado inicial del sector anterosuperior previo al recambio" [ref=e64]
+            - figure "Retiro de coronas antiguas y acondicionamiento para luego opacificar muñones metálicos." [ref=e66]:
+              - img "Retiro de restauraciones anteriores y acondicionamiento" [ref=e68]
+            - figure "Coronas ya instaladas libre de metal." [ref=e70]:
+              - img "Preparación de la superficie para la nueva estructura" [ref=e72]
+            - figure "Naturalidad." [ref=e74]:
+              - img "Prueba de las coronas cerámicas y ajuste de forma" [ref=e76]
+            - figure "Armonía." [ref=e78]:
+              - img "Resultado final con las nuevas coronas libres de metal" [ref=e80]
+        - generic [ref=e82]:
+          - region [ref=e83]:
+            - generic [ref=e84]:
+              - heading "Recuperar la confianza al sonreír" [level=2] [ref=e88]
+              - generic [ref=e89]:
+                - paragraph [ref=e90]: Con el tiempo, las coronas antiguas o con estructuras metálicas internas pueden perder brillo o generar bordes oscuros cerca de la encía.
+                - paragraph [ref=e91]: En este caso, renovamos el sector anterosuperior sustituyendo las viejas restauraciones por coronas cerámicas libres de metal, logrando una apariencia totalmente luminosa y natural.
+              - generic [ref=e92]:
+                - generic [ref=e93]:
+                  - term [ref=e94]: Tratamiento
+                  - definition [ref=e95]: Rehabilitación estética frontal
+                - generic [ref=e96]:
+                  - term [ref=e97]: Material
+                  - definition [ref=e98]: Coronas libres de metal (cerámica)
+            - generic [ref=e99]:
+              - heading "Pasos del tratamiento" [level=3] [ref=e100]
+              - paragraph [ref=e101]: Retiramos las coronas anteriores, preparamos los muñones de los dientes y colocamos piezas cerámicas diseñadas para mimetizarse perfectamente con el resto de la boca.
+              - list [ref=e102]:
+                - listitem [ref=e103]: Retiro de coronas previas
+                - listitem [ref=e108]: Preparación y opacificación de muñones
+                - listitem [ref=e113]: Colocación de coronas libres de metal
+          - generic [ref=e118]:
+            - generic [ref=e119]:
+              - text: Rehabilitación estética
+              - heading "¿Querés renovar tus coronas o mejorar tu sonrisa frontal?" [level=2] [ref=e120]
+              - paragraph [ref=e121]: Escribinos por WhatsApp para evaluar tu caso y planificar una rehabilitación acorde a tus necesidades.
+            - link "Consultar por WhatsApp" [ref=e122] [cursor=pointer]:
+              - /url: https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20rehabilitaci%C3%B3n%20oral
+        - generic [ref=e125]:
+          - generic [ref=e126]:
+            - heading "Temas del artículo" [level=2] [ref=e127]
+            - generic "Temas del artículo" [ref=e131]:
+              - generic [ref=e132]: rehabilitación oral
+              - generic [ref=e133]: estética dental
+              - generic [ref=e134]: coronas libres de metal
+          - complementary [ref=e136]:
+            - text: Seguí explorando
+            - heading "Tratamientos relacionados" [level=2] [ref=e137]
+            - link [ref=e139] [cursor=pointer]:
+              - /url: /tratamientos/rehabilitacion
+              - strong [ref=e140]: Rehabilitación
+              - generic [ref=e141]: Ver tratamiento
+    - generic [ref=e145]:
+      - generic [ref=e146]: Paula Gualtieri
+      - generic [ref=e147]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+  - alert [ref=e148]
