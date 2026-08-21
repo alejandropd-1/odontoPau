@@ -10,6 +10,7 @@ Fecha: 2026-08-21.
 - GitHub Actions: permisos de escritura y creación de Pull Requests confirmados por Alejandro.
 - Branch deploy persistente de Netlify habilitado para `editorial/tina`.
 - URL estable observada: `https://editorial-tina--paulagualtieri.netlify.app`.
+- `NEXT_PUBLIC_EDITORIAL_PREVIEW_URL` configurada por Alejandro con la URL estable para todos los deploy contexts.
 
 ## Prueba reversible de Save
 
@@ -21,7 +22,6 @@ Fecha: 2026-08-21.
 
 La prueba demuestra `Save -> editorial/tina -> Preview` sin publicación ni modificación de producción. No se activó `Publicar cambios`.
 
-## Pendiente externo
+## Pendiente de bootstrap
 
-- Configurar `NEXT_PUBLIC_EDITORIAL_PREVIEW_URL` con la URL estable para que el enlace quede visible dentro del panel nuevo.
 - Resolver el bootstrap estructural antes de ejecutar los ciclos reales: el workflow de publicación debe existir en la rama desde la que GitHub recibe la solicitud, sin introducir archivos estructurales en el diff editorial.

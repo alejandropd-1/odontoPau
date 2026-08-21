@@ -43,5 +43,5 @@
 - [x] 6.2 Ejecutar `validate:tina-content`, `validate:tina-lock`, contratos CMS, reglas editoriales y round-trip aplicable.
 - [x] 6.3 Ejecutar TypeScript, lint y build una sola vez localmente antes del Draft PR; después confiar en CI sobre el mismo commit salvo fallo o diferencia de entorno.
 - [x] 6.4 Auditar que dashboard, workflow y documentación no expongan secretos, rutas privadas, datos identificatorios ni evidencia clínica privada.
-- [ ] 6.5 Alejandro configura o confirma únicamente los permisos externos imprescindibles y autoriza la prueba en Preview; ningún agente modifica Netlify o GitHub antes de esa autorización.
+- [x] 6.5 Alejandro configura o confirma únicamente los permisos externos imprescindibles y autoriza la prueba en Preview; ningún agente modifica Netlify o GitHub antes de esa autorización.
 - [ ] 6.6 Alejandro revisa los dos ciclos, marca este checkbox y autoriza el commit de cierre y OpenSpec Archive. Esta tarea es exclusivamente manual y ningún agente puede marcarla.
