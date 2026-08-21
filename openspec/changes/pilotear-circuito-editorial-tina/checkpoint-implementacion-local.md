@@ -8,7 +8,7 @@ Fecha: 2026-08-21. No se ejecutaron push, PR, Preview remoto, cambios de permiso
 - Workflow: disparo cerrado, request idempotente, snapshot inmutable, PR protegido, espera de checks y sincronización sin force-push verificados estáticamente.
 - Tina audit: 1 Inicio, 1 página de tratamientos, 6 tratamientos, 13 artículos, 4 instrucciones y 1 singleton interno; sin errores.
 - Schema local: generado correctamente con `publicationrequest` y estado `retired`.
-- Tina lock: regenerado y estable en dos ejecuciones consecutivas; su gate contra Git permanecerá pendiente hasta que la versión nueva forme parte del commit.
+- Tina lock: regenerado, estable en dos ejecuciones consecutivas y con su gate contra Git verde sobre el commit de implementación.
 - Contratos históricos: 188 rutas, 36/36 fixtures y 0 violaciones nuevas.
 - Contrato Tina vigente: 130/130 rutas seguras; round-trip local de alta, edición y recuperación sin mutar `src/data`.
 - TypeScript, lint y build de producción: verdes.

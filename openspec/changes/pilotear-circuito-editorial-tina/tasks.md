@@ -40,7 +40,7 @@
 ## 6. Validación y gate humano
 
 - [x] 6.1 Ejecutar `openspec validate pilotear-circuito-editorial-tina --strict`, `git diff --check` y tests específicos del request/workflow.
-- [ ] 6.2 Ejecutar `validate:tina-content`, `validate:tina-lock`, contratos CMS, reglas editoriales y round-trip aplicable.
+- [x] 6.2 Ejecutar `validate:tina-content`, `validate:tina-lock`, contratos CMS, reglas editoriales y round-trip aplicable.
 - [x] 6.3 Ejecutar TypeScript, lint y build una sola vez localmente antes del Draft PR; después confiar en CI sobre el mismo commit salvo fallo o diferencia de entorno.
 - [x] 6.4 Auditar que dashboard, workflow y documentación no expongan secretos, rutas privadas, datos identificatorios ni evidencia clínica privada.
 - [ ] 6.5 Alejandro configura o confirma únicamente los permisos externos imprescindibles y autoriza la prueba en Preview; ningún agente modifica Netlify o GitHub antes de esa autorización.
