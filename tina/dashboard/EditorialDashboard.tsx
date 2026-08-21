@@ -1,6 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useCMS } from 'tinacms';
 
+import {
+  PUBLICATION_REQUEST_RELATIVE_PATH,
+  createPendingPublicationRequest,
+  isActivePublicationRequest,
+  type PublicationRequest,
+  type PublicationRequestStatus,
+} from '../../src/cms/tina/publication';
+
 const EDITORIAL_QUERY = `
   query OdontoPauEditorialDashboard {
     articuloConnection {
@@ -28,6 +36,31 @@ const EDITORIAL_QUERY = `
       }
     }
     tratamientoConnection { totalCount }
+    publicationrequest(relativePath: "publication-request.json") {
+      type
+      status
+      requestId
+      requestedAt
+      lastProcessedRequestId
+      processedAt
+      productionCommit
+      summary
+    }
+  }
+`;
+
+const REQUEST_PUBLICATION_MUTATION = `
+  mutation RequestEditorialPublication($relativePath: String!, $params: PublicationrequestMutation!) {
+    updatePublicationrequest(relativePath: $relativePath, params: $params) {
+      type
+      status
+      requestId
+      requestedAt
+      lastProcessedRequestId
+      processedAt
+      productionCommit
+      summary
+    }
   }
 `;
 
@@ -43,6 +76,7 @@ interface EditorialDashboardData {
   articuloConnection: { totalCount: number; edges: Array<{ node: EditorialNode }> };
   instruccionConnection: { totalCount: number; edges: Array<{ node: EditorialNode }> };
   tratamientoConnection: { totalCount: number };
+  publicationrequest: PublicationRequest;
 }
 
 type EditorialDashboardResponse = EditorialDashboardData & {
@@ -55,6 +89,7 @@ const statusLabels: Record<string, string> = {
   technical_review: 'Revisión técnica',
   approved: 'Aprobado',
   published: 'Publicado',
+  retired: 'Retirado',
 };
 
 const statusColors: Record<string, { color: string; background: string }> = {
@@ -63,7 +98,37 @@ const statusColors: Record<string, { color: string; background: string }> = {
   technical_review: { color: '#385c73', background: '#e8f3fa' },
   approved: { color: '#2e6544', background: '#e7f5ec' },
   published: { color: '#fff', background: '#c94f16' },
+  retired: { color: '#5f6368', background: '#eceff1' },
 };
+
+const publicationStatusCopy: Record<PublicationRequestStatus, { title: string; detail: string }> = {
+  idle: {
+    title: 'Sin publicación pendiente',
+    detail: 'Podés seguir editando y guardar. Producción no cambia hasta que uses el botón de publicación.',
+  },
+  pending: {
+    title: 'Publicación solicitada o en curso',
+    detail: 'Los controles automáticos están comenzando o ejecutándose. Los cambios siguen visibles sólo en Preview.',
+  },
+  processing: {
+    title: 'Publicando cambios',
+    detail: 'Se están ejecutando los controles y la integración protegida. No vuelvas a solicitarla.',
+  },
+  published: {
+    title: 'Últimos cambios publicados',
+    detail: 'La publicación terminó correctamente. Podés iniciar una nueva tanda editorial.',
+  },
+  failed: {
+    title: 'La publicación se detuvo',
+    detail: 'Producción no cambió. Tus modificaciones siguen en Preview para corregirlas o pedir ayuda.',
+  },
+  waiting_index: {
+    title: 'Esperando actualización del editor',
+    detail: 'La versión ya se procesó, pero Tina todavía está actualizando su índice. Esperá antes de publicar otra tanda.',
+  },
+};
+
+const previewUrl = process.env.NEXT_PUBLIC_EDITORIAL_PREVIEW_URL;
 
 function collectionUrl(collection: 'homepage' | 'treatmentspage' | 'tratamiento' | 'articulo' | 'instruccion'): string {
   return `#/collections/${collection}`;
@@ -79,6 +144,8 @@ export function EditorialDashboard() {
   const [data, setData] = useState<EditorialDashboardData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [publishing, setPublishing] = useState(false);
+  const [publicationConfirmed, setPublicationConfirmed] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -98,6 +165,46 @@ export function EditorialDashboard() {
       setLoading(false);
     }
   }, [cms]);
+
+  const requestPublication = useCallback(async () => {
+    const current = data?.publicationrequest;
+    if (!current || !publicationConfirmed || publishing) return;
+
+    const confirmed = window.confirm(
+      'Vas a publicar el snapshot completo que ves en Preview, no sólo la pantalla abierta. ¿Querés continuar?'
+    );
+    if (!confirmed) return;
+
+    setPublishing(true);
+    setError(null);
+    try {
+      const tinaApi = cms.api.tina;
+      if (!tinaApi) throw new Error('El cliente de Tina todavía no está disponible.');
+
+      const requestId = `editorial-${Date.now().toString(36)}-${window.crypto.randomUUID()}`;
+      const next = createPendingPublicationRequest(current, requestId, new Date().toISOString());
+      const response = (await tinaApi.request(REQUEST_PUBLICATION_MUTATION, {
+        variables: {
+          relativePath: PUBLICATION_REQUEST_RELATIVE_PATH,
+          params: next,
+        },
+      })) as {
+        updatePublicationrequest?: PublicationRequest;
+        errors?: Array<{ message: string }>;
+      };
+      if (response.errors?.length) throw new Error(response.errors[0].message);
+      if (!response.updatePublicationrequest) throw new Error('Tina no devolvió la solicitud guardada.');
+
+      setData((previous) =>
+        previous ? { ...previous, publicationrequest: response.updatePublicationrequest as PublicationRequest } : previous
+      );
+      setPublicationConfirmed(false);
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : 'No se pudo solicitar la publicación.');
+    } finally {
+      setPublishing(false);
+    }
+  }, [cms, data?.publicationrequest, publicationConfirmed, publishing]);
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => void load(), 0);
@@ -126,6 +233,11 @@ export function EditorialDashboard() {
     [documents]
   );
 
+  const publicationRequest = data?.publicationrequest;
+  const publicationStatus = publicationRequest?.status ?? 'idle';
+  const publicationCopy = publicationStatusCopy[publicationStatus];
+  const publicationActive = publicationRequest ? isActivePublicationRequest(publicationRequest.status) : true;
+
   return (
     <main style={styles.page}>
       <header style={styles.header}>
@@ -133,15 +245,57 @@ export function EditorialDashboard() {
           <p style={styles.eyebrow}>PAULA GUALTIERI · EDITORIAL</p>
           <h1 style={styles.title}>Contenido del sitio</h1>
           <p style={styles.subtitle}>
-            Editá en esta rama. Publicar sigue requiriendo PR, preview y aprobación.
+            Guardar actualiza Preview. Producción sólo cambia cuando confirmás “Publicar cambios”.
           </p>
         </div>
-        <button type="button" onClick={() => void load()} style={styles.secondaryButton}>
+        <button type="button" onClick={() => void load()} aria-label="Actualizar el estado editorial" style={styles.secondaryButton}>
           Actualizar
         </button>
       </header>
 
-      {error ? <div style={styles.error}>{error}</div> : null}
+      {error ? <div role="alert" style={styles.error}>{error}</div> : null}
+
+      <section aria-labelledby="publication-title" style={styles.publicationPanel}>
+        <div style={styles.publicationCopy}>
+          <p style={styles.eyebrow}>PUBLICACIÓN</p>
+          <h2 id="publication-title" aria-live="polite" style={styles.panelTitle}>{publicationCopy.title}</h2>
+          <p style={styles.publicationDetail}>{publicationRequest?.summary || publicationCopy.detail}</p>
+          <p style={styles.publicationHint}>
+            Guardá todos los documentos primero. El botón publica la tanda completa de Preview y nunca un único campo.
+          </p>
+          {previewUrl ? (
+            <a href={previewUrl} target="_blank" rel="noreferrer" style={styles.previewLink}>
+              Abrir Preview ↗
+            </a>
+          ) : (
+            <span style={styles.previewUnavailable}>El enlace de Preview todavía no está configurado.</span>
+          )}
+        </div>
+        <div style={styles.publicationActions}>
+          <label style={styles.confirmationLabel}>
+            <input
+              type="checkbox"
+              checked={publicationConfirmed}
+              disabled={publicationActive || publishing}
+              onChange={(event) => setPublicationConfirmed(event.target.checked)}
+              style={styles.confirmationCheckbox}
+            />
+            <span>Revisé Preview y confirmé las aprobaciones clínicas o de imágenes que correspondan.</span>
+          </label>
+          <button
+            type="button"
+            onClick={() => void requestPublication()}
+            disabled={publicationActive || publishing || !publicationConfirmed}
+            aria-busy={publishing}
+            style={{
+              ...styles.publishButton,
+              ...(publicationActive || publishing || !publicationConfirmed ? styles.disabledButton : {}),
+            }}
+          >
+            {publishing ? 'Enviando solicitud…' : publicationActive ? 'Publicación en curso' : 'Publicar cambios'}
+          </button>
+        </div>
+      </section>
 
       <section aria-label="Colecciones" style={styles.collectionGrid}>
         <a href={collectionUrl('homepage')} style={styles.collectionCard}>
@@ -232,6 +386,17 @@ const styles: Record<string, React.CSSProperties> = {
   subtitle: { maxWidth: 620, margin: '18px 0 0', color: '#6f655e', fontSize: 16, lineHeight: 1.6 },
   secondaryButton: { minHeight: 44, padding: '0 18px', border: '1px solid #d7cec7', borderRadius: 999, background: 'rgba(255,255,255,.75)', color: '#2b2521', fontWeight: 700, cursor: 'pointer' },
   error: { maxWidth: 1120, margin: '0 auto 24px', padding: 16, borderRadius: 14, color: '#7f1d1d', background: '#fee2e2' },
+  publicationPanel: { maxWidth: 1120, margin: '0 auto 24px', padding: 'clamp(22px, 4vw, 34px)', borderRadius: 26, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 28, alignItems: 'center', background: 'linear-gradient(145deg, #fffaf6, #f8e8db)', border: '1px solid rgba(192,85,31,.25)', boxShadow: '0 20px 60px rgba(80,45,25,.08)' },
+  publicationCopy: { minWidth: 0 },
+  publicationDetail: { margin: '10px 0 0', color: '#514943', fontSize: 16, lineHeight: 1.55 },
+  publicationHint: { margin: '12px 0 0', color: '#756961', fontSize: 13, lineHeight: 1.5 },
+  publicationActions: { display: 'grid', gap: 16 },
+  confirmationLabel: { display: 'grid', gridTemplateColumns: '22px 1fr', gap: 12, alignItems: 'start', color: '#403933', fontSize: 14, lineHeight: 1.5, cursor: 'pointer' },
+  confirmationCheckbox: { width: 20, height: 20, margin: 0, accentColor: '#c14d19' },
+  publishButton: { minHeight: 52, padding: '0 24px', border: 0, borderRadius: 999, color: '#fff', background: '#c14d19', fontSize: 15, fontWeight: 800, cursor: 'pointer', boxShadow: '0 12px 30px rgba(193,77,25,.24)' },
+  disabledButton: { opacity: 0.5, cursor: 'not-allowed', boxShadow: 'none' },
+  previewLink: { display: 'inline-flex', marginTop: 18, color: '#a93f12', fontWeight: 800, textDecoration: 'none' },
+  previewUnavailable: { display: 'inline-block', marginTop: 18, color: '#8a5b44', fontSize: 13, fontWeight: 700 },
   collectionGrid: { maxWidth: 1120, margin: '0 auto 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 },
   collectionCard: { minHeight: 180, padding: 28, borderRadius: 24, display: 'flex', flexDirection: 'column', textDecoration: 'none', color: '#1f1b18', background: 'linear-gradient(145deg, rgba(255,255,255,.94), rgba(247,230,217,.82))', border: '1px solid rgba(192,85,31,.2)', boxShadow: '0 18px 50px rgba(70,45,31,.08)' },
   collectionLabel: { color: '#7f6d62', fontSize: 14, fontWeight: 700 },
