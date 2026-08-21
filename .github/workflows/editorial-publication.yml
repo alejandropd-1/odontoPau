@@ -1,0 +1,160 @@
+name: Editorial Publication
+
+on:
+  push:
+    branches:
+      - editorial/tina
+    paths:
+      - src/data/editorial/publication-request.json
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+concurrency:
+  group: editorial-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: protected-editorial-publication
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CI: "true"
+
+    steps:
+      - name: Checkout editorial snapshot
+        uses: actions/checkout@v4
+        with:
+          ref: editorial/tina
+          fetch-depth: 0
+
+      - name: Read publication request
+        id: request
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const request = JSON.parse(fs.readFileSync('src/data/editorial/publication-request.json', 'utf8'));
+          const processRequest = request.status === 'pending' && request.requestId && request.requestId !== request.lastProcessedRequestId;
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `process=${processRequest ? 'true' : 'false'}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `request_id=${processRequest ? request.requestId : ''}\n`);
+          NODE
+
+      - name: Configure pnpm
+        if: steps.request.outputs.process == 'true'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.1.2
+          run_install: false
+
+      - name: Configure Node.js
+        if: steps.request.outputs.process == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        if: steps.request.outputs.process == 'true'
+        run: pnpm install --frozen-lockfile
+
+      - name: Fetch publication refs
+        if: steps.request.outputs.process == 'true'
+        run: |
+          git fetch --no-tags origin main editorial/tina
+          test "$(git rev-parse origin/editorial/tina)" = "${GITHUB_SHA}"
+
+      - name: Validate request and editorial scope
+        if: steps.request.outputs.process == 'true'
+        run: pnpm exec tsx scripts/editorial-publication.ts preflight origin/main "${GITHUB_SHA}" origin/editorial/tina
+
+      - name: Create or reuse technical pull request
+        if: steps.request.outputs.process == 'true'
+        id: pull_request
+        shell: bash
+        run: |
+          pr_number="$(gh pr list --base main --head editorial/tina --state open --json number --jq '.[0].number // empty')"
+          if [ -z "$pr_number" ]; then
+            pr_url="$(gh pr create \
+              --base main \
+              --head editorial/tina \
+              --title "Publicación editorial ${{ steps.request.outputs.request_id }}" \
+              --body "Solicitud generada desde Tina. El workflow valida alcance, CI y convergencia antes de integrar.")"
+            pr_number="${pr_url##*/}"
+          fi
+          echo "number=$pr_number" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for required checks
+        if: steps.request.outputs.process == 'true'
+        shell: bash
+        run: |
+          for attempt in {1..12}; do
+            check_count="$(gh pr checks "${{ steps.pull_request.outputs.number }}" --json name --jq 'length' 2>/dev/null || echo 0)"
+            if [ "$check_count" -gt 0 ]; then
+              break
+            fi
+            sleep 5
+          done
+          test "${check_count:-0}" -gt 0
+          gh pr checks "${{ steps.pull_request.outputs.number }}" --watch --fail-fast --interval 10
+
+      - name: Confirm immutable editorial snapshot
+        if: steps.request.outputs.process == 'true'
+        run: |
+          git fetch --no-tags origin editorial/tina
+          test "$(git rev-parse origin/editorial/tina)" = "${GITHUB_SHA}"
+
+      - name: Merge protected publication
+        if: steps.request.outputs.process == 'true'
+        id: merge
+        run: |
+          gh pr merge "${{ steps.pull_request.outputs.number }}" --merge --delete-branch=false
+          git fetch --no-tags origin main
+          echo "commit=$(git rev-parse origin/main)" >> "$GITHUB_OUTPUT"
+
+      - name: Synchronize editorial branch and record success
+        if: steps.request.outputs.process == 'true'
+        shell: bash
+        run: |
+          git push origin origin/main:refs/heads/editorial/tina
+          git checkout -B editorial/tina origin/main
+          pnpm exec tsx scripts/editorial-publication.ts mark-result \
+            published \
+            "${{ steps.request.outputs.request_id }}" \
+            "${{ steps.merge.outputs.commit }}" \
+            "Cambios integrados. El despliegue de producción fue iniciado."
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- src/data/editorial/publication-request.json
+          git commit -m "chore(editorial): registrar publicación ${{ steps.request.outputs.request_id }}"
+          git push origin HEAD:editorial/tina
+
+      - name: Record safe failure
+        if: failure() && steps.request.outputs.process == 'true'
+        shell: bash
+        run: |
+          git fetch --no-tags origin main editorial/tina
+          git checkout -B editorial/tina origin/editorial/tina
+          if git merge-base --is-ancestor "${GITHUB_SHA}" origin/main; then
+            result="published"
+            production_commit="$(git rev-parse origin/main)"
+            summary="Los cambios llegaron a main, pero la sincronización final necesita revisión."
+          else
+            result="failed"
+            production_commit="-"
+            summary="La publicación se detuvo de forma segura. Producción no fue modificada por este request."
+          fi
+          pnpm exec tsx scripts/editorial-publication.ts mark-result \
+            "$result" \
+            "${{ steps.request.outputs.request_id }}" \
+            "$production_commit" \
+            "$summary" || exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- src/data/editorial/publication-request.json
+          git commit -m "chore(editorial): registrar resultado ${{ steps.request.outputs.request_id }}" || exit 0
+          git push origin HEAD:editorial/tina

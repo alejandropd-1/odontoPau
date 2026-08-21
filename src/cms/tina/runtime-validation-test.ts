@@ -25,6 +25,14 @@ const clone = <T>(value: T): T => structuredClone(value);
 assert.doesNotThrow(() => validateArticleDocument(clone(baseArticle), 'articulo-real-copia'));
 assert.doesNotThrow(() => validateInstructionDocument(clone(baseInstruction), 'instruccion-real-copia'));
 
+const retiredArticle = clone(baseArticle);
+retiredArticle.status = 'retired';
+assert.doesNotThrow(() => validateArticleDocument(retiredArticle, 'articulo-retirado'));
+
+const retiredInstruction = clone(baseInstruction);
+retiredInstruction.status = 'retired';
+assert.doesNotThrow(() => validateInstructionDocument(retiredInstruction, 'instruccion-retirada'));
+
 const articleWithoutReviewer = clone(baseArticle);
 delete articleWithoutReviewer.clinicalReviewer;
 assert.throws(() => validateArticleDocument(articleWithoutReviewer), /clinicalReviewer/);

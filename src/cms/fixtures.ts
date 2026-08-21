@@ -9,7 +9,9 @@ export interface DocumentFixture {
 }
 
 /**
- * Carga los 25 documentos JSON editoriales reales existentes bajo `src/data`.
+ * Carga los documentos públicos reales bajo `src/data`.
+ * Los singletons operativos internos se validan en su suite propia y no alteran
+ * la línea base histórica de contratos del contenido del sitio.
  */
 export function loadRealJsonDocuments(): DocumentFixture[] {
   const dataDir = path.join(process.cwd(), 'src', 'data');
@@ -24,6 +26,9 @@ export function loadRealJsonDocuments(): DocumentFixture[] {
         walk(fullPath);
       } else if (file.endsWith('.json')) {
         const relativePath = path.relative(dataDir, fullPath).replace(/\\/g, '/');
+        if (relativePath.startsWith('editorial/')) {
+          continue;
+        }
         const rawContent = fs.readFileSync(fullPath, 'utf-8');
         const json = JSON.parse(rawContent);
 

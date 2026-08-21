@@ -174,10 +174,38 @@ export const treatmentCollection: Collection = {
   fields: treatmentFields,
 };
 
+export const publicationRequestCollection: Collection = {
+  name: 'publicationrequest',
+  label: 'Publicación del sitio',
+  path: 'src/data/editorial',
+  format: 'json',
+  match: { include: 'publication-request' },
+  ui: {
+    allowedActions: { create: false, delete: false, createFolder: false, createNestedFolder: false },
+    filename: { readonly: true },
+  },
+  fields: [
+    { name: 'type', label: 'Tipo', type: 'string', required: true, ui: { component: 'hidden' } },
+    { name: 'status', label: 'Estado', type: 'string', required: true, ui: { component: 'hidden' } },
+    { name: 'requestId', label: 'Solicitud', type: 'string', ui: { component: 'hidden' } },
+    { name: 'requestedAt', label: 'Fecha de solicitud', type: 'datetime', ui: { component: 'hidden' } },
+    {
+      name: 'lastProcessedRequestId',
+      label: 'Última solicitud procesada',
+      type: 'string',
+      ui: { component: 'hidden' },
+    },
+    { name: 'processedAt', label: 'Fecha de resultado', type: 'datetime', ui: { component: 'hidden' } },
+    { name: 'productionCommit', label: 'Versión publicada', type: 'string', ui: { component: 'hidden' } },
+    { name: 'summary', label: 'Resultado', type: 'string', ui: { component: 'hidden' } },
+  ],
+};
+
 export const tinaCollections: Collection[] = [
   homePageCollection,
   treatmentsPageCollection,
   treatmentCollection,
   articleCollection,
   instructionCollection,
+  publicationRequestCollection,
 ];

@@ -6,6 +6,7 @@ export const instructionStatusLabels: Record<InstructionStatus, string> = {
   technical_review: 'revisión técnica',
   approved: 'aprobada',
   published: 'publicada',
+  retired: 'retirada',
 };
 
 export function formatInstructionDate(value: string) {

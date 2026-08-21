@@ -7,7 +7,8 @@ export type InstructionStatus =
   | 'clinical_review'
   | 'technical_review'
   | 'approved'
-  | 'published';
+  | 'published'
+  | 'retired';
 
 export const instructionStatusLabels: Record<InstructionStatus, string> = {
   draft: 'borrador',
@@ -15,6 +16,7 @@ export const instructionStatusLabels: Record<InstructionStatus, string> = {
   technical_review: 'revisión técnica',
   approved: 'aprobada',
   published: 'publicada',
+  retired: 'retirada',
 };
 
 export type InstructionNoticeTone = 'info' | 'important' | 'contact';
@@ -105,6 +107,7 @@ const instructionStatuses = new Set<InstructionStatus>([
   'technical_review',
   'approved',
   'published',
+  'retired',
 ]);
 const noticeTones = new Set<InstructionNoticeTone>(['info', 'important', 'contact']);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;

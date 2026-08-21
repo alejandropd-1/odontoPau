@@ -8,10 +8,12 @@ import {
   instructionCollection,
   treatmentCollection,
   treatmentsPageCollection,
+  publicationRequestCollection,
 } from './collections';
 import {
   CATEGORY_OPTIONS,
   SERVICE_OPTIONS,
+  STATUS_OPTIONS,
   articleFields,
   articleImageFields,
   instructionFields,
@@ -166,6 +168,13 @@ assert.match(
   editorialFieldSource,
   /input\.onChange as unknown as \(value: string\) => void\)\(event\.target\.value\)/,
   'Los campos de texto personalizados deben entregar el valor a Final Form, no el evento sintético de React.'
+);
+
+assert.equal(publicationRequestCollection.ui?.allowedActions?.create, false);
+assert.equal(publicationRequestCollection.ui?.allowedActions?.delete, false);
+assert.equal(
+  STATUS_OPTIONS.some((option) => option.value === 'retired' && option.label === 'Retirado'),
+  true
 );
 
 const tinaRunnerSource = readFileSync(new URL('../../../scripts/run-tina.mjs', import.meta.url), 'utf8');
