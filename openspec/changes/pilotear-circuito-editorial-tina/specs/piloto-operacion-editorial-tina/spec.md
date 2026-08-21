@@ -33,12 +33,16 @@ Cada ciclo MUST clasificarse como `editorial-routine` o `structural-change`. Só
 - **WHEN** la modificación requiere agregar un campo al schema o cambiar un renderizador
 - **THEN** el ciclo se clasifica `structural-change`, se detiene el carril automático y se deriva a un OpenSpec propio
 
-### Requirement: Piloto representativo y medido
-El sistema SHALL completar dos ciclos editoriales reales antes de declarar estable la rutina: al menos una actualización visible y un retiro o republicación. Cada ciclo MUST registrar evidencia mínima no sensible, duración, fallos e intervención necesaria.
+### Requirement: Bootstrap estructural verificable
+La infraestructura de publicación SHALL validarse en un Draft PR y un Deploy Preview antes de integrarse. El bootstrap MUST demostrar `Save -> Preview` sin modificar producción, MUST mantener la allowlist cerrada y MUST NOT copiar código, workflows u OpenSpec a `editorial/tina` para simular anticipadamente un ciclo real.
 
-#### Scenario: Cobertura suficiente
-- **WHEN** los dos ciclos llegan correctamente a producción y terminan convergentes
-- **THEN** el piloto puede cerrar sin fabricar un tercer cambio
+#### Scenario: Workflow todavía no publicado
+- **WHEN** el workflow sólo existe en la rama estructural del OpenSpec
+- **THEN** el bootstrap puede cerrar con evidencia de CI y Preview, pero la rutina no se declara estable ni se inventa una publicación real
+
+#### Scenario: Infraestructura integrada
+- **WHEN** el bootstrap se mezcla con autorización y `editorial/tina` converge con el nuevo `main`
+- **THEN** el sucesor operativo puede ejecutar los dos ciclos reales sin relajar la allowlist
 
 ### Requirement: Autoridad editorial explicita
 La automatización MUST actuar solamente después de una solicitud consciente de un colaborador Tina. Las aprobaciones clínicas aplicables permanecen obligatorias como responsabilidad humana, pero el sistema MUST NOT imponer una separación adicional entre profesional, editor, Admin o Editor de Tina para activar la publicación.
@@ -51,9 +55,9 @@ La automatización MUST actuar solamente después de una solicitud consciente de
 - **WHEN** sólo se guardaron cambios o se seleccionó un estado editorial
 - **THEN** no existe autorización de producción y el snapshot permanece en Preview
 
-### Requirement: Resultado operativo transferible
-Al finalizar, el piloto SHALL producir una guía para personas no técnicas, una matriz de excepciones y un handoff reusable para OdontoPia y GitCron, diferenciando scripts deterministas de tareas aptas para un modelo local sin autoridad de publicación.
+### Requirement: Continuidad obligatoria del piloto
+El bootstrap SHALL producir una guía para personas no técnicas, una matriz de excepciones y un handoff reusable para OdontoPia y GitCron. La rutina MUST permanecer en estado pendiente de validación operativa hasta que `validar-operacion-editorial-tina-en-produccion` complete una actualización visible y un retiro o republicación reales con evidencia mínima no sensible.
 
-#### Scenario: Operacion saludable
-- **WHEN** un ciclo cumple clasificación, aprobación, gates, convergencia y publicación
-- **THEN** el colaborador lo completa desde Tina y la intervención técnica queda reservada para excepciones
+#### Scenario: Bootstrap cerrado
+- **WHEN** infraestructura, permisos, CI y Preview están validados y el cambio se integra
+- **THEN** el sucesor recibe ramas convergentes, gates vigentes y los dos ciclos pendientes sin reconstruir el contexto

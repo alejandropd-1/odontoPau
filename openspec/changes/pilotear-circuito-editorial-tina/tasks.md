@@ -28,14 +28,14 @@
 - [x] 4.4 Consumir la solicitud, registrar resultado mínimo y sincronizar `editorial/tina` por fast-forward con el `main` publicado.
 - [x] 4.5 Documentar el permiso externo requerido para `GITHUB_TOKEN` y el fallback manual sin exponer credenciales al CMS.
 
-## 5. Rutina y ciclos reales
+## 5. Rutina y bootstrap transferible
 
 - [x] 5.1 Redactar una guía breve para usuarios no técnicos: editar, guardar, abrir Preview, publicar, retirar y reconocer errores.
 - [x] 5.2 Reconstruir como línea base el ciclo de PR #12 y el fallo por schema remoto desactualizado, sin copiar logs completos.
 - [x] 5.3 Con autorización previa, abrir Draft PR y comprobar que una guarda ordinaria actualiza Preview sin modificar producción.
-- [ ] 5.4 Ejecutar un ciclo real de publicación desde Tina y registrar gates, commit, preview, producción y convergencia.
-- [ ] 5.5 Ejecutar un ciclo real de retiro o republicación y confirmar que el documento permanece editable y deja de renderizarse cuando corresponde.
-- [ ] 5.6 Consolidar tiempos, fallos e intervención necesaria y producir el handoff reusable para OdontoPia y GitCron.
+- [x] 5.4 Registrar la dependencia de bootstrap que impide ejecutar ciclos reales antes de que el workflow exista en `main`, sin relajar la allowlist ni copiar código a `editorial/tina`.
+- [x] 5.5 Trasladar explícitamente la actualización visible y el retiro o republicación reales al sucesor obligatorio `validar-operacion-editorial-tina-en-produccion`.
+- [x] 5.6 Consolidar la evidencia, excepciones y configuración reusable en un handoff de bootstrap para OdontoPia y GitCron.
 
 ## 6. Validación y gate humano
 
@@ -44,4 +44,4 @@
 - [x] 6.3 Ejecutar TypeScript, lint y build una sola vez localmente antes del Draft PR; después confiar en CI sobre el mismo commit salvo fallo o diferencia de entorno.
 - [x] 6.4 Auditar que dashboard, workflow y documentación no expongan secretos, rutas privadas, datos identificatorios ni evidencia clínica privada.
 - [x] 6.5 Alejandro configura o confirma únicamente los permisos externos imprescindibles y autoriza la prueba en Preview; ningún agente modifica Netlify o GitHub antes de esa autorización.
-- [ ] 6.6 Alejandro revisa los dos ciclos, marca este checkbox y autoriza el commit de cierre y OpenSpec Archive. Esta tarea es exclusivamente manual y ningún agente puede marcarla.
+- [ ] 6.6 Alejandro revisa el bootstrap, marca este checkbox y autoriza el commit de cierre y OpenSpec Archive. Esta tarea es exclusivamente manual y ningún agente puede marcarla.

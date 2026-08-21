@@ -84,6 +84,12 @@ Ante error, la solicitud permanece identificable como fallida, producción conse
 
 Los cambios locales ejecutan pruebas específicas del contrato y del workflow. El PR ejecuta los gates completos una vez. Los logs de Netlify sólo se inspeccionan ante fallo, timeout o commit inesperado.
 
+### 10. Bootstrap estructural antes de los ciclos reales
+
+El workflow y el panel de publicación son cambios estructurales. GitHub sólo puede reaccionar a una solicitud enviada desde `editorial/tina` cuando el archivo de workflow ya existe en esa rama; al mismo tiempo, la allowlist debe rechazar workflows, código y OpenSpec dentro de un snapshot editorial.
+
+Por lo tanto, este cambio termina al validar, archivar e integrar la infraestructura. Después del merge autorizado, `editorial/tina` se adelanta al `main` publicado y el sucesor obligatorio `validar-operacion-editorial-tina-en-produccion` ejecuta los dos ciclos reales. No se copiará código estructural a staging ni se relajará la allowlist sólo para fabricar una prueba previa al bootstrap.
+
 ## Risks / Trade-offs
 
 - [Dos personas editan al mismo tiempo] → el botón publica el snapshot completo y lo declara explícitamente; el piloto comienza con una tanda editorial por vez.
@@ -101,13 +107,15 @@ Los cambios locales ejecutan pruebas específicas del contrato y del workflow. E
 4. Implementar el preflight y el workflow de publicación sin activarlo externamente todavía.
 5. Validar localmente schema, contratos, TypeScript y workflow.
 6. Con autorización de Alejandro, publicar la rama en Draft PR y probar Preview.
-7. Ejecutar dos ciclos editoriales reales antes del gate humano final.
-8. Archivar y mezclar mediante el circuito OpenSpec vigente.
+7. Registrar el límite de bootstrap, obtener el gate humano final, archivar y mezclar mediante el circuito OpenSpec vigente.
+8. Sincronizar `editorial/tina` con el `main` publicado.
+9. Abrir `validar-operacion-editorial-tina-en-produccion` y ejecutar allí una actualización visible y un retiro o republicación reales.
 
 Rollback: deshabilitar el workflow y ocultar el control de publicación. Tina continúa guardando en `editorial/tina`; el procedimiento manual por PR sigue disponible sin perder contenido.
 
-## Open Questions
+## Decisiones externas confirmadas
 
-- URL definitiva del branch deploy que se mostrará como Preview en Tina.
-- Si GitHub permite al `GITHUB_TOKEN` del repositorio crear y mezclar el PR automático o necesita habilitarse una opción administrativa.
-- Qué dos cambios reales se utilizarán para validar publicación y retiro.
+- Preview estable: `https://editorial-tina--paulagualtieri.netlify.app`.
+- GitHub Actions dispone de escritura y creación de Pull Requests.
+- Netlify construye `editorial/tina` como branch deploy y recibe la URL mediante `NEXT_PUBLIC_EDITORIAL_PREVIEW_URL`.
+- La selección de los dos cambios reales pertenece al sucesor y requiere contenido reversible o explícitamente aprobado.

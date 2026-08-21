@@ -20,7 +20,8 @@
 | 3 | `adoptar-tina-y-completar-cms-articulos-instrucciones` | DONE | Publicado y archivado el 2026-08-21; Tina edita Inicio, Tratamientos, casos, Artículos e Instrucciones desde `editorial/tina` |
 | 4 | CMS Tina slice C: tratamientos y casos | ABSORBED BY 3 | Incorporado explícitamente al cambio activo mediante tareas 4.5–4.13; no crear un change duplicado |
 | 5 | CMS Tina slice D: portada e institucionales | ABSORBED BY 3 | Inicio e índice de Tratamientos incorporados al cambio activo; la configuración global del sitio seguirá en un OpenSpec posterior |
-| 6 | `pilotear-circuito-editorial-tina` | IN IMPLEMENTATION | Tina Free: `Guardar -> Preview -> Publicar/Retirar -> Producción`; publicación explícita disponible para todos los colaboradores autorizados |
+| 6 | `pilotear-circuito-editorial-tina` | BOOTSTRAP IN REVIEW | Infraestructura Tina Free validada en Draft PR y Preview; pendiente gate humano, archive y merge |
+| 6.1 | `validar-operacion-editorial-tina-en-produccion` | NEXT / BLOCKED BY 6 | Después del bootstrap: una publicación visible, un retiro o republicación, convergencia y handoff operativo final |
 | 7 | `preparar-redes-sociales-editoriales` | PARKED | CMS estable y articulos fuente publicados/aprobados |
 | 8 | `dinamizar-dashboard-editorial-con-supabase` | PARKED / DECISION GATE | Implementar solo si el piloto demuestra necesidad de asignaciones, KPIs o auditoria operativa |
 | 9 | `preparar-runner-editorial-lm-studio-link` | PARKED | Circuito estable, casos golden suficientes y retorno esperado justificado |
@@ -33,7 +34,8 @@
 2. `adoptar-tina-y-completar-cms-articulos-instrucciones`.
 3. Tratamientos, casos, Inicio e índice absorbidos de forma explícita por `adoptar-tina-y-completar-cms-articulos-instrucciones`.
 4. Futuro slice acotado de configuración global del sitio: navegación, contacto, mapa y relaciones automáticas entre contenidos.
-5. `pilotear-circuito-editorial-tina` para estabilizar la operación antes de automatizarla en GitCron o delegar trabajo a modelos locales.
+5. `pilotear-circuito-editorial-tina` para instalar y validar el bootstrap estructural.
+6. `validar-operacion-editorial-tina-en-produccion` para ejecutar los dos ciclos reales después de integrar el workflow, antes de automatizarlo en GitCron o delegar trabajo a modelos locales.
 
 Cada slice reutilizara las specs del programa y evitara duplicar requisitos. El programa se cerrara cuando los cuatro slices y el piloto editorial esten terminados.
 

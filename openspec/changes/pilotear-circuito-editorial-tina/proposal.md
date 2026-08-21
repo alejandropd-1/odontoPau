@@ -13,7 +13,7 @@ El flujo debe funcionar con los colaboradores disponibles en Tina Free. Todos lo
 - Agregar una automatización de GitHub que sólo reaccione a esa solicitud, valide el alcance editorial, ejecute los gates vigentes, integre a `main` y vuelva a sincronizar `editorial/tina`.
 - Mostrar en Tina el enlace al Preview, el estado de la solicitud y una explicación breve del circuito `Guardar -> Preview -> Publicar cambios -> Producción`.
 - Mantener un carril separado para cambios estructurales de código, schema, rutas o configuración, que continúan requiriendo OpenSpec y el flujo de desarrollo habitual.
-- Ejecutar dos ciclos reales: al menos una actualización visible y un retiro o republicación, antes de declarar estable la rutina.
+- Cerrar el bootstrap estructural de la rutina y dejar como sucesor obligatorio `validar-operacion-editorial-tina-en-produccion`, que ejecutará dos ciclos reales una vez que el workflow exista en `main` y `editorial/tina` vuelva a estar convergente.
 
 ### Fuera de alcance
 
@@ -39,7 +39,8 @@ El flujo debe funcionar con los colaboradores disponibles en Tina Free. Todos lo
 - La automatización publica únicamente si el snapshot es editorial, válido y convergente; ante fallo conserva la producción anterior.
 - Un artículo o instrucción con estado `retired` deja de renderizarse en producción después de publicar el snapshot, pero continúa editable en Tina y visible en Preview.
 - `main`, `editorial/tina`, TinaCloud y Netlify terminan convergentes después de cada publicación.
-- Dos ciclos reales completan el recorrido con una rutina corta que no exige una auditoría general de Codex.
+- El bootstrap queda listo para integrarse sin presentar como probada una automatización que todavía no puede ejecutarse desde la rama editorial.
+- La rutina sólo podrá declararse estable después del sucesor `validar-operacion-editorial-tina-en-produccion`, con una actualización visible y un retiro o republicación reales.
 
 ## Capabilities
 
@@ -59,5 +60,5 @@ El flujo debe funcionar con los colaboradores disponibles en Tina Free. Todos lo
 - Contratos y renderizado editorial de artículos e instrucciones.
 - Solicitud singleton de publicación bajo `src/data/`.
 - Workflow de GitHub para alcance, validación, integración y convergencia.
-- Documentación operativa y evidencia del piloto.
+- Documentación operativa, evidencia del bootstrap y contrato de entrada del piloto real sucesor.
 - Netlify seguirá publicando producción exclusivamente desde `main`; su configuración externa sólo se tocará después de autorización explícita.
