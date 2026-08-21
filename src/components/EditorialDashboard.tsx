@@ -65,6 +65,7 @@ const statusLabels: Record<string, string> = {
   technical_review: 'Revisión Técnica',
   clinical_review: 'Revisión Clínica',
   draft: 'Borrador',
+  retired: 'Retirado',
 };
 
 const categoryBadgeColors: Record<string, string> = {

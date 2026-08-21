@@ -7,7 +7,8 @@ export type ArticleStatus =
   | 'clinical_review'
   | 'technical_review'
   | 'approved'
-  | 'published';
+  | 'published'
+  | 'retired';
 
 export interface ArticleImage {
   src: string;
@@ -162,6 +163,7 @@ const articleStatuses = new Set<ArticleStatus>([
   'technical_review',
   'approved',
   'published',
+  'retired',
 ]);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const articlesRoot = path.join(process.cwd(), 'src', 'data', 'articulos');

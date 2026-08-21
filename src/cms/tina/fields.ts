@@ -17,6 +17,7 @@ export const STATUS_OPTIONS = [
   { label: 'Revisión técnica', value: 'technical_review' },
   { label: 'Aprobado', value: 'approved' },
   { label: 'Publicado', value: 'published' },
+  { label: 'Retirado', value: 'retired' },
 ];
 
 const editorialSelect = (options: typeof STATUS_OPTIONS) => ({
