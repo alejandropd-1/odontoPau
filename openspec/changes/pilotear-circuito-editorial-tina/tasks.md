@@ -32,7 +32,7 @@
 
 - [x] 5.1 Redactar una guía breve para usuarios no técnicos: editar, guardar, abrir Preview, publicar, retirar y reconocer errores.
 - [x] 5.2 Reconstruir como línea base el ciclo de PR #12 y el fallo por schema remoto desactualizado, sin copiar logs completos.
-- [ ] 5.3 Con autorización previa, abrir Draft PR y comprobar que una guarda ordinaria actualiza Preview sin modificar producción.
+- [x] 5.3 Con autorización previa, abrir Draft PR y comprobar que una guarda ordinaria actualiza Preview sin modificar producción.
 - [ ] 5.4 Ejecutar un ciclo real de publicación desde Tina y registrar gates, commit, preview, producción y convergencia.
 - [ ] 5.5 Ejecutar un ciclo real de retiro o republicación y confirmar que el documento permanece editable y deja de renderizarse cuando corresponde.
 - [ ] 5.6 Consolidar tiempos, fallos e intervención necesaria y producir el handoff reusable para OdontoPia y GitCron.
