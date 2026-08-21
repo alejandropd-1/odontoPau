@@ -15,15 +15,15 @@ El sistema SHALL identificar el tratamiento con `rehabilitacion`, presentar el n
 - **THEN** se emite la URL canónica de Rehabilitación y no una URL indexable duplicada bajo `implantes`
 
 ### Requirement: Compatibilidad de rutas históricas
-El sistema MUST redirigir permanentemente las rutas públicas anteriores de implantes hacia sus equivalentes de Rehabilitación.
+El sistema MUST redirigir permanentemente las rutas públicas anteriores de implantes hacia sus destinos canónicos vigentes, sin sostener una ficha legacy duplicada.
 
 #### Scenario: Página histórica del tratamiento
 - **WHEN** se solicita `/tratamientos/implantes`
 - **THEN** se responde con una redirección permanente a `/tratamientos/rehabilitacion`
 
-#### Scenario: Caso histórico
-- **WHEN** se solicita `/tratamientos/implantes/casos/:casoId`
-- **THEN** se conserva `:casoId` y se redirige a `/tratamientos/rehabilitacion/casos/:casoId`
+#### Scenario: Caso histórico documentado
+- **WHEN** se solicita `/tratamientos/implantes/casos/2`
+- **THEN** se responde con una redirección permanente a `/articulos/rehabilitacion-sector-anterosuperior`
 
 ### Requirement: Evidencia clínica verificable
 La página de Rehabilitación SHALL excluir testimonios, porcentajes, duraciones, diagnósticos, resultados y casos de demostración no confirmados, y SHALL presentar sólo el caso anterosuperior respaldado por Paula cuando corresponda.

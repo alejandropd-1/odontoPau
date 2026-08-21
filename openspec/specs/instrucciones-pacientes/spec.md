@@ -91,17 +91,25 @@ La plantilla MUST cumplir una base WCAG 2.2 AA: jerarquía de encabezados, lista
 - **WHEN** una persona no distingue los colores de estado
 - **THEN** puede diferenciar `Sí`, `Precaución` y `No` mediante texto e iconografía accesible
 
-### Requirement: Edición en CMS existente
-El sistema SHALL exponer los campos y módulos de instrucciones en Stackbit/Netlify Visual Editor sin agregar otro CMS ni cambiar la fuente JSON versionada.
-
-#### Scenario: Campo opcional vacío
-- **WHEN** el editor deja vacío un módulo opcional
-- **THEN** el sitio no muestra placeholders ni huecos de maquetación
-
 ### Requirement: Casos iniciales aprobados
 El sistema SHALL incorporar `Dieta blanca` y `Indicaciones post extracción` como casos de referencia utilizando el contenido aprobado por Paula y sin agregar indicaciones clínicas inferidas.
 
 #### Scenario: Comparación con el material fuente
 - **WHEN** se revisa cualquiera de las dos instrucciones iniciales
 - **THEN** los alimentos, tiempos, pasos y criterios de consulta coinciden con la pieza entregada o con una corrección explícita de Paula
+
+### Requirement: Edicion de instrucciones mediante TinaCMS
+El sistema SHALL exponer en Tina todos los campos y módulos de Instrucciones, incluidos recursos individuales, galerías, imágenes sociales y referencias validadas de descarga o video. Los opcionales vacíos MUST permanecer ausentes y no producir placeholders ni huecos.
+
+#### Scenario: Recurso agregado posteriormente
+- **WHEN** un editor incorpora un recurso a una Instrucción existente
+- **THEN** conserva slug, URL, plantilla y contenido previo mientras agrega la referencia y sus metadatos accesibles
+
+#### Scenario: Referencia de video
+- **WHEN** una tarjeta de recurso representa un video público admitido
+- **THEN** Tina exige portada/alt y valida la ruta de reproducción o descarga sin almacenar material privado
+
+#### Scenario: Edicion visual de una instruccion
+- **WHEN** un editor modifica el título, un paso, una matriz, un aviso o un recurso desde la vista visual
+- **THEN** la página reacciona en vivo, el panel identifica el campo correspondiente y el guardado conserva orden, discriminantes y referencias accesibles
 
