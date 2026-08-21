@@ -31,17 +31,17 @@
 - [x] 4.9 Implementar un sistema visual editorial coherente mediante APIs públicas de Tina: campos simples de 56 px con label flotante, foco, ayuda y error accesibles, conservando controles especializados para selectores, fechas, imágenes, listas y objetos.
 - [x] 4.10 Agregar ayudas contextuales y títulos comprensibles a campos y objetos complejos, incluida una navegación clara al editar imágenes compuestas y la explicación de qué superficie pública afecta cada dato.
 - [x] 4.11 Usar chips nativos para listas breves y mantener controles separados para párrafos, pasos y recomendaciones extensas, demostrando que cada valor persiste como elemento independiente sin pérdida.
-- [x] 4.12 Mantener cada caso clínico en su URL propia, convertir el artículo relacionado en CTA secundario opcional y habilitar un renderizador reactivo con marcas granulares, documentando el límite de un único `ui.router` por documento anidado en Tina 3.11.
-- [x] 4.13 Ampliar las pruebas del schema, routing, serialización, marcadores visuales y accesibilidad básica para cubrir 4.9–4.12 sin mutar contenido público.
+- [x] 4.12 Retirar el render público duplicado de casos clínicos, enlazar cada tarjeta directamente al artículo canónico y conservar las URL históricas solo como redirecciones permanentes no indexables.
+- [x] 4.13 Ampliar las pruebas del schema, routing, serialización, marcadores visuales y accesibilidad básica para cubrir 4.9–4.12, exigir que todos los casos resuelvan artículos publicados y prohibir enlaces legacy sin mutar contenido público.
 
 ## 5. QA, preview y operación
 
 - [x] 5.1 Ejecutar paridad/equivalencia, validación de contratos, no mutación, `pnpm exec tsc --noEmit --incremental false`, `pnpm run lint`, `pnpm run build`, `git diff --check` y `openspec validate --all --strict`, registrando resultados y limitaciones atribuibles después del refinamiento editorial.
 - [x] 5.2 Probar localmente creación y edición de un Artículo y una Instrucción sintéticos mínimos/completos, imágenes, opcionales, errores de validación y recuperación por Git sin incorporar fixtures al contenido público.
-- [x] 5.3 Verificar localmente Visual Editing en Inicio, índice de Tratamientos, un Tratamiento, un caso clínico, un Artículo y una Instrucción reales: navegación desde el admin, vista lado a lado, actualización reactiva, selección de campos raíz y anidados, guardado/reversión y ausencia de requests Tina en las páginas públicas fuera del iframe.
-- [ ] 5.4 Publicar la rama en Draft PR, verificar CI y Deploy Preview, autenticar Tina con la configuración autorizada y demostrar con evidencia que el guardado modifica únicamente la rama exacta y nunca `main`.
-- [ ] 5.5 Auditar preview desktop/mobile desde 320 px, teclado, foco, alt, SEO/noindex, ausencia de desborde y exclusión de borradores; obtener aprobación de Paula para campos/superficies clínicas e imágenes de prueba aplicables y documentar el circuito operativo Tina → rama → PR → preview → aprobación.
+- [x] 5.3 Verificar localmente Visual Editing en Inicio, índice de Tratamientos, un Tratamiento con tarjeta de caso, un Artículo y una Instrucción reales: navegación desde el admin, vista lado a lado, actualización reactiva, selección de campos raíz y anidados, guardado/reversión y ausencia de requests Tina en las páginas públicas fuera del iframe.
+- [x] 5.4 Publicar la rama en Draft PR, verificar CI y Deploy Preview, autenticar Tina con la configuración autorizada y demostrar con evidencia que el guardado modifica únicamente la rama exacta y nunca `main`.
+- [x] 5.5 Auditar preview desktop/mobile desde 320 px, teclado, foco, alt, SEO/noindex, ausencia de desborde y exclusión de borradores; obtener aprobación de Paula para campos/superficies clínicas e imágenes de prueba aplicables y documentar el circuito operativo Tina → rama → PR → preview → aprobación.
 
 ## 6. Validacion final de Alejandro
 
-- [ ] 6.1 Alejandro revisa la experiencia Tina y el Deploy Preview final, confirma la evidencia de rama, paridad, privacidad, aprobación clínica aplicable y ausencia de cambios públicos no deseados, y autoriza el commit de cierre y la preparación posterior del OpenSpec Archive. Esta tarea es exclusivamente manual y ningún agente puede marcarla.
+- [x] 6.1 Alejandro revisa la experiencia Tina y el Deploy Preview final, confirma la evidencia de rama, paridad, privacidad, aprobación clínica aplicable y ausencia de cambios públicos no deseados, y autoriza el commit de cierre y la preparación posterior del OpenSpec Archive. Esta tarea es exclusivamente manual y ningún agente puede marcarla.

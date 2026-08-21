@@ -33,7 +33,6 @@
   },
   "sections": [
     {
-      "type": "case_summary",
       "title": "Recuperar la confianza al sonreír",
       "paragraphs": [
         "Con el tiempo, las coronas antiguas o con estructuras metálicas internas pueden perder brillo o generar bordes oscuros cerca de la encía.",
@@ -57,10 +56,10 @@
           "Preparación y opacificación de muñones",
           "Colocación de coronas libres de metal"
         ]
-      }
+      },
+      "type": "case_summary"
     },
     {
-      "type": "gallery",
       "title": "Secuencia del caso paso a paso",
       "intro": "Recorrido por las etapas del tratamiento desde la preparación hasta el resultado final.",
       "images": [
@@ -79,8 +78,8 @@
           "caption": "Retiro de coronas antiguas y acondicionamiento para luego opacificar muñones metálicos."
         },
         {
-          "src": "/images/articulos/rehabilitacion-sector-anterosuperior/registro-03.webp",
-          "alt": "Preparación de la superficie para la nueva estructura",
+          "src": "/images/articulos/rehabilitacion-sector-anterosuperior/3b.jpeg",
+          "alt": "Coronas libres de metal instaladas en el sector anterosuperior",
           "width": 1280,
           "height": 728,
           "caption": "Coronas ya instaladas libre de metal."
@@ -99,15 +98,16 @@
           "height": 566,
           "caption": "Armonía."
         }
-      ]
+      ],
+      "type": "gallery"
     },
     {
-      "type": "cta",
       "label": "Rehabilitación estética",
       "title": "¿Querés renovar tus coronas o mejorar tu sonrisa frontal?",
       "text": "Escribinos por WhatsApp para evaluar tu caso y planificar una rehabilitación acorde a tus necesidades.",
       "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20rehabilitaci%C3%B3n%20oral",
-      "buttonLabel": "Consultar por WhatsApp"
+      "buttonLabel": "Consultar por WhatsApp",
+      "type": "cta"
     }
   ]
 }

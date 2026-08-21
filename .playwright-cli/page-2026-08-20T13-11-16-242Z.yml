@@ -1,0 +1,69 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - navigation "Navegación principal" [ref=e4]:
+        - link "Paula Gualtieri" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - link "Inicio" [ref=e8] [cursor=pointer]:
+            - /url: /#inicio
+          - link "Servicios" [ref=e9] [cursor=pointer]:
+            - /url: /tratamientos
+          - link "Artículos" [ref=e10] [cursor=pointer]:
+            - /url: /articulos
+          - link "Instrucciones" [ref=e11] [cursor=pointer]:
+            - /url: /instrucciones
+          - link "Ubicación" [ref=e12] [cursor=pointer]:
+            - /url: /#ubicacion
+        - link "Agendar Turno" [ref=e14] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola,%20quiero%20sacar%20un%20turno
+    - navigation "Breadcrumb" [ref=e17]:
+      - list [ref=e18]:
+        - listitem [ref=e19]:
+          - link "Inicio" [ref=e20] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e24]:
+          - link "Rehabilitación" [ref=e27] [cursor=pointer]:
+            - /url: /tratamientos/rehabilitacion
+        - listitem [ref=e28]:
+          - generic [ref=e31]: "Caso: Renovación estética del sector anterior: armonía y naturalidad"
+    - generic [ref=e33]:
+      - generic [ref=e34]: "Caso clínico: Rehabilitación"
+      - 'heading "Caso clínico: Renovación estética del sector anterior: armonía y naturalidad" [level=1] [ref=e35]'
+      - paragraph [ref=e36]: Remoción de coronas anteriores y opacificación de pernos metálicos para la colocación final de coronas libres de metal.
+    - region "Registros del caso" [ref=e37]:
+      - generic [ref=e39]:
+        - 'img "Registro 1 del caso Renovación estética del sector anterior: armonía y naturalidad" [ref=e42]'
+        - 'img "Registro 2 del caso Renovación estética del sector anterior: armonía y naturalidad" [ref=e45]'
+        - 'img "Registro 3 del caso Renovación estética del sector anterior: armonía y naturalidad" [ref=e48]'
+        - 'img "Registro 4 del caso Renovación estética del sector anterior: armonía y naturalidad" [ref=e51]'
+        - 'img "Registro 5 del caso Renovación estética del sector anterior: armonía y naturalidad" [ref=e54]'
+    - generic [ref=e56]:
+      - generic [ref=e58]:
+        - heading "El caso" [level=2] [ref=e62]
+        - paragraph [ref=e63]: El caso corresponde a una rehabilitación del sector anterosuperior con coronas anteriores y pernos metálicos preexistentes.
+      - generic [ref=e64]:
+        - heading "Abordaje documentado" [level=2] [ref=e65]
+        - paragraph [ref=e66]: Se removieron las coronas anteriores, se opacificaron los pernos metálicos y se colocaron coronas libres de metal como resultado final.
+        - list [ref=e67]:
+          - listitem [ref=e68]:
+            - generic [ref=e73]: Remoción de coronas anteriores
+          - listitem [ref=e74]:
+            - generic [ref=e79]: Opacificación de pernos metálicos
+          - listitem [ref=e80]:
+            - generic [ref=e85]: Coronas libres de metal
+    - generic [ref=e88]:
+      - heading "¿Querés consultar por este tratamiento?" [level=2] [ref=e89]
+      - paragraph [ref=e90]: Cada situación requiere una evaluación individual. Podés escribirnos para coordinar una consulta.
+      - generic [ref=e91]:
+        - link "Solicitar evaluación" [ref=e92] [cursor=pointer]:
+          - /url: https://wa.me/5491137854198?text=Hola%2C%20vi%20el%20caso%20de%20Rehabilitaci%C3%B3n%20y%20quiero%20coordinar%20una%20evaluaci%C3%B3n
+        - link "Ver otros casos" [ref=e95] [cursor=pointer]:
+          - /url: /tratamientos/rehabilitacion
+        - 'link "Leer artículo relacionado: Renovación estética del sector anterior: armonía y naturalidad" [ref=e96] [cursor=pointer]':
+          - /url: /articulos/rehabilitacion-sector-anterosuperior
+    - contentinfo [ref=e97]:
+      - generic [ref=e98]:
+        - generic [ref=e99]: Paula Gualtieri
+        - generic [ref=e100]: © 2026 Paula Gualtieri Odontología. Todos los derechos reservados.
+  - alert [ref=e101]

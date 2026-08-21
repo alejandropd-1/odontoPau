@@ -17,6 +17,7 @@ import { treatmentFromVisualData } from '@/cms/tina/visual-data';
 
 interface TreatmentDetailContentProps {
   tratamiento: Tratamiento;
+  caseArticlesById: Record<string, { slug: string }>;
   relatedArticles: {
     slug: string;
     title: string;
@@ -29,6 +30,7 @@ interface TreatmentDetailContentProps {
 
 export default function TreatmentDetailContent({
   tratamiento: fallback,
+  caseArticlesById,
   relatedArticles,
   relatedArticlesHref,
   visual,
@@ -185,45 +187,51 @@ export default function TreatmentDetailContent({
               ref={scrollRef}
               className="treatment-detail__cases-scroller"
             >
-              {tratamiento.casosClinicos.map((caso, idx) => (
-                <motion.div 
-                  key={caso.id}
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: shouldReduceMotion ? 0 : idx * 0.1 }}
-                  viewport={{ once: true }}
-                  className="treatment-detail__case-card"
-                >
-                  <div className="treatment-detail__case-card-image-wrap">
-                    <Image 
-                      src={caso.imagenDespues || caso.imagenAntes || (caso.imagenes && caso.imagenes.length > 0 ? caso.imagenes[caso.imagenes.length - 1] : '')} 
-                      alt={caso.titulo}
-                      fill
-                      className="treatment-detail__case-card-image"
-                      data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], caso.imagenDespues ? 'imagenDespues' : caso.imagenAntes ? 'imagenAntes' : 'imagenes') : undefined}
-                    />
-                    {caso.estado && (
-                      <div className="treatment-detail__case-card-status" data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], 'estado') : undefined}>
-                        {caso.estado}
-                      </div>
-                    )}
-                  </div>
-                  <div className="treatment-detail__case-card-content">
-                    <h3 className="treatment-detail__case-card-title" data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], 'titulo') : undefined}>{caso.titulo}</h3>
-                    <div className="treatment-detail__case-card-footer">
-                      {caso.fecha && (
-                        <span className="treatment-detail__case-card-date" data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], 'fecha') : undefined}>{caso.fecha}</span>
+              {tratamiento.casosClinicos.map((caso, idx) => {
+                const caseArticle = caseArticlesById[String(caso.id)];
+
+                return (
+                  <motion.div
+                    key={caso.id}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: shouldReduceMotion ? 0 : idx * 0.1 }}
+                    viewport={{ once: true }}
+                    className="treatment-detail__case-card"
+                  >
+                    <div className="treatment-detail__case-card-image-wrap">
+                      <Image
+                        src={caso.imagenDespues || caso.imagenAntes || (caso.imagenes && caso.imagenes.length > 0 ? caso.imagenes[caso.imagenes.length - 1] : '')}
+                        alt={caso.titulo}
+                        fill
+                        className="treatment-detail__case-card-image"
+                        data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], caso.imagenDespues ? 'imagenDespues' : caso.imagenAntes ? 'imagenAntes' : 'imagenes') : undefined}
+                      />
+                      {caso.estado && (
+                        <div className="treatment-detail__case-card-status" data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], 'estado') : undefined}>
+                          {caso.estado}
+                        </div>
                       )}
-                      <Link
-                        href={`/tratamientos/${tratamiento.id}/casos/${caso.id}`}
-                        className="treatment-detail__case-card-link"
-                      >
-                        {tratamiento.pageCopy.caseLinkLabel}
-                      </Link>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                    <div className="treatment-detail__case-card-content">
+                      <h3 className="treatment-detail__case-card-title" data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], 'titulo') : undefined}>{caso.titulo}</h3>
+                      <div className="treatment-detail__case-card-footer">
+                        {caso.fecha && (
+                          <span className="treatment-detail__case-card-date" data-tina-field={editorCases?.[idx] ? tinaField(editorCases[idx], 'fecha') : undefined}>{caso.fecha}</span>
+                        )}
+                        {caseArticle && (
+                          <Link
+                            href={`/articulos/${caseArticle.slug}`}
+                            className="treatment-detail__case-card-link"
+                          >
+                            {tratamiento.pageCopy.caseLinkLabel}
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>

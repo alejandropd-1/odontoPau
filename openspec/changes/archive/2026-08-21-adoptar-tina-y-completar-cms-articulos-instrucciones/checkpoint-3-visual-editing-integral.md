@@ -81,3 +81,25 @@ Después del refinamiento aprobaron nuevamente: schema local, auditoría de 25 d
 - El runner del adaptador cierra explícitamente después de validar, evitando procesos Node huérfanos en CI.
 
 Con esta evidencia se completa 5.3. Continúan pendientes 5.4 (Draft PR, CI, Deploy Preview y rama remota exacta), 5.5 (auditoría del preview y aprobación humana aplicable) y 6.1 (validación final exclusiva de Alejandro).
+
+## Checkpoint remoto — 2026-08-20
+
+- Draft PR: `#12`, desde `change/adoptar-tina-y-completar-cms-articulos-instrucciones` hacia `main`.
+- Revisión verificada: `25622b6`; el gate de GitHub terminó aprobado, incluidos contratos, seguridad de rama, auditoría de contenido, lock reproducible, build del admin, diff del PR, TypeScript, lint y build de preview.
+- Deploy Preview aprobado: `https://deploy-preview-12--paulagualtieri.netlify.app`.
+- El primer intento detectó correctamente un `tina/tina-lock.json` desactualizado y una diferencia entre el schema local y el indexado por TinaCloud. Se regeneró el lock y la comparación semántica mostró únicamente tres ayudas editoriales esperadas sobre el artículo canónico de los casos clínicos.
+- La edición autenticada de Tina quedó en `origin/editorial/tina` (`9ba9356`) y no en `origin/main` (`aa37acc`). Esa edición se integró después a la rama del OpenSpec mediante Git y PR; `main` permaneció intacta.
+
+Con esta evidencia se completa 5.4. Continúan pendientes 5.5 (auditoría manual del preview y aprobación humana aplicable) y 6.1 (validación final exclusiva de Alejandro).
+
+## Auditoría técnica parcial del Deploy Preview — 2026-08-20
+
+- Se relevaron Inicio, índice y detalle de Tratamientos, un Artículo y una Instrucción en escritorio y desde 320 px.
+- Las cinco rutas respondieron correctamente, conservaron `lang="es"`, un único `h1`, atributos `alt` presentes y ausencia de enlaces legacy `/casos/`.
+- Los tres `alt=""` del índice de Tratamientos corresponden a imágenes decorativas de recursos que acompañan texto equivalente.
+- La navegación por teclado recorrió los controles en orden y mostró foco visible. La revisión humana completa sigue pendiente.
+- El header HTTP del Deploy Preview entrega `X-Robots-Tag: noindex`; por lo tanto prevalece sobre el meta público `index, follow` y evita que el preview sea indexado.
+- El borrador `Cuidados diarios para alineadores invisibles` aparece en el Deploy Preview para revisión y permanece excluido de producción, según el contrato editorial.
+- No se detectó desplazamiento horizontal utilizable. En Inicio, los elementos decorativos de ancho completo exceden por el ancho de la barra vertical, pero el recorte intencional de `body { overflow-x: hidden; }` evita que rompan la maqueta.
+
+Alejandro confirmó el 2026-08-21 que la inspección visual y la revisión de Paula resultaron aprobadas. Con esa confirmación y la evidencia técnica anterior se completa 5.5. Permanece pendiente únicamente 6.1, que Alejandro debe marcar manualmente antes del commit de cierre y del OpenSpec Archive.

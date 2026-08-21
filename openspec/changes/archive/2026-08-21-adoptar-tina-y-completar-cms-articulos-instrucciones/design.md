@@ -83,11 +83,13 @@ Los campos simples usarán componentes propios registrados mediante `ui.componen
 
 No se modificarán selectores internos, clases privadas ni archivos generados de Tina. La personalización se limitará a APIs públicas y componentes versionados por el repositorio, con foco accesible, teclado, contraste y movimiento reducido. Los textos breves repetibles usarán chips; párrafos, pasos y matrices mantendrán ítems separados para evitar serializaciones ambiguas por comas.
 
-### 10. Caso clínico y artículo relacionado son recursos distintos
+### 10. El artículo es la ficha pública canónica del caso clínico
 
-Cada caso clínico conservará su URL `/tratamientos/{id}/casos/{casoId}`, su metadata y un renderizador reactivo con marcas granulares sobre el mismo formulario del Tratamiento. `articleSlug` se interpreta únicamente como relación editorial opcional: cuando el artículo exista y sea enrutable, la ficha del caso ofrecerá un CTA secundario hacia él. Las tarjetas de casos siempre enlazarán primero a la ficha clínica y nunca redirigirán automáticamente al artículo.
+La auditoría correctiva encontró 13 casos clínicos: los 13 declaran un `articleSlug`, resuelven un artículo publicado y comparten su título. Por lo tanto no existe un caso que requiera una segunda ficha pública. Los objetos anidados del Tratamiento se conservan como datos de tarjeta y relación editorial; la tarjeta enlaza directamente a `/articulos/{articleSlug}` y el cuerpo completo se administra únicamente desde Artículos.
 
-Tina 3.11 permite un único `ui.router` por documento y el modo click-to-edit intercepta la navegación dentro del iframe. Como los casos están anidados en el JSON de su Tratamiento, la entrada estándar del documento abre `/tratamientos/{id}`. No se duplicará la colección ni se manipulará el iframe con APIs privadas. Convertir cada caso en documento independiente será una decisión de modelado futura si el piloto demuestra que el cambio de preview por caso aporta suficiente valor.
+Las URL históricas `/tratamientos/{id}/casos/{casoId}` dejan de renderizar metadata o contenido propio. Se conservan solo como redirecciones permanentes de compatibilidad hacia el artículo resoluble, evitando enlaces rotos sin sostener contenido duplicado ni incorporarlas al sitemap. Si una relación futura está ausente o no resuelve, la tarjeta no muestra enlace y la auditoría editorial bloquea su publicación hasta asignar un artículo canónico.
+
+Tina mantiene un único `ui.router` por Tratamiento y muestra la tarjeta dentro de `/tratamientos/{id}`. El artículo se edita desde su propio documento y su propia ruta visual. No se duplica la colección, no se manipula el iframe con APIs privadas y no se vuelve a crear una ficha separada para el mismo caso.
 
 ## Risks / Trade-offs
 
@@ -102,7 +104,7 @@ Tina 3.11 permite un único `ui.router` por documento y el modo click-to-edit in
 - **[Activos clínicos o secretos expuestos]** → media solo autorizada, alt obligatorio, revisión humana y secretos exclusivos de entorno.
 - **[Doble infraestructura durante la migración]** → convivencia breve y documentada; retiro selectivo de Stackbit solo con tests Tina aprobados.
 - **[Personalizar el shell interno de Tina haría frágil el mantenimiento]** → componentes editoriales propios solo mediante APIs públicas; no se sobrescribe CSS interno del CMS.
-- **[Una relación caso-artículo podría ocultar la ficha clínica]** → URL de caso estable, artículo como CTA secundario y pruebas de routing/Visual Editing para ambos recursos.
+- **[Una relación caso-artículo ausente podría dejar una tarjeta sin destino]** → auditoría determinista de todos los casos, enlace solo cuando resuelve y gate de publicación que exige un artículo canónico.
 
 ## Migration Plan
 

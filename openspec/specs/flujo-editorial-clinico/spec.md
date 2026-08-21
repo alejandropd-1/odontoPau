@@ -72,19 +72,19 @@ El sitio SHALL mantener inactiva la seccion publica de testimonios y su enlace d
 - **THEN** la seccion y su enlace pueden reactivarse mediante una unica opcion de configuracion
 
 ### Requirement: Escritura CMS condicionada por paridad
-El flujo editorial MUST mantener bloqueada la escritura de todo modelo clasificado `blocked` o `pending`. Un resultado `safe` de las pruebas locales SHALL ser necesario pero MUST NOT reemplazar la revision clinica, visual, de privacidad ni la prueba real posterior en Netlify Visual Editor.
+El flujo editorial MUST mantener bloqueada la escritura Tina de todo modelo clasificado `blocked` o `pending`. Un resultado `safe` de las pruebas locales SHALL ser necesario pero MUST NOT reemplazar la revisión clínica, visual, de privacidad ni la prueba real posterior en Tina y Deploy Preview.
 
 #### Scenario: Modelo con cobertura incompleta
-- **WHEN** la matriz contractual identifica un campo persistido que el CMS no conserva de forma segura
-- **THEN** el modelo permanece sin nuevas capacidades de creacion o edicion hasta que su slice funcional resuelva el desfase
+- **WHEN** la matriz contractual identifica un campo persistido que Tina no conserva de forma segura
+- **THEN** el modelo permanece sin capacidades de creación o edición hasta resolver el desfase
 
 #### Scenario: Modelo tecnicamente seguro
-- **WHEN** un modelo obtiene estado `safe` en paridad y round-trip
-- **THEN** queda habilitado solamente para continuar al siguiente slice y no se considera aprobado ni publicado automaticamente
+- **WHEN** Artículo o Instrucción obtiene estado `safe` en paridad y round-trip Tina
+- **THEN** queda habilitado solamente para el piloto en rama y no se considera aprobado ni publicado automáticamente
 
 #### Scenario: Default sin aprobacion
-- **WHEN** un futuro documento editorial se inicializa desde una configuracion preparada por el CMS
-- **THEN** comienza como `draft` sin fecha de publicacion, revision clinica ni autorizacion de uso inferida
+- **WHEN** Tina inicializa un documento editorial
+- **THEN** comienza como `draft` sin fecha de publicación, revisión clínica ni autorización de uso inferida
 
 ### Requirement: Autoridad humana preservada
 La automatizacion contractual MUST NOT modificar estados de publicacion, contenido clinico, imagenes de pacientes, ramas remotas ni produccion. Paula MUST conservar la aprobacion de contenido e imagenes clinicas, y Alejandro MUST conservar la validacion final, el archive y la autorizacion de merge.
@@ -96,4 +96,19 @@ La automatizacion contractual MUST NOT modificar estados de publicacion, conteni
 #### Scenario: Imagen clinica presente en fixture real
 - **WHEN** una prueba carga la referencia de una imagen de paciente ya versionada
 - **THEN** solo valida estructura y no interpreta el activo como evidencia de consentimiento ni duplica su archivo
+
+### Requirement: Circuito Tina a preview con autoridad humana
+Toda edición Tina SHALL permanecer en una rama no productiva y SHALL atravesar diff, gates, Draft PR y Deploy Preview. Paula MUST aprobar el contenido o las imágenes clínicas aplicables y Alejandro MUST conservar la validación final, el archive y la autorización de merge.
+
+#### Scenario: Guardado exitoso sin aprobacion
+- **WHEN** Tina guarda un documento válido pero faltan aprobaciones humanas
+- **THEN** el cambio permanece en su rama y no se mezcla, archiva ni publica
+
+#### Scenario: Seleccion de estado published
+- **WHEN** un editor selecciona `published` dentro de la rama de revisión
+- **THEN** producción permanece intacta y el cambio solo puede publicarse mediante el merge autorizado a `main`
+
+#### Scenario: Evidencia de consentimiento
+- **WHEN** una imagen clínica requiere consentimiento
+- **THEN** el flujo registra únicamente la confirmación no sensible y mantiene el documento privado de evidencia fuera de Git y Tina
 

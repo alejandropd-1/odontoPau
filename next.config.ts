@@ -29,8 +29,8 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/tratamientos/implantes/casos/:casoId',
-        destination: '/tratamientos/rehabilitacion/casos/:casoId',
+        source: '/tratamientos/implantes/casos/2',
+        destination: '/articulos/rehabilitacion-sector-anterosuperior',
         permanent: true,
       },
       {

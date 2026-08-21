@@ -1,5 +1,8 @@
-## ADDED Requirements
+# tratamientos-odontologicos Specification
 
+## Purpose
+TBD - created by archiving change adoptar-tina-y-completar-cms-articulos-instrucciones. Update Purpose after archive.
+## Requirements
 ### Requirement: Edición completa de tratamientos desde Tina
 Tina SHALL exponer todos los campos persistidos de cada Tratamiento existente, incluidos metadata visible, icono, imagen hero, profesionales, características y casos clínicos completos. La colección MUST impedir altas, borrado y cambios accidentales de ruta durante este cambio.
 
@@ -18,17 +21,17 @@ Cada Tratamiento SHALL resolver a `/tratamientos/{id}` para Visual Editing. Las 
 - **WHEN** el editor cambia el título, descripción o hero de un Tratamiento
 - **THEN** la vista detalle reacciona en vivo y, una vez guardado y aprobado, Inicio e índice reutilizan el mismo valor
 
-### Requirement: Ficha propia para cada caso clínico
-Cada caso clínico SHALL conservar una ruta pública propia y un renderizador reactivo con marcas granulares vinculado a su objeto dentro del Tratamiento. La entrada visual estándar MAY continuar en la ruta del Tratamiento mientras los casos permanezcan anidados en el mismo documento. Una relación opcional con un Artículo MUST NOT reemplazar la ficha ni provocar una redirección automática.
+### Requirement: Artículo canónico para cada caso clínico
+Cada caso clínico mostrado por un Tratamiento SHALL resolver un Artículo disponible mediante `articleSlug`. La tarjeta SHALL enlazar directamente al Artículo y el sistema MUST NOT renderizar una segunda ficha pública con cuerpo, captions o metadata divergentes. Las URL históricas de casos MAY conservarse únicamente como redirecciones permanentes de compatibilidad y MUST quedar fuera de navegación y sitemap.
 
 #### Scenario: Caso con artículo relacionado
 - **WHEN** un caso define un `articleSlug` enrutable
-- **THEN** la tarjeta abre primero `/tratamientos/{id}/casos/{casoId}` y la ficha ofrece el artículo como acceso secundario
+- **THEN** la tarjeta abre `/articulos/{articleSlug}` como única ficha pública del caso
 
-#### Scenario: Edición visual del caso
-- **WHEN** el editor modifica título, descripción, imágenes, contexto, abordaje o métricas del caso
-- **THEN** las superficies del caso reaccionan en vivo y cada marcador editable apunta al campo anidado correspondiente sin duplicar el documento
+#### Scenario: Acceso por una URL histórica
+- **WHEN** se solicita `/tratamientos/{id}/casos/{casoId}` para un caso con Artículo resoluble
+- **THEN** el sistema redirige permanentemente al Artículo canónico y no entrega contenido ni metadata alternativos
 
-#### Scenario: Caso sin artículo relacionado
+#### Scenario: Caso sin artículo canónico resoluble
 - **WHEN** `articleSlug` está ausente o no resuelve un artículo disponible
-- **THEN** la ficha permanece completa y no muestra un enlace vacío ni reserva espacio para él
+- **THEN** la tarjeta no muestra un enlace vacío ni apunta a una ruta legacy y la auditoría editorial informa la relación faltante antes de publicar
