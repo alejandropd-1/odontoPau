@@ -1,4 +1,5 @@
 export const PRODUCTION_BRANCHES = new Set(['main', 'master']);
+export const TINA_EDITORIAL_BRANCH = 'editorial/tina';
 
 export const TINA_EDITORIAL_BRANCH_ENV = 'NEXT_PUBLIC_TINA_BRANCH';
 export const NETLIFY_BRANCH_ENV = 'HEAD';
@@ -19,6 +20,10 @@ export interface TinaBranchResolution {
 function normalizeBranch(value: string | undefined): string | undefined {
   const normalized = value?.trim().replace(/^refs\/heads\//, '');
   return normalized || undefined;
+}
+
+export function isEditorialPublicationBranch(branch: string): boolean {
+  return normalizeBranch(branch) === TINA_EDITORIAL_BRANCH;
 }
 
 export function assertNonProductionTinaBranch(branch: string): string {

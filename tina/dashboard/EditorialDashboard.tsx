@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useCMS } from 'tinacms';
 
+import { isEditorialPublicationBranch } from '../../src/cms/tina/branch';
 import {
   PUBLICATION_REQUEST_RELATIVE_PATH,
   createPendingPublicationRequest,
@@ -130,6 +131,10 @@ const publicationStatusCopy: Record<PublicationRequestStatus, { title: string; d
 
 const previewUrl = process.env.NEXT_PUBLIC_EDITORIAL_PREVIEW_URL;
 
+interface EditorialDashboardProps {
+  branch: string;
+}
+
 function collectionUrl(collection: 'homepage' | 'treatmentspage' | 'tratamiento' | 'articulo' | 'instruccion'): string {
   return `#/collections/${collection}`;
 }
@@ -139,13 +144,20 @@ function documentUrl(collection: 'articulo' | 'instruccion', relativePath: strin
   return `#/collections/edit/${collection}/${documentPath}`;
 }
 
-export function EditorialDashboard() {
+export function createEditorialDashboard(branch: string) {
+  return function TinaEditorialDashboard() {
+    return <EditorialDashboard branch={branch} />;
+  };
+}
+
+export function EditorialDashboard({ branch }: EditorialDashboardProps) {
   const cms = useCMS();
   const [data, setData] = useState<EditorialDashboardData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [publishing, setPublishing] = useState(false);
   const [publicationConfirmed, setPublicationConfirmed] = useState(false);
+  const publicationEnabled = isEditorialPublicationBranch(branch);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -168,7 +180,7 @@ export function EditorialDashboard() {
 
   const requestPublication = useCallback(async () => {
     const current = data?.publicationrequest;
-    if (!current || !publicationConfirmed || publishing) return;
+    if (!current || !publicationConfirmed || publishing || !publicationEnabled) return;
 
     const confirmed = window.confirm(
       'Vas a publicar el snapshot completo que ves en Preview, no sólo la pantalla abierta. ¿Querés continuar?'
@@ -204,7 +216,7 @@ export function EditorialDashboard() {
     } finally {
       setPublishing(false);
     }
-  }, [cms, data?.publicationrequest, publicationConfirmed, publishing]);
+  }, [cms, data?.publicationrequest, publicationConfirmed, publicationEnabled, publishing]);
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => void load(), 0);
@@ -255,6 +267,12 @@ export function EditorialDashboard() {
 
       {error ? <div role="alert" style={styles.error}>{error}</div> : null}
 
+      {!publicationEnabled ? (
+        <div role="status" style={styles.notice}>
+          Este es un Preview técnico. Podés revisar la interfaz, pero la publicación sólo se habilita en el panel editorial conectado a editorial/tina.
+        </div>
+      ) : null}
+
       <section aria-labelledby="publication-title" style={styles.publicationPanel}>
         <div style={styles.publicationCopy}>
           <p style={styles.eyebrow}>PUBLICACIÓN</p>
@@ -276,7 +294,7 @@ export function EditorialDashboard() {
             <input
               type="checkbox"
               checked={publicationConfirmed}
-              disabled={publicationActive || publishing}
+              disabled={!publicationEnabled || publicationActive || publishing}
               onChange={(event) => setPublicationConfirmed(event.target.checked)}
               style={styles.confirmationCheckbox}
             />
@@ -285,14 +303,20 @@ export function EditorialDashboard() {
           <button
             type="button"
             onClick={() => void requestPublication()}
-            disabled={publicationActive || publishing || !publicationConfirmed}
+            disabled={!publicationEnabled || publicationActive || publishing || !publicationConfirmed}
             aria-busy={publishing}
             style={{
               ...styles.publishButton,
-              ...(publicationActive || publishing || !publicationConfirmed ? styles.disabledButton : {}),
+              ...(!publicationEnabled || publicationActive || publishing || !publicationConfirmed ? styles.disabledButton : {}),
             }}
           >
-            {publishing ? 'Enviando solicitud…' : publicationActive ? 'Publicación en curso' : 'Publicar cambios'}
+            {publishing
+              ? 'Enviando solicitud…'
+              : !publicationEnabled
+                ? 'Publicación no disponible en este Preview'
+                : publicationActive
+                  ? 'Publicación en curso'
+                  : 'Publicar cambios'}
           </button>
         </div>
       </section>
@@ -386,6 +410,7 @@ const styles: Record<string, React.CSSProperties> = {
   subtitle: { maxWidth: 620, margin: '18px 0 0', color: '#6f655e', fontSize: 16, lineHeight: 1.6 },
   secondaryButton: { minHeight: 44, padding: '0 18px', border: '1px solid #d7cec7', borderRadius: 999, background: 'rgba(255,255,255,.75)', color: '#2b2521', fontWeight: 700, cursor: 'pointer' },
   error: { maxWidth: 1120, margin: '0 auto 24px', padding: 16, borderRadius: 14, color: '#7f1d1d', background: '#fee2e2' },
+  notice: { maxWidth: 1120, margin: '0 auto 24px', padding: 16, borderRadius: 14, color: '#6b3a16', background: '#fff1df' },
   publicationPanel: { maxWidth: 1120, margin: '0 auto 24px', padding: 'clamp(22px, 4vw, 34px)', borderRadius: 26, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 28, alignItems: 'center', background: 'linear-gradient(145deg, #fffaf6, #f8e8db)', border: '1px solid rgba(192,85,31,.25)', boxShadow: '0 20px 60px rgba(80,45,25,.08)' },
   publicationCopy: { minWidth: 0 },
   publicationDetail: { margin: '10px 0 0', color: '#514943', fontSize: 16, lineHeight: 1.55 },
