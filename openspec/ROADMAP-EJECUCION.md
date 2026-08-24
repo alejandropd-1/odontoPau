@@ -20,8 +20,8 @@
 | 3 | `adoptar-tina-y-completar-cms-articulos-instrucciones` | DONE | Publicado y archivado el 2026-08-21; Tina edita Inicio, Tratamientos, casos, Artículos e Instrucciones desde `editorial/tina` |
 | 4 | CMS Tina slice C: tratamientos y casos | ABSORBED BY 3 | Incorporado explícitamente al cambio activo mediante tareas 4.5–4.13; no crear un change duplicado |
 | 5 | CMS Tina slice D: portada e institucionales | ABSORBED BY 3 | Inicio e índice de Tratamientos incorporados al cambio activo; la configuración global del sitio seguirá en un OpenSpec posterior |
-| 6 | `pilotear-circuito-editorial-tina` | DONE / PENDING MERGE | Bootstrap aprobado y archivado el 2026-08-21; pendiente integrar el PR autorizado a `main` |
-| 6.1 | `validar-operacion-editorial-tina-en-produccion` | NEXT AFTER MERGE | Después de publicar el bootstrap: una publicación visible, un retiro o republicación, convergencia y handoff operativo final |
+| 6 | `pilotear-circuito-editorial-tina` | DONE | Bootstrap aprobado, archivado, integrado mediante PR #13 y publicado el 2026-08-21 |
+| 6.1 | `validar-operacion-editorial-tina-en-produccion` | ACTIVE / PLANNING | Ejecutar una actualización visible, un retiro y una republicación reales; demostrar convergencia y cerrar el handoff operativo |
 | 7 | `preparar-redes-sociales-editoriales` | PARKED | CMS estable y articulos fuente publicados/aprobados |
 | 8 | `dinamizar-dashboard-editorial-con-supabase` | PARKED / DECISION GATE | Implementar solo si el piloto demuestra necesidad de asignaciones, KPIs o auditoria operativa |
 | 9 | `preparar-runner-editorial-lm-studio-link` | PARKED | Circuito estable, casos golden suficientes y retorno esperado justificado |

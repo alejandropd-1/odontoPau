@@ -379,7 +379,7 @@ export function EditorialDashboard() {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  page: { minHeight: '100vh', padding: 'clamp(24px, 5vw, 64px)', background: '#f8f6f3', color: '#1f1b18', fontFamily: 'Inter, system-ui, sans-serif' },
+  page: { height: '100%', minHeight: 0, overflowY: 'auto', boxSizing: 'border-box', padding: 'clamp(24px, 5vw, 64px)', background: '#f8f6f3', color: '#1f1b18', fontFamily: 'Inter, system-ui, sans-serif' },
   header: { display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: 24, maxWidth: 1120, margin: '0 auto 32px' },
   eyebrow: { margin: '0 0 8px', color: '#b74516', fontSize: 12, fontWeight: 800, letterSpacing: '0.14em' },
   title: { margin: 0, fontSize: 'clamp(34px, 6vw, 64px)', lineHeight: 0.98, letterSpacing: '-0.045em' },
