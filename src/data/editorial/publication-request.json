@@ -1,5 +1,7 @@
 {
   "type": "EditorialPublicationRequest",
-  "status": "idle",
-  "summary": "Todavía no se solicitó una publicación desde este panel."
+  "status": "pending",
+  "requestId": "editorial-mt7drxp7-a92754e5-7ae8-4cf5-8530-6ade012a3dae",
+  "requestedAt": "2026-08-24T15:18:19.483Z",
+  "summary": "Solicitud enviada. Producción todavía no cambió."
 }
