@@ -110,12 +110,33 @@ export function validatePublicationRequest(
   }
 }
 
+export function normalizePublicationRequest(value: unknown): PublicationRequest {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    validatePublicationRequest(value);
+  }
+
+  const normalized = { ...(value as Record<string, unknown>) };
+  for (const field of [
+    'requestId',
+    'requestedAt',
+    'lastProcessedRequestId',
+    'processedAt',
+    'productionCommit',
+    'summary',
+  ] as const) {
+    if (normalized[field] === null) delete normalized[field];
+  }
+
+  validatePublicationRequest(normalized);
+  return normalized;
+}
+
 export function createPendingPublicationRequest(
-  current: PublicationRequest,
+  currentValue: unknown,
   requestId: string,
   requestedAt: string
 ): PublicationRequest {
-  validatePublicationRequest(current);
+  const current = normalizePublicationRequest(currentValue);
   if (isActivePublicationRequest(current.status)) {
     throw new Error('Ya hay una publicación pendiente o en proceso. Esperá su resultado antes de volver a publicar.');
   }
@@ -135,12 +156,12 @@ export function createPendingPublicationRequest(
 }
 
 export function createPublicationResult(
-  current: PublicationRequest,
+  currentValue: unknown,
   status: 'published' | 'failed',
   processedAt: string,
   options: { productionCommit?: string; summary: string }
 ): PublicationRequest {
-  validatePublicationRequest(current);
+  const current = normalizePublicationRequest(currentValue);
   if (!current.requestId || !current.requestedAt) {
     throw new Error('No existe un request identificable para registrar el resultado.');
   }

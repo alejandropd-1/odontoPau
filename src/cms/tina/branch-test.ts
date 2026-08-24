@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   assertNonProductionTinaBranch,
   assertTinaCloudConfiguration,
+  isEditorialPublicationBranch,
   resolveTinaBranch,
 } from './branch';
 
@@ -43,6 +44,11 @@ assert.throws(
   'El modo remoto no debe inventar una rama por defecto.'
 );
 
+assert.equal(isEditorialPublicationBranch('editorial/tina'), true);
+assert.equal(isEditorialPublicationBranch(' refs/heads/editorial/tina '), true);
+assert.equal(isEditorialPublicationBranch('change/validar-operacion-editorial-tina-en-produccion'), false);
+assert.equal(isEditorialPublicationBranch('deploy-preview-14'), false);
+
 assert.doesNotThrow(() =>
   assertTinaCloudConfiguration({
     TINA_PUBLIC_IS_LOCAL: 'false',
@@ -61,5 +67,5 @@ assert.throws(
 );
 
 console.log(
-  'Tina branch guard: configuracion publica valida, token server-only, main/master bloqueadas y sin fallback remoto.'
+  'Tina branch guard: configuracion publica valida, token server-only, main/master bloqueadas, sin fallback remoto y publicacion limitada a editorial/tina.'
 );

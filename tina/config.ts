@@ -2,10 +2,11 @@ import { defineConfig } from 'tinacms';
 
 import { assertTinaCloudConfiguration, resolveTinaBranch } from '../src/cms/tina/branch';
 import { tinaCollections } from '../src/cms/tina/collections';
-import { EditorialDashboard } from './dashboard/EditorialDashboard';
+import { createEditorialDashboard } from './dashboard/EditorialDashboard';
 
 const branchResolution = resolveTinaBranch(process.env);
 assertTinaCloudConfiguration(process.env);
+const EditorialDashboardScreen = createEditorialDashboard(branchResolution.branch);
 
 export default defineConfig({
   branch: branchResolution.branch,
@@ -30,7 +31,7 @@ export default defineConfig({
       name: 'Panel editorial',
       Icon: () => '✦',
       layout: 'fullscreen',
-      Component: EditorialDashboard,
+      Component: EditorialDashboardScreen,
     });
     return cms;
   },
