@@ -2,18 +2,30 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 const workflow = fs.readFileSync('.github/workflows/editorial-publication.yml', 'utf8');
+const qualityWorkflow = fs.readFileSync('.github/workflows/quality-gates.yml', 'utf8');
 const dashboard = fs.readFileSync('tina/dashboard/EditorialDashboard.tsx', 'utf8');
 
 assert.match(workflow, /branches:\s*\n\s*- editorial\/tina/);
 assert.match(workflow, /paths:\s*\n\s*- src\/data\/editorial\/publication-request\.json/);
 assert.match(workflow, /cancel-in-progress: false/);
+assert.match(workflow, /actions: write/);
 assert.match(workflow, /editorial-publication\.ts preflight/);
-assert.match(workflow, /gh pr checks/);
+assert.match(workflow, /gh workflow run quality-gates\.yml --ref editorial\/tina/);
 assert.match(workflow, /check_count/);
 assert.match(workflow, /gh pr merge/);
 assert.match(workflow, /test "\$\(git rev-parse origin\/editorial\/tina\)" = "\$\{GITHUB_SHA\}"/);
 assert.match(workflow, /git add -- src\/data\/editorial\/publication-request\.json/);
 assert.doesNotMatch(workflow, /git add \.|git add -A|force|TINA_TOKEN|NETLIFY_AUTH_TOKEN/);
+
+const pullRequestCheckCommands = workflow
+  .split('\n')
+  .filter((line) => line.includes('gh pr checks'));
+assert.ok(pullRequestCheckCommands.length > 0);
+for (const command of pullRequestCheckCommands) {
+  assert.match(command, /--required/, `El workflow no debe esperarse a sí mismo: ${command.trim()}`);
+}
+
+assert.match(qualityWorkflow, /workflow_dispatch:/);
 
 assert.match(dashboard, /Guardar actualiza Preview/);
 assert.match(dashboard, /Publicar cambios/);
