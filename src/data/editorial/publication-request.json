@@ -1,7 +1,9 @@
 {
   "type": "EditorialPublicationRequest",
-  "status": "pending",
+  "status": "failed",
   "requestId": "editorial-mt7fsixr-5199f298-875e-4818-94d3-08bf00c35e72",
   "requestedAt": "2026-08-24T16:14:46.239Z",
-  "summary": "Solicitud enviada. Producción todavía no cambió."
+  "lastProcessedRequestId": "editorial-mt7fsixr-5199f298-875e-4818-94d3-08bf00c35e72",
+  "processedAt": "2026-08-24T17:04:44.945Z",
+  "summary": "La publicación se detuvo de forma segura antes de modificar producción. Ya podés reintentar."
 }
