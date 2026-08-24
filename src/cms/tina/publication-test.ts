@@ -6,6 +6,7 @@ import {
   createPublicationResult,
   isActivePublicationRequest,
   isEditorialAllowedPath,
+  normalizePublicationRequest,
   validatePublicationRequest,
   type PublicationRequest,
 } from './publication';
@@ -18,6 +19,20 @@ const idle: PublicationRequest = {
 };
 
 assert.doesNotThrow(() => validatePublicationRequest(idle));
+
+const idleFromTina = {
+  ...idle,
+  requestId: null,
+  requestedAt: null,
+  lastProcessedRequestId: null,
+  processedAt: null,
+  productionCommit: null,
+};
+assert.deepEqual(normalizePublicationRequest(idleFromTina), idle);
+assert.equal(
+  createPendingPublicationRequest(idleFromTina, 'req-20260824-12345678', '2026-08-24T18:30:00.000Z').status,
+  'pending'
+);
 assert.equal(isActivePublicationRequest('pending'), true);
 assert.equal(isActivePublicationRequest('processing'), true);
 assert.equal(isActivePublicationRequest('published'), false);
