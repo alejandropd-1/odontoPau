@@ -17,7 +17,7 @@ assert.match(workflow, /check_count/);
 assert.match(workflow, /gh pr merge/);
 assert.match(workflow, /\[skip netlify\] Publicación editorial/);
 assert.match(workflow, /wait-for-production-marker\.mjs/);
-assert.match(workflow, /mark-progress \\\n\s*deploying/);
+assert.match(workflow, /mark-progress \\\r?\n\s*deploying/);
 assert.match(workflow, /waiting_index/);
 assert.match(workflow, /deploy_not_confirmed/);
 assert.match(workflow, /test "\$\(git rev-parse origin\/editorial\/tina\)" = "\$\{GITHUB_SHA\}"/);
