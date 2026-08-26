@@ -161,7 +161,7 @@ function friendlyDashboardError(reason: unknown, fallback: string): DashboardErr
 }
 
 const previewUrl = process.env.NEXT_PUBLIC_EDITORIAL_PREVIEW_URL;
-const localReviewEnabled = process.env.NODE_ENV !== 'production';
+const localReviewEnabled = process.env.TINA_PUBLIC_IS_LOCAL === 'true';
 
 type LocalReviewScenario = PublicationRequestStatus | 'current' | 'dashboard_error';
 
