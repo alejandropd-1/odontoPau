@@ -4,8 +4,11 @@ import path from 'node:path';
 
 import {
   PUBLICATION_REQUEST_PATH,
+  createPublicationProgress,
   createPublicationResult,
+  publicationIssueKinds,
   validatePublicationRequest,
+  type PublicationIssueKind,
   type PublicationRequest,
 } from '../src/cms/tina/publication';
 import { evaluatePublicationPreflight } from '../src/cms/tina/publication-preflight';
@@ -94,20 +97,56 @@ function runPreflight(base: string, head: string, remoteEditorialRef: string): v
   console.log('- Convergencia, allowlist y medios: válidos.');
 }
 
-function writeResult(status: 'published' | 'failed', requestId: string, productionCommit: string | undefined, summary: string): void {
-  const current = loadRequest();
-  if (current.requestId !== requestId) {
-    throw new Error('La solicitud vigente cambió; no se sobrescribirá con el resultado de otra ejecución.');
+function parseIssueKind(value: string | undefined): PublicationIssueKind | undefined {
+  if (!value || value === '-') return undefined;
+  if (!publicationIssueKinds.includes(value as PublicationIssueKind)) {
+    throw new Error(`Tipo de incidencia desconocido: ${value}.`);
   }
-  const next = createPublicationResult(current, status, new Date().toISOString(), {
-    productionCommit: status === 'published' ? productionCommit : undefined,
-    summary,
-  });
+  return value as PublicationIssueKind;
+}
+
+function assertCurrentRequest(current: PublicationRequest, requestId: string): void {
+  if (current.requestId !== requestId) {
+    throw new Error('El pedido vigente cambió; no se sobrescribirá con el resultado de otra ejecución.');
+  }
+}
+
+function persistRequest(next: PublicationRequest): void {
   fs.writeFileSync(
     path.join(process.cwd(), PUBLICATION_REQUEST_PATH),
     `${JSON.stringify(next, null, 2)}\n`,
     'utf8'
   );
+}
+
+function writeResult(
+  status: 'published' | 'failed',
+  requestId: string,
+  productionCommit: string | undefined,
+  issueKind: PublicationIssueKind | undefined,
+  summary: string
+): void {
+  const current = loadRequest();
+  assertCurrentRequest(current, requestId);
+  const next = createPublicationResult(current, status, new Date().toISOString(), {
+    productionCommit: status === 'published' ? productionCommit : undefined,
+    issueKind,
+    summary,
+  });
+  persistRequest(next);
+}
+
+function writeProgress(
+  status: 'processing' | 'deploying' | 'waiting_index',
+  requestId: string,
+  productionCommit: string | undefined,
+  issueKind: PublicationIssueKind | undefined,
+  summary: string
+): void {
+  const current = loadRequest();
+  assertCurrentRequest(current, requestId);
+  const next = createPublicationProgress(current, status, { productionCommit, issueKind, summary });
+  persistRequest(next);
 }
 
 const [command, ...args] = process.argv.slice(2);
@@ -116,13 +155,35 @@ if (command === 'preflight') {
   const [base = 'origin/main', head = 'HEAD', remoteEditorialRef = 'origin/editorial/tina'] = args;
   runPreflight(base, head, remoteEditorialRef);
 } else if (command === 'mark-result') {
-  const [status, requestId, productionCommit, ...summaryParts] = args;
+  const [status, requestId, productionCommit, issueKindValue, ...summaryParts] = args;
   if (status !== 'published' && status !== 'failed') {
     throw new Error('mark-result requiere status published o failed.');
   }
   if (!requestId) throw new Error('mark-result requiere requestId.');
   const summary = summaryParts.join(' ').trim() || (status === 'published' ? 'Cambios publicados.' : 'La publicación se detuvo.');
-  writeResult(status, requestId, productionCommit && productionCommit !== '-' ? productionCommit : undefined, summary);
+  writeResult(
+    status,
+    requestId,
+    productionCommit && productionCommit !== '-' ? productionCommit : undefined,
+    parseIssueKind(issueKindValue),
+    summary
+  );
+} else if (command === 'mark-progress') {
+  const [status, requestId, productionCommit, issueKindValue, ...summaryParts] = args;
+  if (status !== 'processing' && status !== 'deploying' && status !== 'waiting_index') {
+    throw new Error('mark-progress requiere status processing, deploying o waiting_index.');
+  }
+  if (!requestId) throw new Error('mark-progress requiere requestId.');
+  const summary = summaryParts.join(' ').trim() || 'La publicación continúa en curso.';
+  writeProgress(
+    status,
+    requestId,
+    productionCommit && productionCommit !== '-' ? productionCommit : undefined,
+    parseIssueKind(issueKindValue),
+    summary
+  );
 } else {
-  throw new Error('Uso: editorial-publication.ts preflight [base] [head] [remote] | mark-result <status> <requestId> <commit|-> <summary>');
+  throw new Error(
+    'Uso: editorial-publication.ts preflight [base] [head] [remote] | mark-progress <status> <requestId> <commit|-> <issue|-> <summary> | mark-result <status> <requestId> <commit|-> <issue|-> <summary>'
+  );
 }

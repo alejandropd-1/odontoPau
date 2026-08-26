@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   classifyEditorialPaths,
   createPendingPublicationRequest,
+  createPublicationProgress,
   createPublicationResult,
   isActivePublicationRequest,
   isEditorialAllowedPath,
@@ -27,6 +28,7 @@ const idleFromTina = {
   lastProcessedRequestId: null,
   processedAt: null,
   productionCommit: null,
+  issueKind: null,
 };
 assert.deepEqual(normalizePublicationRequest(idleFromTina), idle);
 assert.equal(
@@ -35,6 +37,8 @@ assert.equal(
 );
 assert.equal(isActivePublicationRequest('pending'), true);
 assert.equal(isActivePublicationRequest('processing'), true);
+assert.equal(isActivePublicationRequest('deploying'), true);
+assert.equal(isActivePublicationRequest('waiting_index'), true);
 assert.equal(isActivePublicationRequest('published'), false);
 
 const pending = createPendingPublicationRequest(
@@ -55,6 +59,31 @@ const published = createPublicationResult(pending, 'published', '2026-08-21T18:3
 });
 assert.equal(published.lastProcessedRequestId, pending.requestId);
 assert.doesNotThrow(() => validatePublicationRequest(published));
+
+const deploying = createPublicationProgress(pending, 'deploying', {
+  productionCommit: 'abcdef0123456789',
+  summary: 'Estamos actualizando el sitio público.',
+});
+assert.equal(deploying.status, 'deploying');
+assert.equal(deploying.productionCommit, 'abcdef0123456789');
+
+const waiting = createPublicationProgress(deploying, 'waiting_index', {
+  productionCommit: 'abcdef0123456789',
+  issueKind: 'deploy_not_confirmed',
+  summary: 'Todavía no pudimos confirmar el sitio público.',
+});
+assert.equal(waiting.issueKind, 'deploy_not_confirmed');
+assert.equal(isActivePublicationRequest(waiting.status), true);
+
+const failed = createPublicationResult(pending, 'failed', '2026-08-21T18:35:00.000Z', {
+  issueKind: 'checks_failed',
+  summary: 'Uno de los controles no pasó.',
+});
+assert.equal(failed.issueKind, 'checks_failed');
+assert.throws(
+  () => validatePublicationRequest({ ...failed, issueKind: undefined }),
+  /failed requiere issueKind/
+);
 
 const duplicated = { ...pending, lastProcessedRequestId: pending.requestId };
 assert.throws(() => validatePublicationRequest(duplicated), /ya fue procesado/);

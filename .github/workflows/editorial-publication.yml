@@ -25,6 +25,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       CI: "true"
+      PRODUCTION_MARKER_URL: ${{ vars.EDITORIAL_PRODUCTION_MARKER_URL || 'https://paulagualtieri.com/deployment.json' }}
 
     steps:
       - name: Checkout editorial snapshot
@@ -71,6 +72,7 @@ jobs:
 
       - name: Validate request and editorial scope
         if: steps.request.outputs.process == 'true'
+        id: preflight
         run: pnpm exec tsx scripts/editorial-publication.ts preflight origin/main "${GITHUB_SHA}" origin/editorial/tina
 
       - name: Create or reuse technical pull request
@@ -83,25 +85,34 @@ jobs:
             pr_url="$(gh pr create \
               --base main \
               --head editorial/tina \
-              --title "Publicación editorial ${{ steps.request.outputs.request_id }}" \
-              --body "Solicitud generada desde Tina. El workflow valida alcance, CI y convergencia antes de integrar.")"
+              --title "[skip netlify] Publicación editorial ${{ steps.request.outputs.request_id }}" \
+              --body "Pedido generado desde el panel editorial. Los controles internos validan el contenido antes de actualizar el sitio público.")"
             pr_number="${pr_url##*/}"
           fi
+          gh pr edit "$pr_number" --title "[skip netlify] Publicación editorial ${{ steps.request.outputs.request_id }}"
           echo "number=$pr_number" >> "$GITHUB_OUTPUT"
 
       - name: Dispatch required quality gates
         if: steps.request.outputs.process == 'true'
         shell: bash
         run: |
-          quality_check_count="$(gh api \
-            "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/check-runs" \
-            --jq '[.check_runs[] | select(.name == "quality-gates")] | length')"
+          quality_check_count=0
+          for attempt in {1..6}; do
+            quality_check_count="$(gh api \
+              "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/check-runs" \
+              --jq '[.check_runs[] | select(.name == "quality-gates")] | length')"
+            if [ "$quality_check_count" -gt 0 ]; then
+              break
+            fi
+            sleep 5
+          done
           if [ "$quality_check_count" -eq 0 ]; then
             gh workflow run quality-gates.yml --ref editorial/tina
           fi
 
       - name: Wait for required checks
         if: steps.request.outputs.process == 'true'
+        id: quality
         shell: bash
         run: |
           for attempt in {1..24}; do
@@ -116,6 +127,7 @@ jobs:
 
       - name: Confirm immutable editorial snapshot
         if: steps.request.outputs.process == 'true'
+        id: snapshot
         run: |
           git fetch --no-tags origin editorial/tina
           test "$(git rev-parse origin/editorial/tina)" = "${GITHUB_SHA}"
@@ -128,45 +140,95 @@ jobs:
           git fetch --no-tags origin main
           echo "commit=$(git rev-parse origin/main)" >> "$GITHUB_OUTPUT"
 
-      - name: Synchronize editorial branch and record success
+      - name: Synchronize editorial branch and record deployment in progress
         if: steps.request.outputs.process == 'true'
+        id: synchronize
         shell: bash
         run: |
           git push origin origin/main:refs/heads/editorial/tina
           git checkout -B editorial/tina origin/main
+          pnpm exec tsx scripts/editorial-publication.ts mark-progress \
+            deploying \
+            "${{ steps.request.outputs.request_id }}" \
+            "${{ steps.merge.outputs.commit }}" \
+            - \
+            "Los controles salieron bien. Estamos actualizando el sitio público."
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- src/data/editorial/publication-request.json
+          git commit -m "chore(editorial): registrar despliegue ${{ steps.request.outputs.request_id }} [skip netlify]"
+          git push origin HEAD:editorial/tina
+
+      - name: Confirm production serves the integrated commit
+        if: steps.request.outputs.process == 'true'
+        id: deploy
+        run: |
+          node scripts/wait-for-production-marker.mjs \
+            "$PRODUCTION_MARKER_URL" \
+            "${{ steps.merge.outputs.commit }}" \
+            "${{ steps.request.outputs.request_id }}"
+
+      - name: Record confirmed publication
+        if: steps.request.outputs.process == 'true'
+        shell: bash
+        run: |
           pnpm exec tsx scripts/editorial-publication.ts mark-result \
             published \
             "${{ steps.request.outputs.request_id }}" \
             "${{ steps.merge.outputs.commit }}" \
-            "Cambios integrados. El despliegue de producción fue iniciado."
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            - \
+            "Listo: los cambios ya están publicados en el sitio."
           git add -- src/data/editorial/publication-request.json
-          git commit -m "chore(editorial): registrar publicación ${{ steps.request.outputs.request_id }}"
+          git commit -m "chore(editorial): confirmar publicación ${{ steps.request.outputs.request_id }} [skip netlify]"
           git push origin HEAD:editorial/tina
 
       - name: Record safe failure
         if: failure() && steps.request.outputs.process == 'true'
+        env:
+          PREFLIGHT_OUTCOME: ${{ steps.preflight.outcome }}
+          QUALITY_OUTCOME: ${{ steps.quality.outcome }}
+          SNAPSHOT_OUTCOME: ${{ steps.snapshot.outcome }}
+          MERGE_OUTCOME: ${{ steps.merge.outcome }}
+          DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
         shell: bash
         run: |
           git fetch --no-tags origin main editorial/tina
           git checkout -B editorial/tina origin/editorial/tina
           if git merge-base --is-ancestor "${GITHUB_SHA}" origin/main; then
-            result="published"
+            command="mark-progress"
+            result="waiting_index"
             production_commit="$(git rev-parse origin/main)"
-            summary="Los cambios llegaron a main, pero la sincronización final necesita revisión."
+            issue_kind="deploy_not_confirmed"
+            summary="Los cambios fueron aprobados, pero todavía no pudimos confirmar el sitio público. No publiques otra tanda y pedí ayuda."
           else
+            command="mark-result"
             result="failed"
             production_commit="-"
-            summary="La publicación se detuvo de forma segura. Producción no fue modificada por este request."
+            issue_kind="technical"
+            summary="Tuvimos un problema técnico. El sitio público sigue igual y tus cambios continúan guardados en la vista previa."
+
+            if [ "$PREFLIGHT_OUTCOME" = "failure" ]; then
+              issue_kind="content"
+              summary="Encontramos algo que necesita una corrección. Revisá el contenido en la vista previa y volvé a intentarlo."
+            elif [ "$QUALITY_OUTCOME" = "failure" ]; then
+              issue_kind="checks_failed"
+              summary="Uno de los controles no pasó. El sitio público sigue igual; pedí ayuda para revisar tus cambios."
+            elif [ "$SNAPSHOT_OUTCOME" = "failure" ]; then
+              issue_kind="snapshot_changed"
+              summary="Guardaste nuevos cambios mientras se publicaba. Revisá la vista previa completa y volvé a publicar."
+            elif [ "$MERGE_OUTCOME" = "failure" ]; then
+              issue_kind="merge_failed"
+              summary="No pudimos completar la publicación por un problema técnico. El sitio público sigue igual; pedí ayuda."
+            fi
           fi
-          pnpm exec tsx scripts/editorial-publication.ts mark-result \
+          pnpm exec tsx scripts/editorial-publication.ts "$command" \
             "$result" \
             "${{ steps.request.outputs.request_id }}" \
             "$production_commit" \
+            "$issue_kind" \
             "$summary" || exit 0
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- src/data/editorial/publication-request.json
-          git commit -m "chore(editorial): registrar resultado ${{ steps.request.outputs.request_id }}" || exit 0
+          git commit -m "chore(editorial): registrar incidencia ${{ steps.request.outputs.request_id }} [skip netlify]" || exit 0
           git push origin HEAD:editorial/tina
