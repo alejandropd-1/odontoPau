@@ -52,6 +52,34 @@ El reporte registrará timestamps, request id, SHAs, resultado de checks, deploy
 
 Si el defecto está dentro del bootstrap —por ejemplo, estado que no se actualiza, request duplicado o convergencia incorrecta— podrá corregirse en esta rama con una tarea y prueba específicas. Si exige schema, contrato, navegación o una nueva capacidad, el ciclo se detendrá y se abrirá otro OpenSpec.
 
+### 7. El PR técnico es una barrera interna y no una pantalla para el usuario
+
+Cada tanda conserva un único PR técnico y los checks requeridos sobre el snapshot exacto. El panel traduce su resultado a estados editoriales y nunca exige abrir GitHub. Como el Preview editorial ya existe en `editorial/tina`, el PR técnico llevará la señal oficial para omitir su Deploy Preview de Netlify; crear otra vista previa del mismo snapshot no agrega una decisión humana y consume capacidad innecesaria.
+
+### 8. Los commits de control no reconstruyen el sitio
+
+Los commits que modifican exclusivamente `src/data/editorial/publication-request.json` registran pedido, progreso o resultado y no cambian la web. Netlify los omite mediante un `ignore` versionado y comprobable. Las ediciones reales siguen construyendo el branch deploy de Preview y el merge a `main` sigue iniciando la única compilación de producción.
+
+La misma regla omite una sincronización entre dos commits cuyo árbol público es idéntico. Ante una referencia ausente, un error de comparación o cualquier archivo real modificado, el comportamiento seguro es construir. Los controles de GitHub también esperan primero el check iniciado por el PR y sólo lo disparan manualmente si no apareció, para no ejecutar dos veces la misma suite.
+
+### 9. Publicado significa producción confirmada
+
+El build genera una marca pública no sensible con el SHA servido. Después del merge, la automatización conserva el estado `deploying` hasta que esa marca coincide con el commit integrado. Recién entonces registra `published`. Si la confirmación tarda o falla, bloquea una nueva tanda con `waiting_index` y muestra una instrucción comprensible, sin afirmar un éxito ambiguo.
+
+### 10. Errores orientados a la acción
+
+El usuario ve mensajes coloquiales según la clase de problema: corregir contenido, revisar un snapshot que cambió, esperar la actualización pública o pedir ayuda técnica. Los identificadores del request quedan disponibles sólo como referencia de soporte; los logs y términos como PR, SHA, CI o merge permanecen fuera del recorrido ordinario.
+
+Para la inspección visual previa, el panel ofrece en desarrollo un selector de escenarios que simula los estados sin persistir datos, crear requests ni comunicarse con Netlify. El selector y el bloqueo local de la acción de publicación no se incluyen en el build de producción.
+
+### 11. Estado por contenido y publicación por tanda
+
+El panel puede mostrar el estado y la preparación de cada documento, pero la promoción técnica continúa siendo una única tanda: el snapshot completo revisado en Preview. Por lo tanto, una fila podrá informar `listo para publicar`, `bloqueado`, `publicado` o `retirado`, junto con el motivo y la acción editorial aplicable, sin prometer que se desplegará aislada de los demás cambios aprobados.
+
+La unificación de estas filas operativas pertenece al cambio posterior `operativizar-dashboard-editorial-por-contenido`. Ese cambio trasladará las funciones útiles de la interfaz histórica de `/editorial` al Panel editorial personalizado de Tina dentro de `/admin`; no mantendrá dos dashboards. Después de la migración, la ruta independiente `/editorial` se eliminará o redirigirá a `/admin`.
+
+`/admin` es la única entrada editorial destinada a las personas. La rama `editorial/tina` se conserva como detalle técnico separado porque alimenta Preview y evita que **Save** modifique `main`; su nombre no implica una ruta web `/editorial`. Este OpenSpec sólo valida el motor real que el futuro dashboard consumirá. Supabase no es necesario para esa primera integración y conserva su gate separado para colaboración, KPIs y auditoría avanzada.
+
 ## Risks / Trade-offs
 
 - **[La prueba modifica producción]** → usar cambios reversibles, aprobación previa y tres promociones secuenciales sin solapamiento.
@@ -59,6 +87,8 @@ Si el defecto está dentro del bootstrap —por ejemplo, estado que no se actual
 - **[TinaCloud indexa un schema distinto]** → confirmar rama y reindexado antes del primer Save; no continuar ante diferencias.
 - **[El workflow mezcla un snapshot mayor al esperado]** → mostrar y confirmar el alcance global, ejecutar la allowlist y detenerse ante archivos estructurales.
 - **[Se duplica trabajo de validación]** → ejecutar localmente sólo el preflight específico y confiar en CI remoto salvo investigación.
+- **[Los commits de estado consumen minutos de Netlify]** → omitir únicamente los diffs operativos conocidos y mantener el build normal ante cualquier cambio real o condición no reconocida.
+- **[El merge termina antes que el deploy]** → mantener el panel en `deploying` y comprobar la marca pública antes de mostrar éxito.
 - **[La evidencia expone información clínica]** → conservar sólo identificadores técnicos y confirmaciones humanas no sensibles.
 - **[Una corrección del bootstrap crece de alcance]** → aplicar el clasificador `editorial-routine` / `structural-change` antes de editar código.
 

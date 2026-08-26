@@ -64,6 +64,7 @@ jobs:
           pnpm run test:tina-media
           pnpm run test:tina-publication
           pnpm run test:tina-publication-workflow
+          pnpm run test:netlify-ignore-build
           pnpm run test:tina-runtime
           pnpm run test:tina-visual
 

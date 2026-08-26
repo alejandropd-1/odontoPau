@@ -198,6 +198,7 @@ export const publicationRequestCollection: Collection = {
     { name: 'processedAt', label: 'Fecha de resultado', type: 'datetime', ui: { component: 'hidden' } },
     { name: 'productionCommit', label: 'Versión publicada', type: 'string', ui: { component: 'hidden' } },
     { name: 'summary', label: 'Resultado', type: 'string', ui: { component: 'hidden' } },
+    { name: 'issueKind', label: 'Tipo de incidencia', type: 'string', ui: { component: 'hidden' } },
   ],
 };
 

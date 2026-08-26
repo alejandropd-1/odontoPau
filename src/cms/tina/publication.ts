@@ -5,12 +5,24 @@ export const publicationRequestStatuses = [
   'idle',
   'pending',
   'processing',
+  'deploying',
   'published',
   'failed',
   'waiting_index',
 ] as const;
 
 export type PublicationRequestStatus = (typeof publicationRequestStatuses)[number];
+
+export const publicationIssueKinds = [
+  'content',
+  'snapshot_changed',
+  'checks_failed',
+  'merge_failed',
+  'deploy_not_confirmed',
+  'technical',
+] as const;
+
+export type PublicationIssueKind = (typeof publicationIssueKinds)[number];
 
 export interface PublicationRequest {
   type: 'EditorialPublicationRequest';
@@ -21,9 +33,10 @@ export interface PublicationRequest {
   processedAt?: string;
   productionCommit?: string;
   summary?: string;
+  issueKind?: PublicationIssueKind;
 }
 
-const activeStatuses = new Set<PublicationRequestStatus>(['pending', 'processing', 'waiting_index']);
+const activeStatuses = new Set<PublicationRequestStatus>(['pending', 'processing', 'deploying', 'waiting_index']);
 const isoUtcPattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
 const requestIdPattern = /^[a-zA-Z0-9][a-zA-Z0-9._:-]{7,127}$/;
 const commitPattern = /^[0-9a-f]{7,40}$/;
@@ -94,6 +107,12 @@ export function validatePublicationRequest(
   if (request.summary !== undefined && (typeof request.summary !== 'string' || request.summary.length > 280)) {
     throw new Error(`Solicitud editorial inválida en ${source}: summary supera el límite permitido.`);
   }
+  if (
+    request.issueKind !== undefined &&
+    (typeof request.issueKind !== 'string' || !publicationIssueKinds.includes(request.issueKind as PublicationIssueKind))
+  ) {
+    throw new Error(`Solicitud editorial inválida en ${source}: issueKind no es válido.`);
+  }
 
   const status = request.status as PublicationRequestStatus;
   if (status !== 'idle' && (!request.requestId || !request.requestedAt)) {
@@ -101,6 +120,18 @@ export function validatePublicationRequest(
   }
   if (status === 'pending' && request.requestId === request.lastProcessedRequestId) {
     throw new Error(`Solicitud editorial inválida en ${source}: el request pendiente ya fue procesado.`);
+  }
+  if (status === 'deploying' && !request.productionCommit) {
+    throw new Error(`Solicitud editorial inválida en ${source}: deploying requiere productionCommit.`);
+  }
+  if (status === 'waiting_index' && request.issueKind !== 'deploy_not_confirmed') {
+    throw new Error(`Solicitud editorial inválida en ${source}: waiting_index requiere deploy_not_confirmed.`);
+  }
+  if (status === 'failed' && !request.issueKind) {
+    throw new Error(`Solicitud editorial inválida en ${source}: failed requiere issueKind.`);
+  }
+  if (!['failed', 'waiting_index'].includes(status) && request.issueKind !== undefined) {
+    throw new Error(`Solicitud editorial inválida en ${source}: ${status} no admite issueKind.`);
   }
   if (
     ['published', 'failed'].includes(status) &&
@@ -123,6 +154,7 @@ export function normalizePublicationRequest(value: unknown): PublicationRequest 
     'processedAt',
     'productionCommit',
     'summary',
+    'issueKind',
   ] as const) {
     if (normalized[field] === null) delete normalized[field];
   }
@@ -149,7 +181,7 @@ export function createPendingPublicationRequest(
     lastProcessedRequestId: current.lastProcessedRequestId,
     processedAt: current.processedAt,
     productionCommit: current.productionCommit,
-    summary: 'Solicitud enviada. Producción todavía no cambió.',
+    summary: 'Recibimos tu pedido. Tus cambios siguen sólo en Preview mientras hacemos los controles.',
   };
   validatePublicationRequest(next);
   return next;
@@ -159,7 +191,7 @@ export function createPublicationResult(
   currentValue: unknown,
   status: 'published' | 'failed',
   processedAt: string,
-  options: { productionCommit?: string; summary: string }
+  options: { productionCommit?: string; summary: string; issueKind?: PublicationIssueKind }
 ): PublicationRequest {
   const current = normalizePublicationRequest(currentValue);
   if (!current.requestId || !current.requestedAt) {
@@ -173,6 +205,28 @@ export function createPublicationResult(
     processedAt,
     productionCommit: options.productionCommit,
     summary: options.summary,
+    issueKind: status === 'failed' ? options.issueKind ?? 'technical' : undefined,
+  };
+  validatePublicationRequest(next);
+  return next;
+}
+
+export function createPublicationProgress(
+  currentValue: unknown,
+  status: 'processing' | 'deploying' | 'waiting_index',
+  options: { productionCommit?: string; summary: string; issueKind?: PublicationIssueKind }
+): PublicationRequest {
+  const current = normalizePublicationRequest(currentValue);
+  if (!current.requestId || !current.requestedAt) {
+    throw new Error('No existe un pedido identificable para actualizar su progreso.');
+  }
+
+  const next: PublicationRequest = {
+    ...current,
+    status,
+    productionCommit: options.productionCommit,
+    summary: options.summary,
+    issueKind: status === 'waiting_index' ? options.issueKind ?? 'deploy_not_confirmed' : undefined,
   };
   validatePublicationRequest(next);
   return next;

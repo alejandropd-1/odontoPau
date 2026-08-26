@@ -24,9 +24,17 @@ Una modificación editorial reversible y aprobada SHALL completar `Save -> Previ
 - **WHEN** el colaborador aprueba el Preview y activa `Publicar cambios`
 - **THEN** un único request atraviesa preflight, PR técnico, checks, merge y deploy, y producción muestra exactamente la modificación autorizada
 
+#### Scenario: Controles internos sin builds redundantes
+- **WHEN** el circuito crea el PR técnico o registra pedido, progreso y resultado sin cambiar contenido público
+- **THEN** conserva los checks requeridos pero omite el Deploy Preview del PR y los builds de Netlify causados exclusivamente por archivos operativos
+
+#### Scenario: Sincronización sin cambios públicos
+- **WHEN** la rama editorial converge con el commit publicado y ambos árboles contienen exactamente los mismos archivos públicos
+- **THEN** Netlify no repite ese build y GitHub no duplica un control que ya se inició para la misma revisión
+
 #### Scenario: Gate fallido
 - **WHEN** cualquier control rechaza el snapshot
-- **THEN** producción permanece en el último commit sano, el Preview conserva la edición y el panel informa una acción comprensible
+- **THEN** producción permanece en el último commit sano, el Preview conserva la edición y el panel informa en lenguaje cotidiano si corresponde corregir, volver a revisar o pedir ayuda
 
 ### Requirement: Retiro y republicación reversibles
 
@@ -46,11 +54,15 @@ Después de cada promoción exitosa, el sistema MUST registrar el request proces
 
 #### Scenario: Cierre saludable
 - **WHEN** Netlify publica el commit integrado
-- **THEN** el estado del panel, el SHA de producción y la rama editorial convergente permiten comenzar otro ciclo
+- **THEN** una marca pública confirma el commit servido y recién entonces el panel informa éxito y permite comenzar otro ciclo
 
 #### Scenario: Cierre ambiguo
 - **WHEN** el merge existe pero el deploy, el índice o la rama editorial no convergen
 - **THEN** se bloquea otra publicación y se deriva a intervención técnica
+
+#### Scenario: Seguimiento sin actualización manual
+- **WHEN** existe una publicación pendiente, en controles, desplegándose o esperando confirmación
+- **THEN** el panel consulta su estado de forma periódica mientras está visible y anuncia los cambios de estado sin exigir recargar la página
 
 ### Requirement: Verificación proporcional y evidencia trazable
 
@@ -74,7 +86,11 @@ La operación MUST conservar las aprobaciones clínicas y de imágenes aplicable
 
 #### Scenario: Uso no técnico del panel
 - **WHEN** un colaborador navega la rutina mediante teclado o lector de pantalla
-- **THEN** puede identificar Preview, publicación, estado ocupado, éxito y error sin depender sólo del color ni de jerga técnica
+- **THEN** puede identificar Preview, publicación, estado ocupado, éxito y error sin depender sólo del color ni de jerga como PR, CI, merge o SHA
+
+#### Scenario: Inspección local segura de todos los estados
+- **WHEN** Alejandro revisa el panel en el entorno local de desarrollo
+- **THEN** puede simular cada estado y mensaje sin guardar contenido, crear una solicitud, publicar ni llamar a Netlify, y ese selector no aparece en producción
 
 ### Requirement: Handoff operativo y matriz de excepciones
 

@@ -10,12 +10,14 @@ El bootstrap editorial de Tina ya está integrado y publicado, pero la rutina to
 - Confirmar que cada publicación deja `main`, `editorial/tina`, TinaCloud y Netlify en un estado convergente antes del ciclo siguiente.
 - Registrar evidencia mínima por ciclo —request, commits, checks, deploy y rutas— sin copiar logs verdes completos ni información clínica privada.
 - Entregar una rutina breve para usuarios no técnicos y una matriz de excepciones que indique cuándo detenerse y pedir intervención.
+- Mantener el PR y los controles como una barrera interna, sin crear Deploy Previews ni builds de Netlify para commits que sólo registran el estado operativo de una publicación.
+- Mostrar estados y fallos en lenguaje cotidiano, actualizar el panel automáticamente durante una publicación y declarar éxito sólo después de confirmar en producción el commit integrado.
 - Corregir el roadmap para reflejar que `pilotear-circuito-editorial-tina` ya fue integrado y que este cambio es el sucesor operativo vigente.
 
 ### Alcance
 
 - Validación del circuito editorial ya implementado con contenido existente y previamente aprobado.
-- Ajustes mínimos de configuración, mensajes o automatización únicamente si una prueba real revela un defecto del bootstrap y sin ampliar el contrato editorial.
+- Ajustes mínimos de configuración, mensajes o automatización únicamente si una prueba real revela un defecto del bootstrap y sin ampliar el contrato editorial. Esto incluye evitar builds redundantes y hacer comprensibles los estados del circuito ya aprobado.
 - Evidencia de funcionamiento proporcional al riesgo, reutilizando los checks remotos sobre la revisión exacta.
 
 ### Fuera de alcance
