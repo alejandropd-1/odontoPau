@@ -1,6 +1,7 @@
 [build]
   command = "pnpm run build"
   publish = ".next"
+  ignore = "node ./scripts/netlify-ignore-build.mjs"
 
 [build.environment]
   NODE_VERSION = "22"
@@ -22,3 +23,8 @@
   for = "/admin/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow, noarchive"
+
+[[headers]]
+  for = "/deployment.json"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
