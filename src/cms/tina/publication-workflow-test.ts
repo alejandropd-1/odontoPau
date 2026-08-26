@@ -45,7 +45,7 @@ assert.match(dashboard, /aria-live="polite"/);
 assert.match(dashboard, /window\.setInterval/);
 assert.match(dashboard, /document\.visibilityState/);
 assert.match(dashboard, /Información para pedir ayuda/);
-assert.match(dashboard, /localReviewEnabled = process\.env\.NODE_ENV !== 'production'/);
+assert.match(dashboard, /localReviewEnabled = process\.env\.TINA_PUBLIC_IS_LOCAL === 'true'/);
 assert.match(dashboard, /Esta prueba no guarda, no publica y no llama a Netlify/);
 assert.match(dashboard, /publicationInteractionEnabled = publicationEnabled && !localReviewEnabled/);
 

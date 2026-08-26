@@ -132,3 +132,11 @@ Resultado: la tarea 3.1 quedó demostrada. El retiro está guardado únicamente 
 El 2026-08-26 Alejandro autorizó iniciar la tarea 3.2, pero el circuito se detuvo antes de confirmar la tanda y antes de presionar `Publicar cambios` porque el administrador en vivo todavía sirve el bundle de `HEAD`: muestra `Guardar actualiza Preview. Producción sólo cambia...`. El checkout local pendiente contiene, en cambio, `Guardar actualiza la vista previa. El sitio público sólo cambia...`, junto con la confirmación por marca pública y los estados refinados.
 
 Publicar en estas condiciones probaría el workflow anterior y no la implementación local que este OpenSpec debe cerrar. No se creó un request ni se modificó producción. Antes de reanudar 3.2 debe decidirse y autorizarse cómo poner la revisión vigente en una superficie verificable, preservando el circuito Git y sin mezclar a `main` fuera de la autorización correspondiente.
+
+### Publicación intermedia del circuito corregido
+
+El 2026-08-26 Alejandro autorizó publicar la corrección operativa antes de continuar el retiro. El PR existente superó Quality Gates y Deploy Preview, y se integró en `main` como `817f3ffdaa31b24add83daa9cf3a346b6d5ad53a`.
+
+El primer deploy de producción falló de forma segura antes de publicar: Tina Cloud informó que el esquema remoto de `editorial/tina` todavía no incluía el campo técnico `issueKind`. Se sincronizó `main` hacia la rama editorial mediante el merge limpio `da927454e15208c3876f34a8fa36cab244ddf93e`, preservando tanto el artículo retirado como el pedido editorial. El branch deploy terminó correctamente y el reintento de producción confirmó la marca pública para `817f3ffdaa31b24add83daa9cf3a346b6d5ad53a`.
+
+La comprobación visual posterior confirmó el texto nuevo y el artículo `Retirado`, pero también detectó que el simulador local aparecía en producción y deshabilitaba el botón. La causa fue usar `NODE_ENV` como señal de revisión local dentro del bundle de Tina. El hotfix pendiente reemplaza esa inferencia por `TINA_PUBLIC_IS_LOCAL === 'true'`, que es la señal explícita ya establecida por `scripts/run-tina.mjs`. La tarea 3.2 continúa sin ejecutar hasta publicar y verificar este hotfix.
