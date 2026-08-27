@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import homeJson from '../../data/home.json';
 import treatmentsPageJson from '../../data/tratamientos-page.json';
-import { articles } from '../../data/articulos';
+import { articles, publishedArticles } from '../../data/articulos';
 import { instrucciones } from '../../data/instrucciones';
 import type { HomePageData, TreatmentsPageData } from '../../data/site-pages';
 import { validateHomePageData, validateTreatmentsPageData } from '../../data/site-pages';
@@ -44,6 +44,7 @@ const article = articles[0];
 const instruction = instrucciones[0];
 
 const articlesBySlug = new Map(articles.map((item) => [item.slug, item]));
+const publishedArticlesBySlug = new Map(publishedArticles.map((item) => [item.slug, item]));
 const clinicalCases = getTratamientos().flatMap((item) =>
   item.casosClinicos.map((clinicalCase) => ({ treatment: item, clinicalCase }))
 );
@@ -59,9 +60,9 @@ for (const { treatment: caseTreatment, clinicalCase } of clinicalCases) {
     `El caso ${caseTreatment.id}/${clinicalCase.id} referencia un artículo inexistente.`
   );
   assert.equal(
-    canonicalArticle.status,
-    'published',
-    `El caso ${caseTreatment.id}/${clinicalCase.id} debe resolver un artículo publicado.`
+    publishedArticlesBySlug.has(canonicalArticle.slug),
+    canonicalArticle.status === 'published',
+    `La relación pública del caso ${caseTreatment.id}/${clinicalCase.id} debe respetar el estado editorial del artículo.`
   );
   assert.equal(
     clinicalCase.titulo,
@@ -149,6 +150,6 @@ console.log('--- Tina Visual Editing contract ---');
 console.log('- Superficies: Inicio, Servicios, detalle de servicio, Artículo e Instrucción.');
 console.log('- Normalización inicial/editor: round-trip semántico sin pérdida.');
 console.log('- Routers: 5/5 resuelven una preview local no productiva.');
-console.log(`- Casos: ${clinicalCases.length}/${clinicalCases.length} resuelven un artículo publicado; sin fichas ni enlaces legacy.`);
+console.log(`- Casos: ${clinicalCases.length}/${clinicalCases.length} conservan su relación editorial y sólo exponen artículos publicados; sin fichas ni enlaces legacy.`);
 console.log('- Consultas: versionadas y dirigidas por relativePath.');
 console.log('- Baseline histórica: preservada; contrato institucional Tina validado por separado.');
