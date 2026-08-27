@@ -1,9 +1,10 @@
 {
   "type": "EditorialPublicationRequest",
-  "status": "pending",
+  "status": "deploying",
   "requestId": "editorial-retry-1787836693109-28fe0156-d2b1-40d6-b472-f9d8e530af0a",
   "requestedAt": "2026-08-27T13:18:13.106Z",
   "lastProcessedRequestId": "editorial-retry-1787836482668-c9330081-a853-4e37-92a3-7b955fa46bff",
   "processedAt": "2026-08-27T13:17:13.434Z",
-  "summary": "Recibimos tu pedido. Tus cambios siguen sólo en Preview mientras hacemos los controles."
+  "summary": "Los controles salieron bien. Estamos actualizando el sitio público.",
+  "productionCommit": "bf82398e194df8f3ac262869e2ca9c6937f4bf82"
 }
