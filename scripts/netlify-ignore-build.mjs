@@ -3,7 +3,12 @@ import { pathToFileURL } from 'node:url';
 
 const operationalPaths = new Set(['src/data/editorial/publication-request.json']);
 
-export function shouldIgnoreBuild(changedPaths) {
+export function shouldIgnoreBuild(changedPaths, deployment = {}) {
+  const previewBranch = deployment.head || deployment.branch;
+  if (deployment.context === 'deploy-preview' && previewBranch === 'editorial/tina') {
+    return true;
+  }
+
   return changedPaths.every((filePath) => operationalPaths.has(filePath.replaceAll('\\', '/')));
 }
 
@@ -24,7 +29,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   } else {
     try {
       const changedPaths = changedPathsBetween(base, head);
-      process.exitCode = shouldIgnoreBuild(changedPaths) ? 0 : 1;
+      process.exitCode = shouldIgnoreBuild(changedPaths, {
+        context: process.env.CONTEXT,
+        branch: process.env.BRANCH,
+        head: process.env.HEAD,
+      }) ? 0 : 1;
     } catch {
       // Ante una condición no reconocida se construye el sitio: nunca se omite por error.
       process.exitCode = 1;
