@@ -276,14 +276,15 @@ Fecha: 2026-08-27.
 
 Resultado: las tareas 6.1, 6.4 y 6.5 quedaron demostradas. Continúan pendientes la preparación final de 6.6 y el gate exclusivamente humano 6.7.
 
-## Revisión final preparada sin consumir cuota adicional
+## Revisión final preparada y cuota comprobada
 
 Fecha: 2026-08-27.
 
 - La evidencia, la guía y el handoff se versionaron selectivamente en `750d4b1aa12d1b60e1fbb51815f9299bec2acf1a`; quedaron fuera `tsconfig.tsbuildinfo` y `.codex-remote-attachments/`.
-- Se abrió el Draft PR `#24` con omisión explícita de Netlify porque Alejandro informó que el sitio ya consumió el 75% de su cuota gratuita y que el período se reinicia dentro de cinco días, contando el día actual.
+- Se abrió el Draft PR `#24` con omisión explícita de Netlify mientras se comprobaba el margen disponible del plan.
 - Netlify no inició un Deploy Preview para esta revisión documental.
 - `quality-gates` terminó correctamente en la ejecución `33089800730`: OpenSpec, contratos, seguridad de rama, reglas editoriales, auditoría, administración Tina, diff, TypeScript, lint y build interno válidos.
-- La rama del Draft PR todavía debe sincronizar el commit público de la republicación. Hacerlo ahora repetiría la tanda completa de controles; se posterga junto con el único Deploy Preview final para después del reinicio de cuota.
+- La pantalla de uso confirmó que la cuenta utiliza `Free Legacy`: consumió `225/300` minutos y conserva `75` minutos. El proyecto `paulagualtieri` registra un promedio de `1 min 53 s` por build; por lo tanto, existe margen suficiente para un único CI/Deploy Preview final y no es necesario esperar al reinicio mensual sólo por la cuota.
+- La rama del Draft PR todavía debe sincronizar el commit público de la republicación. Esa sincronización, la actualización del PR y el único Deploy Preview final permanecen detenidos hasta recibir autorización explícita para las acciones externas.
 
-La tarea 6.6 continúa pendiente. Para completarla se debe sincronizar `main` una sola vez, retirar la omisión temporal del título, verificar un único CI/Deploy Preview sobre esa revisión exacta y recién entonces presentar el gate 6.7 a Alejandro. No se debe mezclar ni archivar antes.
+La tarea 6.6 continúa pendiente. Para completarla se debe sincronizar `main` una sola vez, retirar la omisión temporal del título, verificar un único CI/Deploy Preview sobre esa revisión exacta y recién entonces presentar el gate 6.7 a Alejandro. No se debe mezclar ni archivar antes, ni repetir la tanda salvo un fallo real.
