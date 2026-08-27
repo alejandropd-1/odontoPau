@@ -1,9 +1,10 @@
 {
   "type": "EditorialPublicationRequest",
-  "status": "pending",
+  "status": "failed",
   "requestId": "editorial-mtbef91i-33d3d8cc-47c6-4a56-b08e-01bc8c8e8bb9",
   "requestedAt": "2026-08-27T10:47:31.974Z",
-  "lastProcessedRequestId": "editorial-mtabait1-8fb42e38-0160-4d5d-b38c-e64b3db797d6",
-  "processedAt": "2026-08-26T16:56:29.299Z",
-  "summary": "Recibimos tu pedido. Tus cambios siguen sólo en Preview mientras hacemos los controles."
+  "lastProcessedRequestId": "editorial-mtbef91i-33d3d8cc-47c6-4a56-b08e-01bc8c8e8bb9",
+  "processedAt": "2026-08-27T10:48:40.470Z",
+  "summary": "Uno de los controles no pasó. El sitio público sigue igual; pedí ayuda para revisar tus cambios.",
+  "issueKind": "checks_failed"
 }
