@@ -85,11 +85,11 @@ jobs:
             pr_url="$(gh pr create \
               --base main \
               --head editorial/tina \
-              --title "[skip netlify] Publicación editorial ${{ steps.request.outputs.request_id }}" \
+              --title "Publicación editorial ${{ steps.request.outputs.request_id }}" \
               --body "Pedido generado desde el panel editorial. Los controles internos validan el contenido antes de actualizar el sitio público.")"
             pr_number="${pr_url##*/}"
           fi
-          gh pr edit "$pr_number" --title "[skip netlify] Publicación editorial ${{ steps.request.outputs.request_id }}"
+          gh pr edit "$pr_number" --title "Publicación editorial ${{ steps.request.outputs.request_id }}"
           echo "number=$pr_number" >> "$GITHUB_OUTPUT"
 
       - name: Dispatch required quality gates
