@@ -1,9 +1,9 @@
 {
   "type": "EditorialPublicationRequest",
   "status": "pending",
-  "requestId": "editorial-mt7hodbr-6e1b5236-97a5-429c-aaf3-3a7d73ef4825",
-  "requestedAt": "2026-08-24T17:07:31.575Z",
-  "lastProcessedRequestId": "editorial-mt7fsixr-5199f298-875e-4818-94d3-08bf00c35e72",
-  "processedAt": "2026-08-24T17:04:44.945Z",
-  "summary": "Solicitud enviada. Producción todavía no cambió."
+  "requestId": "editorial-mtbf41o7-b781bda0-ebbd-4793-9898-bff84cbc0b5c",
+  "requestedAt": "2026-08-27T11:06:48.823Z",
+  "lastProcessedRequestId": "editorial-mtbef91i-33d3d8cc-47c6-4a56-b08e-01bc8c8e8bb9",
+  "processedAt": "2026-08-27T10:48:40.470Z",
+  "summary": "Recibimos tu pedido. Tus cambios siguen sólo en Preview mientras hacemos los controles."
 }

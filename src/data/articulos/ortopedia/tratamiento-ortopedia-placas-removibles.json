@@ -13,7 +13,7 @@
   "excerpt": "Luego de un exhaustivo diagnóstico, se colocaron placas activas superior e inferior logrando cambios favorables en un año de tratamiento.",
   "author": "Equipo clínico",
   "clinicalReviewer": "Paula Gualtieri",
-  "status": "published",
+  "status": "retired",
   "createdAt": "2026-08-08T12:00:00.000Z",
   "publishedAt": "2026-08-10T01:16:26.782Z",
   "updatedAt": "2026-08-08T12:00:00.000Z",
@@ -32,7 +32,6 @@
   },
   "sections": [
     {
-      "type": "case_summary",
       "title": "Diagnóstico y planificación",
       "paragraphs": [
         "Luego de realizar un exhaustivo diagnóstico cefalométrico, fotográfico y de modelos, se decidió comenzar un tratamiento de ortopedia. Se colocaron dos placas, superior e inferior, con tornillo medio.",
@@ -48,10 +47,10 @@
           "label": "Tiempo",
           "value": "1 año"
         }
-      ]
+      ],
+      "type": "case_summary"
     },
     {
-      "type": "gallery",
       "title": "Registros clínicos del caso",
       "images": [
         {
@@ -82,15 +81,16 @@
           "height": 960,
           "caption": "Perfil luego del tratamiento de ortopedia."
         }
-      ]
+      ],
+      "type": "gallery"
     },
     {
-      "type": "cta",
       "label": "Consulta odontopediátrica",
       "title": "¿Notás alguna alteración en la mordida de tu hijo/a?",
       "text": "Escribinos por WhatsApp para coordinar un diagnóstico oportuno.",
       "href": "https://wa.me/5491137854198?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20ortopedia",
-      "buttonLabel": "Consultar por WhatsApp"
+      "buttonLabel": "Consultar por WhatsApp",
+      "type": "cta"
     }
   ]
 }
