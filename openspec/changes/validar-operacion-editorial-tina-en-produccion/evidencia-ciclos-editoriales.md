@@ -285,6 +285,10 @@ Fecha: 2026-08-27.
 - Netlify no inició un Deploy Preview para esta revisión documental.
 - `quality-gates` terminó correctamente en la ejecución `33089800730`: OpenSpec, contratos, seguridad de rama, reglas editoriales, auditoría, administración Tina, diff, TypeScript, lint y build interno válidos.
 - La pantalla de uso confirmó que la cuenta utiliza `Free Legacy`: consumió `225/300` minutos y conserva `75` minutos. El proyecto `paulagualtieri` registra un promedio de `1 min 53 s` por build; por lo tanto, existe margen suficiente para un único CI/Deploy Preview final y no es necesario esperar al reinicio mensual sólo por la cuota.
-- La rama del Draft PR todavía debe sincronizar el commit público de la republicación. Esa sincronización, la actualización del PR y el único Deploy Preview final permanecen detenidos hasta recibir autorización explícita para las acciones externas.
+- Alejandro autorizó explícitamente la tarea 6.6. La rama incorporó una sola vez el `main` público `bf82398e194df8f3ac262869e2ca9c6937f4bf82` y el Draft PR se actualizó mediante un único push al commit `d67b53442de50e3a919055eb87502e7edaffe6e3`.
+- El título temporal de omisión se retiró antes del push. Netlify ejecutó un único Deploy Preview final, deploy `6a90635024367f0008707ff6`, disponible en `https://deploy-preview-24--paulagualtieri.netlify.app`.
+- `quality-gates` terminó correctamente en la ejecución `33092536439`; headers y redirects finalizaron en `success`, y el control informativo de páginas modificadas quedó neutral.
+- `/` y `/admin/` respondieron HTTP 200. La marca `deployment.json`, generada a las `2026-08-27T16:19:47.008Z` con contexto `deploy-preview`, confirmó exactamente el commit `d67b53442de50e3a919055eb87502e7edaffe6e3`.
+- El Draft PR continuó abierto y en borrador, con estado integrable limpio. No se mezcló a `main`, no se ejecutó producción y no se archivó el OpenSpec.
 
-La tarea 6.6 continúa pendiente. Para completarla se debe sincronizar `main` una sola vez, retirar la omisión temporal del título, verificar un único CI/Deploy Preview sobre esa revisión exacta y recién entonces presentar el gate 6.7 a Alejandro. No se debe mezclar ni archivar antes, ni repetir la tanda salvo un fallo real.
+La tarea 6.6 quedó completa. El único paso pendiente es 6.7: Alejandro debe revisar los tres ciclos, la rutina, la evidencia y el Deploy Preview, marcar personalmente su checkbox y autorizar el commit de cierre y el OpenSpec Archive. Ningún agente puede marcarlo.

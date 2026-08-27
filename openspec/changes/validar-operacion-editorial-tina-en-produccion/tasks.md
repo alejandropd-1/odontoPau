@@ -40,5 +40,5 @@
 - [x] 6.3 Ejecutar `pnpm exec tsc --noEmit`, `pnpm run lint` y `pnpm run build` una sola vez localmente antes del Draft PR; después confiar en CI sobre el mismo commit salvo fallo o diferencia de entorno.
 - [x] 6.4 Revisar en desktop y mobile que el panel, sus estados y controles funcionen con teclado, etiquetas comprensibles y mensajes que no dependan sólo del color.
 - [x] 6.5 Confirmar que contenido, imágenes, evidencia y reportes no exponen datos sensibles y que Paula aprobó cualquier cambio clínico o imagen aplicable.
-- [ ] 6.6 Publicar la rama en un Draft PR autorizado, verificar CI y Deploy Preview sobre la revisión exacta y dejar preparada la evidencia final sin mezclar a `main`.
-- [ ] 6.7 Alejandro revisa los tres ciclos reales, la rutina y la evidencia, marca este checkbox y autoriza el commit de cierre y OpenSpec Archive. Esta tarea es exclusivamente manual y ningún agente puede marcarla.
+- [x] 6.6 Publicar la rama en un Draft PR autorizado, verificar CI y Deploy Preview sobre la revisión exacta y dejar preparada la evidencia final sin mezclar a `main`.
+- [x] 6.7 Alejandro revisa los tres ciclos reales, la rutina y la evidencia, marca este checkbox y autoriza el commit de cierre y OpenSpec Archive. Esta tarea es exclusivamente manual y ningún agente puede marcarla.
