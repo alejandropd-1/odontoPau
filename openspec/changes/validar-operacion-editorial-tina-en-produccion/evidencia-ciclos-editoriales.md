@@ -139,4 +139,139 @@ El 2026-08-26 Alejandro autorizó publicar la corrección operativa antes de con
 
 El primer deploy de producción falló de forma segura antes de publicar: Tina Cloud informó que el esquema remoto de `editorial/tina` todavía no incluía el campo técnico `issueKind`. Se sincronizó `main` hacia la rama editorial mediante el merge limpio `da927454e15208c3876f34a8fa36cab244ddf93e`, preservando tanto el artículo retirado como el pedido editorial. El branch deploy terminó correctamente y el reintento de producción confirmó la marca pública para `817f3ffdaa31b24add83daa9cf3a346b6d5ad53a`.
 
-La comprobación visual posterior confirmó el texto nuevo y el artículo `Retirado`, pero también detectó que el simulador local aparecía en producción y deshabilitaba el botón. La causa fue usar `NODE_ENV` como señal de revisión local dentro del bundle de Tina. El hotfix pendiente reemplaza esa inferencia por `TINA_PUBLIC_IS_LOCAL === 'true'`, que es la señal explícita ya establecida por `scripts/run-tina.mjs`. La tarea 3.2 continúa sin ejecutar hasta publicar y verificar este hotfix.
+La comprobación visual posterior confirmó el texto nuevo y el artículo `Retirado`, pero también detectó que el simulador local aparecía en producción y deshabilitaba el botón. La causa fue usar `NODE_ENV` como señal de revisión local dentro del bundle de Tina. El hotfix reemplazó esa inferencia por `TINA_PUBLIC_IS_LOCAL === 'true'`, que es la señal explícita ya establecida por `scripts/run-tina.mjs`; superó Quality Gates y Deploy Preview, se integró mediante el PR #18 y producción confirmó el commit `7c77eb937a9e8e267a6e9f0ab3764409d765a6ae`. La revisión final mostró el simulador ausente, el artículo `Retirado`, la confirmación habilitada y `Publicar cambios` disponible después de marcarla. La tarea 3.2 todavía no se ejecutó.
+
+### Intentos protegidos de retiro y defecto de la prueba visual
+
+Entre el 2026-08-26 y el 2026-08-27 se enviaron tres pedidos de retiro desde el panel. Ninguno modificó producción:
+
+- El primer pedido, `editorial-mtaacohh-d8387b91-b732-42b9-874a-928d05e19623`, quedó demorado durante una interrupción general de GitHub Actions y luego fue rechazado porque `editorial/tina` todavía no derivaba del hotfix publicado. Se sincronizó la rama sin perder el documento retirado.
+- El segundo pedido, `editorial-mtabait1-8fb42e38-0160-4d5d-b38c-e64b3db797d6`, superó el preflight pero no recibió el control requerido mientras el proveedor todavía drenaba las colas demoradas. El circuito informó la falla y conservó producción.
+- El tercer pedido, `editorial-mtbef91i-33d3d8cc-47c6-4a56-b08e-01bc8c8e8bb9`, se ejecutó con el servicio operativo y reveló un defecto reproducible en `test:tina-visual`: el test exigía que todos los artículos enlazados por casos clínicos permanecieran siempre en estado `published`, contradiciendo el retiro reversible que este mismo OpenSpec debe validar.
+
+El tercer fallo se clasificó como defecto bloqueante del bootstrap, limitado al contrato de prueba. La implementación pública ya consulta únicamente artículos ruteables y omite el enlace cuando la pieza no está publicada. Se ajustó `visual-data-test.ts` para conservar la integridad de la relación editorial y comprobar, por separado, que sólo los artículos `published` aparecen en el conjunto público.
+
+Validación focalizada e integración técnica:
+
+- `pnpm run test:tina-visual`: válido; 13/13 casos conservan su relación editorial y sólo exponen artículos publicados.
+- `git diff --check -- src/cms/tina/visual-data-test.ts`: válido, con el aviso esperado de normalización LF/CRLF del checkout de Windows.
+- Commit selectivo: `22c4f5bfe95f385e3d85fcbe62a0fcede9991c24`.
+- PR técnico `#20`: único archivo modificado, `quality-gates` válido e integración en `main` mediante `8202a1c9d253638c5ceb8ea181a8f1aa830bcf46`.
+- Sincronización editorial: `549a4b0697a576fe899bc5dd24605864cf9f7b92`, preservando `status: retired` y el documento original.
+- Control sobre el snapshot real retirado: `quality-gates` válido en la ejecución `33065418136`, incluyendo OpenSpec, contratos CMS/Tina, auditoría, TypeScript, lint y build de Preview.
+
+La tarea 3.2 continúa pendiente hasta completar la promoción. La regresión ya quedó integrada y la vista previa sincronizada, por lo que el panel está listo para emitir un request nuevo sin el control conocido en rojo.
+
+## Retiro publicado y verificado
+
+Fecha: 2026-08-27. Request final: `editorial-mtbf41o7-b781bda0-ebbd-4793-9898-bff84cbc0b5c`.
+
+- Preflight, snapshot inmutable y `quality-gates`: válidos.
+- PR técnico reutilizado: `#19`.
+- Commit integrado en `main`: `c8aa82fab36eb01247232fdb6df567d7a46e8bee`.
+- La señal `[skip netlify]` usada para evitar el Deploy Preview del PR también omitió el deploy de producción del merge. El workflow permaneció correctamente en `deploying`, sin declarar éxito. Se activó una única compilación de recuperación sobre el `main` exacto ya aprobado, build `6a901ca6d1f585bc3e30840f`, sin modificar contenido ni crear otro commit.
+- La marca pública confirmó `c8aa82fab36eb01247232fdb6df567d7a46e8bee` a las `2026-08-27T11:18:12.974Z`.
+- El workflow `33065951656` finalizó en `success` y registró el request como `published` a las `2026-08-27T11:19:12.426Z`.
+- `editorial/tina` quedó cero commits detrás de `main`, dos commits operativos por delante y con un único archivo diferente: `src/data/editorial/publication-request.json`.
+
+Comprobaciones públicas:
+
+- `/articulos/tratamiento-ortopedia-placas-removibles`: HTTP 404.
+- `/tratamientos/ortopedia/casos/1`: HTTP 404, sin redirección al artículo retirado.
+- `/articulos`: HTTP 200, sin slug ni título de la pieza.
+- `/articulos/tratamiento/ortopedia`: HTTP 404 porque no queda otro artículo público en ese archivo.
+- `/tratamientos/ortopedia`: HTTP 200; conserva el caso clínico, pero no contiene un enlace ni el título del artículo retirado.
+- `/sitemap.xml`: HTTP 200, sin el slug retirado.
+- El JSON canónico continúa presente una sola vez en `main`, con el mismo slug y `status: retired`.
+
+Resultado: las tareas 3.2, 3.3 y 3.4 quedaron demostradas. La publicación fue protegida e idempotente y producción terminó convergente, pero requirió una activación técnica única del build debido al defecto de la señal `[skip netlify]`. Antes de iniciar la republicación debe corregirse ese defecto para demostrar el recorrido saludable sin intervención manual.
+
+### Corrección local previa a la republicación
+
+Se retiró `[skip netlify]` del título del PR técnico para impedir que la señal llegue al mensaje del merge y omita producción. El filtro `netlify-ignore-build.mjs` pasó a omitir el Deploy Preview redundante únicamente cuando `CONTEXT=deploy-preview` y la rama de origen es `editorial/tina`; los cambios de contenido en `production` conservan siempre el build.
+
+Validación focalizada local:
+
+- `pnpm run test:netlify-ignore-build`: válido para commit operativo, Preview editorial, Preview ajeno y producción con contenido.
+- `pnpm run test:tina-publication-workflow`: válido y confirma que el título del PR ya no contiene la señal de omisión.
+- `git diff --check` sobre workflow, filtro y pruebas: válido, con avisos esperados de normalización LF/CRLF.
+
+La corrección se versionó como `b1cb292afb5be9e530fee82b2571c49e173e8626` y se revisó mediante el PR `#21`. `quality-gates`, headers, redirects y Deploy Preview finalizaron correctamente. La integración en `main`, `c8e11dcf52a42ea74c14825f937029c6caef518c`, inició automáticamente el deploy de producción `6a901f493762870008176833`; no fue necesario reactivarlo manualmente. La marca pública confirmó ese commit a las `2026-08-27T11:29:32.106Z` y la ruta del artículo continuó respondiendo HTTP 404.
+
+`editorial/tina` se sincronizó mediante `6cb0d4b6bbf5a8eb08ff5e5eb18214a839c10dde`, preservando el request publicado y `status: retired`. Quedó cero commits detrás de `main` y su único archivo diferente es el registro operativo de publicación. La republicación puede comenzar desde el mismo documento editorial.
+
+## Republicación guardada en vista previa
+
+Fecha: 2026-08-27.
+
+- Alejandro abrió el mismo documento desde la colección Artículos y cambió únicamente `status: retired -> published`.
+- Commit Tina: `a58b029127f772e0840317537560e073cf74f904`.
+- Preview editorial: HTTP 200 para `/articulos/tratamiento-ortopedia-placas-removibles`.
+- Producción antes de solicitar la republicación: HTTP 404 para la misma ruta.
+- No se modificaron slug, texto, imágenes, relaciones ni fechas y todavía no se creó el request de republicación.
+
+Durante la operación se confirmó una limitación de experiencia: pulsar el título de un documento retirado abre directamente su ruta de Visual Editing, que responde 404 por diseño público y no ofrece campos. La recuperación se realizó desde el menú de la fila o la ruta del formulario de colección. El futuro panel por contenido debe ofrecer una acción de edición válida para piezas retiradas sin depender de su ruta pública.
+
+Resultado: la tarea 4.1 quedó demostrada. El mismo documento está restaurado en Preview mientras producción conserva el retiro.
+
+## Solicitud real de republicación
+
+Fecha: 2026-08-27.
+
+- Alejandro confirmó las aprobaciones aplicables y solicitó la publicación desde el Panel editorial.
+- El panel mostró `Publicación en curso` y el pedido fue recibido correctamente.
+- La ejecución protegida comenzó a las `2026-08-27T12:58:18Z` y se detuvo de forma segura antes de integrar o desplegar; producción conservó el retiro.
+- Todos los controles focalizados del snapshot terminaron correctamente. El falso fallo ocurrió porque la espera consultaba los controles generales del PR, mientras la comprobación explícita asociada al commit editorial seguía en curso y luego concluyó en `success`.
+- La tarea 4.2 permanece pendiente: el pedido no se publicó ni debe repetirse desde el panel.
+
+La prueba con una persona real detectó una ambigüedad de producto: `Publicación en curso` comunica actividad, pero no deja suficientemente claro si el contenido permanece sólo en Preview, si está pasando al sitio público o si ya quedó publicado. El futuro panel por contenido debe expresar esos tres momentos con estados visibles y cotidianos, sin exponer el recorrido técnico de fondo.
+
+Se preparó una corrección local para esperar el control correspondiente a la versión editorial exacta y exigir que finalice con resultado válido. La prueba contractual `test:tina-publication-workflow` pasó y `git diff --check` no detectó errores; queda pendiente publicar esta corrección técnica y reanudar el mismo pedido con autorización de Alejandro.
+
+## Republicación publicada y verificada
+
+Fecha: 2026-08-27. Request final: `editorial-retry-1787836693109-28fe0156-d2b1-40d6-b472-f9d8e530af0a`.
+
+- La espera corregida se integró mediante el PR técnico `#23`; sus controles y Deploy Preview finalizaron correctamente y producción confirmó `8f5f37532687aa9d3163061e0439c54707a0fbcf` antes de reanudar el contenido.
+- El primer reintento técnico se detuvo de forma segura porque el registro creado desde PowerShell contenía finales de línea CRLF y `git diff --check` los rechazó. No llegó a integración ni a producción. Se regeneró el mismo pedido funcional con un request único, usando LF y verificando el snapshot antes de continuar.
+- El request final superó el preflight y todos los controles asociados al commit exacto, integró el mismo documento y confirmó automáticamente el deploy público.
+- Commit público confirmado: `bf82398e194df8f3ac262869e2ca9c6937f4bf82`, generado a las `2026-08-27T13:22:24.185Z`.
+- El request quedó `published` a las `2026-08-27T13:23:32.258Z`, con el resumen coloquial `Listo: los cambios ya están publicados en el sitio.`
+
+Comprobaciones públicas:
+
+- `/articulos/tratamiento-ortopedia-placas-removibles`: HTTP 200, con slug, título y enlace canónico.
+- `/articulos`: HTTP 200, con la pieza restaurada.
+- `/articulos/tratamiento/ortopedia`: HTTP 200, con la pieza restaurada.
+- `/tratamientos/ortopedia`: HTTP 200, con título y enlace canónico al artículo.
+- `/tratamientos/ortopedia/casos/1`: HTTP 308 hacia la ruta canónica restaurada.
+- `/sitemap.xml`: HTTP 200 y contiene el slug.
+- `main` contiene un único JSON para el slug, con `status: published`.
+- `editorial/tina` quedó cero commits detrás de `main`; su único archivo diferente es el registro operativo de publicación.
+
+Resultado: las tareas 4.2, 4.3 y 4.4 quedaron demostradas. El ciclo retiro/republicación terminó con el mismo documento, sin duplicados y con convergencia pública y editorial.
+
+## Validación focalizada de cierre
+
+Fecha: 2026-08-27.
+
+- `openspec validate validar-operacion-editorial-tina-en-produccion --strict --no-interactive`: válido.
+- `test:tina-publication`: estados, transiciones idempotentes y allowlist válidos.
+- `test:tina-visual`: 13/13 relaciones editoriales conservadas y sólo artículos publicados expuestos.
+- `test:tina-publication-workflow`: snapshot, espera protegida y sincronización válidos.
+- `test:netlify-ignore-build`: separación entre Preview redundante y producción válida.
+- `git diff --check`: válido, con avisos esperados de normalización LF/CRLF del checkout de Windows.
+- La prueba local de reglas editoriales ejecutó sus aserciones pero mantuvo abierto un proceso Tina en este entorno; se detuvieron únicamente los procesos iniciados por esa prueba y no se repitió. El mismo control terminó correctamente en los Quality Gates de la revisión publicada.
+- El retiro y la republicación cambiaron únicamente el estado del mismo documento. No se modificaron texto clínico ni imágenes, Paula aprobó la ventana mediante la confirmación de Alejandro y la evidencia conserva sólo resultados e identificadores técnicos no sensibles.
+
+### Revisión responsive y de teclado
+
+- Desktop real: Alejandro confirmó visualmente el estado `Listo: los cambios ya están publicados`, la explicación textual, la confirmación etiquetada y el botón deshabilitado.
+- Mobile real a `390 x 844`: al cerrar el menú lateral de Tina, el panel ocupa el ancho completo, no presenta desborde horizontal y conserva legibles el encabezado, el estado, la explicación, la vista previa, la confirmación y el botón.
+- El recorrido con `Tab` avanza desde `Actualizar` hacia `Abrir vista previa`, la confirmación y las tarjetas de colecciones; todos muestran un contorno de foco visible.
+- La confirmación se activó con `Espacio`, habilitó `Publicar cambios` y se devolvió a desmarcada; no se activó ninguna publicación.
+- Los estados usan encabezado y detalle textual dentro de una región accesible y no dependen únicamente del color.
+- Limitación heredada de la interfaz de Tina: el botón visual `X` que cierra el menú móvil no expone nombre accesible, aunque el control alternativo para abrir el menú sí se anuncia como `Open navigation menu`. No bloquea la operación del panel y debe relevarse como adaptación o incidencia upstream, no como ampliación de este OpenSpec.
+- El viewport temporal se restableció y `Publicar cambios` quedó deshabilitado al finalizar.
+
+Resultado: las tareas 6.1, 6.4 y 6.5 quedaron demostradas. Continúan pendientes la preparación final de 6.6 y el gate exclusivamente humano 6.7.
