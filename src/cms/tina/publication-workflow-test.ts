@@ -13,7 +13,9 @@ assert.match(workflow, /cancel-in-progress: false/);
 assert.match(workflow, /actions: write/);
 assert.match(workflow, /editorial-publication\.ts preflight/);
 assert.match(workflow, /gh workflow run quality-gates\.yml --ref editorial\/tina/);
-assert.match(workflow, /check_count/);
+assert.match(workflow, /commits\/\$\{GITHUB_SHA\}\/check-runs/);
+assert.match(workflow, /quality_status/);
+assert.match(workflow, /quality_conclusion/);
 assert.match(workflow, /gh pr merge/);
 assert.match(workflow, /--title "Publicación editorial/);
 assert.doesNotMatch(workflow, /--title "\[skip netlify\]/);
@@ -25,13 +27,9 @@ assert.match(workflow, /test "\$\(git rev-parse origin\/editorial\/tina\)" = "\$
 assert.match(workflow, /git add -- src\/data\/editorial\/publication-request\.json/);
 assert.doesNotMatch(workflow, /git add \.|git add -A|force|TINA_TOKEN|NETLIFY_AUTH_TOKEN/);
 
-const pullRequestCheckCommands = workflow
-  .split('\n')
-  .filter((line) => line.includes('gh pr checks'));
-assert.ok(pullRequestCheckCommands.length > 0);
-for (const command of pullRequestCheckCommands) {
-  assert.match(command, /--required/, `El workflow no debe esperarse a sí mismo: ${command.trim()}`);
-}
+assert.doesNotMatch(workflow, /gh pr checks/);
+assert.match(workflow, /test "\$quality_status" = "completed"/);
+assert.match(workflow, /test "\$quality_conclusion" = "success"/);
 
 assert.match(qualityWorkflow, /workflow_dispatch:/);
 assert.match(qualityWorkflow, /test:netlify-ignore-build/);

@@ -115,15 +115,19 @@ jobs:
         id: quality
         shell: bash
         run: |
-          for attempt in {1..24}; do
-            check_count="$(gh pr checks "${{ steps.pull_request.outputs.number }}" --required --json name --jq '[.[] | select(.name == "quality-gates")] | length' 2>/dev/null || echo 0)"
-            if [ "$check_count" -gt 0 ]; then
+          quality_status=""
+          quality_conclusion=""
+          for attempt in {1..120}; do
+            read -r quality_status quality_conclusion < <(gh api \
+              "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/check-runs" \
+              --jq '[.check_runs[] | select(.name == "quality-gates")] | sort_by(.started_at) | last | [(.status // ""), (.conclusion // "")] | @tsv')
+            if [ "$quality_status" = "completed" ]; then
               break
             fi
-            sleep 5
+            sleep 10
           done
-          test "${check_count:-0}" -gt 0
-          gh pr checks "${{ steps.pull_request.outputs.number }}" --required --watch --fail-fast --interval 10
+          test "$quality_status" = "completed"
+          test "$quality_conclusion" = "success"
 
       - name: Confirm immutable editorial snapshot
         if: steps.request.outputs.process == 'true'
