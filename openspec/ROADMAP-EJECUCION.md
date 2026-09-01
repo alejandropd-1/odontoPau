@@ -23,8 +23,9 @@
 | 6 | `pilotear-circuito-editorial-tina` | DONE | Bootstrap aprobado, archivado, integrado mediante PR #13 y publicado el 2026-08-21 |
 | 6.1 | `validar-operacion-editorial-tina-en-produccion` | DONE | Tres ciclos reales completados; archivado, integrado mediante PR #24 y producción verificada el 2026-08-27 |
 | 6.2 | `operativizar-dashboard-editorial-por-contenido` | DONE | Implementado, validado y archivado; integrado directamente a `main` y publicado el 2026-09-01, con producción confirmada en `e0ae8f8` |
-| 7 | `preparar-redes-sociales-editoriales` | PARKED | CMS estable y articulos fuente publicados/aprobados |
-| 8 | `dinamizar-dashboard-editorial-con-supabase` | PARKED / DECISION GATE | Implementar solo si el piloto demuestra necesidad de asignaciones, KPIs o auditoria operativa |
+| 6.3 | `dinamizar-dashboard-editorial-con-supabase` | RETIRED | Alcance obsoleto y no implementado; la dinamización quedó resuelta por 6.2 y sus delta specs no se sincronizaron |
+| 7 | `persistir-trazabilidad-operativa-editorial` | NEXT / PLANNING | Definir únicamente historial operativo o métricas que Tina + Git no resuelvan, sin segundo login ni estados adicionales |
+| 8 | `preparar-redes-sociales-editoriales` | PARKED | CMS estable, trazabilidad operativa decidida y artículos fuente publicados/aprobados |
 | 9 | `preparar-runner-editorial-lm-studio-link` | PARKED | Circuito estable, casos golden suficientes y retorno esperado justificado |
 
 ## Descomposicion del programa CMS
@@ -49,7 +50,7 @@ Cada slice reutilizara las specs del programa y evitara duplicar requisitos. El 
 | Contrato y validacion del contenido | Schemas/validadores compartidos del repositorio |
 | Experiencia de edicion | `/admin` como entrada única a TinaCMS y a su Panel editorial custom sobre JSON + Git, con un proyecto independiente por sitio |
 | Integracion y produccion | Tina guarda en rama no productiva y actualiza Preview -> el panel solicita publicar -> PR/CI técnico oculto al usuario -> `main` aprobado -> Netlify |
-| Operacion, responsables y KPIs futuros | Supabase, solo si se aprueba su gate |
+| Historial operativo y métricas futuras | Persistencia complementaria por decidir en el cambio 7; Supabase sólo si supera el gate técnico, operativo y de costo |
 | Derivados sociales | Paquetes trazables desde articulos publicados |
 | Automatizacion local futura | Runner aislado que consume validadores compartidos y nunca publica |
 
@@ -68,7 +69,7 @@ El dashboard final vivirá como pantalla personalizada de Tina dentro de `/admin
 
 La unidad de despliegue seguirá siendo la tanda completa aprobada en Preview. Una fila podrá quedar lista, bloqueada o retirada y podrá cambiar su estado editorial, pero el botón final promoverá el snapshot aprobado completo. Publicar una sola fila de manera aislada exigiría una rama, request y despliegue independiente por pieza; no se incorporará salvo que un OpenSpec futuro demuestre una necesidad real que justifique ese costo.
 
-Supabase no es requisito para esta experiencia. El cambio 6.2 debe funcionar primero con Tina + JSON + Git como fuentes canónicas. El cambio 8 seguirá estacionado y sólo se habilitará si hacen falta colaboración avanzada, responsables, KPIs o auditoría operativa persistente.
+Supabase no es requisito para esta experiencia. El cambio 6.2 funciona con Tina + JSON + Git como fuentes canónicas. El antiguo cambio `dinamizar-dashboard-editorial-con-supabase` fue retirado sin implementación porque partía de una arquitectura reemplazada. Antes de redes sociales se planificará `persistir-trazabilidad-operativa-editorial`, limitado a necesidades operativas concretas que Tina y Git no cubran; la tecnología de persistencia se decidirá dentro de ese OpenSpec.
 
 La URL y la rama cumplen funciones diferentes: `/admin` es la dirección que usa la persona; `editorial/tina` es la rama Git no productiva que alimenta Preview y evita que **Save** modifique producción. El nombre de la rama no crea ni requiere una ruta `/editorial`.
 

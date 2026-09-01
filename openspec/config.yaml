@@ -3,9 +3,11 @@ schema: spec-driven
 context: |
   Sitio profesional de la Dra. Paula Gualtieri, orientado a pacientes de odontologia.
   Stack: Next.js 15 App Router, React 19, TypeScript, SASS modular, Lucide React,
-  Motion, contenido JSON versionado y Stackbit/Netlify Create como CMS Git-based.
+  Motion, contenido JSON versionado y TinaCMS/TinaCloud como CMS Git-based.
   El contenido vive en src/data, las imagenes publicas en public/images y las rutas
-  publicas estan en espanol.
+  publicas estan en espanol. Tina opera desde el unico /admin, guarda en una rama
+  no productiva y el Panel editorial obtiene el catalogo mediante Tina GraphQL.
+  Git conserva la fuente canonica; main publica automaticamente mediante Netlify.
   Mantener BEM y los tokens/funciones SASS existentes; no introducir Tailwind ni
   estilos hardcodeados cuando exista un token del proyecto.
   Los articulos deben relacionarse con tratamientos existentes, incluir metadata,
@@ -21,7 +23,7 @@ rules:
     - Escribir en espanol.
     - Incluir alcance, fuera de alcance, riesgos clinicos y criterio de exito.
   design:
-    - Reutilizar patrones existentes de datos, rutas, componentes, SEO y Stackbit.
+    - Reutilizar patrones existentes de datos, rutas, componentes, SEO, Tina y publicacion Git-based.
     - Separar fuente editorial, contenido publicado y derivados para redes.
   specs:
     - Expresar requisitos verificables con escenarios claros.
