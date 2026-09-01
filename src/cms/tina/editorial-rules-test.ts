@@ -19,6 +19,11 @@ import {
   instructionFields,
   treatmentFields,
 } from './fields';
+import {
+  ODONTO_EDITORIAL_PROFILE,
+  isSoloEditorialTransition,
+  visibleEditorialStatusValues,
+} from './editorial-profile';
 
 type InspectableField = {
   name: string;
@@ -82,6 +87,7 @@ async function validateBeforeSubmitRules(): Promise<void> {
   assert.equal(preparedDraft?.type, 'Instruccion');
   assert.equal(preparedDraft?.status, 'draft');
   assert.equal(preparedDraft?.internalId, undefined);
+  assert.equal(typeof preparedDraft?.updatedAt, 'string');
 
   const preparedWithSlug = await articleBeforeSubmit({
     values: {
@@ -96,6 +102,7 @@ async function validateBeforeSubmitRules(): Promise<void> {
   assert.equal(preparedWithSlug?.internalId, 'alta-sintetica');
   assert.equal('sourcePath' in (preparedWithSlug ?? {}), false);
   assert.equal('_template' in (preparedWithSlug ?? {}), false);
+  assert.equal(typeof preparedWithSlug?.updatedAt, 'string');
 }
 
 const realDocuments = loadRealJsonDocuments().filter(
@@ -175,6 +182,26 @@ assert.equal(publicationRequestCollection.ui?.allowedActions?.delete, false);
 assert.equal(
   STATUS_OPTIONS.some((option) => option.value === 'retired' && option.label === 'Retirado'),
   true
+);
+assert.equal(ODONTO_EDITORIAL_PROFILE, 'solo');
+assert.deepEqual(
+  [...visibleEditorialStatusValues(undefined)],
+  ['draft', 'published', 'retired']
+);
+assert.deepEqual(
+  [...visibleEditorialStatusValues('clinical_review')],
+  ['draft', 'published', 'retired', 'clinical_review']
+);
+assert.deepEqual(
+  [...visibleEditorialStatusValues(undefined, 'collaborative')],
+  ['draft', 'clinical_review', 'technical_review', 'approved', 'published', 'retired']
+);
+assert.equal(isSoloEditorialTransition('published'), true);
+assert.equal(isSoloEditorialTransition('technical_review'), false);
+assert.equal(
+  STATUS_OPTIONS.every((option) => visibleEditorialStatusValues('technical_review').has(option.value) || option.value === 'approved'),
+  false,
+  'El perfil solo no debe ofrecer etapas colaborativas que no sean el valor histórico actual.'
 );
 
 const tinaRunnerSource = readFileSync(new URL('../../../scripts/run-tina.mjs', import.meta.url), 'utf8');

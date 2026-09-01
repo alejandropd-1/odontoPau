@@ -12,6 +12,7 @@ import {
   type PublicationRequest,
 } from '../src/cms/tina/publication';
 import { evaluatePublicationPreflight } from '../src/cms/tina/publication-preflight';
+import { buildEditorialProductionIndex } from '../src/cms/tina/production-index-node';
 
 function git(args: string[], allowFailure = false): string {
   try {
@@ -136,6 +137,17 @@ function writeResult(
   persistRequest(next);
 }
 
+function writePublishedResult(requestId: string, productionCommit: string, summary: string): void {
+  const current = loadRequest();
+  assertCurrentRequest(current, requestId);
+  const next = createPublicationResult(current, 'published', new Date().toISOString(), {
+    productionCommit,
+    productionIndex: buildEditorialProductionIndex(),
+    summary,
+  });
+  persistRequest(next);
+}
+
 function writeProgress(
   status: 'processing' | 'deploying' | 'waiting_index',
   requestId: string,
@@ -154,6 +166,13 @@ const [command, ...args] = process.argv.slice(2);
 if (command === 'preflight') {
   const [base = 'origin/main', head = 'HEAD', remoteEditorialRef = 'origin/editorial/tina'] = args;
   runPreflight(base, head, remoteEditorialRef);
+} else if (command === 'mark-published') {
+  const [requestId, productionCommit, ...summaryParts] = args;
+  if (!requestId || !productionCommit || productionCommit === '-') {
+    throw new Error('mark-published requiere requestId y commit de producción.');
+  }
+  const summary = summaryParts.join(' ').trim() || 'Cambios publicados.';
+  writePublishedResult(requestId, productionCommit, summary);
 } else if (command === 'mark-result') {
   const [status, requestId, productionCommit, issueKindValue, ...summaryParts] = args;
   if (status !== 'published' && status !== 'failed') {
@@ -184,6 +203,6 @@ if (command === 'preflight') {
   );
 } else {
   throw new Error(
-    'Uso: editorial-publication.ts preflight [base] [head] [remote] | mark-progress <status> <requestId> <commit|-> <issue|-> <summary> | mark-result <status> <requestId> <commit|-> <issue|-> <summary>'
+    'Uso: editorial-publication.ts preflight [base] [head] [remote] | mark-progress <status> <requestId> <commit|-> <issue|-> <summary> | mark-published <requestId> <commit> <summary> | mark-result <status> <requestId> <commit|-> <issue|-> <summary>'
   );
 }
