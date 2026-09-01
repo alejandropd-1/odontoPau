@@ -176,11 +176,9 @@ jobs:
         if: steps.request.outputs.process == 'true'
         shell: bash
         run: |
-          pnpm exec tsx scripts/editorial-publication.ts mark-result \
-            published \
+          pnpm exec tsx scripts/editorial-publication.ts mark-published \
             "${{ steps.request.outputs.request_id }}" \
             "${{ steps.merge.outputs.commit }}" \
-            - \
             "Listo: los cambios ya están publicados en el sitio."
           git add -- src/data/editorial/publication-request.json
           git commit -m "chore(editorial): confirmar publicación ${{ steps.request.outputs.request_id }} [skip netlify]"

@@ -29,6 +29,7 @@ const idleFromTina = {
   processedAt: null,
   productionCommit: null,
   issueKind: null,
+  productionIndex: null,
 };
 assert.deepEqual(normalizePublicationRequest(idleFromTina), idle);
 assert.equal(
@@ -55,10 +56,39 @@ assert.throws(
 
 const published = createPublicationResult(pending, 'published', '2026-08-21T18:35:00.000Z', {
   productionCommit: 'abcdef0123456789',
+  productionIndex: [
+    {
+      collection: 'articulo',
+      relativePath: 'ortopedia/placas.json',
+      fingerprint: '0123456789abcdef',
+      publicState: 'published',
+    },
+  ],
   summary: 'Cambios publicados.',
 });
 assert.equal(published.lastProcessedRequestId, pending.requestId);
 assert.doesNotThrow(() => validatePublicationRequest(published));
+assert.equal(published.productionIndex?.[0].publicState, 'published');
+
+assert.doesNotThrow(() =>
+  validatePublicationRequest({
+    type: 'EditorialPublicationRequest',
+    status: 'published',
+    requestId: 'req-legacy-12345678',
+    requestedAt: '2026-08-20T18:30:00.000Z',
+    lastProcessedRequestId: 'req-legacy-12345678',
+    processedAt: '2026-08-20T18:35:00.000Z',
+    productionCommit: 'abcdef0123456789',
+  })
+);
+assert.throws(
+  () => validatePublicationRequest({ ...published, productionIndex: [{ ...published.productionIndex?.[0], fingerprint: 'no-valida' }] }),
+  /fingerprint no es válido/
+);
+assert.throws(
+  () => validatePublicationRequest({ ...published, productionIndex: [...(published.productionIndex ?? []), ...(published.productionIndex ?? [])] }),
+  /productionIndex repite/
+);
 
 const deploying = createPublicationProgress(pending, 'deploying', {
   productionCommit: 'abcdef0123456789',
@@ -84,6 +114,15 @@ assert.throws(
   () => validatePublicationRequest({ ...failed, issueKind: undefined }),
   /failed requiere issueKind/
 );
+
+const failedAfterPublished = createPublicationResult(
+  createPendingPublicationRequest(published, 'req-after-published-1234', '2026-08-21T19:00:00.000Z'),
+  'failed',
+  '2026-08-21T19:05:00.000Z',
+  { issueKind: 'checks_failed', summary: 'No se publicó.' }
+);
+assert.equal(failedAfterPublished.productionCommit, published.productionCommit);
+assert.deepEqual(failedAfterPublished.productionIndex, published.productionIndex);
 
 const duplicated = { ...pending, lastProcessedRequestId: pending.requestId };
 assert.throws(() => validatePublicationRequest(duplicated), /ya fue procesado/);

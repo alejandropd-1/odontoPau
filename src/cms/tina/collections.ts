@@ -33,12 +33,15 @@ function prepareEditorialDocument(
     );
   }
 
-  return {
+  const prepared = {
     ...editorialValues,
     type,
     internalId: editorialValues.internalId || editorialValues.slug,
     status,
+    updatedAt: new Date().toISOString(),
   };
+
+  return prepared;
 }
 
 export const articleCollection: Collection = {
@@ -199,6 +202,19 @@ export const publicationRequestCollection: Collection = {
     { name: 'productionCommit', label: 'Versión publicada', type: 'string', ui: { component: 'hidden' } },
     { name: 'summary', label: 'Resultado', type: 'string', ui: { component: 'hidden' } },
     { name: 'issueKind', label: 'Tipo de incidencia', type: 'string', ui: { component: 'hidden' } },
+    {
+      name: 'productionIndex',
+      label: 'Índice de contenidos publicados',
+      type: 'object',
+      list: true,
+      ui: { component: 'hidden' },
+      fields: [
+        { name: 'collection', label: 'Colección', type: 'string', required: true },
+        { name: 'relativePath', label: 'Documento', type: 'string', required: true },
+        { name: 'fingerprint', label: 'Versión editorial', type: 'string', required: true },
+        { name: 'publicState', label: 'Estado público', type: 'string', required: true },
+      ],
+    },
   ],
 };
 

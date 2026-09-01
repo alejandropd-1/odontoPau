@@ -1,8 +1,5 @@
-# dashboard-editorial Specification
+## MODIFIED Requirements
 
-## Purpose
-TBD - created by archiving change crear-dashboard-editorial-y-trazabilidad. Update Purpose after archive.
-## Requirements
 ### Requirement: Lectura Dinámica del Catálogo de Contenidos
 El sistema SHALL listar dinámicamente todos los artículos e instrucciones gestionados por Tina dentro del único Panel editorial de `/admin`. Cada fila MUST mostrar título, tipo, categoría, resumen, etiquetas, fechas editoriales guardadas, un estado cotidiano unificado, explicación de pendientes y acciones aplicables, sin requerir datos estáticos ni cambios de código cuando se agreguen documentos JSON válidos.
 
@@ -25,6 +22,8 @@ El sistema SHALL listar dinámicamente todos los artículos e instrucciones gest
 #### Scenario: Preferencia de vista recordada
 - **WHEN** una persona elige Tabla o Tarjetas y vuelve a cargar el Panel editorial en el mismo navegador
 - **THEN** el panel conserva la vista elegida sin modificar contenidos, filtros ni estado de publicación
+
+## ADDED Requirements
 
 ### Requirement: Estado cotidiano con verificación editorial y pública
 El modelo MUST distinguir el estado guardado en Preview del estado confirmado en producción. El estado público SHALL derivarse de la última tanda confirmada mediante una huella estable por documento y MUST NOT inferirse solamente desde el campo editorial actual.
@@ -80,3 +79,13 @@ La operación editorial SHALL vivir dentro de `/admin`; la ruta histórica `/edi
 #### Scenario: Uso con tecnología asistiva
 - **WHEN** una persona navega la lista por teclado o lector de pantalla
 - **THEN** puede identificar filtros, estado cotidiano, explicación de pendientes y propósito de cada acción sin depender del color
+
+## REMOVED Requirements
+
+### Requirement: Trazabilidad con Google Drive
+**Reason**: La correspondencia manual con carpetas de Drive no forma parte del circuito Tina + JSON + Git validado y mantenía una función exclusiva del segundo dashboard.
+**Migration**: Las fuentes editoriales privadas continúan fuera del repositorio; una necesidad futura de trazabilidad persistente deberá aprobar su propio OpenSpec sin reintroducir `/editorial`.
+
+### Requirement: Módulo de Difusión para Redes Sociales
+**Reason**: La generación de copys sociales está estacionada como cambio posterior y no debe competir con la operación editorial por contenido.
+**Migration**: El futuro `preparar-redes-sociales-editoriales` consumirá únicamente contenidos publicados desde su propio alcance y no reactivará el dashboard histórico.

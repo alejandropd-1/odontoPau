@@ -2,6 +2,7 @@ import React, { useEffect, useId, useState } from 'react';
 import type { ChangeEvent, FocusEvent, KeyboardEvent } from 'react';
 import { useCMS } from 'tinacms';
 import type { TinaField } from 'tinacms';
+import { visibleEditorialStatusValues } from './editorial-profile';
 
 type EditorialFieldProps = {
   field: TinaField & { namespace: string[] };
@@ -298,6 +299,10 @@ export function EditorialSelectField(props: unknown) {
   const error = fieldError(meta);
   const descriptionId = field.description ? `${id}-description` : undefined;
   const errorId = error ? `${id}-error` : undefined;
+  const visibleStatusValues = field.name === 'status' ? visibleEditorialStatusValues(value) : undefined;
+  const visibleOptions = visibleStatusValues
+    ? (field.options ?? []).filter((option) => visibleStatusValues.has(optionValue(option)))
+    : field.options ?? [];
 
   return (
     <div className="odonto-editorial-field odonto-editorial-choice">
@@ -318,7 +323,7 @@ export function EditorialSelectField(props: unknown) {
           onBlur={input.onBlur}
         >
           {!field.required ? <option value="">Sin seleccionar</option> : null}
-          {(field.options ?? []).map((option) => (
+          {visibleOptions.map((option) => (
             <option key={optionValue(option)} value={optionValue(option)}>{optionLabel(option)}</option>
           ))}
         </select>

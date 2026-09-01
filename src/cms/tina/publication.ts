@@ -24,6 +24,19 @@ export const publicationIssueKinds = [
 
 export type PublicationIssueKind = (typeof publicationIssueKinds)[number];
 
+export const editorialProductionCollections = ['articulo', 'instruccion'] as const;
+export type EditorialProductionCollection = (typeof editorialProductionCollections)[number];
+
+export const editorialPublicStates = ['published', 'retired', 'unpublished'] as const;
+export type EditorialPublicState = (typeof editorialPublicStates)[number];
+
+export interface EditorialProductionEntry {
+  collection: EditorialProductionCollection;
+  relativePath: string;
+  fingerprint: string;
+  publicState: EditorialPublicState;
+}
+
 export interface PublicationRequest {
   type: 'EditorialPublicationRequest';
   status: PublicationRequestStatus;
@@ -34,12 +47,15 @@ export interface PublicationRequest {
   productionCommit?: string;
   summary?: string;
   issueKind?: PublicationIssueKind;
+  productionIndex?: EditorialProductionEntry[];
 }
 
 const activeStatuses = new Set<PublicationRequestStatus>(['pending', 'processing', 'deploying', 'waiting_index']);
 const isoUtcPattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
 const requestIdPattern = /^[a-zA-Z0-9][a-zA-Z0-9._:-]{7,127}$/;
 const commitPattern = /^[0-9a-f]{7,40}$/;
+const fingerprintPattern = /^[0-9a-f]{16}$/;
+const relativeEditorialPathPattern = /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$)).+\.json$/;
 const editorialAllowedPathPatterns = [
   /^src\/data\/home\.json$/,
   /^src\/data\/tratamientos-(?:index|page)\.json$/,
@@ -113,6 +129,37 @@ export function validatePublicationRequest(
   ) {
     throw new Error(`Solicitud editorial inválida en ${source}: issueKind no es válido.`);
   }
+  if (request.productionIndex !== undefined) {
+    if (!Array.isArray(request.productionIndex) || request.productionIndex.length > 500) {
+      throw new Error(`Solicitud editorial inválida en ${source}: productionIndex no es válido.`);
+    }
+
+    const identities = new Set<string>();
+    for (const [index, rawEntry] of request.productionIndex.entries()) {
+      if (!rawEntry || typeof rawEntry !== 'object' || Array.isArray(rawEntry)) {
+        throw new Error(`Solicitud editorial inválida en ${source}: productionIndex[${index}] no es válido.`);
+      }
+      const entry = rawEntry as Record<string, unknown>;
+      if (!editorialProductionCollections.includes(entry.collection as EditorialProductionCollection)) {
+        throw new Error(`Solicitud editorial inválida en ${source}: productionIndex[${index}].collection no es válido.`);
+      }
+      if (typeof entry.relativePath !== 'string' || !relativeEditorialPathPattern.test(entry.relativePath)) {
+        throw new Error(`Solicitud editorial inválida en ${source}: productionIndex[${index}].relativePath no es válido.`);
+      }
+      if (typeof entry.fingerprint !== 'string' || !fingerprintPattern.test(entry.fingerprint)) {
+        throw new Error(`Solicitud editorial inválida en ${source}: productionIndex[${index}].fingerprint no es válido.`);
+      }
+      if (!editorialPublicStates.includes(entry.publicState as EditorialPublicState)) {
+        throw new Error(`Solicitud editorial inválida en ${source}: productionIndex[${index}].publicState no es válido.`);
+      }
+
+      const identity = `${entry.collection}:${entry.relativePath}`;
+      if (identities.has(identity)) {
+        throw new Error(`Solicitud editorial inválida en ${source}: productionIndex repite ${identity}.`);
+      }
+      identities.add(identity);
+    }
+  }
 
   const status = request.status as PublicationRequestStatus;
   if (status !== 'idle' && (!request.requestId || !request.requestedAt)) {
@@ -155,6 +202,7 @@ export function normalizePublicationRequest(value: unknown): PublicationRequest 
     'productionCommit',
     'summary',
     'issueKind',
+    'productionIndex',
   ] as const) {
     if (normalized[field] === null) delete normalized[field];
   }
@@ -181,6 +229,7 @@ export function createPendingPublicationRequest(
     lastProcessedRequestId: current.lastProcessedRequestId,
     processedAt: current.processedAt,
     productionCommit: current.productionCommit,
+    productionIndex: current.productionIndex,
     summary: 'Recibimos tu pedido. Tus cambios siguen sólo en Preview mientras hacemos los controles.',
   };
   validatePublicationRequest(next);
@@ -191,7 +240,12 @@ export function createPublicationResult(
   currentValue: unknown,
   status: 'published' | 'failed',
   processedAt: string,
-  options: { productionCommit?: string; summary: string; issueKind?: PublicationIssueKind }
+  options: {
+    productionCommit?: string;
+    productionIndex?: EditorialProductionEntry[];
+    summary: string;
+    issueKind?: PublicationIssueKind;
+  }
 ): PublicationRequest {
   const current = normalizePublicationRequest(currentValue);
   if (!current.requestId || !current.requestedAt) {
@@ -203,7 +257,8 @@ export function createPublicationResult(
     status,
     lastProcessedRequestId: current.requestId,
     processedAt,
-    productionCommit: options.productionCommit,
+    productionCommit: status === 'published' ? options.productionCommit : current.productionCommit,
+    productionIndex: status === 'published' ? options.productionIndex : current.productionIndex,
     summary: options.summary,
     issueKind: status === 'failed' ? options.issueKind ?? 'technical' : undefined,
   };
