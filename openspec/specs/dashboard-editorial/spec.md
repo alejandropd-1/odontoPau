@@ -80,4 +80,3 @@ La operación editorial SHALL vivir dentro de `/admin`; la ruta histórica `/edi
 #### Scenario: Uso con tecnología asistiva
 - **WHEN** una persona navega la lista por teclado o lector de pantalla
 - **THEN** puede identificar filtros, estado cotidiano, explicación de pendientes y propósito de cada acción sin depender del color
-

@@ -87,4 +87,3 @@ La automatización SHALL registrar junto al resultado de una tanda exitosa un í
 #### Scenario: Retiro confirmado
 - **WHEN** el índice registra que una pieza fue promovida con estado retirado y no tiene presencia pública
 - **THEN** la fila informa que está retirada del sitio pero conserva su acción de edición
-
