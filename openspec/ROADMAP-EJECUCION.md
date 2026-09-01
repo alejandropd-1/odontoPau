@@ -22,7 +22,7 @@
 | 5 | CMS Tina slice D: portada e institucionales | ABSORBED BY 3 | Inicio e índice de Tratamientos incorporados al cambio activo; la configuración global del sitio seguirá en un OpenSpec posterior |
 | 6 | `pilotear-circuito-editorial-tina` | DONE | Bootstrap aprobado, archivado, integrado mediante PR #13 y publicado el 2026-08-21 |
 | 6.1 | `validar-operacion-editorial-tina-en-produccion` | DONE | Tres ciclos reales completados; archivado, integrado mediante PR #24 y producción verificada el 2026-08-27 |
-| 6.2 | `operativizar-dashboard-editorial-por-contenido` | READY TO MERGE | Implementado, validado y archivado el 2026-09-01; resta el merge autorizado a `main` y la verificación de producción |
+| 6.2 | `operativizar-dashboard-editorial-por-contenido` | DONE | Implementado, validado y archivado; integrado directamente a `main` y publicado el 2026-09-01, con producción confirmada en `e0ae8f8` |
 | 7 | `preparar-redes-sociales-editoriales` | PARKED | CMS estable y articulos fuente publicados/aprobados |
 | 8 | `dinamizar-dashboard-editorial-con-supabase` | PARKED / DECISION GATE | Implementar solo si el piloto demuestra necesidad de asignaciones, KPIs o auditoria operativa |
 | 9 | `preparar-runner-editorial-lm-studio-link` | PARKED | Circuito estable, casos golden suficientes y retorno esperado justificado |
