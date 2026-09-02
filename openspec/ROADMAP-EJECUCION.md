@@ -24,7 +24,7 @@
 | 6.1 | `validar-operacion-editorial-tina-en-produccion` | DONE | Tres ciclos reales completados; archivado, integrado mediante PR #24 y producción verificada el 2026-08-27 |
 | 6.2 | `operativizar-dashboard-editorial-por-contenido` | DONE | Implementado, validado y archivado; integrado directamente a `main` y publicado el 2026-09-01, con producción confirmada en `e0ae8f8` |
 | 6.3 | `dinamizar-dashboard-editorial-con-supabase` | RETIRED | Alcance obsoleto y no implementado; la dinamización quedó resuelta por 6.2 y sus delta specs no se sincronizaron |
-| 7 | `persistir-trazabilidad-operativa-editorial` | ARCHIVED / PENDING RELEASE | 29/29 tareas completas, revisión local equivalente autorizada y aprobación manual de Alejandro; archivado el 2026-09-02. Pendientes cierre de higiene Git, integración autorizada a `main` y verificación de producción |
+| 7 | `persistir-trazabilidad-operativa-editorial` | INTEGRATED / PENDING PRODUCTION | 29/29 tareas completas y aprobación manual de Alejandro; archivado e integrado directamente a `main` el 2026-09-02, con higiene Git corregida y esquema sincronizado en Tina. Falta confirmar el deploy; ver `docs/RELEASE-TRAZABILIDAD-EDITORIAL-2026-09-02.md` |
 | 8 | `preparar-redes-sociales-editoriales` | PARKED | Cambio 7 integrado y verificado en producción, CMS estable y artículos fuente publicados/aprobados |
 | 9 | `preparar-runner-editorial-lm-studio-link` | PARKED | Circuito estable, casos golden suficientes y retorno esperado justificado |
 
@@ -50,7 +50,7 @@ Cada slice reutilizara las specs del programa y evitara duplicar requisitos. El 
 | Contrato y validacion del contenido | Schemas/validadores compartidos del repositorio |
 | Experiencia de edicion | `/admin` como entrada única a TinaCMS y a su Panel editorial custom sobre JSON + Git, con un proyecto independiente por sitio |
 | Integracion y produccion | Tina guarda en rama no productiva y actualiza Preview -> el panel solicita publicar -> PR/CI técnico oculto al usuario -> `main` aprobado -> Netlify |
-| Historial operativo | Lista `history` del manifiesto `src/data/editorial/publication-request.json`, versionada en Git y consultada por Tina; resumen derivado de resultados finales válidos. Implementado en el cambio 7, pendiente de integración y verificación en producción |
+| Historial operativo | Lista opcional `history` del manifiesto `src/data/editorial/publication-request.json`, versionada en Git y consultada por Tina; resumen derivado de resultados finales válidos. Cambio 7 integrado y esquema sincronizado; pendiente de verificación en producción |
 | Derivados sociales | Paquetes trazables desde articulos publicados |
 | Automatizacion local futura | Runner aislado que consume validadores compartidos y nunca publica |
 
@@ -69,7 +69,7 @@ El dashboard final vivirá como pantalla personalizada de Tina dentro de `/admin
 
 La unidad de despliegue seguirá siendo la tanda completa aprobada en Preview. Una fila podrá quedar lista, bloqueada o retirada y podrá cambiar su estado editorial, pero el botón final promoverá el snapshot aprobado completo. Publicar una sola fila de manera aislada exigiría una rama, request y despliegue independiente por pieza; no se incorporará salvo que un OpenSpec futuro demuestre una necesidad real que justifique ese costo.
 
-Supabase no es requisito para esta experiencia. El cambio 6.2 funciona con Tina + JSON + Git como fuentes canónicas. El antiguo cambio `dinamizar-dashboard-editorial-con-supabase` fue retirado sin implementación porque partía de una arquitectura reemplazada. El cambio `persistir-trazabilidad-operativa-editorial` ya implementó y archivó un historial de resultados finales en el manifiesto editorial, sin base de datos externa ni segundo login. Su resumen y sus movimientos recientes no agregan estados por contenido ni publicación individual: se mantienen `Publicado`, `No publicado` y `Borrador`, con publicación por tanda. Redes sociales sigue pendiente hasta completar la integración y verificación de producción del cambio 7.
+Supabase no es requisito para esta experiencia. El cambio 6.2 funciona con Tina + JSON + Git como fuentes canónicas. El antiguo cambio `dinamizar-dashboard-editorial-con-supabase` fue retirado sin implementación porque partía de una arquitectura reemplazada. El cambio `persistir-trazabilidad-operativa-editorial` ya implementó, archivó e integró un historial de resultados finales en el manifiesto editorial, sin base de datos externa ni segundo login. Su resumen y sus movimientos recientes no agregan estados por contenido ni publicación individual: se mantienen `Publicado`, `No publicado` y `Borrador`, con publicación por tanda. Redes sociales sigue pendiente hasta verificar la publicación en producción del cambio 7.
 
 La URL y la rama cumplen funciones diferentes: `/admin` es la dirección que usa la persona; `editorial/tina` es la rama Git no productiva que alimenta Preview y evita que **Save** modifique producción. El nombre de la rama no crea ni requiere una ruta `/editorial`.
 
