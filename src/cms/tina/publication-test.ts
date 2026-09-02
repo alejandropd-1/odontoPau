@@ -1,14 +1,21 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 
 import {
+  appendPublicationHistory,
   classifyEditorialPaths,
   createPendingPublicationRequest,
   createPublicationProgress,
   createPublicationResult,
+  derivePublicationHistorySummary,
   isActivePublicationRequest,
   isEditorialAllowedPath,
   normalizePublicationRequest,
+  publicationHistoryDurationMs,
+  readPublicationHistory,
+  sortPublicationHistory,
   validatePublicationRequest,
+  type PublicationHistoryEntry,
   type PublicationRequest,
 } from './publication';
 import { evaluatePublicationPreflight } from './publication-preflight';
@@ -69,6 +76,15 @@ const published = createPublicationResult(pending, 'published', '2026-08-21T18:3
 assert.equal(published.lastProcessedRequestId, pending.requestId);
 assert.doesNotThrow(() => validatePublicationRequest(published));
 assert.equal(published.productionIndex?.[0].publicState, 'published');
+assert.deepEqual(published.history, [
+  {
+    requestId: pending.requestId,
+    requestedAt: pending.requestedAt,
+    processedAt: '2026-08-21T18:35:00.000Z',
+    result: 'published',
+    productionCommit: 'abcdef0123456789',
+  },
+]);
 
 assert.doesNotThrow(() =>
   validatePublicationRequest({
@@ -96,6 +112,7 @@ const deploying = createPublicationProgress(pending, 'deploying', {
 });
 assert.equal(deploying.status, 'deploying');
 assert.equal(deploying.productionCommit, 'abcdef0123456789');
+assert.equal(deploying.history, undefined);
 
 const waiting = createPublicationProgress(deploying, 'waiting_index', {
   productionCommit: 'abcdef0123456789',
@@ -104,12 +121,14 @@ const waiting = createPublicationProgress(deploying, 'waiting_index', {
 });
 assert.equal(waiting.issueKind, 'deploy_not_confirmed');
 assert.equal(isActivePublicationRequest(waiting.status), true);
+assert.equal(waiting.history, undefined);
 
 const failed = createPublicationResult(pending, 'failed', '2026-08-21T18:35:00.000Z', {
   issueKind: 'checks_failed',
   summary: 'Uno de los controles no pasó.',
 });
 assert.equal(failed.issueKind, 'checks_failed');
+assert.equal(failed.history?.[0].result, 'failed');
 assert.throws(
   () => validatePublicationRequest({ ...failed, issueKind: undefined }),
   /failed requiere issueKind/
@@ -123,6 +142,77 @@ const failedAfterPublished = createPublicationResult(
 );
 assert.equal(failedAfterPublished.productionCommit, published.productionCommit);
 assert.deepEqual(failedAfterPublished.productionIndex, published.productionIndex);
+assert.equal(failedAfterPublished.history?.length, 2);
+
+const nextPendingAfterHistory = createPendingPublicationRequest(
+  published,
+  'req-next-cycle-12345678',
+  '2026-08-21T19:00:00.000Z'
+);
+const progressAfterHistory = createPublicationProgress(nextPendingAfterHistory, 'processing', {
+  summary: 'Controles en curso.',
+});
+assert.deepEqual(progressAfterHistory.history, published.history);
+
+const historyEntry: PublicationHistoryEntry = {
+  requestId: 'req-history-12345678',
+  requestedAt: '2026-08-21T18:30:00.000Z',
+  processedAt: '2026-08-21T18:35:30.000Z',
+  result: 'published',
+  productionCommit: 'abcdef0123456789',
+};
+assert.equal(appendPublicationHistory([], historyEntry).length, 1);
+const sameHistory = [historyEntry];
+assert.strictEqual(appendPublicationHistory(sameHistory, { ...historyEntry }), sameHistory);
+assert.throws(
+  () => appendPublicationHistory(sameHistory, { ...historyEntry, result: 'failed', issueKind: 'technical', productionCommit: undefined }),
+  /resultado final diferente/
+);
+assert.equal(publicationHistoryDurationMs(historyEntry), 330_000);
+
+const olderFailure: PublicationHistoryEntry = {
+  requestId: 'req-history-old-1234',
+  requestedAt: '2026-08-20T18:00:00.000Z',
+  processedAt: '2026-08-20T18:02:00.000Z',
+  result: 'failed',
+  issueKind: 'checks_failed',
+};
+assert.deepEqual(sortPublicationHistory([olderFailure, historyEntry]).map((entry) => entry.requestId), [
+  historyEntry.requestId,
+  olderFailure.requestId,
+]);
+assert.deepEqual(derivePublicationHistorySummary([olderFailure, historyEntry]), {
+  lastPublishedAt: historyEntry.processedAt,
+  publishedCount: 1,
+  failedCount: 1,
+});
+assert.deepEqual(readPublicationHistory(undefined), { entries: [], invalidEntries: 0, available: true });
+assert.deepEqual(readPublicationHistory('no disponible'), { entries: [], invalidEntries: 1, available: false });
+const partiallyInvalidHistory = readPublicationHistory([
+  historyEntry,
+  { ...olderFailure, patientName: 'Dato que no corresponde' },
+]);
+assert.equal(partiallyInvalidHistory.entries.length, 1);
+assert.equal(partiallyInvalidHistory.invalidEntries, 1);
+assert.throws(
+  () => validatePublicationRequest({ ...published, history: [{ ...historyEntry, patientName: 'Dato sensible' }] }),
+  /campo inesperado patientName/
+);
+assert.throws(
+  () => validatePublicationRequest({ ...published, history: [{ ...historyEntry, result: 'unknown' }] }),
+  /result no es válido/
+);
+assert.throws(
+  () => validatePublicationRequest({ ...published, history: [historyEntry, { ...historyEntry }] }),
+  /history repite/
+);
+
+const repeatedPublished = createPublicationResult(published, 'published', '2026-08-21T19:00:00.000Z', {
+  productionCommit: 'abcdef0123456789',
+  summary: 'No debe reemplazar el resultado final.',
+});
+assert.deepEqual(repeatedPublished, published);
+assert.equal(repeatedPublished.processedAt, '2026-08-21T18:35:00.000Z');
 
 const duplicated = { ...pending, lastProcessedRequestId: pending.requestId };
 assert.throws(() => validatePublicationRequest(duplicated), /ya fue procesado/);
@@ -177,6 +267,12 @@ const advancedBranch = evaluatePublicationPreflight({
 });
 assert.equal(advancedBranch.ok, false);
 assert.match(advancedBranch.errors.join(' '), /cambios después/);
+
+const repositoryManifest = JSON.parse(
+  fs.readFileSync('src/data/editorial/publication-request.json', 'utf8')
+) as unknown;
+assert.doesNotThrow(() => validatePublicationRequest(repositoryManifest));
+assert.deepEqual((repositoryManifest as PublicationRequest).history, []);
 
 console.log('--- Tina publication request ---');
 console.log('- Estados y transiciones idempotentes: válidos.');

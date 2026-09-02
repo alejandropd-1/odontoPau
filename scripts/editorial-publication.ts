@@ -113,11 +113,15 @@ function assertCurrentRequest(current: PublicationRequest, requestId: string): v
 }
 
 function persistRequest(next: PublicationRequest): void {
-  fs.writeFileSync(
-    path.join(process.cwd(), PUBLICATION_REQUEST_PATH),
-    `${JSON.stringify(next, null, 2)}\n`,
-    'utf8'
-  );
+  validatePublicationRequest(next);
+  const targetPath = path.join(process.cwd(), PUBLICATION_REQUEST_PATH);
+  const temporaryPath = `${targetPath}.tmp-${process.pid}`;
+  try {
+    fs.writeFileSync(temporaryPath, `${JSON.stringify(next, null, 2)}\n`, 'utf8');
+    fs.renameSync(temporaryPath, targetPath);
+  } finally {
+    if (fs.existsSync(temporaryPath)) fs.unlinkSync(temporaryPath);
+  }
 }
 
 function writeResult(

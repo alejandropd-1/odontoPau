@@ -17,3 +17,17 @@ odontoPau.code-workspace
 tina/__generated__/
 public/admin/
 public/deployment.json
+
+# Adjuntos y pruebas locales: no forman parte del producto.
+/.codex-remote-attachments/
+/.playwright-cli/
+/.playwright-mcp/
+/output/playwright/
+/tsconfig.tsbuildinfo
+/dashboard-mobile-table-arrows.png
+/dashboard-original-layout-desktop-single-scroll.png
+/dashboard-original-layout-desktop.png
+/dashboard-original-layout-mobile-table-single-scroll.png
+/dashboard-original-layout-mobile-table.png
+/editorial-first-click-after-route.png
+/editorial-first-click-fixed.png
