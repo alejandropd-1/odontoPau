@@ -4,10 +4,16 @@ import { createEditorialRevisionFingerprint } from '../../src/cms/tina/productio
 import type { EditorialProductionEntry } from '../../src/cms/tina/publication';
 import {
   createEditorialDashboardRow,
+  createEditorialPublicationHistoryView,
+  displayStateLabels,
   filterEditorialDashboardRows,
+  formatEditorialDateTime,
+  formatPublicationDuration,
   getEditorialDashboardDisplayState,
   type EditorialDashboardDocument,
 } from './editorial-dashboard-model';
+
+assert.deepEqual(Object.values(displayStateLabels), ['Publicado', 'No publicado', 'Borrador']);
 
 function document(overrides: Partial<EditorialDashboardDocument> = {}): EditorialDashboardDocument {
   const base = {
@@ -84,7 +90,7 @@ assert.equal(unknown.readinessLabel, 'Necesita guardarse');
 const unknownPublished = createEditorialDashboardRow(document(), undefined);
 assert.equal(unknownPublished.publicLabel, 'Todavía sin confirmar');
 assert.equal(unknownPublished.readinessLabel, 'Primera confirmación pendiente');
-assert.deepEqual(getEditorialDashboardDisplayState(unknownPublished), { value: null, label: '—' });
+assert.deepEqual(getEditorialDashboardDisplayState(unknownPublished), { value: 'not_published', label: 'No publicado' });
 
 const newPublished = createEditorialDashboardRow(document({ relativePath: 'ortopedia/nueva.json' }), [], 'https://preview.example.com');
 assert.equal(getEditorialDashboardDisplayState(newPublished).label, 'No publicado');
@@ -107,5 +113,53 @@ assert.equal(filterEditorialDashboardRows([published, previewOnly], { publicStat
 assert.equal(filterEditorialDashboardRows([published], { query: 'sin coincidencias' }).length, 0);
 assert.equal(filterEditorialDashboardRows([published], { query: 'removibles' }).length, 1);
 
+const historyView = createEditorialPublicationHistoryView([
+  {
+    requestId: 'req-dashboard-history-1234',
+    requestedAt: '2026-08-21T18:30:00.000Z',
+    processedAt: '2026-08-21T18:35:30.000Z',
+    result: 'published',
+    productionCommit: 'abcdef0123456789',
+  },
+  {
+    requestId: 'req-dashboard-history-5678',
+    requestedAt: '2026-08-22T18:30:00.000Z',
+    processedAt: '2026-08-22T18:32:00.000Z',
+    result: 'failed',
+    issueKind: 'checks_failed',
+  },
+]);
+assert.equal(historyView.available, true);
+assert.deepEqual(historyView.summary, {
+  lastPublishedAt: '2026-08-21T18:35:30.000Z',
+  publishedCount: 1,
+  failedCount: 1,
+});
+assert.equal(historyView.movements[0].title, 'La publicación se detuvo');
+assert.match(historyView.movements[0].detail, /controles no pasó/);
+assert.equal(historyView.movements[1].durationMs, 330_000);
+assert.equal('requestId' in historyView.movements[0], false);
+assert.equal('productionCommit' in historyView.movements[0], false);
+assert.doesNotMatch(JSON.stringify(historyView), /GitHub|Netlify|SHA|pull request|requestId|productionCommit/i);
+
+const partialHistoryView = createEditorialPublicationHistoryView([
+  {
+    requestId: 'req-dashboard-history-ok12',
+    requestedAt: '2026-08-23T18:30:00.000Z',
+    processedAt: '2026-08-23T18:31:00.000Z',
+    result: 'failed',
+    issueKind: 'technical',
+  },
+  { result: 'published' },
+]);
+assert.equal(partialHistoryView.movements.length, 1);
+assert.equal(partialHistoryView.invalidEntries, 1);
+assert.deepEqual(createEditorialPublicationHistoryView(undefined).movements, []);
+assert.equal(createEditorialPublicationHistoryView(undefined, false).available, false);
+assert.match(formatEditorialDateTime('2026-08-21T18:35:30.000Z'), /21\/08\/2026.*15:35/);
+assert.equal(formatPublicationDuration(330_000), '6 min');
+assert.equal(formatPublicationDuration(3_900_000), '1 h 5 min');
+assert.equal(formatPublicationDuration(undefined), 'Duración no disponible');
+
 console.log('--- Tina editorial dashboard model ---');
-console.log('- Estados público/Preview, bloqueos, URLs y filtros: válidos.');
+console.log('- Estados público/Preview, bloqueos, URLs, filtros e historial seguro: válidos.');
