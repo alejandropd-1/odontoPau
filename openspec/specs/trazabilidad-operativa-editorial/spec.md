@@ -1,7 +1,9 @@
 # trazabilidad-operativa-editorial Specification
 
 ## Purpose
-TBD - created by archiving change persistir-trazabilidad-operativa-editorial. Update Purpose after archive.
+
+Conservar y consultar los resultados finales de las solicitudes de publicación editorial, con fechas verificables y explicaciones seguras, sin sobrescribir ciclos anteriores ni confundir un pedido en curso con una publicación confirmada en el sitio.
+
 ## Requirements
 ### Requirement: Registro persistente por ciclo de publicación
 
@@ -87,4 +89,3 @@ El historial MUST considerar publicada una tanda sólo después de la confirmaci
 
 - **WHEN** otro proceso necesita saber si una tanda puede usarse como fuente publicada
 - **THEN** sólo los ciclos exitosos y públicamente confirmados se ofrecen como referencia confiable
-

@@ -1,7 +1,9 @@
 # dashboard-editorial Specification
 
 ## Purpose
-TBD - created by archiving change crear-dashboard-editorial-y-trazabilidad. Update Purpose after archive.
+
+Ofrecer un único Panel editorial dentro de `/admin` para consultar y preparar los contenidos de Tina, comprender su presencia confirmada en el sitio y revisar los resultados de cada tanda, con lenguaje cotidiano y una interfaz accesible en escritorio y móvil.
+
 ## Requirements
 ### Requirement: Lectura Dinámica del Catálogo de Contenidos
 El sistema SHALL listar dinámicamente todos los artículos e instrucciones gestionados por Tina dentro del único Panel editorial de `/admin`. Cada fila MUST mostrar título, tipo, categoría, resumen, etiquetas, fechas editoriales guardadas, un estado cotidiano unificado, explicación de pendientes y acciones aplicables, sin requerir datos estáticos ni cambios de código cuando se agreguen documentos JSON válidos.
@@ -141,4 +143,3 @@ El historial MUST poder operarse con teclado, anunciar cambios relevantes median
 
 - **WHEN** el Panel editorial se muestra en un ancho móvil
 - **THEN** el historial se apila dentro del ancho disponible y los textos y acciones permanecen legibles y utilizables
-
