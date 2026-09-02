@@ -24,6 +24,30 @@ export const publicationIssueKinds = [
 
 export type PublicationIssueKind = (typeof publicationIssueKinds)[number];
 
+export const publicationHistoryResults = ['published', 'failed'] as const;
+export type PublicationHistoryResult = (typeof publicationHistoryResults)[number];
+
+export interface PublicationHistoryEntry {
+  requestId: string;
+  requestedAt: string;
+  processedAt: string;
+  result: PublicationHistoryResult;
+  issueKind?: PublicationIssueKind;
+  productionCommit?: string;
+}
+
+export interface PublicationHistoryReadResult {
+  entries: PublicationHistoryEntry[];
+  invalidEntries: number;
+  available: boolean;
+}
+
+export interface PublicationHistorySummary {
+  lastPublishedAt?: string;
+  publishedCount: number;
+  failedCount: number;
+}
+
 export const editorialProductionCollections = ['articulo', 'instruccion'] as const;
 export type EditorialProductionCollection = (typeof editorialProductionCollections)[number];
 
@@ -48,6 +72,7 @@ export interface PublicationRequest {
   summary?: string;
   issueKind?: PublicationIssueKind;
   productionIndex?: EditorialProductionEntry[];
+  history?: PublicationHistoryEntry[];
 }
 
 const activeStatuses = new Set<PublicationRequestStatus>(['pending', 'processing', 'deploying', 'waiting_index']);
@@ -56,6 +81,14 @@ const requestIdPattern = /^[a-zA-Z0-9][a-zA-Z0-9._:-]{7,127}$/;
 const commitPattern = /^[0-9a-f]{7,40}$/;
 const fingerprintPattern = /^[0-9a-f]{16}$/;
 const relativeEditorialPathPattern = /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$)).+\.json$/;
+const publicationHistoryEntryFields = new Set([
+  'requestId',
+  'requestedAt',
+  'processedAt',
+  'result',
+  'issueKind',
+  'productionCommit',
+]);
 const editorialAllowedPathPatterns = [
   /^src\/data\/home\.json$/,
   /^src\/data\/tratamientos-(?:index|page)\.json$/,
@@ -82,6 +115,116 @@ export function classifyEditorialPaths(filePaths: string[]): {
     kind: blockedPaths.length === 0 ? 'editorial-routine' : 'structural-change',
     blockedPaths,
   };
+}
+
+function validatePublicationHistoryEntry(
+  value: unknown,
+  source: string
+): asserts value is PublicationHistoryEntry {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error(`Historial editorial inválido en ${source}: se esperaba un objeto.`);
+  }
+
+  const entry = value as Record<string, unknown>;
+  const unexpectedFields = Object.keys(entry).filter((field) => !publicationHistoryEntryFields.has(field));
+  if (unexpectedFields.length > 0) {
+    throw new Error(`Historial editorial inválido en ${source}: campo inesperado ${unexpectedFields[0]}.`);
+  }
+  if (typeof entry.requestId !== 'string' || !requestIdPattern.test(entry.requestId)) {
+    throw new Error(`Historial editorial inválido en ${source}: requestId no es válido.`);
+  }
+  for (const field of ['requestedAt', 'processedAt'] as const) {
+    if (typeof entry[field] !== 'string' || !isoUtcPattern.test(entry[field] as string)) {
+      throw new Error(`Historial editorial inválido en ${source}: ${field} debe ser una fecha ISO UTC.`);
+    }
+  }
+  if (Date.parse(entry.processedAt as string) < Date.parse(entry.requestedAt as string)) {
+    throw new Error(`Historial editorial inválido en ${source}: processedAt precede a requestedAt.`);
+  }
+  if (!publicationHistoryResults.includes(entry.result as PublicationHistoryResult)) {
+    throw new Error(`Historial editorial inválido en ${source}: result no es válido.`);
+  }
+  if (
+    entry.issueKind !== undefined &&
+    (typeof entry.issueKind !== 'string' || !publicationIssueKinds.includes(entry.issueKind as PublicationIssueKind))
+  ) {
+    throw new Error(`Historial editorial inválido en ${source}: issueKind no es válido.`);
+  }
+  if (
+    entry.productionCommit !== undefined &&
+    (typeof entry.productionCommit !== 'string' || !commitPattern.test(entry.productionCommit))
+  ) {
+    throw new Error(`Historial editorial inválido en ${source}: productionCommit no es válido.`);
+  }
+  if (entry.result === 'failed' && !entry.issueKind) {
+    throw new Error(`Historial editorial inválido en ${source}: failed requiere issueKind.`);
+  }
+  if (entry.result === 'published' && entry.issueKind !== undefined) {
+    throw new Error(`Historial editorial inválido en ${source}: published no admite issueKind.`);
+  }
+  if (entry.result === 'failed' && entry.productionCommit !== undefined) {
+    throw new Error(`Historial editorial inválido en ${source}: failed no admite productionCommit.`);
+  }
+}
+
+export function readPublicationHistory(value: unknown): PublicationHistoryReadResult {
+  if (value === undefined || value === null) {
+    return { entries: [], invalidEntries: 0, available: true };
+  }
+  if (!Array.isArray(value)) {
+    return { entries: [], invalidEntries: 1, available: false };
+  }
+
+  const entries: PublicationHistoryEntry[] = [];
+  let invalidEntries = 0;
+  for (const [index, rawEntry] of value.entries()) {
+    try {
+      validatePublicationHistoryEntry(rawEntry, `history[${index}]`);
+      entries.push(rawEntry);
+    } catch {
+      invalidEntries += 1;
+    }
+  }
+  return {
+    entries: sortPublicationHistory(entries),
+    invalidEntries,
+    available: true,
+  };
+}
+
+export function sortPublicationHistory(entries: PublicationHistoryEntry[]): PublicationHistoryEntry[] {
+  return [...entries].sort((left, right) => Date.parse(right.processedAt) - Date.parse(left.processedAt));
+}
+
+export function appendPublicationHistory(
+  entries: PublicationHistoryEntry[] | undefined,
+  entry: PublicationHistoryEntry
+): PublicationHistoryEntry[] {
+  validatePublicationHistoryEntry(entry, 'nuevo movimiento');
+  const current = entries ?? [];
+  const existing = current.find((candidate) => candidate.requestId === entry.requestId);
+  if (!existing) return [...current, entry];
+  if (existing.result !== entry.result) {
+    throw new Error(`El pedido ${entry.requestId} ya tiene un resultado final diferente.`);
+  }
+  return current;
+}
+
+export function derivePublicationHistorySummary(
+  entries: PublicationHistoryEntry[]
+): PublicationHistorySummary {
+  const validEntries = readPublicationHistory(entries).entries;
+  const lastPublished = validEntries.find((entry) => entry.result === 'published');
+  return {
+    lastPublishedAt: lastPublished?.processedAt,
+    publishedCount: validEntries.filter((entry) => entry.result === 'published').length,
+    failedCount: validEntries.filter((entry) => entry.result === 'failed').length,
+  };
+}
+
+export function publicationHistoryDurationMs(entry: PublicationHistoryEntry): number | undefined {
+  const duration = Date.parse(entry.processedAt) - Date.parse(entry.requestedAt);
+  return Number.isFinite(duration) && duration >= 0 ? duration : undefined;
 }
 
 export function validatePublicationRequest(
@@ -160,6 +303,19 @@ export function validatePublicationRequest(
       identities.add(identity);
     }
   }
+  if (request.history !== undefined) {
+    if (!Array.isArray(request.history) || request.history.length > 1000) {
+      throw new Error(`Solicitud editorial inválida en ${source}: history no es válido.`);
+    }
+    const requestIds = new Set<string>();
+    for (const [index, entry] of request.history.entries()) {
+      validatePublicationHistoryEntry(entry, `${source}: history[${index}]`);
+      if (requestIds.has(entry.requestId)) {
+        throw new Error(`Solicitud editorial inválida en ${source}: history repite ${entry.requestId}.`);
+      }
+      requestIds.add(entry.requestId);
+    }
+  }
 
   const status = request.status as PublicationRequestStatus;
   if (status !== 'idle' && (!request.requestId || !request.requestedAt)) {
@@ -203,6 +359,7 @@ export function normalizePublicationRequest(value: unknown): PublicationRequest 
     'summary',
     'issueKind',
     'productionIndex',
+    'history',
   ] as const) {
     if (normalized[field] === null) delete normalized[field];
   }
@@ -230,6 +387,7 @@ export function createPendingPublicationRequest(
     processedAt: current.processedAt,
     productionCommit: current.productionCommit,
     productionIndex: current.productionIndex,
+    history: current.history,
     summary: 'Recibimos tu pedido. Tus cambios siguen sólo en Preview mientras hacemos los controles.',
   };
   validatePublicationRequest(next);
@@ -252,6 +410,25 @@ export function createPublicationResult(
     throw new Error('No existe un request identificable para registrar el resultado.');
   }
 
+  const existingHistoryEntry = current.history?.find((entry) => entry.requestId === current.requestId);
+  if (existingHistoryEntry) {
+    if (existingHistoryEntry.result !== status) {
+      throw new Error(`El pedido ${current.requestId} ya tiene un resultado final diferente.`);
+    }
+    return current;
+  }
+
+  const historyEntry: PublicationHistoryEntry = {
+    requestId: current.requestId,
+    requestedAt: current.requestedAt,
+    processedAt,
+    result: status,
+    ...(status === 'failed' ? { issueKind: options.issueKind ?? 'technical' } : {}),
+    ...(status === 'published' && options.productionCommit
+      ? { productionCommit: options.productionCommit }
+      : {}),
+  };
+
   const next: PublicationRequest = {
     ...current,
     status,
@@ -261,6 +438,7 @@ export function createPublicationResult(
     productionIndex: status === 'published' ? options.productionIndex : current.productionIndex,
     summary: options.summary,
     issueKind: status === 'failed' ? options.issueKind ?? 'technical' : undefined,
+    history: appendPublicationHistory(current.history, historyEntry),
   };
   validatePublicationRequest(next);
   return next;

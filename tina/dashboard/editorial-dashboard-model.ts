@@ -1,7 +1,13 @@
 import {
+  derivePublicationHistorySummary,
+  publicationHistoryDurationMs,
+  readPublicationHistory,
   type EditorialProductionCollection,
   type EditorialProductionEntry,
   type EditorialPublicState,
+  type PublicationHistoryResult,
+  type PublicationHistorySummary,
+  type PublicationIssueKind,
 } from '../../src/cms/tina/publication';
 import { isSoloEditorialTransition } from '../../src/cms/tina/editorial-profile';
 import { createEditorialRevisionFingerprint } from '../../src/cms/tina/production-index';
@@ -52,6 +58,90 @@ export interface EditorialDashboardFilters {
   collection?: EditorialProductionCollection | 'all';
   editorialStatus?: string | 'all';
   publicStatus?: DashboardPublicStatus | 'all';
+}
+
+export interface EditorialPublicationMovement {
+  result: PublicationHistoryResult;
+  title: string;
+  detail: string;
+  requestedAt: string;
+  processedAt: string;
+  durationMs?: number;
+}
+
+export interface EditorialPublicationHistoryView {
+  available: boolean;
+  invalidEntries: number;
+  movements: EditorialPublicationMovement[];
+  summary: PublicationHistorySummary;
+}
+
+const publicationHistoryIssueCopy: Record<PublicationIssueKind, string> = {
+  content: 'Hay algo en el contenido que necesita una corrección antes de volver a intentar.',
+  snapshot_changed: 'Se guardaron cambios nuevos durante la publicación. Revisá la vista previa antes de volver a intentar.',
+  checks_failed: 'Uno de los controles no pasó. Tus cambios siguen guardados en la vista previa.',
+  merge_failed: 'No pudimos completar la publicación. Tus cambios siguen guardados y podés pedir ayuda.',
+  deploy_not_confirmed: 'La actualización avanzó, pero todavía no pudimos confirmar lo que ven los pacientes.',
+  technical: 'Tuvimos un inconveniente técnico. El sitio siguió mostrando la versión anterior.',
+};
+
+const editorialDateTimeFormatter = new Intl.DateTimeFormat('es-AR', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+  timeZone: 'America/Argentina/Buenos_Aires',
+});
+
+export function formatEditorialDateTime(value?: string | null): string {
+  if (!value) return 'No registrada';
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? 'Fecha inválida' : editorialDateTimeFormatter.format(parsed);
+}
+
+export function formatPublicationDuration(durationMs?: number): string {
+  if (durationMs === undefined || !Number.isFinite(durationMs) || durationMs < 0) {
+    return 'Duración no disponible';
+  }
+  const totalMinutes = Math.max(1, Math.round(durationMs / 60_000));
+  if (totalMinutes < 60) return `${totalMinutes} min`;
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  return minutes === 0 ? `${hours} h` : `${hours} h ${minutes} min`;
+}
+
+export function createEditorialPublicationHistoryView(
+  value: unknown,
+  available = true
+): EditorialPublicationHistoryView {
+  if (!available) {
+    return {
+      available: false,
+      invalidEntries: 0,
+      movements: [],
+      summary: { publishedCount: 0, failedCount: 0 },
+    };
+  }
+
+  const history = readPublicationHistory(value);
+  const summary = derivePublicationHistorySummary(history.entries);
+  return {
+    available: history.available,
+    invalidEntries: history.invalidEntries,
+    summary,
+    movements: history.entries.map((entry) => ({
+      result: entry.result,
+      title: entry.result === 'published' ? 'Los cambios se publicaron' : 'La publicación se detuvo',
+      detail: entry.result === 'published'
+        ? 'La nueva versión quedó confirmada en el sitio.'
+        : publicationHistoryIssueCopy[entry.issueKind ?? 'technical'],
+      requestedAt: entry.requestedAt,
+      processedAt: entry.processedAt,
+      durationMs: publicationHistoryDurationMs(entry),
+    })),
+  };
 }
 
 const publicLabels: Record<DashboardPublicStatus, string> = {
@@ -241,7 +331,7 @@ export function getEditorialDashboardDisplayState(
   if (row.confirmedPublicState === 'retired' || row.confirmedPublicState === 'unpublished') {
     return { value: 'not_published', label: displayStateLabels.not_published };
   }
-  return { value: null, label: '—' };
+  return { value: 'not_published', label: displayStateLabels.not_published };
 }
 
 export function filterEditorialDashboardRows(

@@ -6,18 +6,24 @@ import {
   PUBLICATION_REQUEST_RELATIVE_PATH,
   createPendingPublicationRequest,
   isActivePublicationRequest,
+  readPublicationHistory,
   type EditorialProductionEntry,
+  type PublicationHistoryEntry,
   type PublicationRequest,
   type PublicationRequestStatus,
 } from '../../src/cms/tina/publication';
 import { createEditorialRevisionFingerprint } from '../../src/cms/tina/production-index';
 import {
   createEditorialDashboardRow,
+  createEditorialPublicationHistoryView,
   displayStateLabels,
   filterEditorialDashboardRows,
+  formatEditorialDateTime,
+  formatPublicationDuration,
   getEditorialDashboardDisplayState,
   type DashboardDisplayState,
   type EditorialDashboardDocument,
+  type EditorialPublicationHistoryView,
 } from './editorial-dashboard-model';
 
 const EDITORIAL_QUERY = `
@@ -99,6 +105,29 @@ const REQUEST_PUBLICATION_MUTATION = `
         fingerprint
         publicState
       }
+      history {
+        requestId
+        requestedAt
+        processedAt
+        result
+        issueKind
+        productionCommit
+      }
+    }
+  }
+`;
+
+const EDITORIAL_HISTORY_QUERY = `
+  query OdontoPauEditorialPublicationHistory {
+    publicationrequest(relativePath: "publication-request.json") {
+      history {
+        requestId
+        requestedAt
+        processedAt
+        result
+        issueKind
+        productionCommit
+      }
     }
   }
 `;
@@ -128,6 +157,11 @@ interface EditorialDashboardData {
 type EditorialDashboardResponse = EditorialDashboardData & {
   errors?: Array<{ message: string }>;
 };
+
+interface EditorialHistoryResponse {
+  publicationrequest?: { history?: unknown };
+  errors?: Array<{ message: string }>;
+}
 
 const displayStateColors: Record<DashboardDisplayState, { color: string; background: string }> = {
   published: { color: '#22543a', background: '#e4f3e9' },
@@ -206,27 +240,12 @@ const contentViewStorageKey = 'odontopau-editorial-content-view';
 
 type LocalReviewScenario = PublicationRequestStatus | 'current' | 'dashboard_error';
 type LocalContentScenario = 'current' | 'published' | 'preview_only' | 'retired' | 'blocked';
+type LocalHistoryScenario = 'current' | 'empty' | 'published' | 'failed' | 'partial' | 'unavailable';
 type ContentViewMode = 'cards' | 'table';
 type ContentSort = 'updated_desc' | 'created_desc' | 'published_desc' | 'title_asc';
 type ContentPageSize = 6 | 12 | 24;
 
 const contentPageSizeOptions: ContentPageSize[] = [6, 12, 24];
-
-const editorialDateTimeFormatter = new Intl.DateTimeFormat('es-AR', {
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: false,
-  timeZone: 'America/Argentina/Buenos_Aires',
-});
-
-function formatEditorialDateTime(value?: string | null): string {
-  if (!value) return 'No registrada';
-  const parsed = new Date(value);
-  return Number.isNaN(parsed.getTime()) ? 'Fecha inválida' : editorialDateTimeFormatter.format(parsed);
-}
 
 const localReviewScenarios: Array<{ value: LocalReviewScenario; label: string }> = [
   { value: 'current', label: 'Estado real guardado' },
@@ -246,6 +265,33 @@ const localContentScenarios: Array<{ value: LocalContentScenario; label: string 
   { value: 'preview_only', label: 'Cambios sólo en vista previa' },
   { value: 'retired', label: 'Pieza retirada' },
   { value: 'blocked', label: 'Falta revisión clínica' },
+];
+
+const localHistoryScenarios: Array<{ value: LocalHistoryScenario; label: string }> = [
+  { value: 'current', label: 'Historial real guardado' },
+  { value: 'empty', label: 'Sin movimientos todavía' },
+  { value: 'published', label: 'Publicaciones confirmadas' },
+  { value: 'failed', label: 'Publicación detenida' },
+  { value: 'partial', label: 'Un movimiento incompleto' },
+  { value: 'unavailable', label: 'Historial no disponible' },
+];
+
+const localPublishedHistory: PublicationHistoryEntry[] = Array.from({ length: 7 }, (_, index) => ({
+  requestId: `local-history-published-${String(index + 1).padStart(4, '0')}`,
+  requestedAt: new Date(Date.UTC(2026, 7, 20 + index, 13, 0)).toISOString(),
+  processedAt: new Date(Date.UTC(2026, 7, 20 + index, 13, 4 + index)).toISOString(),
+  result: 'published' as const,
+  productionCommit: `abcdef01234567${String(index).padStart(2, '0')}`,
+}));
+
+const localFailedHistory: PublicationHistoryEntry[] = [
+  {
+    requestId: 'local-history-failed-0001',
+    requestedAt: '2026-08-28T13:00:00.000Z',
+    processedAt: '2026-08-28T13:06:00.000Z',
+    result: 'failed',
+    issueKind: 'checks_failed',
+  },
 ];
 
 interface EditorialDashboardProps {
@@ -295,6 +341,10 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
   const [publicationConfirmed, setPublicationConfirmed] = useState(false);
   const [localReviewScenario, setLocalReviewScenario] = useState<LocalReviewScenario>('current');
   const [localContentScenario, setLocalContentScenario] = useState<LocalContentScenario>('current');
+  const [localHistoryScenario, setLocalHistoryScenario] = useState<LocalHistoryScenario>('current');
+  const [publicationHistoryValue, setPublicationHistoryValue] = useState<unknown>(undefined);
+  const [publicationHistoryAvailable, setPublicationHistoryAvailable] = useState(true);
+  const [historyPagination, setHistoryPagination] = useState({ key: '', count: 5 });
   const [searchQuery, setSearchQuery] = useState('');
   const [collectionFilter, setCollectionFilter] = useState<'all' | 'articulo' | 'instruccion'>('all');
   const [contentStateFilter, setContentStateFilter] = useState<'all' | DashboardDisplayState>('all');
@@ -343,6 +393,18 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
       })) as EditorialDashboardResponse;
       if (response.errors?.length) throw new Error(response.errors[0].message);
       setData(response);
+
+      try {
+        const historyResponse = (await tinaApi.request(EDITORIAL_HISTORY_QUERY, {
+          variables: {},
+        })) as EditorialHistoryResponse;
+        if (historyResponse.errors?.length) throw new Error(historyResponse.errors[0].message);
+        setPublicationHistoryValue(historyResponse.publicationrequest?.history);
+        setPublicationHistoryAvailable(true);
+      } catch {
+        setPublicationHistoryValue(undefined);
+        setPublicationHistoryAvailable(false);
+      }
     } catch (reason) {
       setError(friendlyDashboardError(reason, 'No pudimos actualizar el panel. Esperá unos segundos y volvé a intentar.'));
     } finally {
@@ -366,7 +428,11 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
       if (!tinaApi) throw new Error('El cliente de Tina todavía no está disponible.');
 
       const requestId = `editorial-${Date.now().toString(36)}-${window.crypto.randomUUID()}`;
-      const next = createPendingPublicationRequest(current, requestId, new Date().toISOString());
+      const readableHistory = readPublicationHistory(publicationHistoryValue);
+      const currentWithHistory = publicationHistoryAvailable && readableHistory.invalidEntries === 0
+        ? { ...current, history: readableHistory.entries }
+        : current;
+      const next = createPendingPublicationRequest(currentWithHistory, requestId, new Date().toISOString());
       const response = (await tinaApi.request(REQUEST_PUBLICATION_MUTATION, {
         variables: {
           relativePath: PUBLICATION_REQUEST_RELATIVE_PATH,
@@ -379,6 +445,11 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
       if (response.errors?.length) throw new Error(response.errors[0].message);
       if (!response.updatePublicationrequest) throw new Error('Tina no devolvió la solicitud guardada.');
 
+      if (response.updatePublicationrequest.history !== undefined) {
+        setPublicationHistoryValue(response.updatePublicationrequest.history);
+        setPublicationHistoryAvailable(true);
+      }
+
       setData((previous) =>
         previous ? { ...previous, publicationrequest: response.updatePublicationrequest as PublicationRequest } : previous
       );
@@ -388,7 +459,7 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
     } finally {
       setPublishing(false);
     }
-  }, [cms, data?.publicationrequest, publicationConfirmed, publicationInteractionEnabled, publishing]);
+  }, [cms, data?.publicationrequest, publicationConfirmed, publicationHistoryAvailable, publicationHistoryValue, publicationInteractionEnabled, publishing]);
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => void load(), 0);
@@ -564,9 +635,41 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
           detail: 'Simulación local: no se realizó ninguna conexión ni se modificó contenido.',
         }
       : error;
-  const supportRequestId = simulatedPublicationStatus
-    ? 'simulación-local-sin-envío'
-    : publicationRequest?.requestId;
+  const storedHistoryView = useMemo(
+    () => createEditorialPublicationHistoryView(publicationHistoryValue, publicationHistoryAvailable),
+    [publicationHistoryAvailable, publicationHistoryValue]
+  );
+  const displayedHistoryView = useMemo<EditorialPublicationHistoryView>(() => {
+    if (!localReviewEnabled || localHistoryScenario === 'current') return storedHistoryView;
+    if (localHistoryScenario === 'unavailable') {
+      return createEditorialPublicationHistoryView(undefined, false);
+    }
+    if (localHistoryScenario === 'empty') return createEditorialPublicationHistoryView([]);
+    if (localHistoryScenario === 'published') {
+      return createEditorialPublicationHistoryView(localPublishedHistory);
+    }
+    if (localHistoryScenario === 'failed') {
+      return createEditorialPublicationHistoryView(localFailedHistory);
+    }
+    return createEditorialPublicationHistoryView([
+      ...localFailedHistory,
+      { result: 'published' },
+    ]);
+  }, [localHistoryScenario, storedHistoryView]);
+  const historyPaginationKey = displayedHistoryView.movements
+    .map((movement) => `${movement.result}:${movement.requestedAt}:${movement.processedAt}`)
+    .join('|');
+  const visibleHistoryCount = historyPagination.key === historyPaginationKey
+    ? historyPagination.count
+    : 5;
+  const visibleHistoryMovements = displayedHistoryView.movements.slice(0, visibleHistoryCount);
+  const historySummaryText = !displayedHistoryView.available
+    ? 'No pudimos consultar los movimientos ahora. El resto del panel sigue disponible.'
+    : displayedHistoryView.summary.lastPublishedAt
+      ? `Última publicación confirmada: ${formatEditorialDateTime(displayedHistoryView.summary.lastPublishedAt)}.`
+      : displayedHistoryView.movements.length > 0
+        ? 'Todavía no hay una publicación confirmada en los movimientos guardados.'
+        : 'Todavía no hay publicaciones finalizadas para mostrar.';
 
   return (
     <main className="odonto-dashboard-page" style={styles.page}>
@@ -637,6 +740,18 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
                 style={styles.localReviewSelect}
               >
                 {localContentScenarios.map((scenario) => (
+                  <option key={scenario.value} value={scenario.value}>{scenario.label}</option>
+                ))}
+              </select>
+            </label>
+            <label style={styles.localReviewLabel}>
+              <span>Movimientos recientes</span>
+              <select
+                value={localHistoryScenario}
+                onChange={(event) => setLocalHistoryScenario(event.target.value as LocalHistoryScenario)}
+                style={styles.localReviewSelect}
+              >
+                {localHistoryScenarios.map((scenario) => (
                   <option key={scenario.value} value={scenario.value}>{scenario.label}</option>
                 ))}
               </select>
@@ -749,13 +864,74 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
           {localReviewEnabled ? (
             <small style={styles.localPublishNote}>Modo de prueba: este botón no envía ni publica cambios.</small>
           ) : null}
-          {supportRequestId && ['failed', 'waiting_index'].includes(publicationStatus) ? (
-            <details style={styles.supportDetails}>
-              <summary>Datos para pedir ayuda</summary>
-              <p style={styles.supportReference}>Referencia: {supportRequestId}</p>
-            </details>
+        </div>
+      </section>
+
+      <section
+        className="odonto-dashboard-history"
+        aria-labelledby="publication-history-title"
+        style={styles.historyPanel}
+      >
+        <div className="odonto-dashboard-history-head">
+          <div>
+            <p style={styles.eyebrow}>MOVIMIENTOS RECIENTES</p>
+            <h2 id="publication-history-title" style={styles.panelTitle}>Qué pasó con tus publicaciones</h2>
+            <p aria-live="polite" style={styles.historySummary}>{historySummaryText}</p>
+          </div>
+          {displayedHistoryView.available ? (
+            <dl className="odonto-dashboard-history-totals" aria-label="Resumen de publicaciones finalizadas">
+              <div>
+                <dt>Publicadas</dt>
+                <dd>{displayedHistoryView.summary.publishedCount}</dd>
+              </div>
+              <div>
+                <dt>Detenidas</dt>
+                <dd>{displayedHistoryView.summary.failedCount}</dd>
+              </div>
+            </dl>
           ) : null}
         </div>
+
+        {displayedHistoryView.available && displayedHistoryView.movements.length > 0 ? (
+          <details className="odonto-dashboard-history-details">
+            <summary>Ver movimientos recientes</summary>
+            <ol className="odonto-dashboard-history-list">
+              {visibleHistoryMovements.map((movement, index) => (
+                <li key={`${movement.processedAt}-${index}`}>
+                  <span
+                    className={`odonto-dashboard-history-mark odonto-dashboard-history-mark--${movement.result}`}
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <strong>{movement.title}</strong>
+                    <p>{movement.detail}</p>
+                    <small>
+                      {formatEditorialDateTime(movement.processedAt)} · {formatPublicationDuration(movement.durationMs)}
+                    </small>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            {visibleHistoryCount < displayedHistoryView.movements.length ? (
+              <button
+                type="button"
+                className="odonto-dashboard-history-more"
+                onClick={() => setHistoryPagination({
+                  key: historyPaginationKey,
+                  count: visibleHistoryCount + 5,
+                })}
+              >
+                Ver 5 más
+              </button>
+            ) : null}
+          </details>
+        ) : null}
+
+        {displayedHistoryView.invalidEntries > 0 ? (
+          <p role="status" style={styles.historyNotice}>
+            Omitimos {displayedHistoryView.invalidEntries === 1 ? 'un movimiento incompleto' : 'algunos movimientos incompletos'} para que puedas seguir usando el panel.
+          </p>
+        ) : null}
       </section>
 
       <section aria-labelledby="content-list-title" style={styles.panel}>
@@ -1079,6 +1255,25 @@ const dashboardResponsiveStyles = `
   .odonto-dashboard-local-tools > summary, .odonto-dashboard-publication-help > summary { color: #5f5148; font-size: 12px; font-weight: 800; cursor: pointer; }
   .odonto-dashboard-local-tools > summary { color: #285264; }
   .odonto-dashboard-publication-help { margin-top: 12px; }
+  .odonto-dashboard-history-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 20px; }
+  .odonto-dashboard-history-totals { display: grid; grid-template-columns: repeat(2, minmax(90px, 1fr)); gap: 8px; margin: 0; }
+  .odonto-dashboard-history-totals > div { min-width: 90px; padding: 11px 13px; border: 1px solid #e3d9d2; border-radius: 13px; background: #faf7f4; }
+  .odonto-dashboard-history-totals dt { color: #756a63; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+  .odonto-dashboard-history-totals dd { margin: 5px 0 0; color: #2b2521; font-size: 20px; font-weight: 850; }
+  .odonto-dashboard-history-details { margin-top: 18px; border-top: 1px solid #e9e1dc; padding-top: 14px; }
+  .odonto-dashboard-history-details > summary { width: fit-content; min-height: 40px; display: flex; align-items: center; color: #9f3f16; font-size: 13px; font-weight: 800; cursor: pointer; }
+  .odonto-dashboard-history-list { display: grid; gap: 0; margin: 10px 0 0; padding: 0; list-style: none; border: 1px solid #e8dfd9; border-radius: 15px; overflow: hidden; }
+  .odonto-dashboard-history-list li { display: grid; grid-template-columns: 12px minmax(0, 1fr); gap: 12px; padding: 15px; background: #fff; }
+  .odonto-dashboard-history-list li + li { border-top: 1px solid #eee7e2; }
+  .odonto-dashboard-history-list strong { color: #2b2521; font-size: 14px; }
+  .odonto-dashboard-history-list p { margin: 5px 0; color: #675d56; font-size: 13px; line-height: 1.45; }
+  .odonto-dashboard-history-list small { color: #80736b; font-size: 11px; font-weight: 700; }
+  .odonto-dashboard-history-mark { width: 10px; height: 10px; margin-top: 4px; border-radius: 999px; background: #a39389; }
+  .odonto-dashboard-history-mark--published { background: #3b7a55; }
+  .odonto-dashboard-history-mark--failed { background: #b94a24; }
+  .odonto-dashboard-history-more { min-height: 40px; margin-top: 12px; padding: 0 15px; border: 1px solid #d8cec7; border-radius: 999px; color: #8f3715; background: #fff; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+  .odonto-dashboard-history-more:hover { color: #fff; background: #b94818; border-color: #b94818; }
+  .odonto-dashboard-history-details > summary:focus-visible, .odonto-dashboard-history-more:focus-visible { outline: 3px solid rgba(193,77,25,.3); outline-offset: 3px; }
   .odonto-dashboard-summary { width: min(1120px, 100%); margin: 0 auto 18px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
   .odonto-dashboard-summary-card { min-width: 0; display: flex; align-items: center; gap: 14px; padding: 18px; border: 1px solid #e4dbd5; border-radius: 18px; background: rgba(255,255,255,.88); box-shadow: 0 12px 34px rgba(70,45,31,.05); }
   .odonto-dashboard-summary-card > span:last-child { min-width: 0; }
@@ -1192,6 +1387,10 @@ const dashboardResponsiveStyles = `
     .odonto-dashboard-table-scroll--left { left: -9px; }
     .odonto-dashboard-table-scroll--right { right: -9px; }
     .odonto-dashboard-publication { gap: 16px !important; }
+    .odonto-dashboard-history-head { display: grid; }
+    .odonto-dashboard-history-totals { width: 100%; }
+    .odonto-dashboard-history-list li { padding: 13px; }
+    .odonto-dashboard-history-more { width: 100%; }
     .odonto-dashboard-quick-links { grid-template-columns: 1fr !important; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -1214,6 +1413,9 @@ const styles: Record<string, React.CSSProperties> = {
   localReviewLabel: { display: 'grid', gap: 7, fontSize: 13, fontWeight: 800 },
   localReviewSelect: { width: '100%', minHeight: 48, padding: '0 14px', border: '1px solid #8fbac8', borderRadius: 12, color: '#173844', background: '#fff', font: 'inherit', cursor: 'pointer' },
   publicationPanel: { maxWidth: 1120, margin: '0 auto 18px', padding: 'clamp(16px, 2.4vw, 22px)', borderRadius: 18, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 26, alignItems: 'center', background: '#fff', border: '1px solid #e4dbd5', boxShadow: '0 10px 30px rgba(70,45,31,.045)' },
+  historyPanel: { maxWidth: 1120, margin: '0 auto 18px', padding: 'clamp(16px, 2.4vw, 22px)', borderRadius: 18, background: '#fff', border: '1px solid #e4dbd5', boxShadow: '0 10px 30px rgba(70,45,31,.045)' },
+  historySummary: { maxWidth: 660, margin: '8px 0 0', color: '#655b55', fontSize: 14, lineHeight: 1.5 },
+  historyNotice: { margin: '14px 0 0', padding: 12, borderRadius: 12, color: '#6b3a16', background: '#fff1df', fontSize: 12, lineHeight: 1.45 },
   publicationCopy: { minWidth: 0 },
   publicationDetail: { margin: '8px 0 0', color: '#655b55', fontSize: 14, lineHeight: 1.5 },
   publicationHint: { margin: '12px 0 0', color: '#756961', fontSize: 13, lineHeight: 1.5 },

@@ -215,6 +215,21 @@ export const publicationRequestCollection: Collection = {
         { name: 'publicState', label: 'Estado público', type: 'string', required: true },
       ],
     },
+    {
+      name: 'history',
+      label: 'Historial de publicaciones',
+      type: 'object',
+      list: true,
+      ui: { component: 'hidden' },
+      fields: [
+        { name: 'requestId', label: 'Solicitud', type: 'string', required: true, ui: { component: 'hidden' } },
+        { name: 'requestedAt', label: 'Fecha de solicitud', type: 'datetime', required: true, ui: { component: 'hidden' } },
+        { name: 'processedAt', label: 'Fecha de resultado', type: 'datetime', required: true, ui: { component: 'hidden' } },
+        { name: 'result', label: 'Resultado', type: 'string', required: true, ui: { component: 'hidden' } },
+        { name: 'issueKind', label: 'Tipo de incidencia', type: 'string', ui: { component: 'hidden' } },
+        { name: 'productionCommit', label: 'Versión publicada', type: 'string', ui: { component: 'hidden' } },
+      ],
+    },
   ],
 };
 
