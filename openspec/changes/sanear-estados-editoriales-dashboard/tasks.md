@@ -8,13 +8,21 @@
 - [x] 1.6 Incorporar un reintento manual único que conserve filtros, orden, página y preferencia de tabla o tarjetas, y que no guarde contenido, no cree solicitudes de publicación y no llame a Netlify.
 - [x] 1.7 Redactar los avisos diferenciados de sesión inválida, permisos insuficientes, espera agotada y servicio no disponible, sin culpar a la conexión personal, sin afirmar una caída del proveedor y sin agregar estados editoriales.
 - [x] 1.8 Centralizar el contacto de Alejandro en configuración no secreta con `mailto:admin@useodontopro.com` y `https://wa.me/541160513261`, separado del contacto del consultorio, y preparar el borrador y el diagnóstico copiable con una lista cerrada de campos, envío decidido por la persona y alternativa seleccionable si falla el portapapeles.
-- [ ] 1.9 Reordenar la parte superior para que el estado de la tanda de publicación ocupe lugar propio sólo mientras hay una tanda en curso, sin agregar estados ni duplicar la respuesta del historial.
+- [x] 1.9 Reordenar la parte superior para que el estado de la tanda de publicación ocupe lugar propio sólo mientras hay una tanda en curso, sin agregar estados ni duplicar la respuesta del historial.
 - [ ] 1.10 Verificar con teclado, lector de pantalla y viewports de escritorio y móvil que carga, aviso, detalle, reintento y contacto tienen semántica, foco, contraste y distribución utilizables.
+
+**Estado de 1.10 (2026-09-04): verificación parcial.** Se comprobó por inspección del origen que el aviso
+tiene nombre accesible (`aria-labelledby`), que reintento, inicio de sesión, contacto y diagnóstico exponen
+foco visible, que sus controles conservan un objetivo táctil de 40 px y que ningún estado se comunica sólo
+por color. Estas comprobaciones están fijadas en `test:tina-publication-workflow`. **No** se ejecutó todavía
+un recorrido real con teclado, lector de pantalla y viewports de escritorio y móvil sobre el admin compilado:
+esa verificación pertenece al Deploy Preview de 2.4 y a la revisión manual de 2.5, y ningún agente puede
+darla por hecha desde una compilación correcta.
 
 ## 2. Validación y aprobación
 
-- [ ] 2.1 Ejecutar las pruebas focalizadas del modelo y del panel, y registrar comandos y resultados reproducibles sin servicios externos.
-- [ ] 2.2 Ejecutar `pnpm run validate:openspec` y una única tanda final de `pnpm exec tsc --noEmit`, `pnpm run lint` y `pnpm run build`.
-- [ ] 2.3 Revisar el diff completo y verificar que no contiene contenido clínico, cambios editoriales, secretos ni archivos de otros OpenSpecs.
+- [x] 2.1 Ejecutar las pruebas focalizadas del modelo y del panel, y registrar comandos y resultados reproducibles sin servicios externos.
+- [x] 2.2 Ejecutar `pnpm run validate:openspec` y una única tanda final de `pnpm exec tsc --noEmit`, `pnpm run lint` y `pnpm run build`.
+- [x] 2.3 Revisar el diff completo y verificar que no contiene contenido clínico, cambios editoriales, secretos ni archivos de otros OpenSpecs.
 - [ ] 2.4 Con autorización de Alejandro, publicar la rama en un Draft PR y obtener un único Deploy Preview después de CI verde, verificando que no se inicia un deploy de producción.
 - [ ] 2.5 Alejandro revisa manualmente el Deploy Preview o evidencia equivalente, confirma los textos y que correo y WhatsApp abren el destinatario correcto sin enviar mensajes de prueba, y marca personalmente este último checkbox; ningún agente puede marcarlo.

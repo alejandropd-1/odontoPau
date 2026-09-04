@@ -674,6 +674,8 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
     setContentPage(1);
   };
 
+  // Sin tanda en curso ni resultado reciente, el bloque no compite con el resumen ni con el historial.
+  const publicationIdle = publicationStatus === 'idle';
   const publicationCopy = publicationStatusCopy[publicationStatus];
   const simulatedIssueKind =
     publicationStatus === 'failed'
@@ -791,8 +793,13 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
       </header>
 
       {unavailableNotice ? (
-        <section role="alert" style={styles.error}>
-          <strong>{unavailableNotice.message}</strong>
+        <section
+          role="alert"
+          aria-labelledby="editorial-unavailable-title"
+          className="odonto-dashboard-notice"
+          style={styles.error}
+        >
+          <strong id="editorial-unavailable-title">{unavailableNotice.message}</strong>
           <div style={styles.noticeActions}>
             {unavailableNotice.offersRetry ? (
               <button
@@ -940,10 +947,12 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
 
       <section className="odonto-dashboard-publication" aria-labelledby="publication-title" style={styles.publicationPanel}>
         <div style={styles.publicationCopy}>
-          <p style={styles.eyebrow}>ESTADO DE PUBLICACIÓN</p>
+          <p style={styles.eyebrow}>{publicationIdle ? 'PUBLICAR CAMBIOS' : 'ESTADO DE PUBLICACIÓN'}</p>
           <div role="status" aria-live="polite" aria-atomic="true">
-            <h2 id="publication-title" style={styles.panelTitle}>{publicationCopy.title}</h2>
-            <p style={styles.publicationDetail}>{publicationDetail}</p>
+            <h2 id="publication-title" style={styles.panelTitle}>
+              {publicationIdle ? 'Publicar los cambios que revisaste' : publicationCopy.title}
+            </h2>
+            {publicationIdle ? null : <p style={styles.publicationDetail}>{publicationDetail}</p>}
           </div>
           <details className="odonto-dashboard-publication-help">
             <summary>Cómo funciona esta publicación</summary>
@@ -1449,6 +1458,10 @@ const dashboardResponsiveStyles = `
   .odonto-dashboard-table-shell { position: relative; width: 100%; }
   .odonto-dashboard-table-wrap { width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; border: 1px solid #e4dbd5; border-radius: 16px; background: #fff; scroll-behavior: smooth; scrollbar-color: #bcaea5 #f3efec; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
   .odonto-dashboard-table-wrap:focus-visible { outline: 3px solid rgba(193,77,25,.28); outline-offset: 3px; }
+  .odonto-dashboard-notice button:focus-visible, .odonto-dashboard-notice a:focus-visible, .odonto-dashboard-notice summary:focus-visible { outline: 3px solid rgba(127,29,29,.45); outline-offset: 3px; }
+  .odonto-dashboard-notice a { text-underline-offset: 3px; }
+  .odonto-dashboard-notice a:hover { text-decoration: underline; }
+  .odonto-dashboard-notice summary { min-height: 40px; display: flex; align-items: center; cursor: pointer; }
   .odonto-dashboard-table { width: 100%; min-width: 900px; border-collapse: collapse; table-layout: fixed; }
   .odonto-dashboard-table-scroll { position: absolute; top: min(46%, 280px); z-index: 6; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid #d8cec7; border-radius: 999px; color: #8f3715; background: rgba(255,255,255,.96); box-shadow: 0 9px 25px rgba(61,39,27,.2); cursor: pointer; backdrop-filter: blur(8px); }
   .odonto-dashboard-table-scroll span { font-size: 32px; font-weight: 500; line-height: .8; transform: translateY(-1px); }
