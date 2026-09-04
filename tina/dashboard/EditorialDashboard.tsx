@@ -21,10 +21,21 @@ import {
   formatEditorialDateTime,
   formatPublicationDuration,
   getEditorialDashboardDisplayState,
+  classifyEditorialFailure,
+  createEditorialIncidentId,
+  editorialContentSummary,
+  editorialUnavailableNotice,
   type DashboardDisplayState,
+  type EditorialAvailability,
   type EditorialDashboardDocument,
   type EditorialPublicationHistoryView,
 } from './editorial-dashboard-model';
+import {
+  buildEditorialDiagnostic,
+  editorialSupportContact,
+  editorialSupportMailtoHref,
+  editorialSupportWhatsappHref,
+} from './editorial-support-contact';
 
 const EDITORIAL_QUERY = `
   query OdontoPauEditorialDashboard {
@@ -217,6 +228,28 @@ const issueCopy = {
   technical: 'Tuvimos un problema técnico. El sitio público sigue igual y tus cambios están guardados en la vista previa. Pedí ayuda.',
 } as const;
 
+const EDITORIAL_READ_TIMEOUT_MS = 15_000;
+const EDITORIAL_SITE_NAME = 'OdontoPau';
+
+/** Corta una lectura que no responde para que el panel no quede cargando de forma indefinida. */
+function withEditorialDeadline<T>(operation: Promise<T>, timeoutMs = EDITORIAL_READ_TIMEOUT_MS): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timeoutId = window.setTimeout(() => {
+      const expired = new Error('La espera de la lectura editorial se agotó.');
+      expired.name = 'TimeoutError';
+      reject(expired);
+    }, timeoutMs);
+    const settle = (finish: () => void) => {
+      window.clearTimeout(timeoutId);
+      finish();
+    };
+    operation.then(
+      (value) => settle(() => resolve(value)),
+      (reason) => settle(() => reject(reason))
+    );
+  });
+}
+
 interface DashboardError {
   message: string;
   detail?: string;
@@ -334,9 +367,11 @@ export function createEditorialDashboard(branch: string) {
 
 export function EditorialDashboard({ branch }: EditorialDashboardProps) {
   const cms = useCMS();
-  const [data, setData] = useState<EditorialDashboardData | null>(null);
-  const [error, setError] = useState<DashboardError | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [catalog, setCatalog] = useState<EditorialAvailability<EditorialDashboardData>>({ kind: 'loading' });
+  const [actionError, setActionError] = useState<DashboardError | null>(null);
+  const [retrying, setRetrying] = useState(false);
+  const [diagnosticCopied, setDiagnosticCopied] = useState(false);
+  const readGeneration = useRef(0);
   const [publishing, setPublishing] = useState(false);
   const [publicationConfirmed, setPublicationConfirmed] = useState(false);
   const [localReviewScenario, setLocalReviewScenario] = useState<LocalReviewScenario>('current');
@@ -359,8 +394,14 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
   const tableScrollRef = useRef<HTMLDivElement>(null);
   const [canScrollTableLeft, setCanScrollTableLeft] = useState(false);
   const [canScrollTableRight, setCanScrollTableRight] = useState(false);
+  // `data` solo existe cuando la lectura esta confirmada: ningun total se deriva de un fallo.
+  const data = catalog.kind === 'confirmed' ? catalog.value : null;
+  const loading = catalog.kind === 'loading';
+  const unavailable = catalog.kind === 'unavailable' ? catalog : null;
   const publicationEnabled = isEditorialPublicationBranch(branch);
   const publicationInteractionEnabled = publicationEnabled && !localReviewEnabled;
+  // Sin catalogo confirmado no se puede afirmar que se publicaria, asi que la accion se cierra.
+  const publicationBlocked = catalog.kind !== 'confirmed';
 
   const updateTableScrollControls = useCallback(() => {
     const tableScroll = tableScrollRef.current;
@@ -382,33 +423,46 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
   }, []);
 
   const load = useCallback(async (options?: { silent?: boolean }) => {
-    if (!options?.silent) setLoading(true);
-    setError(null);
+    // Cada lectura lleva su generacion: una respuesta tardia no puede pisar a una mas reciente.
+    const generation = ++readGeneration.current;
+    const isStale = () => generation !== readGeneration.current;
+
+    if (!options?.silent) setCatalog({ kind: 'loading' });
+    setActionError(null);
     try {
       const tinaApi = cms.api.tina;
       if (!tinaApi) throw new Error('El cliente de Tina todavía no está disponible.');
 
-      const response = (await tinaApi.request(EDITORIAL_QUERY, {
-        variables: {},
-      })) as EditorialDashboardResponse;
+      const response = (await withEditorialDeadline(
+        tinaApi.request(EDITORIAL_QUERY, { variables: {} })
+      )) as EditorialDashboardResponse;
       if (response.errors?.length) throw new Error(response.errors[0].message);
-      setData(response);
+      if (isStale()) return;
+      setCatalog({ kind: 'confirmed', value: response });
 
       try {
-        const historyResponse = (await tinaApi.request(EDITORIAL_HISTORY_QUERY, {
-          variables: {},
-        })) as EditorialHistoryResponse;
+        const historyResponse = (await withEditorialDeadline(
+          tinaApi.request(EDITORIAL_HISTORY_QUERY, { variables: {} })
+        )) as EditorialHistoryResponse;
         if (historyResponse.errors?.length) throw new Error(historyResponse.errors[0].message);
+        if (isStale()) return;
         setPublicationHistoryValue(historyResponse.publicationrequest?.history);
         setPublicationHistoryAvailable(true);
       } catch {
+        if (isStale()) return;
+        // Solo cae el historial: el catalogo confirmado y sus acciones siguen disponibles.
         setPublicationHistoryValue(undefined);
         setPublicationHistoryAvailable(false);
       }
     } catch (reason) {
-      setError(friendlyDashboardError(reason, 'No pudimos actualizar el panel. Esperá unos segundos y volvé a intentar.'));
+      if (isStale()) return;
+      setCatalog({
+        kind: 'unavailable',
+        reason: classifyEditorialFailure(reason),
+        incidentId: createEditorialIncidentId(),
+      });
     } finally {
-      if (!options?.silent) setLoading(false);
+      if (!isStale()) setRetrying(false);
     }
   }, [cms]);
 
@@ -422,7 +476,7 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
     if (!confirmed) return;
 
     setPublishing(true);
-    setError(null);
+    setActionError(null);
     try {
       const tinaApi = cms.api.tina;
       if (!tinaApi) throw new Error('El cliente de Tina todavía no está disponible.');
@@ -450,12 +504,17 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
         setPublicationHistoryAvailable(true);
       }
 
-      setData((previous) =>
-        previous ? { ...previous, publicationrequest: response.updatePublicationrequest as PublicationRequest } : previous
+      setCatalog((previous) =>
+        previous.kind === 'confirmed'
+          ? {
+              kind: 'confirmed',
+              value: { ...previous.value, publicationrequest: response.updatePublicationrequest as PublicationRequest },
+            }
+          : previous
       );
       setPublicationConfirmed(false);
     } catch (reason) {
-      setError(friendlyDashboardError(reason, 'No pudimos enviar el pedido de publicación. Actualizá el panel y volvé a intentar.'));
+      setActionError(friendlyDashboardError(reason, 'No pudimos enviar el pedido de publicación. Actualizá el panel y volvé a intentar.'));
     } finally {
       setPublishing(false);
     }
@@ -599,12 +658,13 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
     };
   }, [contentViewMode, currentContentPage, paginatedRows.length, updateTableScrollControls]);
 
-  const contentSummary = useMemo(() => ({
-    articles: dashboardRows.filter((row) => row.collection === 'articulo').length,
-    instructions: dashboardRows.filter((row) => row.collection === 'instruccion').length,
-    published: dashboardRows.filter((row) => row.publicStatus === 'published').length,
-    pending: dashboardRows.filter((row) => row.publicStatus === 'preview_only').length,
-  }), [dashboardRows]);
+  // Devuelve null salvo que el catalogo este confirmado: una lectura fallida nunca produce un cero.
+  const contentSummary = useMemo(
+    () => editorialContentSummary(
+      catalog.kind === 'confirmed' ? { kind: 'confirmed', value: dashboardRows } : catalog
+    ),
+    [catalog, dashboardRows]
+  );
 
   const clearFilters = () => {
     setSearchQuery('');
@@ -628,13 +688,50 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
     : publicationRequest?.issueKind
       ? issueCopy[publicationRequest.issueKind]
       : publicationCopy.detail;
-  const displayedError =
+  // La simulacion local reutiliza el mismo aviso que una indisponibilidad real.
+  const displayedUnavailable =
     localReviewEnabled && localReviewScenario === 'dashboard_error'
-      ? {
-          message: 'No pudimos comunicarnos con el editor. Revisá tu conexión y volvé a intentar.',
-          detail: 'Simulación local: no se realizó ninguna conexión ni se modificó contenido.',
-        }
-      : error;
+      ? { kind: 'unavailable' as const, reason: 'service' as const, incidentId: 'OP-LOCAL-SIM' }
+      : unavailable;
+  const unavailableNotice = displayedUnavailable
+    ? editorialUnavailableNotice(displayedUnavailable.reason)
+    : null;
+  const unavailableReason = displayedUnavailable?.reason;
+  const unavailableIncidentId = displayedUnavailable?.incidentId;
+  const supportDiagnostic = useMemo(
+    () => (unavailableReason && unavailableIncidentId
+      ? buildEditorialDiagnostic({
+          siteName: EDITORIAL_SITE_NAME,
+          incidentId: unavailableIncidentId,
+          operation: 'catalogo',
+          reason: unavailableReason,
+          at: new Date(),
+        })
+      : ''),
+    [unavailableIncidentId, unavailableReason]
+  );
+  const retryLoad = useCallback(() => {
+    setRetrying(true);
+    setDiagnosticCopied(false);
+    void load();
+  }, [load]);
+  const signIn = useCallback(async () => {
+    try {
+      await cms.api.tina?.authProvider?.authenticate?.();
+      void load();
+    } catch {
+      // Si el proveedor no puede iniciar sesion, el aviso y el contacto siguen visibles.
+    }
+  }, [cms, load]);
+  const copyDiagnostic = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(supportDiagnostic);
+      setDiagnosticCopied(true);
+    } catch {
+      // El resumen queda visible y seleccionable aunque el portapapeles no este disponible.
+      setDiagnosticCopied(false);
+    }
+  }, [supportDiagnostic]);
   const storedHistoryView = useMemo(
     () => createEditorialPublicationHistoryView(publicationHistoryValue, publicationHistoryAvailable),
     [publicationHistoryAvailable, publicationHistoryValue]
@@ -693,15 +790,50 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
         </button>
       </header>
 
-      {displayedError ? (
+      {unavailableNotice ? (
+        <section role="alert" style={styles.error}>
+          <strong>{unavailableNotice.message}</strong>
+          <div style={styles.noticeActions}>
+            {unavailableNotice.offersRetry ? (
+              <button
+                type="button"
+                onClick={retryLoad}
+                disabled={retrying}
+                style={{ ...styles.noticeButton, ...(retrying ? styles.disabledButton : {}) }}
+              >
+                {retrying ? 'Reintentando…' : 'Reintentar'}
+              </button>
+            ) : null}
+            {unavailableNotice.offersLogin ? (
+              <button type="button" onClick={() => void signIn()} style={styles.noticeButton}>
+                Iniciar sesión
+              </button>
+            ) : null}
+            <a href={editorialSupportMailtoHref(supportDiagnostic)} style={styles.noticeLink}>
+              Escribirle a {editorialSupportContact.name} por correo
+            </a>
+            <a
+              href={editorialSupportWhatsappHref(supportDiagnostic)}
+              target="_blank"
+              rel="noreferrer"
+              style={styles.noticeLink}
+            >
+              Escribirle por WhatsApp
+            </a>
+          </div>
+          <details style={styles.supportDetails}>
+            <summary>Ver diagnóstico para soporte</summary>
+            <pre style={styles.supportCode}>{supportDiagnostic}</pre>
+            <button type="button" onClick={() => void copyDiagnostic()} style={styles.noticeButton}>
+              {diagnosticCopied ? 'Copiado' : 'Copiar diagnóstico'}
+            </button>
+          </details>
+        </section>
+      ) : null}
+
+      {actionError ? (
         <div role="alert" style={styles.error}>
-          <strong>{displayedError.message}</strong>
-          {displayedError.detail ? (
-            <details style={styles.supportDetails}>
-              <summary>Información para pedir ayuda</summary>
-              <code style={styles.supportCode}>{displayedError.detail}</code>
-            </details>
-          ) : null}
+          <strong>{actionError.message}</strong>
         </div>
       ) : null}
 
@@ -769,19 +901,19 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
       <section aria-label="Resumen del contenido" className="odonto-dashboard-summary">
         <article className="odonto-dashboard-summary-card">
           <span className="odonto-dashboard-summary-icon" aria-hidden="true">A</span>
-          <span><strong>{loading ? '—' : contentSummary.articles}</strong><small>Artículos</small></span>
+          <span><strong>{contentSummary ? contentSummary.articles : '—'}</strong><small>Artículos</small></span>
         </article>
         <article className="odonto-dashboard-summary-card">
           <span className="odonto-dashboard-summary-icon odonto-dashboard-summary-icon--sand" aria-hidden="true">I</span>
-          <span><strong>{loading ? '—' : contentSummary.instructions}</strong><small>Instrucciones</small></span>
+          <span><strong>{contentSummary ? contentSummary.instructions : '—'}</strong><small>Instrucciones</small></span>
         </article>
         <article className="odonto-dashboard-summary-card">
           <span className="odonto-dashboard-summary-icon odonto-dashboard-summary-icon--green" aria-hidden="true">✓</span>
-          <span><strong>{loading ? '—' : contentSummary.published}</strong><small>Ya publicados</small></span>
+          <span><strong>{contentSummary ? contentSummary.published : '—'}</strong><small>Ya publicados</small></span>
         </article>
         <article className="odonto-dashboard-summary-card">
           <span className="odonto-dashboard-summary-icon odonto-dashboard-summary-icon--amber" aria-hidden="true">↗</span>
-          <span><strong>{loading ? '—' : contentSummary.pending}</strong><small>Cambios por publicar</small></span>
+          <span><strong>{contentSummary ? contentSummary.pending : '—'}</strong><small>Cambios por publicar</small></span>
         </article>
       </section>
 
@@ -800,7 +932,7 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
             <strong>Editar →</strong>
           </a>
           <a href={collectionUrl('tratamiento')} style={styles.quickLink}>
-            <span>Servicios <small>({loading ? '—' : data?.tratamientoConnection.totalCount ?? 0})</small></span>
+            <span>Servicios <small>({data ? data.tratamientoConnection.totalCount : '—'})</small></span>
             <strong>Abrir →</strong>
           </a>
         </div>
@@ -835,7 +967,7 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
             <input
               type="checkbox"
               checked={publicationConfirmed}
-              disabled={!publicationInteractionEnabled || publicationActive || publishing}
+              disabled={publicationBlocked || !publicationInteractionEnabled || publicationActive || publishing}
               onChange={(event) => setPublicationConfirmed(event.target.checked)}
               style={styles.confirmationCheckbox}
             />
@@ -844,11 +976,11 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
           <button
             type="button"
             onClick={() => void requestPublication()}
-            disabled={!publicationInteractionEnabled || publicationActive || publishing || !publicationConfirmed}
+            disabled={publicationBlocked || !publicationInteractionEnabled || publicationActive || publishing || !publicationConfirmed}
             aria-busy={publishing}
             style={{
               ...styles.publishButton,
-              ...(!publicationInteractionEnabled || publicationActive || publishing || !publicationConfirmed
+              ...(publicationBlocked || !publicationInteractionEnabled || publicationActive || publishing || !publicationConfirmed
                 ? styles.disabledButton
                 : {}),
             }}
@@ -1019,6 +1151,10 @@ export function EditorialDashboard({ branch }: EditorialDashboardProps) {
 
         {loading ? (
           <p role="status" style={styles.emptyState}>Estamos cargando el contenido…</p>
+        ) : displayedUnavailable ? (
+          <p role="status" style={styles.emptyState}>
+            No pudimos confirmar el listado de contenidos. Usá el aviso de arriba para reintentar o pedir ayuda.
+          </p>
         ) : filteredRows.length === 0 ? (
           <div style={styles.emptyState}>
             <strong>No encontramos contenidos con esos filtros.</strong>
@@ -1427,6 +1563,9 @@ const styles: Record<string, React.CSSProperties> = {
   disabledButton: { opacity: 0.5, cursor: 'not-allowed', boxShadow: 'none' },
   previewLink: { display: 'inline-flex', marginTop: 18, color: '#a93f12', fontWeight: 800, textDecoration: 'none' },
   previewUnavailable: { display: 'inline-block', marginTop: 18, color: '#8a5b44', fontSize: 13, fontWeight: 700 },
+  noticeActions: { display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10 },
+  noticeButton: { minHeight: 40, padding: '0 14px', border: 0, borderRadius: 999, color: '#fff', background: '#9f1239', fontWeight: 750, cursor: 'pointer' },
+  noticeLink: { minHeight: 40, display: 'inline-flex', alignItems: 'center', padding: '0 12px', borderRadius: 999, border: '1px solid rgba(127,29,29,.35)', color: '#7f1d1d', fontWeight: 700, textDecoration: 'none' },
   supportDetails: { color: '#6f2d15', fontSize: 13, lineHeight: 1.5 },
   supportCode: { display: 'block', maxWidth: '100%', marginTop: 8, padding: 10, overflowWrap: 'anywhere', borderRadius: 10, color: '#4a2114', background: 'rgba(255,255,255,.55)', whiteSpace: 'pre-wrap' },
   supportReference: { margin: '8px 0 0', overflowWrap: 'anywhere' },
