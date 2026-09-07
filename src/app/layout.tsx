@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
+import Script from 'next/script';
 import '@/styles/main.scss';
 
 const manrope = Manrope({
@@ -78,6 +79,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body id="site-content" suppressHydrationWarning>
         {children}
       </body>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-6M1XZHVBZ7"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-6M1XZHVBZ7');
+        `}
+      </Script>
     </html>
   );
 }
