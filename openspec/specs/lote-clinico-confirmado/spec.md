@@ -1,7 +1,7 @@
 # lote-clinico-confirmado Specification
 
 ## Purpose
-TBD - created by archiving change integrar-lote-clinico-y-rehabilitacion. Update Purpose after archive.
+Integrar casos clínicos confirmados manteniendo relación con sus tratamientos, evidencia, privacidad y aprobación antes de publicar.
 ## Requirements
 ### Requirement: Asociación trazable de cada caso
 El sistema SHALL usar únicamente imágenes provenientes de la carpeta confirmada para cada caso y SHALL conservar una relación inequívoca entre el slug, el identificador editorial y los activos públicos.

@@ -1,7 +1,7 @@
 # navegacion-movil-topbar Specification
 
 ## Purpose
-TBD - created by archiving change crear-menu-movil-topbar. Update Purpose after archive.
+Permitir acceso a la navegación principal desde la barra móvil con operación accesible y movimiento respetuoso.
 ## Requirements
 ### Requirement: Acceso a la navegación principal en mobile
 El sistema SHALL ofrecer entre 320 y 767 px un control visible en la topbar que abra un panel con los mismos destinos habilitados en la navegación desktop.

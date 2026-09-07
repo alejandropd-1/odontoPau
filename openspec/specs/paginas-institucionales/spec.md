@@ -1,7 +1,7 @@
 # paginas-institucionales Specification
 
 ## Purpose
-TBD - created by archiving change adoptar-tina-y-completar-cms-articulos-instrucciones. Update Purpose after archive.
+Administrar contenido institucional de Inicio y del índice de tratamientos conservando estructura, contratos y presentación del sitio.
 ## Requirements
 ### Requirement: Inicio e índice de tratamientos editables sin page builder
 El contenido visible propio de Inicio y del índice de Tratamientos SHALL residir en JSON versionado y SHALL exponerse en Tina con campos semánticos en español. Tina MUST permitir editar contenido, orden y medios admitidos, pero MUST NOT exponer controles de layout, clases, colores ni estructura libre.

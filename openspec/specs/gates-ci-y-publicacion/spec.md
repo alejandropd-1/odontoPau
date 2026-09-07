@@ -1,7 +1,7 @@
 # gates-ci-y-publicacion Specification
 
 ## Purpose
-TBD - created by archiving change blindar-ci-y-publicacion-protegida. Update Purpose after archive.
+Comprobar calidad técnica y autorizaciones antes de publicar cambios del sitio, conservando trazabilidad y recuperación operativa.
 ## Requirements
 ### Requirement: Gates automaticos en pull requests
 Todo pull request hacia `main` SHALL ejecutar validacion OpenSpec estricta, TypeScript, lint y build mediante un workflow reproducible. El resultado MUST fallar si cualquiera de esos comandos termina con codigo distinto de cero.
@@ -80,21 +80,6 @@ Las protecciones externas MUST activarse en orden, con evidencia del check exist
 #### Scenario: Regla bloqueante
 - **WHEN** una proteccion impide integrar un cambio valido por error de configuracion
 - **THEN** un Owner puede aplicar el rollback documentado, corregir la regla y reactivarla sin alterar contenido ni historial
-
-### Requirement: Rama y cierre trazables por OpenSpec
-Cada OpenSpec implementable SHALL usar una rama exclusiva `change/<id-exacto-del-openspec>` y SHALL finalizar con una validacion manual de Alejandro que ningun agente puede completar. Con todas las tareas terminadas, el cambio MUST registrar un commit de cierre y un segundo commit producido por OpenSpec Archive en la misma rama antes de solicitar el merge a `main`.
-
-#### Scenario: Validacion final pendiente
-- **WHEN** CI y Deploy Preview pasan pero Alejandro aun no marco el ultimo checkbox
-- **THEN** el cambio permanece activo y no se archiva ni se solicita su merge a `main`
-
-#### Scenario: Cierre aprobado
-- **WHEN** Alejandro valida la revision exacta y todas las tareas quedan completas
-- **THEN** se registra el commit de cierre, se archiva OpenSpec en la misma rama y se agrega un segundo commit antes del merge autorizado
-
-#### Scenario: Produccion posterior al archive
-- **WHEN** el pull request con implementacion y archive se mezcla a `main`
-- **THEN** Netlify ejecuta el deploy de produccion y su verificacion se registra en el pull request o reporte de release sin reabrir el OpenSpec
 
 ### Requirement: Gate de paridad contractual CMS
 Todo pull request que modifique contratos, modelos o contenido editorial SHALL ejecutar un comando local y remoto de paridad CMS, round-trip semantico y no mutacion antes de TypeScript, lint y build. El gate MUST ser determinista, usar dependencias fijadas y MUST NOT requerir red, credenciales ni servicios externos.

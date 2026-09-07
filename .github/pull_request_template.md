@@ -1,31 +1,17 @@
-## Alcance
+## Qué cambia
 
-- OpenSpec relacionado:
-- Rama `change/<id-exacto-del-openspec>`:
-- Objetivo del cambio:
-- Fuera de alcance:
+Problema resuelto, resultado y OpenSpec relacionado si corresponde.
 
-## Evidencia tecnica
+## Cómo se comprobó
 
-- [ ] `pnpm run validate:openspec`
-- [ ] `pnpm run typecheck`
-- [ ] `pnpm run lint`
-- [ ] `pnpm run build`
-- [ ] `git diff --check`
-- Deploy Preview:
+Comandos/pruebas pertinentes, resultado y límites. Preview cuando ayude a revisar el cambio. Para una limpieza documental, enlaces/formato/diff pueden ser suficientes localmente; la CI mantiene sus checks.
 
-## Revision editorial y clinica
+## Contenido y publicación
 
-- [ ] No modifica contenido clinico ni imagenes de pacientes.
-- [ ] O, cuando corresponde, Paula aprobo hechos e indicaciones clinicas.
-- [ ] Se verifico autorizacion de uso y privacidad sin guardar evidencia sensible en el repositorio.
-- [ ] Se reviso el resultado visual en desktop y mobile.
+- [ ] El diff incluye únicamente el alcance declarado y conserva el trabajo ajeno.
+- [ ] Si cambia contenido clínico o imágenes de pacientes, consta aprobación de Paula y autorización de uso sin exponer evidencia privada.
+- [ ] Si cambia interfaz, se revisaron las vistas afectadas.
+- [ ] Los borradores siguen fuera de producción y no hay secretos ni datos privados en el diff.
+- [ ] La autorización de Alejandro cubre la integración/publicación propuesta, o se identifica claramente como pendiente.
 
-## Publicacion
-
-- [ ] El diff contiene solamente archivos del alcance declarado.
-- [ ] El contenido no publicado permanece fuera de produccion y del sitemap.
-- [ ] Alejandro marco personalmente el ultimo checkbox de validacion manual sobre esta revision.
-- [ ] Existe un commit de cierre y un segundo commit de OpenSpec Archive en esta misma rama.
-- [ ] Existe autorizacion explicita para mezclar a `main`.
-- [ ] Despues del deploy se registrara aqui la evidencia de verificacion de produccion.
+No es obligatorio un número fijo de commits ni que Alejandro edite una casilla personalmente. Registrar la aprobación real con su alcance; no simularla. Si se publica, adjuntar luego la comprobación de producción.

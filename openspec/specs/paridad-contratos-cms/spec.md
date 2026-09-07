@@ -1,7 +1,7 @@
 # paridad-contratos-cms Specification
 
 ## Purpose
-TBD - created by archiving change alinear-contratos-y-seguridad-cms. Update Purpose after archive.
+Mantener equivalencia de datos entre contenido, validadores y CMS con pruebas de ida y vuelta que no alteren información.
 ## Requirements
 ### Requirement: Inventario contractual versionado
 El sistema SHALL mantener un inventario inspeccionable de cada modelo y objeto editorial que identifique campos persistidos, forma, tipo, obligatoriedad, constantes, discriminantes, origen, condicion editorial y estado `safe`, `blocked` o `pending`.

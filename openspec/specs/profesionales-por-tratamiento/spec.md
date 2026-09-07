@@ -1,7 +1,7 @@
 # profesionales-por-tratamiento Specification
 
 ## Purpose
-TBD - created by archiving change integrar-lote-clinico-y-rehabilitacion. Update Purpose after archive.
+Relacionar cada tratamiento con profesionales e información verificable, editable y accesible para pacientes.
 ## Requirements
 ### Requirement: Profesionales definidos por contenido
 Cada tratamiento SHALL poder declarar cero, uno o varios profesionales con nombre, rol, rol mobile breve opcional, retrato y texto alternativo, y el componente del hero SHALL renderizar esos datos sin condicionales por identificador ni especialidades inferidas.

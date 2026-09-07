@@ -1,7 +1,7 @@
 # content-updates Specification
 
 ## Purpose
-TBD - created by archiving change content-updates-and-ortopedia-case. Update Purpose after archive.
+Mantener información de equipo, tratamientos y casos coherente con la evidencia y las correcciones clínicas aprobadas.
 ## Requirements
 ### Requirement: Equipo de trabajo
 La página de inicio SHALL mostrar las matrículas actualizadas de los cuatro profesionales y reflejar la especialidad de Paula Gualtieri como "Especialista en ortodoncia y ortopedia."

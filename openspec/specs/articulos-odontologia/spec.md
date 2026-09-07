@@ -1,7 +1,7 @@
 # articulos-odontologia Specification
 
 ## Purpose
-TBD - created by archiving change crear-circuito-editorial-articulos-redes. Update Purpose after archive.
+Organizar artículos odontológicos en contenido canónico con rutas, relaciones y visibilidad pública controlada.
 ## Requirements
 ### Requirement: Fuente canonica de articulos
 El sistema SHALL cargar articulos tipados desde archivos JSON ubicados recursivamente bajo `src/data/articulos` y SHALL considerar el slug como identificador publico unico.

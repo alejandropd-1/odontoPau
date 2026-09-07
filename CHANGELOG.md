@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2026-08-05
+## [Unreleased]
+
+### Limpieza de instrucciones y skills — 2026-09-07
+
+- Consolidada la colaboración en AGENTS.md y una única skill local OpenSpec; retiradas guías genéricas/duplicadas con resguardo reversible.
+- Agregada docs/COMO-TRABAJAMOS.md con explicación cotidiana de planes, tareas y publicación. Reglas antiguas de permisos repetidos, fases y commits fijos reemplazadas por trabajo según el encargo y autorizaciones reales.
+- Conservados privacidad, revisión clínica, trabajo existente y controles del producto. Solo documentación/skills: sin cambios de código, dependencias o producción.
+ - 2026-08-05
 
 ### Added
 - **Editorial Articles**: Added the JSON-driven `/articulos` archive, dynamic article routes, service-specific archives and pagination with nine articles per page.

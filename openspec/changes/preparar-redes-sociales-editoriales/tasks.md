@@ -49,4 +49,4 @@
 ## 7. Cierre por OpenSpec
 
 - [ ] 7.1 Preparar commit y push selectivos en `change/preparar-redes-sociales-editoriales`, abrir un Draft PR y verificar el diff y los previews finales sin publicar en cuentas externas, hacer merge ni archivar.
-- [ ] 7.2 Alejandro revisa el paquete, las aprobaciones de Paula, el calendario y la evidencia final, y autoriza el commit de cierre y el OpenSpec Archive. Esta tarea es exclusivamente manual y ningún agente puede marcarla; tampoco autoriza por sí sola la publicación en redes.
+- [ ] 7.2 Alejandro revisa el paquete, las aprobaciones de Paula, el calendario y la evidencia final, y autoriza el commit de cierre y el OpenSpec Archive. Registrar la aprobación real de Alejandro con fecha/alcance; el agente puede documentarla una vez recibida. No autoriza por sí sola la publicación en redes.

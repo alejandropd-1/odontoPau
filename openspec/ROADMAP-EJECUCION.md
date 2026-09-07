@@ -1,14 +1,8 @@
 # Roadmap de ejecucion OpenSpec
 
-## Regla operativa
+## Sobre esta cola
 
-- Mantener un solo cambio en `apply` a la vez.
-- Trabajar cada cambio implementable en una rama exclusiva `change/<id-exacto-del-openspec>` creada desde `main` sincronizada.
-- No comenzar el siguiente cambio hasta completar validacion, preview, aprobacion manual de Alejandro, commit de cierre, archive y segundo commit, merge autorizado y verificacion de produccion del anterior.
-- Los cambios marcados como `PARKED` conservan su plan, pero no consumen trabajo ni modifican el producto hasta superar su gate de entrada.
-- Los cambios de contenido clinico requieren aprobacion de Paula; merge y produccion requieren aprobacion del responsable del sitio.
-- Ningun agente puede marcar el ultimo checkbox de validacion humana ni archivar un cambio con tareas pendientes.
-- El archive ocurre en la misma rama antes del merge; la verificacion postproduccion se registra en el pull request o reporte de release y no reabre el OpenSpec.
+La tabla contiene prioridades y estados históricos registrados. El contexto del proyecto está en [AGENTS.md](../AGENTS.md) y la explicación de los documentos en [OpenSpec](../docs/COMO-TRABAJAMOS.md). Esta limpieza no revalidó producción ni cerró pendientes de publicación.
 
 ## Cola priorizada
 
@@ -72,17 +66,3 @@ La unidad de despliegue seguirá siendo la tanda completa aprobada en Preview. U
 Supabase no es requisito para esta experiencia. El cambio 6.2 funciona con Tina + JSON + Git como fuentes canónicas. El antiguo cambio `dinamizar-dashboard-editorial-con-supabase` fue retirado sin implementación porque partía de una arquitectura reemplazada. El cambio `persistir-trazabilidad-operativa-editorial` ya implementó, archivó e integró un historial de resultados finales en el manifiesto editorial, sin base de datos externa ni segundo login. Su resumen y sus movimientos recientes no agregan estados por contenido ni publicación individual: se mantienen `Publicado`, `No publicado` y `Borrador`, con publicación por tanda. Redes sociales sigue pendiente hasta verificar la publicación en producción del cambio 7.
 
 La URL y la rama cumplen funciones diferentes: `/admin` es la dirección que usa la persona; `editorial/tina` es la rama Git no productiva que alimenta Preview y evita que **Save** modifique producción. El nombre de la rama no crea ni requiere una ruta `/editorial`.
-
-## Definicion de terminado por slice
-
-1. Rama exclusiva `change/<id-exacto-del-openspec>` creada desde `main` sincronizada.
-2. OpenSpec estricto valido y alcance revisado sin archivos ajenos.
-3. TypeScript, lint, build y pruebas especificas exitosas.
-4. Revision responsive y accesible cuando exista interfaz.
-5. Draft PR y Deploy Preview verificados.
-6. Aprobacion de Paula cuando corresponda contenido clinico.
-7. Ultimo checkbox marcado manualmente por Alejandro sobre la evidencia final.
-8. Commit de cierre con la implementacion y la validacion registradas.
-9. OpenSpec Archive y segundo commit de archive en la misma rama y PR.
-10. Merge a `main` explicitamente autorizado.
-11. Produccion verificada y evidencia registrada fuera del OpenSpec ya archivado.

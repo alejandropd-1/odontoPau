@@ -1,7 +1,7 @@
 # image-processing Specification
 
 ## Purpose
-TBD - created by archiving change content-updates-and-ortopedia-case. Update Purpose after archive.
+Preparar imágenes clínicas y de portada con calidad visual, accesibilidad y protección de la identidad de pacientes.
 ## Requirements
 ### Requirement: Imágenes Hero adaptadas
 El sistema SHALL servir una imagen Hero de Estética Dental que preserve la identidad y los rasgos visibles de la paciente de la fotografía fuente, sustituya únicamente su entorno por el consultorio real provisto en `main/1.jpeg` con integración visual y desenfoque suave, y SHALL mantener la imagen vigente de “niña con anteojos” para Odontología Pediátrica.

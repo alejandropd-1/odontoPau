@@ -4,15 +4,17 @@ Sitio institucional y circuito editorial para tratamientos, casos clínicos, art
 
 El proyecto usa una arquitectura de contenido basada en JSON y Git. Los contenidos clínicos se preparan como borradores, se revisan en un deploy draft de Netlify y sólo pasan a producción después de una aprobación clínica, visual y técnica explícita.
 
-> Estado al 5 de agosto de 2026: el lote editorial se encuentra en revisión mediante un draft de Netlify. No está integrado en `main` ni publicado en producción.
+> Revisión documental 2026-09-07: el checkout observado es `main` (`ac58ffa`). Los handoffs fechados describen antecedentes; consultar la cola OpenSpec y comprobar el despliegue antes de afirmar estado productivo. Esta limpieza no publica contenidos.
 
 ## Documentación para continuar el trabajo
 
-- [Handoff editorial y operativo](docs/HANDOFF-EDITORIAL-2026-08-05.md): estado exacto, cambios realizados, validaciones, despliegue en Netlify y punto de reanudación para otra IA.
+- [AGENTS.md](AGENTS.md): contexto y referencias del proyecto.
+- [Cómo trabajamos y OpenSpec](docs/COMO-TRABAJAMOS.md): explicación cotidiana y ejemplos.
+- [Cola de cambios](openspec/ROADMAP-EJECUCION.md): prioridad y estados registrados; contrastar evidencia vigente.
+- [Operación de CI y publicación](docs/OPERACION-CI-Y-PUBLICACION.md): controles del producto, conservados.
 - [Changelog](CHANGELOG.md): historial funcional y editorial.
-- [OpenSpec del lote clínico](openspec/changes/integrar-lote-clinico-y-rehabilitacion/): alcance, decisiones, especificaciones y gates pendientes.
-- [OpenSpec del runner con LM Studio Link](openspec/changes/preparar-runner-editorial-lm-studio-link/): investigación futura; todavía no implementada.
-- [Contexto de producto y tono](.agents/product-marketing.md): público, posicionamiento, voz y límites de redacción.
+- [Contexto de producto y tono](.agents/product-marketing.md): información propia de Paula, conservada aunque se retiraron skills genéricas de marketing.
+- [Handoff de agosto](docs/HANDOFF-EDITORIAL-2026-08-05.md): antecedente histórico, no orden de ejecución actual.
 
 ## Stack real
 
@@ -22,7 +24,7 @@ El proyecto usa una arquitectura de contenido basada en JSON y Git. Los contenid
 - Motion para transiciones y microinteracciones.
 - Lucide React para iconografía.
 - JSON dentro de `src/data/` como fuente de contenido.
-- Stackbit / Netlify Create como CMS visual conectado a Git.
+- TinaCMS/TinaCloud como CMS conectado a Git; las referencias antiguas a Stackbit son antecedentes y dependencias históricas, no el CMS que debe adoptar un cambio nuevo.
 - Netlify para deploys de preview y producción.
 - OpenSpec para registrar decisiones, alcance, tareas y gates.
 
@@ -30,37 +32,14 @@ No se usa Astro, Markdown como fuente pública, Tailwind ni un CMS con base de d
 
 ## Estructura relevante
 
-```text
-odontoPau/
-├── docs/
-│   └── HANDOFF-EDITORIAL-2026-08-05.md
-├── openspec/changes/
-│   ├── crear-circuito-editorial-articulos-redes/
-│   ├── crear-circuito-instrucciones-pacientes/
-│   ├── integrar-lote-clinico-y-rehabilitacion/
-│   └── preparar-runner-editorial-lm-studio-link/
-├── public/images/
-│   ├── articulos/<slug>/
-│   ├── instrucciones/<slug>/
-│   └── profesionales/
-├── src/app/
-│   ├── articulos/
-│   ├── instrucciones/
-│   └── tratamientos/
-├── src/components/
-│   ├── ArticleArchive.tsx
-│   ├── ArticleContent.tsx
-│   ├── ArticlePagination.tsx
-│   ├── InstructionContent.tsx
-│   └── TreatmentDetailContent.tsx
-├── src/data/
-│   ├── articulos/<categoria>/<slug>.json
-│   ├── instrucciones/<categoria>/<slug>.json
-│   └── tratamientos/<categoria>/<slug>.json
-├── src/styles/
-├── stackbit.config.ts
-└── netlify.toml
-```
+- `src/data/`: contenido JSON de tratamientos, artículos e instrucciones.
+- `public/images/`: recursos públicos aprobados.
+- `src/app/`, `src/components/` y `src/styles/`: páginas, componentes y diseño.
+- `tina/` y `src/cms/`: edición y validación de contenido.
+- `openspec/changes/`: planes activos; `openspec/changes/archive/`: historia de cambios cerrados o retirados.
+- `.agents/skills/openspec/`: única skill local de trabajo con OpenSpec.
+- `.agents/product-marketing.md`: contexto real de marca, no una skill.
+- `netlify.toml` y `.github/workflows/`: publicación y CI; esta limpieza no modifica sus controles.
 
 ## Modelo editorial
 

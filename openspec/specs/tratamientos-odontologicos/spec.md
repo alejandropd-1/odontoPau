@@ -1,7 +1,7 @@
 # tratamientos-odontologicos Specification
 
 ## Purpose
-TBD - created by archiving change adoptar-tina-y-completar-cms-articulos-instrucciones. Update Purpose after archive.
+Administrar tratamientos odontológicos y casos relacionados desde el CMS manteniendo contratos y edición visual consistentes.
 ## Requirements
 ### Requirement: Edición completa de tratamientos desde Tina
 Tina SHALL exponer todos los campos persistidos de cada Tratamiento existente, incluidos metadata visible, icono, imagen hero, profesionales, características y casos clínicos completos. La colección MUST impedir altas, borrado y cambios accidentales de ruta durante este cambio.

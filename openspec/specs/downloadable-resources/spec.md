@@ -1,7 +1,7 @@
 # downloadable-resources Specification
 
 ## Purpose
-TBD - created by archiving change content-updates-and-ortopedia-case. Update Purpose after archive.
+Ofrecer recursos descargables de instrucciones para pacientes con acceso claro y contenido clínico aprobado.
 ## Requirements
 ### Requirement: Galería descargable de la instrucción KeepSmiling
 Las imágenes fuente 01 y 05–09 de la instrucción KeepSmiling SHALL renderizarse con numeración visual consecutiva 01–06 como una secuencia responsiva junto al bloque “Hábitos durante el tratamiento”, con una columna izquierda de menor ancho en desktop. No SHALL mostrarse ningún botón textual debajo de las portadas y las cards de una misma fila SHALL conservar igual altura.

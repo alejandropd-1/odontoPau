@@ -1,7 +1,7 @@
 # piloto-operacion-editorial-tina Specification
 
 ## Purpose
-TBD - created by archiving change pilotear-circuito-editorial-tina. Update Purpose after archive.
+Comprobar el circuito editorial real de Tina y sus vistas previas antes de extender o automatizar la operación del sitio.
 ## Requirements
 ### Requirement: Flujo autonomo visible desde Tina
 El panel editorial SHALL explicar y ofrecer el circuito `Guardar -> Preview -> Publicar cambios -> Producción` sin exigir al colaborador abrir GitHub, GitCron o Netlify. El botón de publicación SHALL estar disponible para cualquier colaborador autenticado del proyecto y MUST advertir que promueve el snapshot completo. Las filas individuales SHALL preparar y explicar cada contenido, pero MUST NOT iniciar despliegues aislados.

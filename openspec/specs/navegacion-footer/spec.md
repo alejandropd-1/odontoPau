@@ -1,7 +1,7 @@
 # navegacion-footer Specification
 
 ## Purpose
-TBD - created by archiving change retirar-enlaces-inactivos-footer. Update Purpose after archive.
+Ofrecer enlaces útiles y navegación adaptable en el pie del sitio sin destinos inexistentes ni espacios vacíos.
 ## Requirements
 ### Requirement: El footer no ofrece enlaces sin destino
 El sitio SHALL mostrar en el footer solamente enlaces que cuenten con un destino real, navegable y aprobado. Mientras Instagram, Facebook y Aviso Legal no tengan destinos definidos, esos controles MUST permanecer ausentes del DOM y del arbol de accesibilidad.

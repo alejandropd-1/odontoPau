@@ -1,7 +1,7 @@
 # autoria-tina-cms Specification
 
 ## Purpose
-TBD - created by archiving change adoptar-tina-y-completar-cms-articulos-instrucciones. Update Purpose after archive.
+Editar contenido mediante Tina sobre Git con autenticación, separación de ramas y una experiencia adecuada para personas no técnicas.
 ## Requirements
 ### Requirement: TinaCMS como interfaz de autoria Git-backed
 El sistema SHALL usar TinaCMS como interfaz de autoría vigente y SHALL conservar los JSON bajo `src/data` y Git como fuente canónica. El sitio público MUST continuar funcionando desde los loaders locales sin depender en runtime de TinaCloud.

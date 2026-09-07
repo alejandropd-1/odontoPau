@@ -1,7 +1,7 @@
 # instrucciones-pacientes Specification
 
 ## Purpose
-TBD - created by archiving change crear-circuito-instrucciones-pacientes. Update Purpose after archive.
+Entregar instrucciones odontológicas claras, modulares y verificadas para pacientes mediante rutas y recursos accesibles.
 ## Requirements
 ### Requirement: Plantilla modular única
 El sistema SHALL representar todas las instrucciones con una única plantilla que renderice exclusivamente los módulos con contenido y admita bloques de pasos, matriz, aviso y texto.

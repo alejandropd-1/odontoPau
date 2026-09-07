@@ -1,7 +1,7 @@
 # flujo-editorial-clinico Specification
 
 ## Purpose
-TBD - created by archiving change crear-circuito-editorial-articulos-redes. Update Purpose after archive.
+Preparar, revisar y publicar contenido odontológico con evidencia, autorización clínica y protección de la privacidad de pacientes.
 ## Requirements
 ### Requirement: Paquete de ingreso minimo
 El flujo SHALL requerir para cada pieza un tema o caso, tratamiento relacionado, contexto clinico provisto por Paula, inventario de imagenes, autorizacion de uso confirmada y objetivo editorial.

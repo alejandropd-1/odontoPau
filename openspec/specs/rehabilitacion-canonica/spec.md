@@ -1,7 +1,7 @@
 # rehabilitacion-canonica Specification
 
 ## Purpose
-TBD - created by archiving change integrar-lote-clinico-y-rehabilitacion. Update Purpose after archive.
+Mantener la identidad y rutas canónicas de rehabilitación con compatibilidad histórica y relaciones clínicas coherentes.
 ## Requirements
 ### Requirement: Rehabilitación como identidad canónica
 El sistema SHALL identificar el tratamiento con `rehabilitacion`, presentar el nombre “Rehabilitación” y usar `/tratamientos/rehabilitacion` como URL canónica en navegación, metadata, sitemap, CMS y relaciones editoriales.
