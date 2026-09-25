@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Limpieza de instrucciones y skills — 2026-09-07
 
+- Ajuste solicitado por Alejandro: retiradas las reglas generales, no solo simplificadas. AGENTS conserva contexto; config OpenSpec, contexto sin rules; skill, referencia de CLI/formato.
+
 - Consolidada la colaboración en AGENTS.md y una única skill local OpenSpec; retiradas guías genéricas/duplicadas con resguardo reversible.
 - Agregada docs/COMO-TRABAJAMOS.md con explicación cotidiana de planes, tareas y publicación. Reglas antiguas de permisos repetidos, fases y commits fijos reemplazadas por trabajo según el encargo y autorizaciones reales.
 - Conservados privacidad, revisión clínica, trabajo existente y controles del producto. Solo documentación/skills: sin cambios de código, dependencias o producción.

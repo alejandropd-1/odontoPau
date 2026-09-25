@@ -1,19 +1,11 @@
 schema: spec-driven
 
 context: |
-  Sitio profesional de la Dra. Paula Gualtieri, orientado a pacientes de odontologia.
-  Stack: Next.js 15 App Router, React 19, TypeScript, SASS modular, Lucide React,
-  Motion, contenido JSON versionado y TinaCMS/TinaCloud como CMS Git-based.
-  El contenido vive en src/data, las imagenes publicas en public/images y las rutas
-  publicas estan en espanol. Tina opera desde el unico /admin, guarda en una rama
-  no productiva y el Panel editorial obtiene el catalogo mediante Tina GraphQL.
-  Git conserva la fuente canonica; main publica automaticamente mediante Netlify.
-  Mantener BEM y los tokens/funciones SASS existentes; no introducir Tailwind ni
-  estilos hardcodeados cuando exista un token del proyecto.
-  Los articulos deben relacionarse con tratamientos existentes, incluir metadata,
-  sitemap, imagen social, enlaces internos y funcionar en mobile.
-  Todo contenido clinico y toda imagen de pacientes requiere validacion de Paula y
-  consentimiento verificable antes de publicarse. No guardar datos sensibles ni
-  documentos de consentimiento en el repositorio publico.
-  Los borradores deben permanecer no publicados hasta completar revision clinica,
-  editorial, tecnica y visual.
+  Sitio profesional de la Dra. Paula Gualtieri, orientado a pacientes de odontología.
+  Stack: Next.js App Router, React, TypeScript, SASS, JSON versionado y TinaCMS/TinaCloud.
+  El contenido canónico está en src/data, los recursos públicos en public/images,
+  el CMS en tina y src/cms, y el diseño en src/styles.
+  Tina edita sobre una rama no productiva; main publica mediante Netlify.
+  El circuito editorial distingue contenido preparado, aprobado y publicado.
+  Los requisitos de contenido clínico, privacidad, CMS y publicación están en openspec/specs.
+  El sitio es independiente de la webapp OdontoPro.
