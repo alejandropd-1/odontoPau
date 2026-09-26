@@ -45,7 +45,7 @@
     "tinacms": "3.11.0"
   },
   "devDependencies": {
-    "@fission-ai/openspec": "1.5.0",
+    "@fission-ai/openspec": "1.13.2",
     "@stackbit/cms-git": "^1.0.38",
     "@stackbit/types": "^2.1.15",
     "@tinacms/cli": "2.5.6",
