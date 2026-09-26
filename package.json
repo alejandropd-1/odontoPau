@@ -22,6 +22,7 @@
     "test:tina-publication": "tsx src/cms/tina/publication-test.ts",
     "test:tina-editorial-fingerprint": "tsx src/cms/tina/editorial-fingerprint-test.ts",
     "test:tina-dashboard-model": "tsx tina/dashboard/editorial-dashboard-model-test.ts",
+    "test:tina-support-contact": "tsx tina/dashboard/editorial-support-contact-test.ts",
     "test:tina-dashboard-consolidation": "tsx src/cms/tina/dashboard-consolidation-test.ts",
     "test:tina-publication-workflow": "tsx src/cms/tina/publication-workflow-test.ts",
     "test:netlify-ignore-build": "node scripts/netlify-ignore-build-test.mjs",

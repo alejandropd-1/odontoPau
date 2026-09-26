@@ -44,7 +44,6 @@ export interface EditorialDashboardRow extends EditorialDashboardDocument {
   publicStatus: DashboardPublicStatus;
   confirmedPublicState?: EditorialPublicState;
   hasUnpublishedChanges: boolean;
-  publicLabel: string;
   readiness: DashboardReadiness;
   readinessLabel: string;
   explanation: string;
@@ -143,14 +142,6 @@ export function createEditorialPublicationHistoryView(
     })),
   };
 }
-
-const publicLabels: Record<DashboardPublicStatus, string> = {
-  published: 'Visible ahora',
-  retired: 'Retirado del sitio',
-  unpublished: 'No visible',
-  preview_only: 'Cambios sin publicar',
-  unknown: 'Todavía sin confirmar',
-};
 
 export const displayStateLabels: Record<DashboardDisplayState, string> = {
   published: 'Publicado',
@@ -312,7 +303,6 @@ export function createEditorialDashboardRow(
   return {
     ...document,
     ...publicState,
-    publicLabel: publicLabels[publicState.publicStatus],
     ...readinessFor(document, publicState.publicStatus),
     editHref: editorialDocumentEditHref(document),
     previewHref: editorialDocumentPreviewHref(document, previewBaseUrl),
@@ -351,4 +341,118 @@ export function filterEditorialDashboardRows(
 
 export function publicStatusFromEntry(entry: EditorialProductionEntry): EditorialPublicState {
   return entry.publicState;
+}
+
+export type EditorialUnavailableReason = 'session' | 'permission' | 'timeout' | 'service';
+
+export type EditorialAvailability<T> =
+  | { kind: 'loading' }
+  | { kind: 'confirmed'; value: T }
+  | { kind: 'unavailable'; reason: EditorialUnavailableReason; incidentId: string };
+
+export interface EditorialUnavailableNotice {
+  message: string;
+  actionLabel: string;
+  offersRetry: boolean;
+  offersLogin: boolean;
+}
+
+/**
+ * Clasifica el fallo de una lectura editorial sin inspeccionar contenido ni credenciales.
+ * Sólo mira el estado HTTP cuando el cliente lo expone y, si no, la forma del mensaje.
+ */
+export function classifyEditorialFailure(reason: unknown): EditorialUnavailableReason {
+  const status = readFailureStatus(reason);
+  if (status === 401) return 'session';
+  if (status === 403) return 'permission';
+
+  const name = reason instanceof Error ? reason.name : '';
+  if (name === 'AbortError' || name === 'TimeoutError') return 'timeout';
+
+  const message = reason instanceof Error ? reason.message : String(reason ?? '');
+  if (/\btimeout\b|tiempo de espera|abort/i.test(message)) return 'timeout';
+  if (/\b401\b|unauthorized|no autorizad|sesi[oó]n (vencida|inv[aá]lida|expirada)/i.test(message)) return 'session';
+  if (/\b403\b|forbidden|permiso/i.test(message)) return 'permission';
+  return 'service';
+}
+
+function readFailureStatus(reason: unknown): number | undefined {
+  if (typeof reason !== 'object' || reason === null) return undefined;
+  const candidate = reason as { status?: unknown; statusCode?: unknown; response?: { status?: unknown } };
+  for (const value of [candidate.status, candidate.statusCode, candidate.response?.status]) {
+    if (typeof value === 'number' && Number.isFinite(value)) return value;
+  }
+  return undefined;
+}
+
+const editorialUnavailableNotices: Record<EditorialUnavailableReason, EditorialUnavailableNotice> = {
+  session: {
+    message: 'Tu sesión ya no está activa. Iniciá sesión otra vez para seguir trabajando. El contenido publicado no se modificó.',
+    actionLabel: 'Iniciar sesión',
+    offersRetry: false,
+    offersLogin: true,
+  },
+  permission: {
+    message: 'Tu cuenta no tiene acceso a esta operación. El contenido publicado no se modificó. Escribile a Alejandro para revisarlo.',
+    actionLabel: 'Contactar a Alejandro',
+    offersRetry: false,
+    offersLogin: false,
+  },
+  timeout: {
+    message: 'La consulta al servicio de edición tardó demasiado y la cancelamos. Este problema no retira el contenido ya publicado.',
+    actionLabel: 'Reintentar',
+    offersRetry: true,
+    offersLogin: false,
+  },
+  service: {
+    message: 'No podemos conectar con el servicio de edición. Este problema no retira el contenido ya publicado. Intentá nuevamente en unos minutos. Si continúa, contactá a Alejandro.',
+    actionLabel: 'Reintentar',
+    offersRetry: true,
+    offersLogin: false,
+  },
+};
+
+export function editorialUnavailableNotice(reason: EditorialUnavailableReason): EditorialUnavailableNotice {
+  return editorialUnavailableNotices[reason];
+}
+
+/** Identificador local de incidencia. No deriva de contenido, sesión ni parámetros de la consulta. */
+export function createEditorialIncidentId(now = new Date(), entropy = Math.random()): string {
+  const stamp = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0'),
+  ].join('');
+  const suffix = Math.floor(entropy * 46_656).toString(36).toUpperCase().padStart(3, '0');
+  return `OP-${stamp}-${suffix}`;
+}
+
+export function isEditorialConfirmed<T>(
+  availability: EditorialAvailability<T>
+): availability is { kind: 'confirmed'; value: T } {
+  return availability.kind === 'confirmed';
+}
+
+export interface EditorialContentSummary {
+  articles: number;
+  instructions: number;
+  published: number;
+  pending: number;
+}
+
+/**
+ * Devuelve los totales sólo cuando el catálogo está confirmado. Un fallo de lectura
+ * devuelve `null` para que la vista muestre la indisponibilidad y nunca un cero.
+ */
+export function editorialContentSummary(
+  availability: EditorialAvailability<EditorialDashboardRow[]>
+): EditorialContentSummary | null {
+  if (!isEditorialConfirmed(availability)) return null;
+  const rows = availability.value;
+  return {
+    articles: rows.filter((row) => row.collection === 'articulo').length,
+    instructions: rows.filter((row) => row.collection === 'instruccion').length,
+    published: rows.filter((row) => row.publicStatus === 'published').length,
+    pending: rows.filter((row) => row.publicStatus === 'preview_only').length,
+  };
 }

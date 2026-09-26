@@ -54,7 +54,19 @@ assert.match(dashboard, /#\/screens\/panel_editorial/);
 assert.match(dashboard, /close\?\.\(\)/);
 assert.match(dashboard, /window\.location\.replace/);
 assert.match(dashboard, /document\.visibilityState/);
-assert.match(dashboard, /Información para pedir ayuda/);
+assert.match(dashboard, /Ver diagnóstico para soporte/);
+assert.match(dashboard, /editorialSupportMailtoHref/);
+assert.match(dashboard, /editorialSupportWhatsappHref/);
+// Los totales solo pueden derivarse de un catalogo confirmado.
+assert.match(dashboard, /editorialContentSummary/);
+assert.doesNotMatch(dashboard, /loading \? '—' : contentSummary/);
+// El aviso de indisponibilidad tiene nombre accesible y foco visible en todos sus controles.
+assert.match(dashboard, /aria-labelledby="editorial-unavailable-title"/);
+assert.match(dashboard, /odonto-dashboard-notice button:focus-visible/);
+assert.match(dashboard, /odonto-dashboard-notice a:focus-visible/);
+assert.match(dashboard, /odonto-dashboard-notice summary:focus-visible/);
+// Sin tanda en curso, el bloque de publicacion no repite un estado ni compite con el resumen.
+assert.match(dashboard, /publicationIdle \? null : <p style=\{styles\.publicationDetail\}>/);
 assert.match(dashboard, /localReviewEnabled = process\.env\.TINA_PUBLIC_IS_LOCAL === 'true'/);
 assert.match(dashboard, /Esta prueba no guarda, no publica ni llama servicios externos/);
 assert.match(dashboard, /Herramientas de prueba local/);

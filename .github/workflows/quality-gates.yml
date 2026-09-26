@@ -67,6 +67,10 @@ jobs:
           pnpm run test:netlify-ignore-build
           pnpm run test:tina-runtime
           pnpm run test:tina-visual
+          pnpm run test:tina-editorial-fingerprint
+          pnpm run test:tina-dashboard-model
+          pnpm run test:tina-support-contact
+          pnpm run test:tina-dashboard-consolidation
 
       - name: Audit Tina content and lock
         run: |

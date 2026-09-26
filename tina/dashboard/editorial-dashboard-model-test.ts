@@ -10,6 +10,13 @@ import {
   formatEditorialDateTime,
   formatPublicationDuration,
   getEditorialDashboardDisplayState,
+  classifyEditorialFailure,
+  createEditorialIncidentId,
+  editorialContentSummary,
+  editorialUnavailableNotice,
+  isEditorialConfirmed,
+  type EditorialAvailability,
+  type EditorialDashboardRow,
   type EditorialDashboardDocument,
 } from './editorial-dashboard-model';
 
@@ -45,7 +52,6 @@ function indexFor(item: EditorialDashboardDocument, publicState: EditorialProduc
 
 const current = document();
 const published = createEditorialDashboardRow(current, indexFor(current), 'https://preview.example.com');
-assert.equal(published.publicLabel, 'Visible ahora');
 assert.equal(published.readinessLabel, 'Al día');
 assert.equal(published.editHref, '#/collections/edit/articulo/ortopedia/placas');
 assert.equal(published.previewHref, 'https://preview.example.com/articulos/placas');
@@ -56,7 +62,6 @@ const changed = document({
   updatedAt: '2026-08-27T13:00:00.000Z',
 });
 const previewOnly = createEditorialDashboardRow(changed, indexFor(current), 'https://preview.example.com');
-assert.equal(previewOnly.publicLabel, 'Cambios sin publicar');
 assert.equal(previewOnly.readiness, 'ready');
 assert.equal(previewOnly.confirmedPublicState, 'published');
 assert.equal(previewOnly.hasUnpublishedChanges, true);
@@ -64,7 +69,6 @@ assert.equal(getEditorialDashboardDisplayState(previewOnly).label, 'Publicado');
 
 const retired = document({ status: 'retired' });
 const retiredRow = createEditorialDashboardRow(retired, indexFor(retired, 'retired'), 'https://preview.example.com');
-assert.equal(retiredRow.publicLabel, 'Retirado del sitio');
 assert.equal(retiredRow.actionLabel, 'Republicar');
 assert.equal(retiredRow.editHref, '#/collections/edit/articulo/ortopedia/placas');
 assert.equal(getEditorialDashboardDisplayState(retiredRow).label, 'No publicado');
@@ -88,7 +92,6 @@ assert.equal(unknown.publicStatus, 'unknown');
 assert.equal(unknown.readinessLabel, 'Necesita guardarse');
 
 const unknownPublished = createEditorialDashboardRow(document(), undefined);
-assert.equal(unknownPublished.publicLabel, 'Todavía sin confirmar');
 assert.equal(unknownPublished.readinessLabel, 'Primera confirmación pendiente');
 assert.deepEqual(getEditorialDashboardDisplayState(unknownPublished), { value: 'not_published', label: 'No publicado' });
 
@@ -161,5 +164,60 @@ assert.equal(formatPublicationDuration(330_000), '6 min');
 assert.equal(formatPublicationDuration(3_900_000), '1 h 5 min');
 assert.equal(formatPublicationDuration(undefined), 'Duración no disponible');
 
+
+// --- Disponibilidad editorial ---
+
+assert.equal(classifyEditorialFailure({ status: 401 }), 'session');
+assert.equal(classifyEditorialFailure({ response: { status: 403 } }), 'permission');
+assert.equal(classifyEditorialFailure(Object.assign(new Error('cancelada'), { name: 'AbortError' })), 'timeout');
+assert.equal(classifyEditorialFailure(new Error('Request timeout after 15000ms')), 'timeout');
+assert.equal(classifyEditorialFailure(new Error('La sesión expirada del editor')), 'session');
+assert.equal(classifyEditorialFailure(new Error('Failed to fetch')), 'service');
+assert.equal(classifyEditorialFailure(undefined), 'service');
+
+// Un fallo de lectura nunca produce totales: la vista debe mostrar indisponibilidad, no un cero.
+const catalogRows: EditorialDashboardRow[] = [published, previewOnly];
+const confirmed: EditorialAvailability<EditorialDashboardRow[]> = { kind: 'confirmed', value: catalogRows };
+assert.deepEqual(editorialContentSummary(confirmed), {
+  articles: 2,
+  instructions: 0,
+  published: 1,
+  pending: 1,
+});
+assert.equal(editorialContentSummary({ kind: 'loading' }), null);
+assert.equal(
+  editorialContentSummary({ kind: 'unavailable', reason: 'service', incidentId: 'OP-20260904-ABC' }),
+  null
+);
+
+// Un catálogo confirmado y vacío sí puede informar cero.
+assert.deepEqual(editorialContentSummary({ kind: 'confirmed', value: [] }), {
+  articles: 0,
+  instructions: 0,
+  published: 0,
+  pending: 0,
+});
+
+assert.equal(isEditorialConfirmed(confirmed), true);
+assert.equal(isEditorialConfirmed({ kind: 'loading' }), false);
+
+// Los avisos separan sesión, permisos, plazo y servicio, y no culpan a la conexión de la persona.
+const sessionNotice = editorialUnavailableNotice('session');
+assert.equal(sessionNotice.offersLogin, true);
+assert.equal(sessionNotice.offersRetry, false);
+assert.equal(editorialUnavailableNotice('permission').offersLogin, false);
+assert.equal(editorialUnavailableNotice('timeout').offersRetry, true);
+assert.match(editorialUnavailableNotice('service').message, /no retira el contenido ya publicado/);
+for (const reason of ['session', 'permission', 'timeout', 'service'] as const) {
+  const notice = editorialUnavailableNotice(reason);
+  assert.doesNotMatch(notice.message, /tu conexi[oó]n|revis[aá] tu red|GraphQL|token|rama|zstd/i);
+  assert.ok(notice.message.length > 0 && notice.actionLabel.length > 0);
+}
+
+// El identificador de incidencia no incorpora contenido ni credenciales.
+const incidentId = createEditorialIncidentId(new Date('2026-09-04T12:00:00.000Z'), 0.5);
+assert.match(incidentId, /^OP-[0-9]{8}-[0-9A-Z]{3,4}$/);
+
 console.log('--- Tina editorial dashboard model ---');
 console.log('- Estados público/Preview, bloqueos, URLs, filtros e historial seguro: válidos.');
+console.log('- Disponibilidad: clasificación de fallos, totales sólo confirmados y avisos diferenciados: válidos.');
